@@ -2,7 +2,7 @@
 
 ReactPhysics3D lua bindings for the Defold Game Engine.
 
-This project based on [ReactPhysics3D](https://github.com/DanielChappuis/reactphysics3d)(zlib license)
+This project based on [ReactPhysics3D](https://github.com/DanielChappuis/reactphysics3d)
 
 ReactPhysics3D is an open source C++ physics engine library that can be used in 3D simulations and games.
 
