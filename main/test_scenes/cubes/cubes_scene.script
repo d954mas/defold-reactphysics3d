@@ -1,0 +1,26 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+
+---@class SelfDominosScene
+
+---@param self SelfDominosScene
+local function create_physics(self)
+end
+
+---@param self SelfDominosScene
+function init(self)
+    self.world = {}
+    create_physics(self)
+
+    SCENE_HELPER.scene_new({
+        name = "cubes",
+        world = self.world
+    })
+end
+
+function final(self)
+   -- self.world:Destroy()
+    SCENE_HELPER.scene_final()
+end
+
+
+

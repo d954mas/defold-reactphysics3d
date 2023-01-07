@@ -1,0 +1,33 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /rendercam/rendercam.renderc
+
+[script]
+shared_state = 1
+
+[display]
+width = 960
+height = 540
+fullscreen = 0
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = ReactPhysics3D
+dependencies#0 = https://github.com/rgrams/rendercam/archive/refs/tags/1.0.3.zip
+dependencies#1 = https://github.com/britzl/monarch/archive/refs/tags/3.4.0.zip
+dependencies#2 = https://github.com/britzl/gooey/archive/refs/tags/9.1.1.zip
+dependencies#3 = https://github.com/britzl/gooey-dirtylarry/archive/main.zip
+
+[native_extension]
+app_manifest = 
+
+[library]
+include_dirs = 
+
+[html5]
+htmlfile = /builtins/manifests/web/engine_template.html
+scale_mode = fit
+
