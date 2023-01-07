@@ -31,3 +31,6 @@ include_dirs =
 htmlfile = /builtins/manifests/web/engine_template.html
 scale_mode = fit
 
+[graphics]
+verify_graphics_calls = 0
+
