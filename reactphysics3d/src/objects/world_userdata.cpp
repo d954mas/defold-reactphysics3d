@@ -119,6 +119,23 @@ static int SetNbIterationsPositionSolver(lua_State *L){
 	return 0;
 }
 
+static int SetContactsPositionCorrectionTechnique(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    int type = luaL_checknumber(L,2);
+    if(type == 0){
+        data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::BAUMGARTE_CONTACTS);
+    }else if(type == 1){
+        data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::SPLIT_IMPULSES);
+    }else{
+        luaL_error(L, "unknown ContactsPositionCorrectionTechnique");
+    }
+
+	return 0;
+}
+
+
 
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
@@ -143,6 +160,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"update",Update},
         {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
         {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
+        {"setContactsPositionCorrectionTechnique",SetContactsPositionCorrectionTechnique},
         {"__tostring",ToString},
         { 0, 0 }
     };

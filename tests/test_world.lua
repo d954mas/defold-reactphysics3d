@@ -63,6 +63,27 @@ return function()
             rp3d.destroyPhysicsWorld(w)
         end)
 
+        test("SetContactsPositionCorrectionTechnique", function()
+            local w = rp3d.createPhysicsWorld()
+            w:setContactsPositionCorrectionTechnique(rp3d.ContactsPositionCorrectionTechnique.BAUMGARTE_CONTACTS)
+            w:setContactsPositionCorrectionTechnique(rp3d.ContactsPositionCorrectionTechnique.SPLIT_IMPULSES)
+            local status, error = pcall(w.setContactsPositionCorrectionTechnique,w,3)
+            assert_false(status)
+            assert_equal(error,"unknown ContactsPositionCorrectionTechnique")
+            rp3d.destroyPhysicsWorld(w)
+        end)
+
+        test("enums exist", function()
+            local function test_enum(enum_name, config)
+                assert_not_nil(rp3d[enum_name])
+                for k, v in pairs(config) do
+                    assert_equal(rp3d[enum_name][k], v)
+                end
+            end
+            test_enum("ContactsPositionCorrectionTechnique", { BAUMGARTE_CONTACTS = 0, SPLIT_IMPULSES = 1})
+        end)
+
+
 
 
     end)

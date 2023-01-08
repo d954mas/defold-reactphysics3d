@@ -72,14 +72,6 @@ MemoryManager & 	getMemoryManager ()
 AABB 	getWorldAABB (const Collider *collider) const
  	Return the current world-space AABB of given collider.
 
-void 	setNbIterationsVelocitySolver (uint16 nbIterations)
- 	Set the number of iterations for the velocity constraint solver.
-
-void 	setNbIterationsPositionSolver (uint32 nbIterations)
- 	Set the number of iterations for the position constraint solver.
- 
-void 	setContactsPositionCorrectionTechnique (ContactsPositionCorrectionTechnique technique)
- 	Set the position correction technique used for contacts.
  
 RigidBody * 	createRigidBody (const Transform &transform)
  	Create a rigid body into the physics world.
@@ -197,6 +189,10 @@ function PhysicsWorld:setNbIterationsVelocitySolver(nbIterations) end
 ---@param nbIterations number
 function PhysicsWorld:setNbIterationsPositionSolver(nbIterations) end
 
+--the position correction technique used for contacts.
+---@param technique number rp3d.ContactsPositionCorrectionTechnique
+function PhysicsWorld:setContactsPositionCorrectionTechnique(technique) end
+
 
 
 
@@ -207,6 +203,12 @@ function rp3d.createPhysicsWorld(settings) end
 
 ---@param world Rp3dPhysicsWorld
 function rp3d.destroyPhysicsWorld(world) end
+
+
+rp3d.ContactsPositionCorrectionTechnique = {
+	BAUMGARTE_CONTACTS = 0,
+	SPLIT_IMPULSES = 1,
+}
 
 
 

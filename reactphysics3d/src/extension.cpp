@@ -48,6 +48,15 @@ static void LuaInit(lua_State* L){
 	int top = lua_gettop(L);
 	// Register lua names
 	luaL_register(L, MODULE_NAME, Module_methods);
+
+	 lua_newtable(L);
+        lua_pushnumber(L, 0);
+        lua_setfield(L, -2, "BAUMGARTE_CONTACTS");
+        lua_pushnumber(L, 1);
+        lua_setfield(L, -2, "SPLIT_IMPULSES");
+     lua_setfield(L, -2, "ContactsPositionCorrectionTechnique");
+
+
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));
 }
