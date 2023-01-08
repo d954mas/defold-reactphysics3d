@@ -2,6 +2,7 @@ local DEFTEST = require "deftest.deftest"
 local TELESCOPE = require "deftest.telescope"
 
 local TEST_WORLD = require "tests.test_world"
+local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
 local M = {}
 
 function M.run()
@@ -34,6 +35,7 @@ function M.run()
             end
     )
     DEFTEST.add(TEST_WORLD)
+    DEFTEST.add(TEST_WORLD_SETTINGS)
     DEFTEST.run()
 end
 

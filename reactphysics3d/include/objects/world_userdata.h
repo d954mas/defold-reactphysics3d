@@ -4,6 +4,7 @@
 #include <dmsdk/sdk.h>
 #include "objects/base_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
+#include "static_hash.h"
 
 using namespace reactphysics3d;
 
@@ -23,5 +24,8 @@ public:
 
 void WorldUserdataInitMetaTable(lua_State *L);
 WorldUserdata* WorldUserdataCheck(lua_State *L, int index);
+
+PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index);
+
 }
 #endif

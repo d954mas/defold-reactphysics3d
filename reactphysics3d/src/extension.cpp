@@ -18,7 +18,7 @@ static int createPhysicsWorldLua(lua_State* L){
     check_arg_count(L, 0,1);
     PhysicsWorld* world = NULL;
     if (lua_gettop(L) == 1) {
-        PhysicsWorld::WorldSettings settings;
+        PhysicsWorld::WorldSettings settings = WorldSettings_from_table(L,1);
         world = physicsCommon.createPhysicsWorld(settings);
     }else{
         world = physicsCommon.createPhysicsWorld();

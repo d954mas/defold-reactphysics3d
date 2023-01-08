@@ -34,4 +34,8 @@ for file in os.listdir('.'):
 	if file.endswith('.cpp') or file.endswith('.c'):
 		with open(file, 'r') as f:
 			process(f.read())
-	generateEnum()
+for file in os.listdir('objects'):
+	if file.endswith('.cpp') or file.endswith('.c'):
+		with open('objects/' + file, 'r') as f:
+			process(f.read())
+generateEnum()
