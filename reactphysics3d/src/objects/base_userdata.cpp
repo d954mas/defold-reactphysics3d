@@ -1,4 +1,4 @@
-#include "base_userdata.h"
+#include "objects/base_userdata.h"
 #include "utils.h"
 
 #define USERDATA_NAME "__userdata_rp3d"
@@ -90,9 +90,7 @@ void BaseUserData::Push(lua_State *L) {
 }
 
 void BaseUserData::Destroy(lua_State *L) {
-    if(obj != NULL){
-        obj = NULL;
-    }
+    obj = NULL;
 
     if(table_ref != LUA_REFNIL){
         lua_rawgeti(L,LUA_REGISTRYINDEX,table_ref);

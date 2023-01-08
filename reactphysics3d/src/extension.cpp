@@ -3,10 +3,44 @@
 #define MODULE_NAME "rp3d"
 
 #include <dmsdk/sdk.h>
+#include "utils.h"
+#include "objects/objects.h"
 #include "reactphysics3d/reactphysics3d.h"
+
+using namespace reactphysics3d;
+using namespace rp3dDefold;
+
+static PhysicsCommon physicsCommon;
+
+
+static int createPhysicsWorldLua(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 0,1);
+    PhysicsWorld* world = NULL;
+    if (lua_gettop(L) == 1) {
+        PhysicsWorld::WorldSettings settings;
+        world = physicsCommon.createPhysicsWorld(settings);
+    }else{
+        world = physicsCommon.createPhysicsWorld();
+    }
+    WorldUserdata *data = new WorldUserdata(world);
+    data->Push(L);
+    return 1;
+}
+static int destroyPhysicsWorldLua(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L,1);
+    physicsCommon.destroyPhysicsWorld(data->world);
+    data->Destroy(L);
+    delete data;
+    return 0;
+}
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
+	 {"createPhysicsWorld", createPhysicsWorldLua},
+	 {"destroyPhysicsWorld", destroyPhysicsWorldLua},
 	{0, 0}
 };
 
@@ -20,7 +54,7 @@ static void LuaInit(lua_State* L){
 
 static dmExtension::Result AppInitializeMyExtension(dmExtension::AppParams* params){return dmExtension::RESULT_OK;}
 static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
-	// Init Lua
+    WorldUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;

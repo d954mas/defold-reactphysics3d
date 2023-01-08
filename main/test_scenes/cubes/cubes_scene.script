@@ -1,25 +1,69 @@
 local SCENE_HELPER = require "main.gui.scene_helper"
 
----@class SelfDominosScene
+local SCENE_RADIUS = 30              -- Radius of the scene in meters
+local NB_CUBES = 30                              -- Number of boxes in the scene
+local BOX_SIZE = vmath.vector3(2, 2, 2)    -- Box dimensions in meters
+local FLOOR_SIZE = vmath.vector3(30, 1, 30)   -- Floor dimensions in meters
 
----@param self SelfDominosScene
 local function create_physics(self)
+
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+
+	for i=1,NB_CUBES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+	end
+		-- world:setEventListener(self)
+		--[[// Gravity vector in the physics world
+
+		// Create all the cubes of the scene
+		for (int i=0; i<NB_CUBES; i++) {
+
+
+
+		// Set the box color
+		cube->setColor(mObjectColorDemo);
+		cube->setSleepingColor(mSleepingColorDemo);
+
+		// Change the material properties of the rigid body
+		rp3d::Material& material = cube->getCollider()->getMaterial();
+		material.setBounciness(rp3d::decimal(0.4));
+
+		// Add the box the list of box in the scene
+		mBoxes.push_back(cube);
+		mPhysicsObjects.push_back(cube);
+		}
+
+		// ------------------------- FLOOR ----------------------- //
+
+		// Create the floor
+		mFloor = new Box(true, FLOOR_SIZE, mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		mFloor->setColor(mFloorColorDemo);
+		mFloor->setSleepingColor(mFloorColorDemo);
+
+		// The floor must be a static rigid body
+		mFloor->getRigidBody()->setType(rp3d::BodyType::STATIC);
+		mPhysicsObjects.push_back(mFloor);
+		createPhysicsWorld();
+		initBodiesPositions();--]]
 end
 
----@param self SelfDominosScene
 function init(self)
-    self.world = {}
-    create_physics(self)
+	create_physics(self)
 
-    SCENE_HELPER.scene_new({
-        name = "cubes",
-        world = self.world
-    })
+	SCENE_HELPER.scene_new({
+		name = "cubes",
+		world = self.world
+	})
 end
 
 function final(self)
-   -- self.world:Destroy()
-    SCENE_HELPER.scene_final()
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
 end
 
 

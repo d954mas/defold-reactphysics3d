@@ -1,5 +1,7 @@
 local DEFTEST = require "deftest.deftest"
 local TELESCOPE = require "deftest.telescope"
+
+local TEST_WORLD = require "tests.test_world"
 local M = {}
 
 function M.run()
@@ -31,6 +33,7 @@ function M.run()
                 return d >=0 and d <= 0.0000001
             end
     )
+    DEFTEST.add(TEST_WORLD)
     DEFTEST.run()
 end
 
