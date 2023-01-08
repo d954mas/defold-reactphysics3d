@@ -35,6 +35,54 @@ static int GetName(lua_State *L){
 	return 1;
 }
 
+static int GetNbIterationsVelocitySolver(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getNbIterationsVelocitySolver());
+	return 1;
+}
+
+static int GetNbIterationsPositionSolver(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getNbIterationsPositionSolver());
+	return 1;
+}
+
+static int GetTimeBeforeSleep(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getTimeBeforeSleep());
+	return 1;
+}
+
+static int GetSleepAngularVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getSleepAngularVelocity());
+	return 1;
+}
+
+static int GetSleepLinearVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getSleepLinearVelocity());
+	return 1;
+}
+
+static int IsSleepingEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushboolean(L, data->world->isSleepingEnabled());
+	return 1;
+}
+
 static int GetGravity(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -61,6 +109,12 @@ void WorldUserdataInitMetaTable(lua_State *L){
     luaL_Reg functions[] = {
         {"getName",GetName},
         {"getGravity",GetGravity},
+        {"getNbIterationsVelocitySolver",GetNbIterationsVelocitySolver},
+        {"getNbIterationsPositionSolver",GetNbIterationsPositionSolver},
+        {"isSleepingEnabled",IsSleepingEnabled},
+        {"getTimeBeforeSleep",GetTimeBeforeSleep},
+        {"getSleepLinearVelocity",GetSleepLinearVelocity},
+        {"getSleepAngularVelocity",GetSleepAngularVelocity},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -107,7 +161,7 @@ PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index){
                 case HASH_restitutionVelocityThreshold:
                     settings.restitutionVelocityThreshold = luaL_checknumber(L,-1);break;
                 case HASH_isSleepingEnabled:
-                    settings.restitutionVelocityThreshold = lua_toboolean(L,-1);break;
+                    settings.isSleepingEnabled = lua_toboolean(L,-1);break;
                 case HASH_defaultVelocitySolverNbIterations:
                     settings.defaultVelocitySolverNbIterations = luaL_checknumber(L,-1);break;
                 case HASH_defaultPositionSolverNbIterations:

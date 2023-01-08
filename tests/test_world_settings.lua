@@ -46,10 +46,14 @@ return function()
                 cosAngleSimilarContactManifold = 0.96,
             }
             local w = rp3d.createPhysicsWorld(settings)
-            pprint(w)
-            pprint(getmetatable(w))
             assert_equal("TestWorld",w:getName())
             assert_equal_v3(vmath.vector3(1, 2, 3),w:getGravity())
+            assert_equal(5,w:getNbIterationsVelocitySolver())
+            assert_equal(4,w:getNbIterationsPositionSolver())
+            assert_equal(false,w:isSleepingEnabled())
+            assert_equal(1.5,w:getTimeBeforeSleep())
+            assert_equal_float(0.05,w:getSleepLinearVelocity())
+            assert_equal_float(6.0 * (math.pi / 180.0),w:getSleepAngularVelocity())
 
             rp3d.destroyPhysicsWorld(w)
         end)

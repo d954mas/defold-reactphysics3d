@@ -32,7 +32,6 @@ local WorldSettings = {
 	cosAngleSimilarContactManifold = 0.95,
 }
 
-
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 
@@ -76,16 +75,10 @@ AABB 	getWorldAABB (const Collider *collider) const
  
 void 	update (decimal timeStep)
  	Update the physics simulation.
- 
-uint16 	getNbIterationsVelocitySolver () const
- 	Get the number of iterations for the velocity constraint solver.
- 
+
 void 	setNbIterationsVelocitySolver (uint16 nbIterations)
  	Set the number of iterations for the velocity constraint solver.
- 
-uint16 	getNbIterationsPositionSolver () const
- 	Get the number of iterations for the position constraint solver.
- 
+
 void 	setNbIterationsPositionSolver (uint32 nbIterations)
  	Set the number of iterations for the position constraint solver.
  
@@ -117,27 +110,19 @@ bool 	isGravityEnabled () const
  
 void 	setIsGravityEnabled (bool isGravityEnabled)
  	Enable/Disable the gravity.
- 
-bool 	isSleepingEnabled () const
- 	Return true if the sleeping technique is enabled.
- 
+
 void 	enableSleeping (bool isSleepingEnabled)
  	Enable/Disable the sleeping technique.
- 
-decimal 	getSleepLinearVelocity () const
- 	Return the current sleep linear velocity.
+
  
 void 	setSleepLinearVelocity (decimal sleepLinearVelocity)
  	Set the sleep linear velocity.
- 
-decimal 	getSleepAngularVelocity () const
- 	Return the current sleep angular velocity.
+
  
 void 	setSleepAngularVelocity (decimal sleepAngularVelocity)
  	Set the sleep angular velocity.
- 
-decimal 	getTimeBeforeSleep () const
- 	Return the time a body is required to stay still before sleeping.
+
+
  
 void 	setTimeBeforeSleep (decimal timeBeforeSleep)
  	Set the time a body is required to stay still before sleeping.
@@ -179,6 +164,31 @@ function PhysicsWorld:getName() end
 --Return the gravity vector of the world.
 ---@return vector3
 function PhysicsWorld:getGravity() end
+
+--Get the number of iterations for the velocity constraint solver.
+---@return number
+function PhysicsWorld:getNbIterationsVelocitySolver() end
+
+--Get the number of iterations for the position constraint solver.
+---@return number
+function PhysicsWorld:getNbIterationsPositionSolver() end
+
+--Return true if the sleeping technique is enabled.
+---@return bool
+function PhysicsWorld:isSleepingEnabled() end
+
+--Return the time a body is required to stay still before sleeping.
+---@return number
+function PhysicsWorld:getTimeBeforeSleep() end
+
+-- Return the current sleep linear velocity.
+---@return number
+function PhysicsWorld:getSleepLinearVelocity() end
+
+--Return the current sleep angular velocity.
+---@return number
+function PhysicsWorld:getSleepAngularVelocity() end
+
 
 
 --Create and return an instance of PhysicsWorld.
