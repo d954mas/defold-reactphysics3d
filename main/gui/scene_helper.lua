@@ -5,12 +5,24 @@ local M = {}
 M.dirty = false -- if dirty update gui. Scene reload/changed
 
 M.scene_config = {
-	name = "",
-	dt = 1 / 60,
+	name = ""
+}
+M.rendering = {
+	debug_draw = true,
+	contact_points = false,
+	contact_normals = false,
+	broad_phase = false,
+	colliders_aabb = false,
+	shapes = true,
 }
 M.simulation = {
 	play = true,
-	step = false
+	step = false,
+	sleep = true,
+	gravity = true,
+	velocity_iterations = 6,
+	position_iterations = 3,
+	step = 1/60
 }
 M.profiling = {
 	fps_delay = 1,
@@ -22,6 +34,19 @@ M.profiling = {
 	phys_total = 0,
 }
 
+function M.set_allow_sleep(enable)
+	M.simulation.sleep = enable
+	if(M.scene_config.world)then
+
+	end
+end
+
+function M.set_enable_gravity(enable)
+	M.simulation.gravity = enable
+	if(M.scene_config.world)then
+
+	end
+end
 
 function M.scene_new(cfg)
 	M.dirty = true
@@ -72,13 +97,6 @@ function M.reset()
 	cfg.positionIterations = 3
 	--  M.debug_draw.flags =  bit.bor(box2d.b2Draw.e_shapeBit, box2d.b2Draw.e_jointBit)
 	-- M.debug_draw.draw:SetFlags(M.debug_draw.flags)
-end
-
-function M.cfg_velocity_iterations_add(value)
-	M.scene_config.velocityIterations = LUME.clamp(M.scene_config.velocityIterations + value, 1, 100)
-end
-function M.cfg_position_iterations_add(value)
-	M.scene_config.positionIterations = LUME.clamp(M.scene_config.positionIterations + value, 1, 100)
 end
 
 function M.debug_draw_add_flag(flag)
