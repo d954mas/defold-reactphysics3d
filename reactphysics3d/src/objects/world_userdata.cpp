@@ -95,6 +95,17 @@ static int GetGravity(lua_State *L){
 	return 1;
 }
 
+static int SetGravity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    dmVMath::Vector3* dmGravity = dmScript::CheckVector3(L, 2);
+
+    Vector3 gravity(dmGravity->getX(),dmGravity->getY(),dmGravity->getZ());
+    data->world->setGravity(gravity);
+	return 0;
+}
+
 static int Update(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
@@ -135,6 +146,30 @@ static int SetContactsPositionCorrectionTechnique(lua_State *L){
 	return 0;
 }
 
+static int EnableDisableJoints(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->enableDisableJoints();
+	return 0;
+}
+
+static int IsGravityEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushboolean(L,data->world->isGravityEnabled());
+	return 1;
+}
+
+static int SetIsGravityEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setIsGravityEnabled(lua_toboolean(L,2));
+	return 0;
+}
+
 
 
 static int ToString(lua_State *L){
@@ -151,6 +186,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
     luaL_Reg functions[] = {
         {"getName",GetName},
         {"getGravity",GetGravity},
+        {"setGravity",SetGravity},
         {"getNbIterationsVelocitySolver",GetNbIterationsVelocitySolver},
         {"getNbIterationsPositionSolver",GetNbIterationsPositionSolver},
         {"isSleepingEnabled",IsSleepingEnabled},
@@ -161,6 +197,9 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
         {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
         {"setContactsPositionCorrectionTechnique",SetContactsPositionCorrectionTechnique},
+        {"enableDisableJoints",EnableDisableJoints},
+        {"isGravityEnabled",IsGravityEnabled},
+        {"setIsGravityEnabled",SetIsGravityEnabled},
         {"__tostring",ToString},
         { 0, 0 }
     };

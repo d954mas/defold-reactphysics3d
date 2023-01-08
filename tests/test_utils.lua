@@ -49,10 +49,10 @@ function M.test_method_get_set(object, key, config)
         set_f = object[config.setter_full]
         assert(set_f) end
     if(not get_f)then
-        get_f = object[(config.getter or "set") .. key]
+        get_f = object[(config.getter or "get") .. key]
     end
     if(not set_f)then
-        set_f = object[(config.setter or "get") .. key]
+        set_f = object[(config.setter or "set") .. key]
     end
 
 

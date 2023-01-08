@@ -75,9 +75,7 @@ AABB 	getWorldAABB (const Collider *collider) const
  
 RigidBody * 	createRigidBody (const Transform &transform)
  	Create a rigid body into the physics world.
- 
-void 	enableDisableJoints ()
- 	Disable the joints for pair of sleeping bodies.
+
  
 void 	destroyRigidBody (RigidBody *rigidBody)
  	Destroy a rigid body and all the joints which it belongs.
@@ -89,15 +87,6 @@ void 	destroyJoint (Joint *joint)
  	Destroy a joint.
 
 
- 
-void 	setGravity (const Vector3 &gravity)
- 	Set the gravity vector of the world.
- 
-bool 	isGravityEnabled () const
- 	Return if the gravity is on.
- 
-void 	setIsGravityEnabled (bool isGravityEnabled)
- 	Enable/Disable the gravity.
 
 void 	enableSleeping (bool isSleepingEnabled)
  	Enable/Disable the sleeping technique.
@@ -194,6 +183,24 @@ function PhysicsWorld:setNbIterationsPositionSolver(nbIterations) end
 function PhysicsWorld:setContactsPositionCorrectionTechnique(technique) end
 
 
+--Disable the joints for pair of sleeping bodies.
+function PhysicsWorld:enableDisableJoints() end
+
+--Set the gravity vector of the world.
+---@param gravity vector3
+function PhysicsWorld:setGravity(gravity) end
+
+--Return if the gravity is on.
+---@return  bool
+function PhysicsWorld:isGravityEnabled() end
+
+--Enable/Disable the gravity.
+---@param isGravityEnabled bool
+function PhysicsWorld:setIsGravityEnabled(isGravityEnabled) end
+
+
+
+
 
 
 --Create and return an instance of PhysicsWorld.
@@ -203,7 +210,6 @@ function rp3d.createPhysicsWorld(settings) end
 
 ---@param world Rp3dPhysicsWorld
 function rp3d.destroyPhysicsWorld(world) end
-
 
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = 0,
