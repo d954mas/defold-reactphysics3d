@@ -46,7 +46,11 @@ return function()
                 cosAngleSimilarContactManifold = 0.96,
             }
             local w = rp3d.createPhysicsWorld(settings)
-            assert_true(true)
+            pprint(w)
+            pprint(getmetatable(w))
+            assert_equal("TestWorld",w:getName())
+            assert_equal_v3(vmath.vector3(1, 2, 3),w:getGravity())
+
             rp3d.destroyPhysicsWorld(w)
         end)
 

@@ -1,21 +1,5 @@
 rp3d = {}
 
-
---[[
-
-
-
-
-decimal defaultSleepLinearVelocity;
-
-
-decimal defaultSleepAngularVelocity;
-
-
-decimal cosAngleSimilarContactManifold;
-
---]]
-
 ---@class Rp3dWorldSettings
 local WorldSettings = {
 	--Name of the world
@@ -48,6 +32,155 @@ local WorldSettings = {
 	cosAngleSimilarContactManifold = 0.95,
 }
 
+
+---@class Rp3dPhysicsWorld
+local PhysicsWorld = {}
+
+--[[
+CollisionBody * 	createCollisionBody (const Transform &transform)
+ 	Create a collision body.
+ 
+void 	destroyCollisionBody (CollisionBody *collisionBody)
+ 	Destroy a collision body.
+ 
+CollisionDispatch & 	getCollisionDispatch ()
+ 	Get the collision dispatch configuration.
+ 
+void 	raycast (const Ray &ray, RaycastCallback *raycastCallback, unsigned short raycastWithCategoryMaskBits=0xFFFF) const
+ 	Ray cast method.
+ 
+bool 	testOverlap (CollisionBody *body1, CollisionBody *body2)
+ 	Return true if two bodies overlap (collide)
+ 
+void 	testOverlap (CollisionBody *body, OverlapCallback &overlapCallback)
+ 	Report all the bodies that overlap (collide) with the body in parameter.
+ 
+void 	testOverlap (OverlapCallback &overlapCallback)
+ 	Report all the bodies that overlap (collide) in the world.
+ 
+void 	testCollision (CollisionBody *body1, CollisionBody *body2, CollisionCallback &callback)
+ 	Test collision and report contacts between two bodies.
+ 
+void 	testCollision (CollisionBody *body, CollisionCallback &callback)
+ 	Test collision and report all the contacts involving the body in parameter.
+ 
+void 	testCollision (CollisionCallback &callback)
+ 	Test collision and report contacts between each colliding bodies in the world.
+ 
+MemoryManager & 	getMemoryManager ()
+ 	Return a reference to the memory manager of the world.
+ 
+AABB 	getWorldAABB (const Collider *collider) const
+ 	Return the current world-space AABB of given collider.
+
+ 
+void 	update (decimal timeStep)
+ 	Update the physics simulation.
+ 
+uint16 	getNbIterationsVelocitySolver () const
+ 	Get the number of iterations for the velocity constraint solver.
+ 
+void 	setNbIterationsVelocitySolver (uint16 nbIterations)
+ 	Set the number of iterations for the velocity constraint solver.
+ 
+uint16 	getNbIterationsPositionSolver () const
+ 	Get the number of iterations for the position constraint solver.
+ 
+void 	setNbIterationsPositionSolver (uint32 nbIterations)
+ 	Set the number of iterations for the position constraint solver.
+ 
+void 	setContactsPositionCorrectionTechnique (ContactsPositionCorrectionTechnique technique)
+ 	Set the position correction technique used for contacts.
+ 
+RigidBody * 	createRigidBody (const Transform &transform)
+ 	Create a rigid body into the physics world.
+ 
+void 	enableDisableJoints ()
+ 	Disable the joints for pair of sleeping bodies.
+ 
+void 	destroyRigidBody (RigidBody *rigidBody)
+ 	Destroy a rigid body and all the joints which it belongs.
+ 
+Joint * 	createJoint (const JointInfo &jointInfo)
+ 	Create a joint between two bodies in the world and return a pointer to the new joint.
+ 
+void 	destroyJoint (Joint *joint)
+ 	Destroy a joint.
+
+
+ 
+void 	setGravity (const Vector3 &gravity)
+ 	Set the gravity vector of the world.
+ 
+bool 	isGravityEnabled () const
+ 	Return if the gravity is on.
+ 
+void 	setIsGravityEnabled (bool isGravityEnabled)
+ 	Enable/Disable the gravity.
+ 
+bool 	isSleepingEnabled () const
+ 	Return true if the sleeping technique is enabled.
+ 
+void 	enableSleeping (bool isSleepingEnabled)
+ 	Enable/Disable the sleeping technique.
+ 
+decimal 	getSleepLinearVelocity () const
+ 	Return the current sleep linear velocity.
+ 
+void 	setSleepLinearVelocity (decimal sleepLinearVelocity)
+ 	Set the sleep linear velocity.
+ 
+decimal 	getSleepAngularVelocity () const
+ 	Return the current sleep angular velocity.
+ 
+void 	setSleepAngularVelocity (decimal sleepAngularVelocity)
+ 	Set the sleep angular velocity.
+ 
+decimal 	getTimeBeforeSleep () const
+ 	Return the time a body is required to stay still before sleeping.
+ 
+void 	setTimeBeforeSleep (decimal timeBeforeSleep)
+ 	Set the time a body is required to stay still before sleeping.
+ 
+void 	setEventListener (EventListener *eventListener)
+ 	Set an event listener object to receive events callbacks.
+ 
+uint32 	getNbCollisionBodies () const
+ 	Return the number of CollisionBody in the physics world.
+ 
+const CollisionBody * 	getCollisionBody (uint32 index) const
+ 	Return a constant pointer to a given CollisionBody of the world.
+ 
+CollisionBody * 	getCollisionBody (uint32 index)
+ 	Return a pointer to a given CollisionBody of the world.
+ 
+uint32 	getNbRigidBodies () const
+ 	Return the number of RigidBody in the physics world.
+ 
+const RigidBody * 	getRigidBody (uint32 index) const
+ 	Return a constant pointer to a given RigidBody of the world.
+ 
+RigidBody * 	getRigidBody (uint32 index)
+ 	Return a pointer to a given RigidBody of the world.
+ 
+bool 	getIsDebugRenderingEnabled () const
+ 	Return true if the debug rendering is enabled.
+ 
+void 	setIsDebugRenderingEnabled (bool isEnabled)
+ 	Set to true if debug rendering is enabled.
+ 
+DebugRenderer & 	getDebugRenderer ()
+ 	Return a reference to the Debug Renderer of the world. 
+--]]
+
+--Return the name of the world.
+function PhysicsWorld:getName() end
+
+--Return the gravity vector of the world.
+---@return vector3
+function PhysicsWorld:getGravity() end
+
+
 --Create and return an instance of PhysicsWorld.
 ---@param settings Rp3dWorldSettings
 ---@return Rp3dPhysicsWorld
@@ -55,3 +188,6 @@ function rp3d.createPhysicsWorld(settings) end
 
 ---@param world Rp3dPhysicsWorld
 function rp3d.destroyPhysicsWorld(world) end
+
+
+

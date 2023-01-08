@@ -14,6 +14,7 @@ namespace rp3dDefold {
 WorldUserdata::WorldUserdata(PhysicsWorld* world): BaseUserData(USERDATA_TYPE){
     this->world = world;
     this->obj = world;
+    this->metatable_name = META_NAME;
 }
 
 
@@ -24,6 +25,26 @@ WorldUserdata::~WorldUserdata() {
 WorldUserdata* WorldUserdataCheck(lua_State *L, int index) {
     WorldUserdata *lua_world = (WorldUserdata*) BaseUserData_get_userdata(L, index, USERDATA_TYPE);
 	return lua_world;
+}
+
+static int GetName(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    push_std_string(L,data->world->getName());
+	return 1;
+}
+
+static int GetGravity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+
+    Vector3 gravity = data->world->getGravity();
+
+    dmVMath::Vector3 result(gravity.x,gravity.y,gravity.z);
+    dmScript::PushVector3(L, result);
+	return 1;
 }
 
 static int ToString(lua_State *L){
@@ -38,6 +59,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"getName",GetName},
+        {"getGravity",GetGravity},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -68,8 +91,13 @@ PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index){
             switch (hash_string(key)){
                 case HASH_worldName:
                     settings.worldName = lua_tostring(L,-1);break;
-                case HASH_gravity:
+                case HASH_gravity:{
+                    dmVMath::Vector3* value = dmScript::CheckVector3(L, -1);
+                    settings.gravity.x = value->getX();
+                    settings.gravity.y = value->getY();
+                    settings.gravity.z = value->getZ();
                     break;
+                }
                 case HASH_persistentContactDistanceThreshold:
                     settings.persistentContactDistanceThreshold = luaL_checknumber(L,-1);break;
                 case HASH_defaultFrictionCoefficient:
