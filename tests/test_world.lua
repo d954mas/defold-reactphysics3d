@@ -33,5 +33,37 @@ return function()
             assert_equal(w.__userdata_type_rp3d, "rp3d::World")
         end)
 
+        test("update", function()
+            local w = rp3d.createPhysicsWorld()
+            w:update(1/60)
+            w:update(1/30)
+            w:update(0.001)
+            w:update(1/120)
+
+            local status, error = pcall(w.update,w)
+            assert_false(status)
+            assert_equal(error,"This function requires 2 arguments. Got 1.")
+
+            rp3d.destroyPhysicsWorld(w)
+        end)
+
+        test("Set/Get NbIterationsPositionSolver()", function()
+            local w = rp3d.createPhysicsWorld()
+            UTILS.test_method_get_set(w, "NbIterationsPositionSolver", {
+                values = { 1, 5,10 }
+            })
+            rp3d.destroyPhysicsWorld(w)
+        end)
+
+        test("Set/Get NbIterationsVelocitySolver()", function()
+            local w = rp3d.createPhysicsWorld()
+            UTILS.test_method_get_set(w, "NbIterationsVelocitySolver", {
+                values = { 1, 5,10 }
+            })
+            rp3d.destroyPhysicsWorld(w)
+        end)
+
+
+
     end)
 end

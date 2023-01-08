@@ -95,6 +95,31 @@ static int GetGravity(lua_State *L){
 	return 1;
 }
 
+static int Update(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->update(lua_tonumber(L,2));
+	return 0;
+}
+
+static int SetNbIterationsVelocitySolver(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setNbIterationsVelocitySolver(luaL_checknumber(L,2));
+	return 0;
+}
+
+static int SetNbIterationsPositionSolver(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setNbIterationsPositionSolver(luaL_checknumber(L,2));
+	return 0;
+}
+
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -115,6 +140,9 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getTimeBeforeSleep",GetTimeBeforeSleep},
         {"getSleepLinearVelocity",GetSleepLinearVelocity},
         {"getSleepAngularVelocity",GetSleepAngularVelocity},
+        {"update",Update},
+        {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
+        {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
         {"__tostring",ToString},
         { 0, 0 }
     };

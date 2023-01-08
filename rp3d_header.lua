@@ -72,10 +72,6 @@ MemoryManager & 	getMemoryManager ()
 AABB 	getWorldAABB (const Collider *collider) const
  	Return the current world-space AABB of given collider.
 
- 
-void 	update (decimal timeStep)
- 	Update the physics simulation.
-
 void 	setNbIterationsVelocitySolver (uint16 nbIterations)
  	Set the number of iterations for the velocity constraint solver.
 
@@ -188,6 +184,19 @@ function PhysicsWorld:getSleepLinearVelocity() end
 --Return the current sleep angular velocity.
 ---@return number
 function PhysicsWorld:getSleepAngularVelocity() end
+
+--Update the physics simulation.
+---@param timeStep number
+function PhysicsWorld:update(timeStep) end
+
+--Set the number of iterations for the velocity constraint solver.
+---@param nbIterations number
+function PhysicsWorld:setNbIterationsVelocitySolver(nbIterations) end
+
+--Set the number of iterations for the position constraint solver.
+---@param nbIterations number
+function PhysicsWorld:setNbIterationsPositionSolver(nbIterations) end
+
 
 
 
