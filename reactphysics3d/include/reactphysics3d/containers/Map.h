@@ -383,7 +383,7 @@ class Map {
                         }
                         else {
                             assert(false);
-                            throw std::runtime_error("The key and value pair already exists in the map");
+                           //throw std::runtime_error("The key and value pair already exists in the map");
                         }
                     }
                 }
@@ -569,7 +569,7 @@ class Map {
 
             if (entry == INVALID_INDEX) {
                 assert(false);
-                throw std::runtime_error("No item with given key has been found in the map");
+                //throw std::runtime_error("No item with given key has been found in the map");
             }
 
             return mEntries[entry].second;
@@ -582,7 +582,7 @@ class Map {
 
             if (entry == INVALID_INDEX) {
                 assert(false);
-                throw std::runtime_error("No item with given key has been found in the map");
+                //throw std::runtime_error("No item with given key has been found in the map");
             }
 
             return mEntries[entry].second;

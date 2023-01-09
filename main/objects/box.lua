@@ -6,7 +6,6 @@ function Box:initialize(size)
 	self.size = vmath.vector3(size)
 
 	local shape = rp3d.createBoxShape(self.size)
-	pprint(shape)
 
 end
 

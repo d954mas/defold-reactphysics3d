@@ -15,7 +15,6 @@ local function create_physics(self)
 	self.world = rp3d.createPhysicsWorld(settings)
 
 	for i=1,NB_CUBES do
-		print("BOX")
 		-- Create a cube and a corresponding rigid in the physics world
 		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
 		local box_shape = Box(BOX_SIZE)
