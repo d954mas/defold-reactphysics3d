@@ -103,9 +103,7 @@ const RigidBody * 	getRigidBody (uint32 index) const
  
 RigidBody * 	getRigidBody (uint32 index)
  	Return a pointer to a given RigidBody of the world.
- 
-bool 	getIsDebugRenderingEnabled () const
- 	Return true if the debug rendering is enabled.
+
  
 void 	setIsDebugRenderingEnabled (bool isEnabled)
  	Set to true if debug rendering is enabled.
@@ -201,7 +199,13 @@ function PhysicsWorld:getNbCollisionBodies() end
 ---@return number
 function PhysicsWorld:getNbRigidBodies() end
 
+--Return true if the debug rendering is enabled.
+---@return bool
+function PhysicsWorld:getIsDebugRenderingEnabled() end
 
+--Set to true if debug rendering is enabled.
+---@param isEnabled bool
+function PhysicsWorld:setIsDebugRenderingEnabled(isEnabled) end
 
 
 

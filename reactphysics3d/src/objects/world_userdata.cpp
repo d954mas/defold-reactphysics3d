@@ -211,6 +211,22 @@ static int SetIsGravityEnabled(lua_State *L){
 	return 0;
 }
 
+static int GetIsDebugRenderingEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushboolean(L,data->world->getIsDebugRenderingEnabled());
+	return 1;
+}
+
+static int SetIsDebugRenderingEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setIsDebugRenderingEnabled(lua_toboolean(L,2));
+	return 0;
+}
+
 static int EnableSleeping(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
@@ -255,6 +271,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"setIsGravityEnabled",SetIsGravityEnabled},
         {"getNbCollisionBodies",GetNbCollisionBodies},
         {"getNbRigidBodies",GetNbRigidBodies},
+        {"getIsDebugRenderingEnabled",GetIsDebugRenderingEnabled},
+        {"setIsDebugRenderingEnabled",SetIsDebugRenderingEnabled},
         {"__tostring",ToString},
         { 0, 0 }
     };

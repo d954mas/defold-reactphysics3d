@@ -119,6 +119,15 @@ return function()
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
+
+		test("Set/Get IsDebugRenderingEnabled()", function()
+			local w = rp3d.createPhysicsWorld()
+			UTILS.test_method_get_set(w, "IsDebugRenderingEnabled",
+					{
+						values = { false, true, true, false }
+					})
+			rp3d.destroyPhysicsWorld(w)
+		end)
 		test("SetContactsPositionCorrectionTechnique()", function()
 			local w = rp3d.createPhysicsWorld()
 			w:setContactsPositionCorrectionTechnique(rp3d.ContactsPositionCorrectionTechnique.BAUMGARTE_CONTACTS)
