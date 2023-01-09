@@ -3,10 +3,13 @@
 #define MODULE_NAME "rp3d"
 
 #include <dmsdk/sdk.h>
+#include "undefine_none.h"
 #include "utils.h"
 #include "objects/objects.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
+
+
 
 using namespace reactphysics3d;
 using namespace rp3dDefold;

@@ -1,7 +1,6 @@
 #ifndef world_h
 #define world_h
 
-#include <dmsdk/sdk.h>
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"

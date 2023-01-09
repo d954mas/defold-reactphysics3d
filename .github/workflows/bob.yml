@@ -5,8 +5,8 @@ on:
   push:
   pull_request_target:
   schedule:
-    # nightly at 04:00 on the 1st and 15th
-    - cron: 0 4 1,15 * *
+    # nightly at 05:00 on the 1st and 15th
+    - cron: 0 5 1,15 * *
 
 env:
   VERSION_FILENAME: 'info.json'
@@ -48,7 +48,7 @@ jobs:
   build_with_bob_macos:
     strategy:
       matrix:
-        platform: [x86_64-darwin]
+        platform: [x86_64-macos]
     runs-on: macOS-latest
 
     name: Build
