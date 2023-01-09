@@ -85,25 +85,6 @@ Joint * 	createJoint (const JointInfo &jointInfo)
  
 void 	destroyJoint (Joint *joint)
  	Destroy a joint.
-
-
-
-void 	enableSleeping (bool isSleepingEnabled)
- 	Enable/Disable the sleeping technique.
-
- 
-void 	setSleepLinearVelocity (decimal sleepLinearVelocity)
- 	Set the sleep linear velocity.
-
- 
-void 	setSleepAngularVelocity (decimal sleepAngularVelocity)
- 	Set the sleep angular velocity.
-
-
- 
-void 	setTimeBeforeSleep (decimal timeBeforeSleep)
- 	Set the time a body is required to stay still before sleeping.
- 
 void 	setEventListener (EventListener *eventListener)
  	Set an event listener object to receive events callbacks.
  
@@ -115,9 +96,7 @@ const CollisionBody * 	getCollisionBody (uint32 index) const
  
 CollisionBody * 	getCollisionBody (uint32 index)
  	Return a pointer to a given CollisionBody of the world.
- 
-uint32 	getNbRigidBodies () const
- 	Return the number of RigidBody in the physics world.
+
  
 const RigidBody * 	getRigidBody (uint32 index) const
  	Return a constant pointer to a given RigidBody of the world.
@@ -150,6 +129,10 @@ function PhysicsWorld:getNbIterationsVelocitySolver() end
 ---@return number
 function PhysicsWorld:getNbIterationsPositionSolver() end
 
+--Enable/Disable the sleeping technique.
+---@param isSleepingEnabled bool
+function PhysicsWorld:enableSleeping(isSleepingEnabled) end
+
 --Return true if the sleeping technique is enabled.
 ---@return bool
 function PhysicsWorld:isSleepingEnabled() end
@@ -158,13 +141,25 @@ function PhysicsWorld:isSleepingEnabled() end
 ---@return number
 function PhysicsWorld:getTimeBeforeSleep() end
 
+--Set the time a body is required to stay still before sleeping.
+---@param timeBeforeSleep number
+function PhysicsWorld:setTimeBeforeSleep(timeBeforeSleep) end
+
 -- Return the current sleep linear velocity.
 ---@return number
 function PhysicsWorld:getSleepLinearVelocity() end
 
+-- 	Set the sleep linear velocity.
+---@param sleepLinearVelocity number
+function PhysicsWorld:setSleepLinearVelocity(sleepLinearVelocity) end
+
 --Return the current sleep angular velocity.
 ---@return number
 function PhysicsWorld:getSleepAngularVelocity() end
+
+--Set the sleep angular velocity.
+---@param sleepAngularVelocity number
+function PhysicsWorld:setSleepAngularVelocity(sleepAngularVelocity) end
 
 --Update the physics simulation.
 ---@param timeStep number
@@ -197,6 +192,14 @@ function PhysicsWorld:isGravityEnabled() end
 --Enable/Disable the gravity.
 ---@param isGravityEnabled bool
 function PhysicsWorld:setIsGravityEnabled(isGravityEnabled) end
+
+--Return the number of CollisionBody in the physics world.
+---@return number
+function PhysicsWorld:getNbCollisionBodies() end
+
+--Return the number of RigidBody in the physics world.
+---@return number
+function PhysicsWorld:getNbRigidBodies() end
 
 
 

@@ -72,6 +72,33 @@ return function()
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
+		test("Set/Get SleepAngularVelocity()", function()
+			local w = rp3d.createPhysicsWorld()
+			UTILS.test_method_get_set(w, "SleepAngularVelocity",
+					{ float = true,
+					  values = { 0,0.002,1,0.05 }
+					})
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("Set/Get SleepLinearVelocity()", function()
+			local w = rp3d.createPhysicsWorld()
+			UTILS.test_method_get_set(w, "SleepLinearVelocity",
+					{ float = true,
+						values = { 0.1,0.2,0.3,0.4 }
+					})
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("Set/Get TimeBeforeSleep()", function()
+			local w = rp3d.createPhysicsWorld()
+			UTILS.test_method_get_set(w, "TimeBeforeSleep",
+					{ float = true,
+					  values = { 1,0.2,2,32,0.5 }
+					})
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
 		test("Is/SetIs GravityEnabled()", function()
 			local w = rp3d.createPhysicsWorld()
 			UTILS.test_method_get_set(w, "GravityEnabled",
@@ -79,6 +106,16 @@ return function()
 					  getter_full = "isGravityEnabled",
 					  setter_full = "setIsGravityEnabled",
 					  values = { false, true, true, false }
+					})
+			rp3d.destroyPhysicsWorld(w)
+		end)
+		test("Is/Enable Sleeping()", function()
+			local w = rp3d.createPhysicsWorld()
+			UTILS.test_method_get_set(w, "SleepingEnabled",
+					{
+						getter_full = "isSleepingEnabled",
+						setter_full = "enableSleeping",
+						values = { false, true, true, false }
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
@@ -95,6 +132,18 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			w:enableDisableJoints()
 			assert_true(true)
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("getNbRigidBodies()", function()
+			local w = rp3d.createPhysicsWorld()
+			assert_equal(0,w:getNbRigidBodies())
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("getNbCollisionBodies()", function()
+			local w = rp3d.createPhysicsWorld()
+			assert_equal(0,w:getNbCollisionBodies())
 			rp3d.destroyPhysicsWorld(w)
 		end)
 

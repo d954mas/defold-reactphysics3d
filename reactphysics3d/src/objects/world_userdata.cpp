@@ -75,6 +75,22 @@ static int GetSleepLinearVelocity(lua_State *L){
 	return 1;
 }
 
+static int GetNbCollisionBodies(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getNbCollisionBodies());
+	return 1;
+}
+
+static int GetNbRigidBodies(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    lua_pushnumber(L, data->world->getNbRigidBodies());
+	return 1;
+}
+
 static int IsSleepingEnabled(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -130,6 +146,31 @@ static int SetNbIterationsPositionSolver(lua_State *L){
 	return 0;
 }
 
+static int SetSleepAngularVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setSleepAngularVelocity(luaL_checknumber(L,2));
+	return 0;
+}
+
+static int SetSleepLinearVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setSleepLinearVelocity(luaL_checknumber(L,2));
+	return 0;
+}
+
+static int SetTimeBeforeSleep(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->setTimeBeforeSleep(luaL_checknumber(L,2));
+	return 0;
+}
+
+
 static int SetContactsPositionCorrectionTechnique(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
@@ -170,6 +211,14 @@ static int SetIsGravityEnabled(lua_State *L){
 	return 0;
 }
 
+static int EnableSleeping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    data->world->enableSleeping(lua_toboolean(L,2));
+	return 0;
+}
+
 
 
 static int ToString(lua_State *L){
@@ -190,9 +239,13 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getNbIterationsVelocitySolver",GetNbIterationsVelocitySolver},
         {"getNbIterationsPositionSolver",GetNbIterationsPositionSolver},
         {"isSleepingEnabled",IsSleepingEnabled},
+        {"enableSleeping",EnableSleeping},
         {"getTimeBeforeSleep",GetTimeBeforeSleep},
+        {"setTimeBeforeSleep",SetTimeBeforeSleep},
         {"getSleepLinearVelocity",GetSleepLinearVelocity},
+        {"setSleepLinearVelocity",SetSleepLinearVelocity},
         {"getSleepAngularVelocity",GetSleepAngularVelocity},
+        {"setSleepAngularVelocity",SetSleepAngularVelocity},
         {"update",Update},
         {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
         {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
@@ -200,6 +253,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"enableDisableJoints",EnableDisableJoints},
         {"isGravityEnabled",IsGravityEnabled},
         {"setIsGravityEnabled",SetIsGravityEnabled},
+        {"getNbCollisionBodies",GetNbCollisionBodies},
+        {"getNbRigidBodies",GetNbRigidBodies},
         {"__tostring",ToString},
         { 0, 0 }
     };
