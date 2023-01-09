@@ -218,6 +218,11 @@ function rp3d.createPhysicsWorld(settings) end
 ---@param world Rp3dPhysicsWorld
 function rp3d.destroyPhysicsWorld(world) end
 
+
+--Create and return a box collision shape.
+---@param halfExtents vector3
+function rp3d.createBoxShape(halfExtents) end
+
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = 0,
 	SPLIT_IMPULSES = 1,

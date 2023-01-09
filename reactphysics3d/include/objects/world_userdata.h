@@ -1,5 +1,5 @@
-#ifndef world_h
-#define world_h
+#ifndef world_userdata_h
+#define world_userdata_h
 
 #include <dmsdk/sdk.h>
 #include "objects/base_userdata.h"

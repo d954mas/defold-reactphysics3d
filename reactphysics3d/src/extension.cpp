@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "objects/objects.h"
 #include "reactphysics3d/reactphysics3d.h"
+#include "objects/shape/collision_shape_userdata.h"
 
 using namespace reactphysics3d;
 using namespace rp3dDefold;
@@ -13,7 +14,7 @@ using namespace rp3dDefold;
 static PhysicsCommon physicsCommon;
 
 
-static int createPhysicsWorldLua(lua_State* L){
+static int CreatePhysicsWorldLua(lua_State* L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 0,1);
     PhysicsWorld* world = NULL;
@@ -27,7 +28,7 @@ static int createPhysicsWorldLua(lua_State* L){
     data->Push(L);
     return 1;
 }
-static int destroyPhysicsWorldLua(lua_State* L){
+static int DestroyPhysicsWorldLua(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
     WorldUserdata *data = WorldUserdataCheck(L,1);
@@ -37,10 +38,21 @@ static int destroyPhysicsWorldLua(lua_State* L){
     return 0;
 }
 
+static int CreateBoxShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    dmVMath::Vector3* v3 = dmScript::CheckVector3(L, 1);
+    Vector3 v3rp3d(v3->getX(),v3->getY(),v3->getZ());
+    BoxShape * shape = physicsCommon.createBoxShape(v3rp3d);
+    CollisionShapePush(L,shape);
+    return 1;
+}
+
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
-	 {"createPhysicsWorld", createPhysicsWorldLua},
-	 {"destroyPhysicsWorld", destroyPhysicsWorldLua},
+	 {"createPhysicsWorld", CreatePhysicsWorldLua},
+	 {"destroyPhysicsWorld", DestroyPhysicsWorldLua},
+	 {"createBoxShape", CreateBoxShape},
 	{0, 0}
 };
 
