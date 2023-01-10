@@ -24,6 +24,10 @@ namespace rp3dDefold {
     int CollisionShape_GetName(lua_State *L);
     int CollisionShape_GC(lua_State *L);
 
+    const char* CollisionShapeNameEnumToString(CollisionShapeName name);
+
+    //CollisionShapeName CollisionShapeNameStringToEnum(lua_State *L,const char* str);
+
 
 
 

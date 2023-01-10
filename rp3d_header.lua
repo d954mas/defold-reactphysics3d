@@ -223,9 +223,19 @@ function rp3d.destroyPhysicsWorld(world) end
 ---@param halfExtents vector3
 function rp3d.createBoxShape(halfExtents) end
 
+--Destroy a box collision shape.
+---@param boxShape Rp3dBoxShape
+function rp3d.destroyBoxShape(boxShape) end
+
 rp3d.ContactsPositionCorrectionTechnique = {
-	BAUMGARTE_CONTACTS = 0,
-	SPLIT_IMPULSES = 1,
+	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",
+	SPLIT_IMPULSES = "SPLIT_IMPULSES",
+}
+
+rp3d.CollisionShapeName = {
+	TRIANGLE = "TRIANGLE", SPHERE = "SPHERE", CAPSULE = "CAPSULE",
+	BOX = "BOX", CONVEX_MESH = "CONVEX_MESH", TRIANGLE_MESH = "TRIANGLE_MESH",
+	HEIGHTFIELD = "HEIGHTFIELD"
 }
 
 

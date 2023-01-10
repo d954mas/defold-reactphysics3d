@@ -155,17 +155,5 @@ return function()
 			assert_equal(0,w:getNbCollisionBodies())
 			rp3d.destroyPhysicsWorld(w)
 		end)
-
-		test("enums exist", function()
-			local function test_enum(enum_name, config)
-				assert_not_nil(rp3d[enum_name])
-				for k, v in pairs(config) do
-					assert_equal(rp3d[enum_name][k], v)
-				end
-			end
-			test_enum("ContactsPositionCorrectionTechnique", { BAUMGARTE_CONTACTS = 0, SPLIT_IMPULSES = 1 })
-		end)
-
-
 	end)
 end

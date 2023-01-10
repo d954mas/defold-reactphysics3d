@@ -76,11 +76,30 @@ static void LuaInit(lua_State* L){
 	luaL_register(L, MODULE_NAME, Module_methods);
 
 	 lua_newtable(L);
-        lua_pushnumber(L, 0);
+        lua_pushstring(L, "BAUMGARTE_CONTACTS");
         lua_setfield(L, -2, "BAUMGARTE_CONTACTS");
-        lua_pushnumber(L, 1);
+        lua_pushstring(L, "SPLIT_IMPULSES");
         lua_setfield(L, -2, "SPLIT_IMPULSES");
      lua_setfield(L, -2, "ContactsPositionCorrectionTechnique");
+
+    lua_newtable(L);
+        lua_pushstring(L, "TRIANGLE");
+        lua_setfield(L, -2, "TRIANGLE");
+        lua_pushstring(L, "SPHERE");
+        lua_setfield(L, -2, "SPHERE");
+        lua_pushstring(L, "CAPSULE");
+        lua_setfield(L, -2, "CAPSULE");
+        lua_pushstring(L, "BOX");
+        lua_setfield(L, -2, "BOX");
+        lua_pushstring(L, "CONVEX_MESH");
+        lua_setfield(L, -2, "CONVEX_MESH");
+        lua_pushstring(L, "TRIANGLE_MESH");
+        lua_setfield(L, -2, "TRIANGLE_MESH");
+        lua_pushstring(L, "HEIGHTFIELD");
+        lua_setfield(L, -2, "HEIGHTFIELD");
+     lua_setfield(L, -2, "CollisionShapeName");
+
+
 
 
 	lua_pop(L, 1);

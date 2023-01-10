@@ -175,13 +175,17 @@ static int SetContactsPositionCorrectionTechnique(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
     WorldUserdata *data = WorldUserdataCheck(L, 1);
-    int type = luaL_checknumber(L,2);
-    if(type == 0){
-        data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::BAUMGARTE_CONTACTS);
-    }else if(type == 1){
-        data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::SPLIT_IMPULSES);
-    }else{
-        luaL_error(L, "unknown ContactsPositionCorrectionTechnique");
+    const char* str = lua_tostring(L,2);
+    switch (hash_string(str)){
+        case HASH_BAUMGARTE_CONTACTS:
+             data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::BAUMGARTE_CONTACTS);
+            break;
+        case HASH_SPLIT_IMPULSES:
+            data->world->setContactsPositionCorrectionTechnique(ContactsPositionCorrectionTechnique::SPLIT_IMPULSES);
+            break;
+        default:
+             luaL_error(L, "unknown ContactsPositionCorrectionTechnique");
+             break;
     }
 
 	return 0;
