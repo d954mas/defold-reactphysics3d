@@ -42,7 +42,6 @@ CollisionShapeLua* CollisionShapeCheck(lua_State* L, int index){
 }
 
 const char * CollisionShapeNameEnumToString(CollisionShapeName name){
-    dmLogInfo("enum");
     switch(name){
         case CollisionShapeName::TRIANGLE:
             return "TRIANGLE";
