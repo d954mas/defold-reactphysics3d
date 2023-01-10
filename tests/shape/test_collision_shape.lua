@@ -30,6 +30,14 @@ return function()
 			assert_equal(shapes.box:getName(), rp3d.CollisionShapeName.BOX)
 		end)
 
+		test("getType", function()
+			assert_equal(shapes.box:getType(), rp3d.CollisionShapeType.CONVEX_POLYHEDRON)
+		end)
+
+		test("toString", function()
+			assert_equal("BoxShape", tostring(shapes.box):sub(1,8))
+		end)
+
 
 
 

@@ -41,7 +41,7 @@ CollisionShapeLua* CollisionShapeCheck(lua_State* L, int index){
     return shape;
 }
 
-const char * CollisionShapeNameEnumToString(CollisionShapeName name){
+static const char * CollisionShapeNameEnumToString(CollisionShapeName name){
     switch(name){
         case CollisionShapeName::TRIANGLE:
             return "TRIANGLE";
@@ -62,12 +62,42 @@ const char * CollisionShapeNameEnumToString(CollisionShapeName name){
     }
 }
 
+static const char * CollisionShapeTypeEnumToString(CollisionShapeType type){
+    switch(type){
+        case CollisionShapeType::SPHERE:
+            return "SPHERE";
+        case CollisionShapeType::CAPSULE:
+            return "CAPSULE";
+        case CollisionShapeType::CONVEX_POLYHEDRON:
+            return "CONVEX_POLYHEDRON";
+        case CollisionShapeType::CONCAVE_SHAPE:
+            return "CONCAVE_SHAPE";
+        default:
+            assert(false);
+    }
+}
 
 int CollisionShape_GetName(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
     CollisionShapeLua* shape = CollisionShapeCheck(L,1);
     lua_pushstring(L,CollisionShapeNameEnumToString(shape->shape->getName()));
+    return 1;
+}
+
+int CollisionShape_GetType(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    lua_pushstring(L,CollisionShapeTypeEnumToString(shape->shape->getType()));
+    return 1;
+}
+
+int CollisionShape_ToString(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    push_std_string(L,shape->shape->to_string());
     return 1;
 }
 

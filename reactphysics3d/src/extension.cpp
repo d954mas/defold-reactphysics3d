@@ -99,8 +99,16 @@ static void LuaInit(lua_State* L){
         lua_setfield(L, -2, "HEIGHTFIELD");
      lua_setfield(L, -2, "CollisionShapeName");
 
-
-
+    lua_newtable(L);
+        lua_pushstring(L, "SPHERE");
+        lua_setfield(L, -2, "SPHERE");
+        lua_pushstring(L, "CAPSULE");
+        lua_setfield(L, -2, "CAPSULE");
+        lua_pushstring(L, "CONVEX_POLYHEDRON");
+        lua_setfield(L, -2, "CONVEX_POLYHEDRON");
+        lua_pushstring(L, "CONCAVE_SHAPE");
+        lua_setfield(L, -2, "CONCAVE_SHAPE");
+    lua_setfield(L, -2, "CollisionShapeType");
 
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));

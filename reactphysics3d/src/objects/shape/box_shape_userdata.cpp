@@ -25,6 +25,8 @@ void BoxShapePush(lua_State *L, BoxShape* shape){
     if(luaL_newmetatable(L, META_NAME_BOX_SHAPE)){
         static const luaL_Reg functions[] ={
             {"getName", CollisionShape_GetName},
+            {"getType", CollisionShape_GetType},
+            {"__tostring", CollisionShape_ToString},
             {"__gc", CollisionShape_GC},
             {0, 0}
         };
