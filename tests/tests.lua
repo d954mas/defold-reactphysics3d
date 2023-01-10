@@ -3,7 +3,8 @@ local TELESCOPE = require "deftest.telescope"
 
 local TEST_RP3D = require "tests.test_rp3d"
 local TEST_WORLD = require "tests.test_world"
-local TEST_SHAPE = require "tests.test_shape"
+local TEST_COLLISION_SHAPE = require "tests.shape.test_collision_shape"
+local TEST_BOX_SHAPE= require "tests.shape.test_box_shape"
 local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
 local M = {}
 
@@ -39,7 +40,8 @@ function M.run()
     DEFTEST.add(TEST_RP3D)
     DEFTEST.add(TEST_WORLD)
     DEFTEST.add(TEST_WORLD_SETTINGS)
-    DEFTEST.add(TEST_SHAPE)
+    DEFTEST.add(TEST_COLLISION_SHAPE)
+    DEFTEST.add(TEST_BOX_SHAPE)
     DEFTEST.run()
 end
 

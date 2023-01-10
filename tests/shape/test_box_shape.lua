@@ -1,11 +1,12 @@
 local UTILS = require "tests.test_utils"
 
 return function()
-	describe("World", function()
+	describe("BoxShape", function()
 		before(function()
 			UTILS.set_env(getfenv(1))
 		end)
 		after(function() end)
+
 
 		test("create/destroy box", function()
 			local shape = rp3d.createBoxShape(vmath.vector3(1,1,1))
