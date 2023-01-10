@@ -208,6 +208,26 @@ function PhysicsWorld:getIsDebugRenderingEnabled() end
 function PhysicsWorld:setIsDebugRenderingEnabled(isEnabled) end
 
 
+---@class Rp3dCollisionShape
+local CollisionShape = {}
+
+---@return string the type of the collision shape.
+function CollisionShape:getType() end
+
+---@return string the name of the collision shape.
+function CollisionShape:getName() end
+
+---@return bool true if the collision shape is a polyhedron.
+function CollisionShape:isPolyhedron() end
+
+---@return bool true if the collision shape is convex, false if it is concave.
+function CollisionShape:isConvex() end
+
+
+
+---@class Rp3dBoxShape:Rp3dCollisionShape
+local BoxShape = {}
+
 
 
 --Create and return an instance of PhysicsWorld.
@@ -221,6 +241,7 @@ function rp3d.destroyPhysicsWorld(world) end
 
 --Create and return a box collision shape.
 ---@param halfExtents vector3
+---@return Rp3dBoxShape
 function rp3d.createBoxShape(halfExtents) end
 
 --Destroy a box collision shape.

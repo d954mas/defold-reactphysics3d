@@ -93,6 +93,22 @@ int CollisionShape_GetType(lua_State *L){
     return 1;
 }
 
+int CollisionShape_IsConvex(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    lua_pushboolean(L,shape->shape->isConvex());
+    return 1;
+}
+
+int CollisionShape_IsPolyhedron(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    lua_pushboolean(L,shape->shape->isPolyhedron());
+    return 1;
+}
+
 int CollisionShape_ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);

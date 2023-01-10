@@ -26,15 +26,23 @@ return function()
 		end)
 
 
-		test("getName", function()
+		test("getName()", function()
 			assert_equal(shapes.box:getName(), rp3d.CollisionShapeName.BOX)
 		end)
 
-		test("getType", function()
+		test("getType()", function()
 			assert_equal(shapes.box:getType(), rp3d.CollisionShapeType.CONVEX_POLYHEDRON)
 		end)
 
-		test("toString", function()
+		test("isPolyhedron()", function()
+			assert_equal(shapes.box:isPolyhedron(), true)
+		end)
+
+		test("isConvex()", function()
+			assert_equal(shapes.box:isConvex(), true)
+		end)
+
+		test("toString()", function()
 			assert_equal("BoxShape", tostring(shapes.box):sub(1,8))
 		end)
 
