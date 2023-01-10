@@ -13,11 +13,13 @@ local function create_physics(self)
 		gravity = vmath.vector3(0, -9.81, 0)
 	}
 	self.world = rp3d.createPhysicsWorld(settings)
+	self.objects = {}
 
 	for i=1,NB_CUBES do
 		-- Create a cube and a corresponding rigid in the physics world
 		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
-		local box_shape = Box(BOX_SIZE)
+		local box = Box(true,BOX_SIZE)
+		table.insert(self.objects,box)
 	end
 		-- world:setEventListener(self)
 		--[[// Gravity vector in the physics world
@@ -64,6 +66,11 @@ function init(self)
 end
 
 function final(self)
+	for _,obj in ipairs(self.objects)do
+		obj:dispose()
+	end
+	self.objects = nil
+
 	rp3d.destroyPhysicsWorld(self.world)
 	-- self.world:Destroy()
 	SCENE_HELPER.scene_final()

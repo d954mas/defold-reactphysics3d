@@ -28,5 +28,6 @@ namespace rp3dDefold {
 
 
     void CollisionShapePush(lua_State *L, CollisionShape* shape);
+    CollisionShapeLua* CollisionShapeCheck(lua_State *L, int index);
 }
 #endif

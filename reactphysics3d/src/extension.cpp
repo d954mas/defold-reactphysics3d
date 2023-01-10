@@ -8,6 +8,7 @@
 #include "objects/objects.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
+#include "objects/shape/box_shape_userdata.h"
 
 
 
@@ -51,11 +52,21 @@ static int CreateBoxShape(lua_State* L){
     return 1;
 }
 
+static int DestroyBoxShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionShapeLua * shape = BoxShapeCheck(L,1);
+    physicsCommon.destroyBoxShape( static_cast<BoxShape*>(shape->shape));
+    shape->shape = NULL;
+    return 0;
+}
+
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
 	 {"createPhysicsWorld", CreatePhysicsWorldLua},
 	 {"destroyPhysicsWorld", DestroyPhysicsWorldLua},
 	 {"createBoxShape", CreateBoxShape},
+	 {"destroyBoxShape", DestroyBoxShape},
 	{0, 0}
 };
 

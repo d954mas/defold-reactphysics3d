@@ -23,7 +23,7 @@ CollisionShapeLua::~CollisionShapeLua() {
 
 }
 
-CollisionShapeLua* CollisionShape_get_userdata(lua_State* L, int index){
+CollisionShapeLua* CollisionShapeCheck(lua_State* L, int index){
     CollisionShapeLua *shape = NULL;
 
     if(luaL_checkudata(L, index, META_NAME_BOX_SHAPE)){

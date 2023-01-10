@@ -10,6 +10,15 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+CollisionShapeLua* BoxShapeCheck(lua_State* L, int index){
+    CollisionShapeLua *shape = CollisionShapeCheck(L,index);
+    if (shape->shape->getName() == CollisionShapeName::BOX){
+        return shape;
+    }else{
+        luaL_error(L, "shape not BoxShape");
+    }
+}
+
 void BoxShapePush(lua_State *L, BoxShape* shape){
     CollisionShapeLua *shapeLua = new CollisionShapeLua(shape);
     *static_cast<CollisionShapeLua**>(lua_newuserdata(L, sizeof(CollisionShapeLua*))) = shapeLua;
