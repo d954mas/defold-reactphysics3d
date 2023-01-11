@@ -28,6 +28,10 @@ void BoxShapePush(lua_State *L, BoxShape* shape){
             {"getType", CollisionShape_GetType},
             {"isPolyhedron", CollisionShape_IsPolyhedron},
             {"isConvex", CollisionShape_IsConvex},
+            {"getLocalBounds", CollisionShape_GetLocalBounds},
+            {"getId", CollisionShape_GetId},
+            {"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},
+            {"getVolume", CollisionShape_GetVolume},
             {"__tostring", CollisionShape_ToString},
             {"__gc", CollisionShape_GC},
             {0, 0}

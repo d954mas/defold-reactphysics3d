@@ -27,6 +27,10 @@ namespace rp3dDefold {
     int CollisionShape_ToString(lua_State *L);
     int CollisionShape_IsConvex(lua_State *L);
     int CollisionShape_IsPolyhedron(lua_State *L);
+    int CollisionShape_GetLocalBounds(lua_State *L);
+    int CollisionShape_GetId(lua_State *L);
+    int CollisionShape_GetLocalInertiaTensor(lua_State *L);
+    int CollisionShape_GetVolume(lua_State *L);
 
    // const char* CollisionShapeNameEnumToString(CollisionShapeName name);
 

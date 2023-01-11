@@ -108,6 +108,45 @@ int CollisionShape_IsPolyhedron(lua_State *L){
     lua_pushboolean(L,shape->shape->isPolyhedron());
     return 1;
 }
+int CollisionShape_GetLocalBounds(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 2);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    Vector3 min;
+    Vector3 max;
+    shape->shape->getLocalBounds(min,max);
+    dmVMath::Vector3 dmVMin(min.x,min.y,min.z);
+    dmVMath::Vector3 dmVMax(max.x,max.y,max.z);
+    dmScript::PushVector3(L, dmVMin);
+    dmScript::PushVector3(L, dmVMax);
+    return 2;
+}
+
+int CollisionShape_GetId(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    lua_pushnumber(L,shape->shape->getId());
+    return 1;
+}
+
+int CollisionShape_GetVolume(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    lua_pushnumber(L,shape->shape->getVolume());
+    return 1;
+}
+
+int CollisionShape_GetLocalInertiaTensor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+    Vector3 result = shape->shape->getLocalInertiaTensor(luaL_checknumber(L,2));
+    dmVMath::Vector3 dmResult(result.x,result.y,result.z);
+    dmScript::PushVector3(L, dmResult);
+    return 1;
+}
 
 int CollisionShape_ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);

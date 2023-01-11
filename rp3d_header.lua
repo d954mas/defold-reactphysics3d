@@ -207,7 +207,6 @@ function PhysicsWorld:getIsDebugRenderingEnabled() end
 ---@param isEnabled bool
 function PhysicsWorld:setIsDebugRenderingEnabled(isEnabled) end
 
-
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
@@ -224,6 +223,23 @@ function CollisionShape:isPolyhedron() end
 function CollisionShape:isConvex() end
 
 
+--Return the local bounds of the shape in x, y and z directions.
+---@return vector3 min
+---@return vector3 max
+function CollisionShape:getLocalBounds() end
+
+--Return the id of the shape.
+---@return number
+function CollisionShape:getId() end
+
+--Return the local inertia tensor of the collision shapes.
+---@param mass number
+---@return vector3
+function CollisionShape:getLocalInertiaTensor(mass) end
+
+--Compute and return the volume of the collision shape.
+---@return number
+function CollisionShape:getVolume() end
 
 ---@class Rp3dBoxShape:Rp3dCollisionShape
 local BoxShape = {}

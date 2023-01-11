@@ -15,10 +15,16 @@ local function dispose_shapes()
 
 end
 
+local function assert_two_vectors(v1_result,v2_result,v1,v2)
+	assert_equal_v3(v1_result,v1)
+	assert_equal_v3(v2_result,v2)
+end
+
 return function()
 	describe("CollsionShape", function()
 		before(function()
 			UTILS.set_env(getfenv(1))
+			setfenv(assert_two_vectors,getfenv(1))
 			init_shapes()
 		end)
 		after(function()
@@ -40,6 +46,21 @@ return function()
 
 		test("isConvex()", function()
 			assert_equal(shapes.box:isConvex(), true)
+		end)
+
+		test("getLocalBounds()", function()
+			assert_two_vectors(vmath.vector3(-1),vmath.vector3(1),shapes.box:getLocalBounds())
+		end)
+
+		test("getId()", function()
+			assert_type(shapes.box:getId(),"number")
+		end)
+		test("getLocalInertiaTensor()", function()
+			assert_type(shapes.box:getLocalInertiaTensor(1),"userdata")
+		end)
+
+		test("getVolume()", function()
+			assert_type(shapes.box:getVolume(),"number")
 		end)
 
 		test("toString()", function()
