@@ -8,6 +8,7 @@
 #include "objects/shape/collision_shape_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
+#include "objects/aabb.h"
 
 
 
@@ -145,6 +146,20 @@ int CollisionShape_GetLocalInertiaTensor(lua_State *L){
     Vector3 result = shape->shape->getLocalInertiaTensor(luaL_checknumber(L,2));
     dmVMath::Vector3 dmResult(result.x,result.y,result.z);
     dmScript::PushVector3(L, dmResult);
+    return 1;
+}
+
+int CollisionShape_ComputeAABB(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    CollisionShapeLua* shape = CollisionShapeCheck(L,1);
+
+    Transform transform = checkRp3dTransform(L,2);
+    AABB aabb;
+    shape->shape->computeAABB(aabb,transform);
+
+
+    AABBPush(L,aabb);
     return 1;
 }
 

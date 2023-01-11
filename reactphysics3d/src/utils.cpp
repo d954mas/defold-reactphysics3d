@@ -21,4 +21,12 @@ namespace rp3dDefold {
 	void push_std_string(lua_State *L, std::string str){
         lua_pushlstring(L, str.c_str(), str.length());
 	}
+
+	reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index){
+        dmVMath::Vector3* dmPosition = dmScript::CheckVector3(L, index);
+		reactphysics3d::Vector3 position(dmPosition->getX(),dmPosition->getY(),dmPosition->getZ());
+        dmVMath::Quat* dmQuat =  dmScript::CheckQuat(L, index+1);
+        reactphysics3d::Quaternion quat(dmQuat->getX(),dmQuat->getY(),dmQuat->getZ(), dmQuat->getW());
+        return reactphysics3d::Transform(position,quat);
+	}
 }

@@ -31,6 +31,7 @@ namespace rp3dDefold {
     int CollisionShape_GetId(lua_State *L);
     int CollisionShape_GetLocalInertiaTensor(lua_State *L);
     int CollisionShape_GetVolume(lua_State *L);
+    int CollisionShape_ComputeAABB(lua_State *L);
 
    // const char* CollisionShapeNameEnumToString(CollisionShapeName name);
 

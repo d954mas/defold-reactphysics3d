@@ -241,8 +241,18 @@ function CollisionShape:getLocalInertiaTensor(mass) end
 ---@return number
 function CollisionShape:getVolume() end
 
+--Compute the world-space AABB of the collision shape given a transform.
+---@param position vector3
+---@param quaternion quaternion
+---@return Rp3dAABB
+function CollisionShape:computeAABB(position, quaternion) end
+
 ---@class Rp3dBoxShape:Rp3dCollisionShape
 local BoxShape = {}
+
+
+---@class Rp3dAABB:Rp3dCollisionShape
+local Rp3dAABB = {}
 
 
 

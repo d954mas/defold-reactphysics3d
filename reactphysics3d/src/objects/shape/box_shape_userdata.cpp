@@ -32,6 +32,7 @@ void BoxShapePush(lua_State *L, BoxShape* shape){
             {"getId", CollisionShape_GetId},
             {"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},
             {"getVolume", CollisionShape_GetVolume},
+            {"computeAABB", CollisionShape_ComputeAABB},
             {"__tostring", CollisionShape_ToString},
             {"__gc", CollisionShape_GC},
             {0, 0}
