@@ -6,6 +6,7 @@ local TEST_WORLD = require "tests.test_world"
 local TEST_COLLISION_SHAPE = require "tests.shape.test_collision_shape"
 local TEST_BOX_SHAPE= require "tests.shape.test_box_shape"
 local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
+local TEST_AABB= require "tests.shape.test_aabb"
 local M = {}
 
 function M.run()
@@ -42,6 +43,7 @@ function M.run()
     DEFTEST.add(TEST_WORLD_SETTINGS)
     DEFTEST.add(TEST_COLLISION_SHAPE)
     DEFTEST.add(TEST_BOX_SHAPE)
+    DEFTEST.add(TEST_AABB)
     DEFTEST.run()
 end
 
