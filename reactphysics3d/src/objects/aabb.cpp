@@ -14,7 +14,7 @@
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
-    AABBLua::AABBLua(AABB aabb): aabb{aabb}{}
+    AABBLua::AABBLua(AABB aabb): aabb(aabb){}
     AABBLua::AABBLua(){
 
     }
