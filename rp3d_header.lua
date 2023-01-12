@@ -32,84 +32,92 @@ local WorldSettings = {
 	cosAngleSimilarContactManifold = 0.95,
 }
 
+---@class Rp3dRay
+local Rp3dRay = {
+	point1 = vmath.vector3(),
+	point2 = vmath.vector3(),
+	maxFraction = 0 --[0-1] if nil use 1.
+}
+
+
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 
 --[[
 CollisionBody * 	createCollisionBody (const Transform &transform)
  	Create a collision body.
- 
+
 void 	destroyCollisionBody (CollisionBody *collisionBody)
  	Destroy a collision body.
- 
+
 CollisionDispatch & 	getCollisionDispatch ()
  	Get the collision dispatch configuration.
- 
+
 void 	raycast (const Ray &ray, RaycastCallback *raycastCallback, unsigned short raycastWithCategoryMaskBits=0xFFFF) const
  	Ray cast method.
- 
+
 bool 	testOverlap (CollisionBody *body1, CollisionBody *body2)
  	Return true if two bodies overlap (collide)
- 
+
 void 	testOverlap (CollisionBody *body, OverlapCallback &overlapCallback)
  	Report all the bodies that overlap (collide) with the body in parameter.
- 
+
 void 	testOverlap (OverlapCallback &overlapCallback)
  	Report all the bodies that overlap (collide) in the world.
- 
+
 void 	testCollision (CollisionBody *body1, CollisionBody *body2, CollisionCallback &callback)
  	Test collision and report contacts between two bodies.
- 
+
 void 	testCollision (CollisionBody *body, CollisionCallback &callback)
  	Test collision and report all the contacts involving the body in parameter.
- 
+
 void 	testCollision (CollisionCallback &callback)
  	Test collision and report contacts between each colliding bodies in the world.
- 
+
 MemoryManager & 	getMemoryManager ()
  	Return a reference to the memory manager of the world.
- 
+
 AABB 	getWorldAABB (const Collider *collider) const
  	Return the current world-space AABB of given collider.
 
- 
+
 RigidBody * 	createRigidBody (const Transform &transform)
  	Create a rigid body into the physics world.
 
- 
+
 void 	destroyRigidBody (RigidBody *rigidBody)
  	Destroy a rigid body and all the joints which it belongs.
- 
+
 Joint * 	createJoint (const JointInfo &jointInfo)
  	Create a joint between two bodies in the world and return a pointer to the new joint.
- 
+
 void 	destroyJoint (Joint *joint)
  	Destroy a joint.
 void 	setEventListener (EventListener *eventListener)
  	Set an event listener object to receive events callbacks.
- 
+
 uint32 	getNbCollisionBodies () const
  	Return the number of CollisionBody in the physics world.
- 
+
 const CollisionBody * 	getCollisionBody (uint32 index) const
  	Return a constant pointer to a given CollisionBody of the world.
- 
+
 CollisionBody * 	getCollisionBody (uint32 index)
  	Return a pointer to a given CollisionBody of the world.
 
- 
+
 const RigidBody * 	getRigidBody (uint32 index) const
  	Return a constant pointer to a given RigidBody of the world.
- 
+
 RigidBody * 	getRigidBody (uint32 index)
  	Return a pointer to a given RigidBody of the world.
 
- 
+
 void 	setIsDebugRenderingEnabled (bool isEnabled)
  	Set to true if debug rendering is enabled.
- 
+
 DebugRenderer & 	getDebugRenderer ()
- 	Return a reference to the Debug Renderer of the world. 
+ 	Return a reference to the Debug Renderer of the world.
 --]]
 
 --Return the name of the world.
@@ -247,12 +255,98 @@ function CollisionShape:getVolume() end
 ---@return Rp3dAABB
 function CollisionShape:computeAABB(position, quaternion) end
 
+
+
 ---@class Rp3dBoxShape:Rp3dCollisionShape
 local BoxShape = {}
 
-
----@class Rp3dAABB:Rp3dCollisionShape
+---@class Rp3dAABB
 local Rp3dAABB = {}
+
+--Return the center point.
+---@return number
+function Rp3dAABB:getCenter() end
+
+--Return the minimum coordinates of the AABB.
+---@return number
+function Rp3dAABB:getMin() end
+
+--Set the minimum coordinates of the AABB.
+---@param min number
+function Rp3dAABB:setMin(min) end
+
+--Return the maximum coordinates of the AABB.
+---@return number
+function Rp3dAABB:getMax() end
+
+--Set the maximum coordinates of the AABB.
+---@param max number
+function Rp3dAABB:setMax(max) end
+
+--Return the size of the AABB in the three dimension x, y and z.
+---@return vector3
+function Rp3dAABB:getExtent() end
+
+--Inflate each side of the AABB by a given size.
+---@param x number
+---@param y number
+---@param z number
+function Rp3dAABB:inflate(x, y, z) end
+
+
+--Return true if the current AABB is overlapping with the AABB in argument.
+--Two AABBs overlap if they overlap in the three x, y and z axis at the same time.
+---@param aabb Rp3dAABB
+---@return bool
+function Rp3dAABB:testCollision(aabb) end
+
+--Return the volume of the AABB.
+---@return number
+function Rp3dAABB:getVolume() end
+
+--Merge the AABB in parameter with the current one.
+---@param aabb Rp3dAABB
+function Rp3dAABB:mergeWithAABB(aabb) end
+
+--Replace the current AABB with a new AABB that is the union of two AABBs in parameters.
+---@param aabb1 Rp3dAABB
+---@param aabb2 Rp3dAABB
+function Rp3dAABB:mergeTwoAABBs(aabb1, aabb2) end
+
+--Return true if the current AABB contains the AABB given in parameter.
+---@param aabb Rp3dAABB
+---@return bool
+function Rp3dAABB:contains(aabb) end
+
+--Return true if a point is inside the AABB.
+---@param point vector3
+---@return bool
+function Rp3dAABB:containsPoint(point) end
+
+--Return true if the AABB of a triangle intersects the AABB.
+---@param trianglePoints vector3[] 3 points
+---@return bool
+function Rp3dAABB:testCollisionTriangleAABB(trianglePoints) end
+
+
+--Return true if the ray intersects the AABB.
+---@param rayOrigin vector3
+---@param rayDirectionInv vector3 inverse 1 / rayDirection.x, 1 / rayDirection.y, 1 / rayDirection.z);
+---@param rayMaxFraction number
+---@return bool
+function Rp3dAABB:testRayIntersect(rayOrigin, rayDirectionInv, rayMaxFraction) end
+
+--Apply a scale factor to the AABB.
+---@param scale vector3
+function Rp3dAABB:applyScale(scale) end
+
+
+--Compute the intersection of a ray and the AABB.
+---@param ray Rp3dRay infinity ray. Ignore maxFraction. Ignore distance of ray
+---@return nil|vector3
+function Rp3dAABB:raycast(ray) end
+
+
 
 
 

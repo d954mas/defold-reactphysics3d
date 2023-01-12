@@ -13,6 +13,7 @@ namespace rp3dDefold {
 	void push_std_string(lua_State *L, std::string str);
 
 	reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index);
+	reactphysics3d::Ray CheckRay(lua_State *L, int index);
 }
 
 #endif

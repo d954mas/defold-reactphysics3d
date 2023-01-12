@@ -18,10 +18,6 @@ namespace rp3dDefold {
         ~AABBLua();
     };
 
-
-    int AABB_GC(lua_State *L);
-    int AABB_ToString(lua_State *L);
-
     void AABBPush(lua_State *L, AABB aabb);
     AABBLua* AABBCheck(lua_State *L, int index);
 }
