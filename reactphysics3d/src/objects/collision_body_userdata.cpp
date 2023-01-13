@@ -17,6 +17,7 @@ static void init(CollisionBodyUserdata* userdata,CollisionBody* body){
     userdata->body = body;
     userdata->obj = body;
     userdata->user_data_ref = LUA_REFNIL;
+    body->setUserData(userdata);
 }
 
 CollisionBodyUserdata::CollisionBodyUserdata(CollisionBody* body): BaseUserData(USERDATA_TYPE){
@@ -49,6 +50,13 @@ static int GetEntityId(lua_State *L){
 	return 1;
 }
 
+static int IsRigidBody(lua_State *L){
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushboolean(L,userdata->isRigidBody);
+	return 1;
+}
+
 
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
@@ -73,6 +81,7 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
 
     luaL_Reg functions[] = {
         {"getEntityId",GetEntityId},
+        {"isRigidBody",IsRigidBody},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -91,6 +100,7 @@ void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
 
     luaL_Reg functions[] = {
         {"getEntityId",GetEntityId},
+        {"isRigidBody",IsRigidBody},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -105,7 +115,10 @@ void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
 
 
 void CollisionBodyUserdata::Destroy(lua_State *L){
+    body->setUserData(NULL);
     body = NULL;
+    luaL_unref(L, LUA_REGISTRYINDEX, user_data_ref);
+    user_data_ref = LUA_REFNIL;
     BaseUserData::Destroy(L);
 }
 

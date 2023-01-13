@@ -45,18 +45,22 @@ local Rp3dTransform = {
 	quat = vmath.quat(),
 }
 
+---@class Rp3dCollisionBody
+local CollisionBody = {}
 
+---@return number
+function CollisionBody:getEntityId() end
+
+---@return boolean
+function CollisionBody:isRigidBody() end
+
+---@class Rp3dRigidBody:Rp3dCollisionBody
+local Rp3dRigidBody = {}
 
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 
 --[[
-CollisionBody * 	createCollisionBody (const Transform &transform)
- 	Create a collision body.
-
-void 	destroyCollisionBody (CollisionBody *collisionBody)
- 	Destroy a collision body.
-
 CollisionDispatch & 	getCollisionDispatch ()
  	Get the collision dispatch configuration.
 
@@ -86,14 +90,6 @@ MemoryManager & 	getMemoryManager ()
 
 AABB 	getWorldAABB (const Collider *collider) const
  	Return the current world-space AABB of given collider.
-
-
-RigidBody * 	createRigidBody (const Transform &transform)
- 	Create a rigid body into the physics world.
-
-
-void 	destroyRigidBody (RigidBody *rigidBody)
- 	Destroy a rigid body and all the joints which it belongs.
 
 Joint * 	createJoint (const JointInfo &jointInfo)
  	Create a joint between two bodies in the world and return a pointer to the new joint.
@@ -222,6 +218,24 @@ function PhysicsWorld:getIsDebugRenderingEnabled() end
 ---@param isEnabled bool
 function PhysicsWorld:setIsDebugRenderingEnabled(isEnabled) end
 
+--Create a collision body.
+---@param transform Rp3dTransform
+---@return Rp3dCollisionBody
+function PhysicsWorld:createCollisionBody(transform) end
+
+---Destroy a collision body.
+---@param body Rp3dCollisionBody
+function PhysicsWorld:destroyCollisionBody(body) end
+
+--Create a rigid body into the physics world.
+---@param transform Rp3dTransform
+---@return Rp3dRigidBody
+function PhysicsWorld:createRigidBody(transform) end
+
+---Destroy a rigid body and all the joints which it belongs.
+---@param body Rp3dRigidBody
+function PhysicsWorld:destroyRigidBody(body) end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
@@ -261,8 +275,6 @@ function CollisionShape:getVolume() end
 ---@param quaternion quaternion
 ---@return Rp3dAABB
 function CollisionShape:computeAABB(transform) end
-
-
 
 ---@class Rp3dBoxShape:Rp3dCollisionShape
 local BoxShape = {}

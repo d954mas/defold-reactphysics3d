@@ -36,8 +36,28 @@ static int DestroyPhysicsWorldLua(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
     WorldUserdata *data = WorldUserdataCheck(L,1);
-    //destroy collisionBody
+    //free all
+    //destroy collisionBodyUserdata
+    for(int i=0;i<data->world->getNbCollisionBodies();++i){
+        CollisionBody* body = data->world->getCollisionBody(i);
+        CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
+        if(userdata!=NULL){
+            userdata->Destroy(L);
+            delete userdata;
+        }
+    }
+    //destroy rigidBodyUserdata
+    for(int i=0;i<data->world->getNbRigidBodies();++i){
+        CollisionBody* body = data->world->getRigidBody(i);
+        CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
+        if(userdata!=NULL){
+            userdata->Destroy(L);
+            delete userdata;
+        }
+    }
     //destroy joints
+
+
     physicsCommon.destroyPhysicsWorld(data->world);
     data->Destroy(L);
     delete data;

@@ -262,7 +262,37 @@ static int CreateRigidBody(lua_State *L){
 	return 1;
 }
 
+static int DestroyCollisionBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body = CollisionBodyUserdataCheck(L,2);
+    if(body->isRigidBody){
+        luaL_error(L,"can't destroy RigidBody.Need CollisionBody");
+    }
+    CollisionBody* collisionBody = body->body;
+    body->Destroy(L);
+    delete body;
+    data->world->destroyCollisionBody(collisionBody);
+   	return 0;
+}
 
+static int DestroyRigidBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body = CollisionBodyUserdataCheck(L,2);
+    if(!body->isRigidBody){
+        luaL_error(L,"can't destroy CollisionBody.Need RigidBody");
+    }
+    RigidBody* rigidBody = static_cast<RigidBody*>(body->body);
+    body->Destroy(L);
+    delete body;
+    //TODO DESTROY JOINS USERDATA
+
+    data->world->destroyRigidBody(rigidBody);
+   	return 0;
+}
 
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
@@ -301,7 +331,9 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getIsDebugRenderingEnabled",GetIsDebugRenderingEnabled},
         {"setIsDebugRenderingEnabled",SetIsDebugRenderingEnabled},
         {"createCollisionBody",CreateCollisionBody},
+        {"destroyCollisionBody",DestroyCollisionBody},
         {"createRigidBody",CreateRigidBody},
+        {"destroyRigidBody",DestroyRigidBody},
         {"__tostring",ToString},
         { 0, 0 }
     };
