@@ -42,13 +42,29 @@ CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index) {
 	return userdata;
 }
 
-
+static int GetEntityId(lua_State *L){
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->body->getEntity().id);
+	return 1;
+}
 
 
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
     CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
-    lua_pushfstring( L, "rp3d::CollisionBody[%p]",(void *) userdata->body);
+    if(userdata->isRigidBody){
+         lua_pushfstring( L, "rp3d::RigidBody[%p]",(void *) userdata->body);
+    }else{
+         lua_pushfstring( L, "rp3d::CollisionBody[%p]",(void *) userdata->body);
+    }
+	return 1;
+}
+
+static int ToStringRigid(lua_State *L){
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushfstring( L, "rp3d::RigidBody[%p]",(void *) userdata->body);
 	return 1;
 }
 
@@ -56,6 +72,7 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"getEntityId",GetEntityId},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -73,6 +90,7 @@ void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"getEntityId",GetEntityId},
         {"__tostring",ToString},
         { 0, 0 }
     };
