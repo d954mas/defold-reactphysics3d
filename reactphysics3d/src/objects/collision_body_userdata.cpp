@@ -68,6 +68,24 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
     assert(top == lua_gettop(L));
 }
 
+
+void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
+    int top = lua_gettop(L);
+
+    luaL_Reg functions[] = {
+        {"__tostring",ToString},
+        { 0, 0 }
+    };
+    luaL_newmetatable(L, META_NAME_RIGID);
+    luaL_register (L, NULL,functions);
+    lua_pushvalue(L, -1);
+    lua_setfield(L, -1, "__index");
+    lua_pop(L, 1);
+
+    assert(top == lua_gettop(L));
+}
+
+
 void CollisionBodyUserdata::Destroy(lua_State *L){
     body = NULL;
     BaseUserData::Destroy(L);

@@ -120,6 +120,7 @@ static dmExtension::Result AppInitializeMyExtension(dmExtension::AppParams* para
 static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     WorldUserdataInitMetaTable(params->m_L);
     CollisionBodyUserdataInitMetaTable(params->m_L);
+    CollisionBodyUserdataRigidInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;
