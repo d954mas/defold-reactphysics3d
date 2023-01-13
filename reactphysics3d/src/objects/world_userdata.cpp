@@ -1,4 +1,5 @@
 #include "objects/world_userdata.h"
+#include "objects/collision_body_userdata.h"
 #include "static_hash.h"
 #include "utils.h"
 
@@ -239,6 +240,28 @@ static int EnableSleeping(lua_State *L){
 	return 0;
 }
 
+static int CreateCollisionBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    Transform transform = checkRp3dTransform(L,2);
+    CollisionBody* body = data->world->createCollisionBody(transform);
+    CollisionBodyUserdata* result = new CollisionBodyUserdata(body);
+    result->Push(L);
+	return 1;
+}
+
+static int CreateRigidBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    Transform transform = checkRp3dTransform(L,2);
+    RigidBody* body = data->world->createRigidBody(transform);
+    CollisionBodyUserdata* result = new CollisionBodyUserdata(body);
+    result->Push(L);
+	return 1;
+}
+
 
 
 static int ToString(lua_State *L){
@@ -277,6 +300,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getNbRigidBodies",GetNbRigidBodies},
         {"getIsDebugRenderingEnabled",GetIsDebugRenderingEnabled},
         {"setIsDebugRenderingEnabled",SetIsDebugRenderingEnabled},
+        {"createCollisionBody",CreateCollisionBody},
+        {"createRigidBody",CreateRigidBody},
         {"__tostring",ToString},
         { 0, 0 }
     };

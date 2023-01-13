@@ -15,11 +15,11 @@ function Box:initialize(rigid_body, size, world)
 	}
 	if (rigid_body) then
 		self.body = world:createRigidBody(transform_identity);
-		self.collider = body:addCollider(self.shape, transform_identity);
+		self.collider = self.body:addCollider(self.shape, transform_identity);
 		self.body:updateMassPropertiesFromColliders();
 	else
 		self.body = world:createCollisionBody(transform_identity);
-		self.collider = body:addCollider(self.shape, transform_identity);
+		self.collider = self.body:addCollider(self.shape, transform_identity);
 	end
 
 end

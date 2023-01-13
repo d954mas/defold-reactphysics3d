@@ -36,6 +36,8 @@ static int DestroyPhysicsWorldLua(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
     WorldUserdata *data = WorldUserdataCheck(L,1);
+    //destroy collisionBody
+    //destroy joints
     physicsCommon.destroyPhysicsWorld(data->world);
     data->Destroy(L);
     delete data;
@@ -117,6 +119,7 @@ static void LuaInit(lua_State* L){
 static dmExtension::Result AppInitializeMyExtension(dmExtension::AppParams* params){return dmExtension::RESULT_OK;}
 static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     WorldUserdataInitMetaTable(params->m_L);
+    CollisionBodyUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;
