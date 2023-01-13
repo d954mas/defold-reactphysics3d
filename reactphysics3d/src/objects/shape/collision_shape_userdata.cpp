@@ -151,7 +151,7 @@ int CollisionShape_GetLocalInertiaTensor(lua_State *L){
 
 int CollisionShape_ComputeAABB(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
-    check_arg_count(L, 3);
+    check_arg_count(L, 2);
     CollisionShapeLua* shape = CollisionShapeCheck(L,1);
 
     Transform transform = checkRp3dTransform(L,2);

@@ -65,7 +65,7 @@ return function()
 		test("ComputeAABB()", function()
 			local pos = vmath.vector3()
 			local quat = vmath.quat()
-			local aabb = shapes.box:computeAABB(pos,quat)
+			local aabb = shapes.box:computeAABB({position = pos,quat = quat})
 			assert_equal("rp3d::AABB",tostring(aabb):sub(1,10))
 		end)
 

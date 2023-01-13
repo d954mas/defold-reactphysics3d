@@ -23,5 +23,5 @@ Try the demo:
 ## Limits
 1)Defold vector instead of rp3d::Vector
 2)Defold quaternion instead of rp3d::Quat
-3)no Transform userdata. Use pair of vector3 and quaternion
+3)no Transform userdata. Use table with vector3 and quaternion
 

@@ -24,11 +24,54 @@ namespace rp3dDefold {
 	}
 
 	reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index){
-        dmVMath::Vector3* dmPosition = dmScript::CheckVector3(L, index);
-		reactphysics3d::Vector3 position(dmPosition->getX(),dmPosition->getY(),dmPosition->getZ());
-        dmVMath::Quat* dmQuat =  dmScript::CheckQuat(L, index+1);
-        reactphysics3d::Quaternion quat(dmQuat->getX(),dmQuat->getY(),dmQuat->getZ(), dmQuat->getW());
-        return reactphysics3d::Transform(position,quat);
+        if (lua_istable(L, index)) {
+            reactphysics3d::Vector3 position;
+            bool positionExist = false;
+            reactphysics3d::Quaternion quat;
+            bool quatExist = false;
+
+            lua_pushvalue(L,index);
+            lua_pushnil(L);  /* first key */
+            while (lua_next(L, -2) != 0) {
+                /* uses 'key' (at index -2) and 'value' (at index -1) */
+                //printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
+                const char* key = lua_tostring(L, -2);
+                switch (hash_string(key)){
+                    case HASH_position:{
+                        dmVMath::Vector3* value = dmScript::CheckVector3(L, -1);
+                        position.x = value->getX();
+                        position.y = value->getY();
+                        position.z = value->getZ();
+                        positionExist = true;
+                        break;
+                    }
+                   case HASH_quat:{
+                        dmVMath::Quat* value =  dmScript::CheckQuat(L, -1);
+                        quat.x = value->getX();
+                        quat.y = value->getY();
+                        quat.z = value->getZ();
+                        quat.w = value->getW();
+                        quatExist = true;
+                        break;
+                   }
+                   default:
+                       luaL_error(L, "unknown key:%s", key);
+                       break;
+               }
+              /* removes 'value'; keeps 'key' for next iteration */
+              lua_pop(L, 1);
+            }
+            lua_pop(L,1);
+            if(!positionExist){
+                luaL_error(L,"transform need position");
+            }
+            if(!quatExist){
+                luaL_error(L,"transform need quat");
+            }
+            return reactphysics3d::Transform(position,quat);
+        }else{
+            luaL_error(L,"transform should be table");
+        }
 	}
 
     reactphysics3d::Ray CheckRay(lua_State *L, int index){

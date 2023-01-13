@@ -39,6 +39,13 @@ local Rp3dRay = {
 	maxFraction = 0 --[0-1] if nil use 1.
 }
 
+---@class Rp3dTransform
+local Rp3dTransform = {
+	position = vmath.vector3(),
+	quat = vmath.quat(),
+}
+
+
 
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
@@ -250,10 +257,10 @@ function CollisionShape:getLocalInertiaTensor(mass) end
 function CollisionShape:getVolume() end
 
 --Compute the world-space AABB of the collision shape given a transform.
----@param position vector3
+---@param transform Rp3dTransform
 ---@param quaternion quaternion
 ---@return Rp3dAABB
-function CollisionShape:computeAABB(position, quaternion) end
+function CollisionShape:computeAABB(transform) end
 
 
 
