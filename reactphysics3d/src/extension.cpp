@@ -81,6 +81,7 @@ static int DestroyBoxShape(lua_State* L){
     CollisionShapeUserdata * shapeUserdata = BoxShapeCheck(L,1);
     BoxShape* shape = static_cast<BoxShape*>(shapeUserdata->shape);
     shapeUserdata->Destroy(L);
+    delete shapeUserdata;
     physicsCommon.destroyBoxShape(shape);
     return 0;
 }

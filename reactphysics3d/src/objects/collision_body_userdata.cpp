@@ -118,8 +118,7 @@ static int AddCollider(lua_State *L){
     //dmLogInfo("shape[%p]",(void *) shapeLua->shape);
     Collider* collider = userdata->body->addCollider(shapeLua->shape,transform);
   //  dmLogInfo("Collider shape[%p]",(void *) collider->getCollisionShape());
-    ColliderUserdata* colliderLua = new ColliderUserdata(collider);
-    colliderLua->Push(L);
+    ColliderPush(L,collider);
 	return 1;
 }
 
@@ -193,6 +192,14 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
 
 
 void CollisionBodyUserdata::Destroy(lua_State *L){
+    for(int i =0;i<body->getNbColliders();i++){
+        Collider* collider = body->getCollider(i);
+        ColliderUserdata* userdata = (ColliderUserdata*)collider->getUserData();
+        if(userdata!=NULL){
+            userdata->Destroy(L);
+            delete userdata;
+        }
+    }
     body->setUserData(NULL);
     body = NULL;
     luaL_unref(L, LUA_REGISTRYINDEX, user_data_ref);

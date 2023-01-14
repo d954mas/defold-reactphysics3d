@@ -28,6 +28,6 @@ public:
 
 void ColliderUserdataInitMetaTable(lua_State *L);
 ColliderUserdata* ColliderUserdataCheck(lua_State *L, int index);
-
+void ColliderPush(lua_State *L, Collider* collider);
 }
 #endif

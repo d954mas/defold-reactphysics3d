@@ -16,6 +16,7 @@ ColliderUserdata::ColliderUserdata(Collider* collider): BaseUserData(USERDATA_TY
     this->metatable_name = META_NAME;
     this->collider = collider;
     this->obj = collider;
+    this->collider->setUserData(this);
 }
 
 ColliderUserdata::~ColliderUserdata() {
@@ -114,6 +115,16 @@ void ColliderUserdata::Destroy(lua_State *L){
     luaL_unref(L, LUA_REGISTRYINDEX, user_data_ref);
     user_data_ref = LUA_REFNIL;
     BaseUserData::Destroy(L);
+}
+
+void ColliderPush(lua_State *L, Collider* collider){
+    if(collider->getUserData()!=NULL){
+        ColliderUserdata* userdata =(ColliderUserdata*) collider->getUserData();
+         userdata->Push(L);
+    }else{
+        ColliderUserdata* userdata = new ColliderUserdata(collider);
+        userdata->Push(L);
+    }
 }
 
 }
