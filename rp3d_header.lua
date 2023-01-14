@@ -45,6 +45,12 @@ local Rp3dTransform = {
 	quat = vmath.quat(),
 }
 
+---@class Rp3dCollider
+local Collider = {}
+
+---@return number
+function Collider:getEntityId() end
+
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 
@@ -75,6 +81,15 @@ function CollisionBody:getTransform() end
 --Set the current position and orientation.
 ---@param transform Rp3dTransform
 function CollisionBody:setTransform(transform) end
+
+--Create a new collider and add it to the body.
+--A collider is an object with a collision shape that is attached to a body.
+--It is possible to attach multiple colliders to a given body.
+--You can use the returned collider to get and set information about the corresponding collision shape for that body.
+---@param collisionShape Rp3dCollisionShape
+---@param transform Rp3dTransform
+---@return Rp3dCollider
+function CollisionBody:addCollider(collisionShape,transform) end
 
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local Rp3dRigidBody = {}

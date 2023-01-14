@@ -1,5 +1,7 @@
 #include "objects/collision_body_userdata.h"
 #include "static_hash.h"
+#include "objects/shape/collision_shape_userdata.h"
+#include "objects/collider_userdata.h"
 #include "utils.h"
 
 #define META_NAME "rp3d::CollisionBody"
@@ -113,6 +115,20 @@ static int SetTransform(lua_State *L){
 	return 0;
 }
 
+static int AddCollider(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    CollisionShapeLua* shapeLua = CollisionShapeCheck(L,2);
+    Transform transform = checkRp3dTransform(L,3);
+    //dmLogInfo("shape[%p]",(void *) shapeLua->shape);
+    Collider* collider = userdata->body->addCollider(shapeLua->shape,transform);
+  //  dmLogInfo("Collider shape[%p]",(void *) collider->getCollisionShape());
+    ColliderUserdata* colliderLua = new ColliderUserdata(collider);
+    colliderLua->Push(L);
+	return 1;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -138,6 +154,7 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
         {"setUserData",SetUserData},
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
+        {"addCollider",AddCollider},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -163,6 +180,7 @@ void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"setUserData",SetUserData},
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
+        {"addCollider",AddCollider},
         {"__tostring",ToString},
         { 0, 0 }
     };

@@ -94,6 +94,16 @@ return function()
 			end
 		end)
 
+		test("addCollider()", function()
+			for _,b in ipairs(bodies)do
+				local shape = rp3d.createBoxShape(vmath.vector3(2))
+				local collider = b:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+			--	rp3d.destroyBoxShape(shape)
+				assert_not_nil(collider)
+				print(tostring(collider))
+			end
+		end)
+
 		test("toString()", function()
 			assert_equal(tostring(bodies[1]):sub(1,19),"rp3d::CollisionBody")
 			assert_equal(tostring(bodies[2]):sub(1,15),"rp3d::RigidBody")
