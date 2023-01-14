@@ -7,17 +7,20 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "static_hash.h"
 
-#define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
-
 
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
-    class CollisionShapeLua {
+
+//use same for all Shaped
+//use diff meta tables
+class CollisionShapeUserdata : public BaseUserData {
     public:
         CollisionShape* shape;
-        CollisionShapeLua(CollisionShape* shape);
-        ~CollisionShapeLua();
+        CollisionShapeUserdata(CollisionShape* shape);
+        ~CollisionShapeUserdata();
+
+        virtual void Destroy(lua_State *L);
     };
 
 
@@ -39,8 +42,8 @@ namespace rp3dDefold {
 
 
 
-
+    void CollisionShapeUserdataInitMetaTable(lua_State *L);
     void CollisionShapePush(lua_State *L, CollisionShape* shape);
-    CollisionShapeLua* CollisionShapeCheck(lua_State *L, int index);
+    CollisionShapeUserdata* CollisionShapeCheck(lua_State *L, int index);
 }
 #endif

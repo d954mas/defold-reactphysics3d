@@ -77,9 +77,10 @@ static int CreateBoxShape(lua_State* L){
 static int DestroyBoxShape(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
-    CollisionShapeLua * shape = BoxShapeCheck(L,1);
-    physicsCommon.destroyBoxShape( static_cast<BoxShape*>(shape->shape));
-    shape->shape = NULL;
+    CollisionShapeUserdata * shapeUserdata = BoxShapeCheck(L,1);
+    BoxShape* shape = static_cast<BoxShape*>(shapeUserdata->shape);
+    shapeUserdata->Destroy(L);
+    physicsCommon.destroyBoxShape(shape);
     return 0;
 }
 
@@ -141,6 +142,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     WorldUserdataInitMetaTable(params->m_L);
     CollisionBodyUserdataInitMetaTable(params->m_L);
     CollisionBodyUserdataRigidInitMetaTable(params->m_L);
+    CollisionShapeUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;

@@ -79,6 +79,9 @@ class CollisionShape {
         /// Array of the colliders associated with this shape
         Array<Collider*> mColliders;
 
+        /// Pointer to user data
+        void* mUserData=NULL;
+
 #ifdef IS_RP3D_PROFILING_ENABLED
 
 		/// Pointer to the profiler
@@ -152,6 +155,12 @@ class CollisionShape {
         /// Return the string representation of the shape
         virtual std::string to_string() const=0;
 
+        /// Return a pointer to the user data attached to this body
+        void* getUserData() const;
+
+        /// Attach user data to this body
+        void setUserData(void* userData);
+
 #ifdef IS_RP3D_PROFILING_ENABLED
 
 		/// Set the profiler
@@ -209,6 +218,25 @@ RP3D_FORCE_INLINE void CollisionShape::setProfiler(Profiler* profiler) {
 
 #endif
 
+//@FIX ADD METHODS TO MAKE LUA BINDING EASY
+// Return a pointer to the user data attached to this body
+/**
+ * @return A pointer to the user data stored into the collider
+ */
+RP3D_FORCE_INLINE void* CollisionShape::getUserData() const {
+    return mUserData;
 }
+
+// Attach user data to this body
+/**
+ * @param userData Pointer to the user data you want to store within the collider
+ */
+RP3D_FORCE_INLINE void CollisionShape::setUserData(void* userData) {
+    mUserData = userData;
+}
+
+}
+
+
 
 #endif

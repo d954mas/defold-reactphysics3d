@@ -10,38 +10,13 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
-CollisionShapeLua* BoxShapeCheck(lua_State* L, int index){
-    CollisionShapeLua *shape = CollisionShapeCheck(L,index);
+CollisionShapeUserdata* BoxShapeCheck(lua_State* L, int index){
+    CollisionShapeUserdata *shape = CollisionShapeCheck(L,index);
     if (shape->shape->getName() == CollisionShapeName::BOX){
         return shape;
     }else{
         luaL_error(L, "shape not BoxShape");
     }
-}
-
-void BoxShapePush(lua_State *L, BoxShape* shape){
-    CollisionShapeLua *shapeLua = new CollisionShapeLua(shape);
-    *static_cast<CollisionShapeLua**>(lua_newuserdata(L, sizeof(CollisionShapeLua*))) = shapeLua;
-    if(luaL_newmetatable(L, META_NAME_BOX_SHAPE)){
-        static const luaL_Reg functions[] ={
-            {"getName", CollisionShape_GetName},
-            {"getType", CollisionShape_GetType},
-            {"isPolyhedron", CollisionShape_IsPolyhedron},
-            {"isConvex", CollisionShape_IsConvex},
-            {"getLocalBounds", CollisionShape_GetLocalBounds},
-            {"getId", CollisionShape_GetId},
-            {"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},
-            {"getVolume", CollisionShape_GetVolume},
-            {"computeAABB", CollisionShape_ComputeAABB},
-            {"__tostring", CollisionShape_ToString},
-            {"__gc", CollisionShape_GC},
-            {0, 0}
-        };
-        luaL_register(L, NULL,functions);
-        lua_pushvalue(L, -1);
-        lua_setfield(L, -1, "__index");
-    }
-    lua_setmetatable(L, -2);
 }
 
 }

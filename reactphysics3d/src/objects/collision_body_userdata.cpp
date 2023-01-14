@@ -119,7 +119,7 @@ static int AddCollider(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 3);
     CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
-    CollisionShapeLua* shapeLua = CollisionShapeCheck(L,2);
+    CollisionShapeUserdata* shapeLua = CollisionShapeCheck(L,2);
     Transform transform = checkRp3dTransform(L,3);
     //dmLogInfo("shape[%p]",(void *) shapeLua->shape);
     Collider* collider = userdata->body->addCollider(shapeLua->shape,transform);

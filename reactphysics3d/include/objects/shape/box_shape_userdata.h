@@ -13,7 +13,6 @@
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
-    void BoxShapePush(lua_State *L, BoxShape* shape);
-    CollisionShapeLua* BoxShapeCheck(lua_State *L, int index);
+    CollisionShapeUserdata* BoxShapeCheck(lua_State *L, int index);
 }
 #endif
