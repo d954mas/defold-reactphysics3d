@@ -122,6 +122,40 @@ static int AddCollider(lua_State *L){
 	return 1;
 }
 
+static int GetNbColliders(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->body->getNbColliders());
+	return 1;
+}
+
+static int GetCollider(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    int idx = luaL_checknumber(L,2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    if(idx<0 || idx >= userdata->body->getNbColliders() ){
+        luaL_error(L,"bad idx:%d. Size:%d",idx,userdata->body->getNbColliders());
+    }
+    Collider *collider = userdata->body->getCollider(idx);
+    ColliderPush(L,collider);
+	return 1;
+}
+
+static int RemoveCollider(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    ColliderUserdata *colliderUserdata = ColliderUserdataCheck(L,2);
+    Collider* collider = colliderUserdata->collider;
+    colliderUserdata->Destroy(L);
+    delete colliderUserdata;
+    body->body->removeCollider(collider);
+
+	return 0;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -148,6 +182,9 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
         {"addCollider",AddCollider},
+        {"getCollider",	GetCollider},
+        {"getNbColliders",GetNbColliders},
+        {"removeCollider",RemoveCollider},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -173,6 +210,10 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
         {"addCollider",AddCollider},
+        {"removeCollider ",RemoveCollider},
+        {"getCollider",	GetCollider},
+        {"getNbColliders",GetNbColliders},
+        {"removeCollider",RemoveCollider},
         {"__tostring",ToString},
         { 0, 0 }
     };

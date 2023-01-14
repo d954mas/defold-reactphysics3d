@@ -63,7 +63,6 @@ function Collider:getUserData() end
 ---@param userdata table|nil
 function Collider:setUserData(userdata) end
 
-
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 
@@ -102,7 +101,18 @@ function CollisionBody:setTransform(transform) end
 ---@param collisionShape Rp3dCollisionShape
 ---@param transform Rp3dTransform
 ---@return Rp3dCollider
-function CollisionBody:addCollider(collisionShape,transform) end
+function CollisionBody:addCollider(collisionShape, transform) end
+
+---@return Rp3dCollider
+---@param index number [0,size)
+function CollisionBody:getCollider(index) end
+
+--Return the number of colliders associated with this body.
+---@return number
+function CollisionBody:getNbColliders() end
+
+---@param collider Rp3dCollider
+function CollisionBody:removeCollider(collider) end
 
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local Rp3dRigidBody = {}

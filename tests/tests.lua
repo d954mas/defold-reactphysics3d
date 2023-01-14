@@ -8,7 +8,7 @@ local TEST_BOX_SHAPE = require "tests.shape.test_box_shape"
 local TEST_COLLISION_BODY = require "tests.test_collision_body"
 local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
 local TEST_AABB = require "tests.test_aabb"
-local TEST_COLLIDER = require "tests.shape.test_collider"
+local TEST_COLLIDER = require "tests.test_collider"
 local M = {}
 
 function M.run()

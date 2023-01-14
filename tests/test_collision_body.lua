@@ -98,11 +98,34 @@ return function()
 			for _,b in ipairs(bodies)do
 				local shape = rp3d.createBoxShape(vmath.vector3(2))
 				local collider = b:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
-			--	rp3d.destroyBoxShape(shape)
 				assert_not_nil(collider)
 				print(tostring(collider))
 			end
 		end)
+		test("getNbColliders()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for _,b in ipairs(bodies)do
+				assert_equal(b:getNbColliders(),0)
+				local c = b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+				assert_equal(b:getNbColliders(),1)
+				b:removeCollider(c)
+				assert_equal(b:getNbColliders(),0)
+			end
+
+		end)
+
+		test("removeCollider()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for _,b in ipairs(bodies)do
+				local c = b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+				b:removeCollider(c)
+				local status, error = pcall(c.getEntityId,c)
+				assert_false(status)
+				assert_equal(error,"rp3d::Collider was destroyed")
+			end
+
+		end)
+
 
 		test("toString()", function()
 			assert_equal(tostring(bodies[1]):sub(1,19),"rp3d::CollisionBody")
