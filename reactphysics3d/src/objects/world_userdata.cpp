@@ -246,8 +246,7 @@ static int CreateCollisionBody(lua_State *L){
     WorldUserdata *data = WorldUserdataCheck(L, 1);
     Transform transform = checkRp3dTransform(L,2);
     CollisionBody* body = data->world->createCollisionBody(transform);
-    CollisionBodyUserdata* result = new CollisionBodyUserdata(body);
-    result->Push(L);
+    CollisionBodyPush(L,body);
 	return 1;
 }
 
@@ -257,8 +256,7 @@ static int CreateRigidBody(lua_State *L){
     WorldUserdata *data = WorldUserdataCheck(L, 1);
     Transform transform = checkRp3dTransform(L,2);
     RigidBody* body = data->world->createRigidBody(transform);
-    CollisionBodyUserdata* result = new CollisionBodyUserdata(body);
-    result->Push(L);
+    CollisionBodyPush(L,body);
 	return 1;
 }
 

@@ -24,13 +24,7 @@ static void init(CollisionBodyUserdata* userdata,CollisionBody* body){
 
 CollisionBodyUserdata::CollisionBodyUserdata(CollisionBody* body): BaseUserData(USERDATA_TYPE){
     this->metatable_name = META_NAME;
-    isRigidBody = false;
-    init(this,body);
-}
-
-CollisionBodyUserdata::CollisionBodyUserdata(RigidBody* body): BaseUserData(USERDATA_TYPE){
-    this->metatable_name = META_NAME_RIGID;
-    isRigidBody = true;
+    isRigidBody = body->isRigidBody();
     init(this,body);
 }
 
@@ -201,5 +195,17 @@ void CollisionBodyUserdata::Destroy(lua_State *L){
     user_data_ref = LUA_REFNIL;
     BaseUserData::Destroy(L);
 }
+
+void CollisionBodyPush(lua_State *L, CollisionBody *body){
+
+    if(body->getUserData()!=NULL){
+        CollisionBodyUserdata* userdata =(CollisionBodyUserdata*) body->getUserData();
+         userdata->Push(L);
+    }else{
+        CollisionBodyUserdata* userdata = new CollisionBodyUserdata(body);
+        userdata->Push(L);
+    }
+}
+
 
 }

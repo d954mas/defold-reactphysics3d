@@ -1,6 +1,7 @@
 #include "objects/collision_body_userdata.h"
 #include "static_hash.h"
 #include "objects/collider_userdata.h"
+#include "objects/shape/collision_shape_userdata.h"
 #include "utils.h"
 
 #define META_NAME "rp3d::Collider"
@@ -31,6 +32,24 @@ static int GetEntityId(lua_State *L){
     check_arg_count(L, 1);
     ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
     lua_pushnumber(L,userdata->collider->getEntity().id);
+	return 1;
+}
+
+static int GetCollisionShape(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    CollisionShape* shape = userdata->collider->getCollisionShape();
+    CollisionShapePush(L,shape);
+    return 1;
+}
+
+static int GetBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    CollisionBody* body = userdata->collider->getBody();
+    CollisionBodyPush(L,body);
 	return 1;
 }
 
@@ -71,6 +90,10 @@ void ColliderUserdataInitMetaTable(lua_State *L){
 
     luaL_Reg functions[] = {
         {"getEntityId",GetEntityId},
+        {"getCollisionShape",GetCollisionShape},
+        {"getBody",GetBody},
+        {"setUserData",SetUserData},
+        {"getUserData",GetUserData},
         {"__tostring",ToString},
         { 0, 0 }
     };

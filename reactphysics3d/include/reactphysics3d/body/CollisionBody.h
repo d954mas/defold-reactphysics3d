@@ -157,6 +157,9 @@ class CollisionBody {
         /// Return the body local-space coordinates of a vector given in the world-space coordinates
         Vector3 getLocalVector(const Vector3& worldVector) const;
 
+        /// Set the current position and orientation
+        virtual bool isRigidBody();
+
 #ifdef IS_RP3D_PROFILING_ENABLED
 
 		/// Set the profiler

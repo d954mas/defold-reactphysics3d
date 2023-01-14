@@ -1108,3 +1108,7 @@ void RigidBody::setProfiler(Profiler* profiler) {
 }
 
 #endif
+
+bool RigidBody::isRigidBody()  {
+    return true;
+}

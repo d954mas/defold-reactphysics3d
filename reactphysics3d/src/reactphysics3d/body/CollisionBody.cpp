@@ -465,3 +465,7 @@ Vector3 CollisionBody::getLocalPoint(const Vector3& worldPoint) const {
 Vector3 CollisionBody::getLocalVector(const Vector3& worldVector) const {
     return mWorld.mTransformComponents.getTransform(mEntity).getOrientation().getInverse() * worldVector;
 }
+
+bool CollisionBody::isRigidBody()  {
+    return false;
+}
