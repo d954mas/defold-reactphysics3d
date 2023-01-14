@@ -74,6 +74,31 @@ namespace rp3dDefold {
         }
 	}
 
+    void pushRp3dTransform(lua_State *L, reactphysics3d::Transform transform){
+        dmVMath::Vector3 dmPosition;
+        dmVMath::Quat dmQuat;
+
+       const reactphysics3d::Vector3& position = transform.getPosition();
+       const reactphysics3d::Quaternion& quat = transform.getOrientation();
+
+        dmPosition.setX(position.x);
+        dmPosition.setY(position.y);
+        dmPosition.setZ(position.z);
+
+        dmQuat.setX(quat.x);
+        dmQuat.setY(quat.y);
+        dmQuat.setZ(quat.z);
+        dmQuat.setW(quat.w);
+
+        lua_newtable(L);
+            dmScript::PushVector3(L, dmPosition);
+            lua_setfield(L, -2, "position");
+            dmScript::PushQuat(L,dmQuat);
+            lua_setfield(L, -2, "quat");
+
+    }
+
+
     reactphysics3d::Ray CheckRay(lua_State *L, int index){
         if (lua_istable(L, index)) {
             reactphysics3d::Vector3 point1;

@@ -2,7 +2,7 @@ local UTILS = require "tests.test_utils"
 
 ---@type Rp3dPhysicsWorld
 local w
----@type Rp3dCollisionBody
+---@type Rp3dCollisionBody[]
 local bodies = {}
 return function()
 	describe("CollisionBody", function()
@@ -39,6 +39,58 @@ return function()
 		test("getEntityId()", function()
 			for _,body in ipairs(bodies)do
 				assert_type(body:getEntityId(),"number")
+			end
+		end)
+
+		test("isRigidBody()", function()
+			assert_false(bodies[1]:isRigidBody())
+			assert_true(bodies[2]:isRigidBody())
+		end)
+		test("is/set Active()", function()
+			for _,body in ipairs(bodies)do
+				UTILS.test_method_get_set(body, "Active",
+					{
+						getter_full = "isActive",
+						setter_full = "setIsActive",
+						values = { false, true, true, false }
+					})
+				end
+		end)
+
+		test("get/set UserData()", function()
+			for _,body in ipairs(bodies)do
+				assert_nil(body:getUserData())
+				local data = {}
+				local data2 = {}
+				body:setUserData(data)
+				assert_equal(data,body:getUserData())
+				body:setUserData(data2)
+				assert_not_equal(data,body:getUserData())
+				assert_equal(data2,body:getUserData())
+				body:setUserData(nil)
+				assert_nil(body:getUserData())
+				local status,error = pcall(body.setUserData,body,"data")
+				assert_false(status)
+				assert_equal(error,"userdata can be only table or nil")
+
+			end
+		end)
+
+		test("get/set Transform()", function()
+			for _,body in ipairs(bodies)do
+				local initTransform = body:getTransform()
+				assert_not_nil(initTransform)
+				assert_equal_v3(initTransform.position,vmath.vector3(0,0,0))
+				assert_equal_quat(initTransform.quat,vmath.quat())
+				body:setTransform({position =  vmath.vector3(1,2,3),quat = vmath.quat_rotation_z(math.pi)})
+				local transform2 = body:getTransform()
+				assert_equal_v3(transform2.position,vmath.vector3(1,2,3))
+				assert_equal_quat(transform2.quat,vmath.quat_rotation_z(math.pi))
+
+				local status,error = pcall(body.setTransform,body,{})
+				assert_false(status)
+				assert_equal(error,"transform need position")
+
 			end
 		end)
 

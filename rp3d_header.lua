@@ -54,6 +54,28 @@ function CollisionBody:getEntityId() end
 ---@return boolean
 function CollisionBody:isRigidBody() end
 
+
+--Return true if the body is active.
+---@return boolean
+function CollisionBody:isActive() end
+
+
+--Return a table or nil user data attached to this body.
+---@return table|nil
+function CollisionBody:getUserData() end
+
+--Attach user data to this body.
+---@param userdata table|nil
+function CollisionBody:setUserData(userdata) end
+
+--Return the current position and orientation.
+---@return Rp3dTransform
+function CollisionBody:getTransform() end
+
+--Set the current position and orientation.
+---@param transform Rp3dTransform
+function CollisionBody:setTransform(transform) end
+
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local Rp3dRigidBody = {}
 
@@ -62,65 +84,65 @@ local PhysicsWorld = {}
 
 --[[
 CollisionDispatch & 	getCollisionDispatch ()
- 	Get the collision dispatch configuration.
+	 Get the collision dispatch configuration.
 
 void 	raycast (const Ray &ray, RaycastCallback *raycastCallback, unsigned short raycastWithCategoryMaskBits=0xFFFF) const
- 	Ray cast method.
+	 Ray cast method.
 
 bool 	testOverlap (CollisionBody *body1, CollisionBody *body2)
- 	Return true if two bodies overlap (collide)
+	 Return true if two bodies overlap (collide)
 
 void 	testOverlap (CollisionBody *body, OverlapCallback &overlapCallback)
- 	Report all the bodies that overlap (collide) with the body in parameter.
+	 Report all the bodies that overlap (collide) with the body in parameter.
 
 void 	testOverlap (OverlapCallback &overlapCallback)
- 	Report all the bodies that overlap (collide) in the world.
+	 Report all the bodies that overlap (collide) in the world.
 
 void 	testCollision (CollisionBody *body1, CollisionBody *body2, CollisionCallback &callback)
- 	Test collision and report contacts between two bodies.
+	 Test collision and report contacts between two bodies.
 
 void 	testCollision (CollisionBody *body, CollisionCallback &callback)
- 	Test collision and report all the contacts involving the body in parameter.
+	 Test collision and report all the contacts involving the body in parameter.
 
 void 	testCollision (CollisionCallback &callback)
- 	Test collision and report contacts between each colliding bodies in the world.
+	 Test collision and report contacts between each colliding bodies in the world.
 
 MemoryManager & 	getMemoryManager ()
- 	Return a reference to the memory manager of the world.
+	 Return a reference to the memory manager of the world.
 
 AABB 	getWorldAABB (const Collider *collider) const
- 	Return the current world-space AABB of given collider.
+	 Return the current world-space AABB of given collider.
 
 Joint * 	createJoint (const JointInfo &jointInfo)
- 	Create a joint between two bodies in the world and return a pointer to the new joint.
+	 Create a joint between two bodies in the world and return a pointer to the new joint.
 
 void 	destroyJoint (Joint *joint)
- 	Destroy a joint.
+	 Destroy a joint.
 void 	setEventListener (EventListener *eventListener)
- 	Set an event listener object to receive events callbacks.
+	 Set an event listener object to receive events callbacks.
 
 uint32 	getNbCollisionBodies () const
- 	Return the number of CollisionBody in the physics world.
+	 Return the number of CollisionBody in the physics world.
 
 const CollisionBody * 	getCollisionBody (uint32 index) const
- 	Return a constant pointer to a given CollisionBody of the world.
+	 Return a constant pointer to a given CollisionBody of the world.
 
 CollisionBody * 	getCollisionBody (uint32 index)
- 	Return a pointer to a given CollisionBody of the world.
+	 Return a pointer to a given CollisionBody of the world.
 
 
 const RigidBody * 	getRigidBody (uint32 index) const
- 	Return a constant pointer to a given RigidBody of the world.
+	 Return a constant pointer to a given RigidBody of the world.
 
 RigidBody * 	getRigidBody (uint32 index)
- 	Return a pointer to a given RigidBody of the world.
+	 Return a pointer to a given RigidBody of the world.
 
 
 void 	setIsDebugRenderingEnabled (bool isEnabled)
- 	Set to true if debug rendering is enabled.
+	 Set to true if debug rendering is enabled.
 
 DebugRenderer & 	getDebugRenderer ()
- 	Return a reference to the Debug Renderer of the world.
+	 Return a reference to the Debug Renderer of the world.
 --]]
 
 --Return the name of the world.

@@ -2,6 +2,7 @@ function assert_blank(a) end --true if a is nil, or the empty string</li>
 function assert_empty(a) end --true if a is an empty table</li>
 function assert_equal(a, b) end --true if a == b</li>
 function assert_equal_v3(a, b) end --true if a == b</li>
+function assert_equal_quat(a, b) end --true if a == b</li>
 function assert_equal_float(a, b) end --true if a == b</li>
 function assert_error(f) end --true if function f produces an error</li>
 function assert_false(a) end --true if a is false</li>
