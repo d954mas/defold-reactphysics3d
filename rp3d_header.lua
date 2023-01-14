@@ -51,6 +51,19 @@ local Collider = {}
 ---@return number
 function Collider:getEntityId() end
 
+---@return Rp3dCollisionShape
+function Collider:getCollisionShape() end
+
+---@return Rp3dCollisionBody
+function Collider:getBody() end
+
+---@return table|nil
+function Collider:getUserData() end
+
+---@param userdata table|nil
+function Collider:setUserData(userdata) end
+
+
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 

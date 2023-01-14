@@ -15,6 +15,7 @@ namespace rp3dDefold {
 ColliderUserdata::ColliderUserdata(Collider* collider): BaseUserData(USERDATA_TYPE){
     this->metatable_name = META_NAME;
     this->collider = collider;
+    this->obj = collider;
 }
 
 ColliderUserdata::~ColliderUserdata() {

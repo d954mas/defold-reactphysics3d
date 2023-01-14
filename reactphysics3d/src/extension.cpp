@@ -6,6 +6,7 @@
 #include "undefine_none.h"
 #include "utils.h"
 #include "objects/objects.h"
+#include "objects/collider_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
@@ -141,8 +142,8 @@ static dmExtension::Result AppInitializeMyExtension(dmExtension::AppParams* para
 static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     WorldUserdataInitMetaTable(params->m_L);
     CollisionBodyUserdataInitMetaTable(params->m_L);
-    CollisionBodyUserdataRigidInitMetaTable(params->m_L);
     CollisionShapeUserdataInitMetaTable(params->m_L);
+    ColliderUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;

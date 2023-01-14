@@ -29,7 +29,6 @@ public:
 };
 
 void CollisionBodyUserdataInitMetaTable(lua_State *L);
-void CollisionBodyUserdataRigidInitMetaTable(lua_State *L);
 CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index);
 void CollisionBodyPush(lua_State *L, CollisionBody *body);
 

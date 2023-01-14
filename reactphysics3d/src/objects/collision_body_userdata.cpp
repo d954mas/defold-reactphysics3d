@@ -136,33 +136,7 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
-void CollisionBodyUserdataInitMetaTable(lua_State *L){
-    int top = lua_gettop(L);
-
-    luaL_Reg functions[] = {
-        {"getEntityId",GetEntityId},
-        {"isRigidBody",IsRigidBody},
-        {"isActive",IsActive},
-        {"setIsActive",SetIsActive},
-        {"getUserData",GetUserData},
-        {"setUserData",SetUserData},
-        {"getTransform",GetTransform},
-        {"setTransform",SetTransform},
-        {"addCollider",AddCollider},
-        {"__tostring",ToString},
-        { 0, 0 }
-    };
-    luaL_newmetatable(L, META_NAME);
-    luaL_register (L, NULL,functions);
-    lua_pushvalue(L, -1);
-    lua_setfield(L, -1, "__index");
-    lua_pop(L, 1);
-
-    assert(top == lua_gettop(L));
-}
-
-
-void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
+static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
@@ -186,6 +160,36 @@ void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
 
     assert(top == lua_gettop(L));
 }
+
+void CollisionBodyUserdataInitMetaTable(lua_State *L){
+    int top = lua_gettop(L);
+
+    luaL_Reg functions[] = {
+        {"getEntityId",GetEntityId},
+        {"isRigidBody",IsRigidBody},
+        {"isActive",IsActive},
+        {"setIsActive",SetIsActive},
+        {"getUserData",GetUserData},
+        {"setUserData",SetUserData},
+        {"getTransform",GetTransform},
+        {"setTransform",SetTransform},
+        {"addCollider",AddCollider},
+        {"__tostring",ToString},
+        { 0, 0 }
+    };
+    luaL_newmetatable(L, META_NAME);
+    luaL_register (L, NULL,functions);
+    lua_pushvalue(L, -1);
+    lua_setfield(L, -1, "__index");
+    lua_pop(L, 1);
+
+    assert(top == lua_gettop(L));
+
+    CollisionBodyUserdataRigidInitMetaTable(L);
+}
+
+
+
 
 
 void CollisionBodyUserdata::Destroy(lua_State *L){
