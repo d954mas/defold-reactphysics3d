@@ -213,5 +213,7 @@ return function()
 			assert_equal(error,"can't destroy CollisionBody.Need RigidBody")
 			rp3d.destroyPhysicsWorld(w)
 		end)
+
+
 	end)
 end

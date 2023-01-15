@@ -24,5 +24,50 @@ return function()
 				STATIC = "STATIC", KINEMATIC = "KINEMATIC", DYNAMIC = "DYNAMIC"
 			})
 		end)
+
+		--crash if have some memory corrupted issues
+		test("test memory errors", function()
+			for i=1,1000 do
+				local w = rp3d.createPhysicsWorld()
+				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+				w:destroyCollisionBody(body)
+				rp3d.destroyPhysicsWorld(w)
+			end
+
+			for i=1,100 do
+				local w = rp3d.createPhysicsWorld()
+				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+				rp3d.destroyPhysicsWorld(w)
+			end
+
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for i=1,100 do
+				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+
+				local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+				local body_rigid = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+				local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+				w:destroyCollisionBody(body)
+				w:destroyRigidBody(body_rigid)
+			end
+			rp3d.destroyBoxShape(shape)
+			rp3d.destroyPhysicsWorld(w)
+
+			w = rp3d.createPhysicsWorld()
+			shape = rp3d.createBoxShape(vmath.vector3(2))
+			for i=1,100 do
+				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+				local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+				local body_rigid = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+				local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+			end
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+
+		end)
 	end)
 end
