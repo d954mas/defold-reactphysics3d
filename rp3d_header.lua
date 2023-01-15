@@ -117,8 +117,20 @@ function CollisionBody:removeCollider(collider) end
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local Rp3dRigidBody = {}
 
+
+
+-- Compute and set the center of mass, the mass and the local-space inertia
+--tensor of the body using its colliders.
+-- This method uses the shape, mass density and transform of the colliders
+--of the body to set the total mass, the center of mass and the local inertia
+--tensor of the body.
+-- Note that calling this method will overwrite the mass that has been set
+--with the RigidBody::setMass(), the center of mass that has been set with RigidBody::setCenterOfMass() and the local inertia tensor that has been set with RigidBody::setInertiaTensorLocal().
+function Rp3dRigidBody:updateMassPropertiesFromColliders() end
+
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
+
 
 --[[
 CollisionDispatch & 	getCollisionDispatch ()

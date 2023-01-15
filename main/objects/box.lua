@@ -25,6 +25,11 @@ function Box:initialize(rigid_body, size, world)
 end
 
 function Box:dispose()
+	if(self.rigid_body)then
+		self.world:destroyRigidBody(self.body)
+	else
+		self.world:destroyCollisionBody(self.body)
+	end
 	rp3d.destroyBoxShape(self.shape)
 end
 

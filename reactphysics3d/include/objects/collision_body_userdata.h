@@ -23,6 +23,7 @@ public:
 
     CollisionBodyUserdata(CollisionBody* body);
     CollisionBodyUserdata(RigidBody* body);
+    RigidBody* GetRigidBodyOrError(lua_State *L);
 	~CollisionBodyUserdata();
 
 	virtual void Destroy(lua_State *L);
@@ -31,6 +32,5 @@ public:
 void CollisionBodyUserdataInitMetaTable(lua_State *L);
 CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index);
 void CollisionBodyPush(lua_State *L, CollisionBody *body);
-
 }
 #endif

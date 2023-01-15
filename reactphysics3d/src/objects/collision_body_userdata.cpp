@@ -25,6 +25,9 @@ static void init(CollisionBodyUserdata* userdata,CollisionBody* body){
 CollisionBodyUserdata::CollisionBodyUserdata(CollisionBody* body): BaseUserData(USERDATA_TYPE){
     this->metatable_name = META_NAME;
     isRigidBody = body->isRigidBody();
+    if(isRigidBody){
+         this->metatable_name = META_NAME_RIGID;
+    }
     init(this,body);
 }
 
@@ -37,6 +40,14 @@ CollisionBodyUserdata::~CollisionBodyUserdata() {
 CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index) {
     CollisionBodyUserdata *userdata = (CollisionBodyUserdata*) BaseUserData_get_userdata(L, index, USERDATA_TYPE);
 	return userdata;
+}
+
+RigidBody* CollisionBodyUserdata::GetRigidBodyOrError(lua_State *L){
+    if(!isRigidBody){
+        luaL_error(L,"Need RigidBody.Get CollisionBody");
+    }else{
+        return (RigidBody*)body;
+    }
 }
 
 static int GetEntityId(lua_State *L){
@@ -169,6 +180,14 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
+static int RigidBodyUpdateMassPropertiesFromColliders(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->updateMassPropertiesFromColliders();
+    return 0;
+}
+
 static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -185,6 +204,7 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"getCollider",	GetCollider},
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},
+        {"updateMassPropertiesFromColliders",RigidBodyUpdateMassPropertiesFromColliders},
         {"__tostring",ToString},
         { 0, 0 }
     };

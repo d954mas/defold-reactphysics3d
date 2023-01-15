@@ -20,6 +20,25 @@ It will help me make more libraries for defold.
 Try the demo: 
 
 
+##Be carefull
+1. This is c++ library. I add some function parameters checks but you can crash it in some cases.
+
+2. Call destroy. Or you will have memory leaks.
+
+3. rp3d.destroyPhysicsWorld will destroy and free all used memory,except shapes.
+
+4. Destroy shapes after destroy all objects that use shape
+or you will get crash.
+```lua
+--CRASH
+rp3d.destroyBoxShape(self.shape)
+self.world:destroyCollisionBody(self.body)
+
+--GOOD
+self.world:destroyCollisionBody(self.body)
+rp3d.destroyBoxShape(self.shape)
+```
+
 ## Limits
 1)Defold vector instead of rp3d::Vector
 2)Defold quaternion instead of rp3d::Quat
