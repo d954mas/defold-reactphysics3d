@@ -10,6 +10,7 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
+#include "objects/debug_renderer_userdata.h"
 
 
 
@@ -144,6 +145,21 @@ static void LuaInit(lua_State* L){
         lua_setfield(L, -2, "DYNAMIC");
     lua_setfield(L, -2, "BodyType");
 
+    lua_newtable(L);
+        lua_newtable(L);
+            lua_pushstring(L, "COLLIDER_AABB");
+            lua_setfield(L, -2, "COLLIDER_AABB");
+            lua_pushstring(L, "COLLIDER_BROADPHASE_AABB");
+            lua_setfield(L, -2, "COLLIDER_BROADPHASE_AABB");
+            lua_pushstring(L, "COLLISION_SHAPE");
+            lua_setfield(L, -2, "COLLISION_SHAPE");
+            lua_pushstring(L, "CONTACT_POINT");
+            lua_setfield(L, -2, "CONTACT_POINT");
+            lua_pushstring(L, "CONTACT_NORMAL");
+            lua_setfield(L, -2, "CONTACT_NORMAL");
+        lua_setfield(L, -2, "DebugItem");
+    lua_setfield(L, -2, "DebugRenderer");
+
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));
 }
@@ -154,6 +170,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     CollisionBodyUserdataInitMetaTable(params->m_L);
     CollisionShapeUserdataInitMetaTable(params->m_L);
     ColliderUserdataInitMetaTable(params->m_L);
+    DebugRendererUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;

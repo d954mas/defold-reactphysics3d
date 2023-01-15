@@ -214,6 +214,12 @@ return function()
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
+		test("getDebugRenderer()", function()
+			local w = rp3d.createPhysicsWorld()
+			assert_not_nil(w:getDebugRenderer())
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
 
 	end)
 end

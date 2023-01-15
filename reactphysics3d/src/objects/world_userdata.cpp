@@ -1,7 +1,9 @@
 #include "objects/world_userdata.h"
 #include "objects/collision_body_userdata.h"
+#include "objects/debug_renderer_userdata.h"
 #include "static_hash.h"
 #include "utils.h"
+
 
 #define META_NAME "rp3d::World"
 #define USERDATA_TYPE "rp3d::World"
@@ -292,6 +294,15 @@ static int DestroyRigidBody(lua_State *L){
    	return 0;
 }
 
+static int GetDebugRenderer(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    DebugRenderer& renderer = data->world->getDebugRenderer();
+    DebugRendererPush(L,&renderer);
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -332,6 +343,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"destroyCollisionBody",DestroyCollisionBody},
         {"createRigidBody",CreateRigidBody},
         {"destroyRigidBody",DestroyRigidBody},
+        {"getDebugRenderer",GetDebugRenderer},
         {"__tostring",ToString},
         { 0, 0 }
     };

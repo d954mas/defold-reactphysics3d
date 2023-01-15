@@ -177,6 +177,9 @@ class DebugRenderer : public EventListener {
         /// Lenght of contact normal
         decimal mContactNormalLength;
 
+        /// Pointer to user data
+        void* mUserData=NULL;
+
         // -------------------- Methods -------------------- //
 
 		/// Draw an AABB
@@ -257,6 +260,12 @@ class DebugRenderer : public EventListener {
 
         /// Called when some contacts occur
         virtual void onContact(const CollisionCallback::CallbackData& callbackData) override;
+
+        /// Return a pointer to the user data attached to this body
+        void* getUserData() const;
+
+        /// Attach user data to this body
+        void setUserData(void* userData);
 };
 
 // Return the number of lines
@@ -362,6 +371,23 @@ RP3D_FORCE_INLINE decimal DebugRenderer::getContactNormalLength() const {
  */
 RP3D_FORCE_INLINE void DebugRenderer::setContactNormalLength(decimal contactNormalLength) {
     mContactNormalLength = contactNormalLength;
+}
+
+//@FIX ADD METHODS TO MAKE LUA BINDING EASY
+// Return a pointer to the user data attached to this body
+/**
+ * @return A pointer to the user data stored into the collider
+ */
+RP3D_FORCE_INLINE void* DebugRenderer::getUserData() const {
+    return mUserData;
+}
+
+// Attach user data to this body
+/**
+ * @param userData Pointer to the user data you want to store within the collider
+ */
+RP3D_FORCE_INLINE void DebugRenderer::setUserData(void* userData) {
+    mUserData = userData;
 }
 
 }

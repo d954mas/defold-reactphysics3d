@@ -115,7 +115,7 @@ function CollisionBody:getNbColliders() end
 function CollisionBody:removeCollider(collider) end
 
 ---@class Rp3dRigidBody:Rp3dCollisionBody
-local Rp3dRigidBody = {}
+local RigidBody = {}
 
 -- Compute and set the center of mass, the mass and the local-space inertia
 --tensor of the body using its colliders.
@@ -124,13 +124,16 @@ local Rp3dRigidBody = {}
 --tensor of the body.
 -- Note that calling this method will overwrite the mass that has been set
 --with the RigidBody::setMass(), the center of mass that has been set with RigidBody::setCenterOfMass() and the local inertia tensor that has been set with RigidBody::setInertiaTensorLocal().
-function Rp3dRigidBody:updateMassPropertiesFromColliders() end
+function RigidBody:updateMassPropertiesFromColliders() end
 
 ---@param type string rp3d.BodyType
-function Rp3dRigidBody:setType(type) end
+function RigidBody:setType(type) end
 
 ---@return string
-function Rp3dRigidBody:getType() end
+function RigidBody:getType() end
+
+---@class Rp3dDebugRenderer
+local DebugRenderer = {}
 
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
@@ -191,12 +194,6 @@ const RigidBody * 	getRigidBody (uint32 index) const
 RigidBody * 	getRigidBody (uint32 index)
 	 Return a pointer to a given RigidBody of the world.
 
-
-void 	setIsDebugRenderingEnabled (bool isEnabled)
-	 Set to true if debug rendering is enabled.
-
-DebugRenderer & 	getDebugRenderer ()
-	 Return a reference to the Debug Renderer of the world.
 --]]
 
 --Return the name of the world.
@@ -311,6 +308,10 @@ function PhysicsWorld:createRigidBody(transform) end
 ---Destroy a rigid body and all the joints which it belongs.
 ---@param body Rp3dRigidBody
 function PhysicsWorld:destroyRigidBody(body) end
+
+---@return Rp3dDebugRenderer
+function PhysicsWorld:getDebugRenderer() end
+
 
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
@@ -491,6 +492,17 @@ rp3d.BodyType = {
 	STATIC = "STATIC",
 	KINEMATIC = "KINEMATIC",
 	DYNAMIC = "DYNAMIC"
+}
+
+rp3d.DebugRenderer = {
+	DebugItem = {
+		COLLIDER_AABB = "COLLIDER_AABB",
+		COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
+		COLLISION_SHAPE = "COLLISION_SHAPE",
+		CONTACT_POINT = "CONTACT_POINT",
+		CONTACT_POINT = "CONTACT_NORMAL",
+	},
+
 }
 
 

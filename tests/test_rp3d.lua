@@ -14,6 +14,14 @@ return function()
 					assert_equal(rp3d[enum_name][k], v)
 				end
 			end
+			local function test_enum_v2(parent,enum_name, config)
+				assert_not_nil(rp3d[parent])
+				assert_not_nil(rp3d[parent][enum_name])
+				for k, v in pairs(config) do
+					assert_equal(rp3d[parent][enum_name][k], v)
+				end
+			end
+
 			test_enum("ContactsPositionCorrectionTechnique", { BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS", SPLIT_IMPULSES = "SPLIT_IMPULSES" })
 			test_enum("CollisionShapeName", { TRIANGLE = "TRIANGLE", SPHERE = "SPHERE",
 											  CAPSULE = "CAPSULE", BOX = "BOX", CONVEX_MESH = "CONVEX_MESH", TRIANGLE_MESH = "TRIANGLE_MESH", HEIGHTFIELD = "HEIGHTFIELD" })
@@ -22,6 +30,10 @@ return function()
 			})
 			test_enum("BodyType", {
 				STATIC = "STATIC", KINEMATIC = "KINEMATIC", DYNAMIC = "DYNAMIC"
+			})
+			test_enum_v2("DebugRenderer","DebugItem", {
+				COLLIDER_AABB = "COLLIDER_AABB", COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
+				COLLISION_SHAPE = "COLLISION_SHAPE", CONTACT_POINT = "CONTACT_POINT", CONTACT_NORMAL = "CONTACT_NORMAL"
 			})
 		end)
 
