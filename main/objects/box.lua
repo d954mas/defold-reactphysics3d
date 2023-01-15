@@ -25,6 +25,10 @@ function Box:initialize(rigid_body, size, world)
 
 end
 
+function Box:update_transform()
+
+end
+
 function Box:dispose()
 	if(self.rigid_body)then
 		self.world:destroyRigidBody(self.body)

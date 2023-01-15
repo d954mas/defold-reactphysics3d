@@ -10,6 +10,7 @@ local TEST_RIGID_BODY = require "tests.test_rigid_body"
 local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
 local TEST_AABB = require "tests.test_aabb"
 local TEST_COLLIDER = require "tests.test_collider"
+local TEST_DEBUG_RENDERER = require "tests.test_debug_renderer"
 local M = {}
 
 function M.run()
@@ -64,6 +65,7 @@ function M.run()
 	DEFTEST.add(TEST_COLLISION_BODY)
 	DEFTEST.add(TEST_RIGID_BODY)
 	DEFTEST.add(TEST_COLLIDER)
+	DEFTEST.add(TEST_DEBUG_RENDERER)
 	DEFTEST.run()
 end
 

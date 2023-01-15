@@ -27,5 +27,7 @@ public:
 void DebugRendererUserdataInitMetaTable(lua_State *L);
 DebugRendererUserdata* DebugRendererUserdataCheck(lua_State *L, int index);
 void DebugRendererPush(lua_State *L, DebugRenderer* renderer);
+DebugRenderer::DebugItem DebugRendererDebugItemStringToEnum(lua_State *L,const char* str);
+const char * DebugRendererDebugItemEnumToString(DebugRenderer::DebugItem name);
 }
 #endif

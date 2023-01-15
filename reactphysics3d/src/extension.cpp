@@ -60,6 +60,13 @@ static int DestroyPhysicsWorldLua(lua_State* L){
     //destroy joints
 
 
+    DebugRendererUserdata* drUserdata = (DebugRendererUserdata*)data->world->getDebugRenderer().getUserData();
+    if(drUserdata!=NULL){
+        drUserdata->Destroy(L);
+        delete drUserdata;
+    }
+
+
     physicsCommon.destroyPhysicsWorld(data->world);
     data->Destroy(L);
     delete data;

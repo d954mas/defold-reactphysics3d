@@ -99,7 +99,6 @@ return function()
 				local shape = rp3d.createBoxShape(vmath.vector3(2))
 				local collider = b:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
 				assert_not_nil(collider)
-				print(tostring(collider))
 			end
 		end)
 		test("getNbColliders()", function()

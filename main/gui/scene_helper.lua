@@ -109,7 +109,7 @@ function M.updatePhysics(dt,objects)
 			M.rendering.shapes)
 
 	for _,object in ipairs(objects)do
-		object:updateTransform()
+		object:update_transform()
 	end
 end
 

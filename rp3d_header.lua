@@ -135,6 +135,14 @@ function RigidBody:getType() end
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 
+---@param item string rp3d.DebugRenderer.DebugItem
+---@return boolean
+function DebugRenderer:getIsDebugItemDisplayed(item) end
+
+---@param item string rp3d.DebugRenderer.DebugItem
+---@param isDisplayed boolean
+function DebugRenderer:setIsDebugItemDisplayed(item,isDisplayed) end
+
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 
