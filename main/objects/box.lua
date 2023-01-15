@@ -1,5 +1,6 @@
 local CLASS = require "libs.middleclass"
 
+---@class GameBox
 local Box = CLASS.class("Box")
 
 ---@param world Rp3dPhysicsWorld

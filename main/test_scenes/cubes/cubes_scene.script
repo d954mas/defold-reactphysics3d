@@ -13,13 +13,17 @@ local function create_physics(self)
 		gravity = vmath.vector3(0, -9.81, 0)
 	}
 	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
 	self.objects = {}
+	---@type GameBox[]
+	self.boxes = {}
 
 	for i=1,NB_CUBES do
 		-- Create a cube and a corresponding rigid in the physics world
 		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
 		local box = Box(true,BOX_SIZE,self.world)
 		table.insert(self.objects,box)
+		table.insert(self.boxes,box)
 	end
 
 	--FLOOR
@@ -27,7 +31,17 @@ local function create_physics(self)
 	-- The floor must be a static rigid body
 	self.floor.body:setType(rp3d.BodyType.STATIC);
 	table.insert(self.objects,self.floor)
-		-- world:setEventListener(self)
+
+
+	--INIT POSITIONS
+	local radius = 2.0
+	for index,box in ipairs(self.boxes)do
+		local i = index - 1
+		local angle = i * 30
+		local position = vmath.vector3(radius * math.cos(angle),10 + i * (BOX_SIZE.y + 0.3),0)
+		box.body:setTransform({position = position ,quat = vmath.quat_rotation_z(0)})
+	end
+	self.floor.body:setTransform({position = vmath.vector3(0) ,quat = vmath.quat_rotation_z(0)})
 		--[[// Gravity vector in the physics world
 
 		// Create all the cubes of the scene

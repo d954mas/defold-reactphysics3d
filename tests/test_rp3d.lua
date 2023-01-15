@@ -60,10 +60,10 @@ return function()
 			shape = rp3d.createBoxShape(vmath.vector3(2))
 			for i=1,100 do
 				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
-				local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+				--local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
 
 				local body_rigid = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
-				local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+				--local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
 			end
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)

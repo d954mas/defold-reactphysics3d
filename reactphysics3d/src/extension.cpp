@@ -43,7 +43,6 @@ static int DestroyPhysicsWorldLua(lua_State* L){
         CollisionBody* body = data->world->getCollisionBody(i);
         CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
         if(userdata!=NULL){
-            body->setUserData(NULL);
             userdata->Destroy(L);
             delete userdata;
         }
@@ -53,7 +52,6 @@ static int DestroyPhysicsWorldLua(lua_State* L){
         CollisionBody* body = data->world->getRigidBody(i);
         CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
         if(userdata!=NULL){
-            body->setUserData(NULL);
             userdata->Destroy(L);
             delete userdata;
         }
