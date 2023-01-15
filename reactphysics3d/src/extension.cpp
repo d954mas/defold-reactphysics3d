@@ -43,6 +43,7 @@ static int DestroyPhysicsWorldLua(lua_State* L){
         CollisionBody* body = data->world->getCollisionBody(i);
         CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
         if(userdata!=NULL){
+            body->setUserData(NULL);
             userdata->Destroy(L);
             delete userdata;
         }
@@ -52,6 +53,7 @@ static int DestroyPhysicsWorldLua(lua_State* L){
         CollisionBody* body = data->world->getRigidBody(i);
         CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
         if(userdata!=NULL){
+            body->setUserData(NULL);
             userdata->Destroy(L);
             delete userdata;
         }
@@ -134,7 +136,7 @@ static void LuaInit(lua_State* L){
         lua_pushstring(L, "CONCAVE_SHAPE");
         lua_setfield(L, -2, "CONCAVE_SHAPE");
     lua_setfield(L, -2, "CollisionShapeType");
-    
+
     lua_newtable(L);
         lua_pushstring(L, "STATIC");
         lua_setfield(L, -2, "STATIC");

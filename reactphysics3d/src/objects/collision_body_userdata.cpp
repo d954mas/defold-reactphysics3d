@@ -304,6 +304,7 @@ void CollisionBodyUserdata::Destroy(lua_State *L){
         if(userdata!=NULL){
             userdata->Destroy(L);
             delete userdata;
+            collider->setUserData(NULL);
         }
     }
     body->setUserData(NULL);
