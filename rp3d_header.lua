@@ -117,8 +117,6 @@ function CollisionBody:removeCollider(collider) end
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local Rp3dRigidBody = {}
 
-
-
 -- Compute and set the center of mass, the mass and the local-space inertia
 --tensor of the body using its colliders.
 -- This method uses the shape, mass density and transform of the colliders
@@ -127,6 +125,12 @@ local Rp3dRigidBody = {}
 -- Note that calling this method will overwrite the mass that has been set
 --with the RigidBody::setMass(), the center of mass that has been set with RigidBody::setCenterOfMass() and the local inertia tensor that has been set with RigidBody::setInertiaTensorLocal().
 function Rp3dRigidBody:updateMassPropertiesFromColliders() end
+
+---@param type string rp3d.BodyType
+function Rp3dRigidBody:setType(type) end
+
+---@return string
+function Rp3dRigidBody:getType() end
 
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
@@ -473,6 +477,20 @@ rp3d.CollisionShapeName = {
 rp3d.CollisionShapeType = {
 	SPHERE = "SPHERE", CAPSULE = "CAPSULE",
 	CONVEX_POLYHEDRON = "CONVEX_POLYHEDRON", CONCAVE_SHAPE = "CONCAVE_SHAPE"
+}
+--Enumeration for the type of a body
+-- STATIC : A static body has infinite mass, zero velocity but the position can be
+--          changed manually. A static body does not collide with other static or kinematic bodies.
+-- KINEMATIC : A kinematic body has infinite mass, the velocity can be changed manually and its
+--             position is computed by the physics engine. A kinematic body does not collide with
+--             other static or kinematic bodies.
+-- DYNAMIC : A dynamic body has non-zero mass, non-zero velocity determined by forces and its
+--           position is determined by the physics engine. A dynamic body can collide with other
+--           dynamic, static or kinematic bodies.
+rp3d.BodyType = {
+	STATIC = "STATIC",
+	KINEMATIC = "KINEMATIC",
+	DYNAMIC = "DYNAMIC"
 }
 
 

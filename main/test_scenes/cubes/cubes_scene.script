@@ -21,6 +21,12 @@ local function create_physics(self)
 		local box = Box(true,BOX_SIZE,self.world)
 		table.insert(self.objects,box)
 	end
+
+	--FLOOR
+	self.floor = Box(true, FLOOR_SIZE,self.world);
+	-- The floor must be a static rigid body
+	self.floor.body:setType(rp3d.BodyType.STATIC);
+	table.insert(self.objects,self.floor)
 		-- world:setEventListener(self)
 		--[[// Gravity vector in the physics world
 

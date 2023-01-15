@@ -20,6 +20,9 @@ return function()
 			test_enum("CollisionShapeType", {
 				SPHERE = "SPHERE", CAPSULE = "CAPSULE", CONVEX_POLYHEDRON = "CONVEX_POLYHEDRON", CONCAVE_SHAPE = "CONCAVE_SHAPE"
 			})
+			test_enum("BodyType", {
+				STATIC = "STATIC", KINEMATIC = "KINEMATIC", DYNAMIC = "DYNAMIC"
+			})
 		end)
 	end)
 end

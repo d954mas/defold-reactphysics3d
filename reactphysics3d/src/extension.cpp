@@ -134,6 +134,15 @@ static void LuaInit(lua_State* L){
         lua_pushstring(L, "CONCAVE_SHAPE");
         lua_setfield(L, -2, "CONCAVE_SHAPE");
     lua_setfield(L, -2, "CollisionShapeType");
+    
+    lua_newtable(L);
+        lua_pushstring(L, "STATIC");
+        lua_setfield(L, -2, "STATIC");
+        lua_pushstring(L, "KINEMATIC");
+        lua_setfield(L, -2, "KINEMATIC");
+        lua_pushstring(L, "DYNAMIC");
+        lua_setfield(L, -2, "DYNAMIC");
+    lua_setfield(L, -2, "BodyType");
 
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));

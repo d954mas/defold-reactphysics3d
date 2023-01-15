@@ -32,5 +32,7 @@ public:
 void CollisionBodyUserdataInitMetaTable(lua_State *L);
 CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index);
 void CollisionBodyPush(lua_State *L, CollisionBody *body);
+BodyType BodyTypeStringToEnum(lua_State *L,const char* str);
+const char * BodyTypeEnumToString(BodyType name);
 }
 #endif

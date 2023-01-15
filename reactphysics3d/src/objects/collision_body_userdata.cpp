@@ -188,6 +188,49 @@ static int RigidBodyUpdateMassPropertiesFromColliders(lua_State *L){
     return 0;
 }
 
+static int RigidBodyGetType(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushstring(L,BodyTypeEnumToString(userdata->GetRigidBodyOrError(L)->getType()));
+    return 1;
+}
+
+static int RigidBodySetType(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setType(BodyTypeStringToEnum(L,luaL_checkstring(L,2)));
+    return 0;
+}
+
+const char * BodyTypeEnumToString(BodyType name){
+    switch(name){
+        case BodyType::STATIC:
+            return "STATIC";
+        case BodyType::KINEMATIC:
+            return "KINEMATIC";
+        case BodyType::DYNAMIC:
+            return "DYNAMIC";
+        default:
+            assert(false);
+    }
+}
+
+BodyType BodyTypeStringToEnum(lua_State *L,const char* str){
+    switch (hash_string(str)){
+        case HASH_STATIC:
+            return BodyType::STATIC;
+        case HASH_KINEMATIC:
+          return BodyType::KINEMATIC;
+        case HASH_DYNAMIC:
+            return BodyType::DYNAMIC;
+        default:
+            luaL_error(L, "unknown BodyType:%s", str);
+            break;
+    }
+}
+
 static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -205,6 +248,8 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},
         {"updateMassPropertiesFromColliders",RigidBodyUpdateMassPropertiesFromColliders},
+        {"getType",RigidBodyGetType},
+        {"setType",RigidBodySetType},
         {"__tostring",ToString},
         { 0, 0 }
     };

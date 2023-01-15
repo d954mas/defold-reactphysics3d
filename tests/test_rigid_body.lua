@@ -28,5 +28,18 @@ return function()
 			body:updateMassPropertiesFromColliders()
 		end)
 
+		test("get/set Type", function()
+			assert_equal(body:getType(),rp3d.BodyType.DYNAMIC)
+			body:setType(rp3d.BodyType.KINEMATIC)
+			assert_equal(body:getType(),rp3d.BodyType.KINEMATIC)
+			body:setType(rp3d.BodyType.STATIC)
+			assert_equal(body:getType(),rp3d.BodyType.STATIC)
+			body:setType(rp3d.BodyType.DYNAMIC)
+			assert_equal(body:getType(),rp3d.BodyType.DYNAMIC)
+			local status,error = pcall(body.setType,body,"ssss");
+			assert_false(status)
+			assert_equal(error,"unknown BodyType:ssss")
+		end)
+
 	end)
 end
