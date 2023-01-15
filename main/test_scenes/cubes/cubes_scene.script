@@ -85,6 +85,11 @@ function init(self)
 	})
 end
 
+function update(self,dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt,self.objects)
+end
+
 function final(self)
 	for _,obj in ipairs(self.objects)do
 		obj:dispose()

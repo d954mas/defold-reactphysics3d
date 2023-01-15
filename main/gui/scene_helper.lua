@@ -5,7 +5,9 @@ local M = {}
 M.dirty = false -- if dirty update gui. Scene reload/changed
 
 M.scene_config = {
-	name = ""
+	name = "",
+	---@type Rp3dPhysicsWorld
+	world = nil
 }
 M.rendering = {
 	debug_draw = true,
@@ -22,7 +24,7 @@ M.simulation = {
 	gravity = true,
 	velocity_iterations = 6,
 	position_iterations = 3,
-	step = 1/60
+	step = 1 / 60
 }
 M.profiling = {
 	fps_delay = 1,
@@ -36,14 +38,14 @@ M.profiling = {
 
 function M.set_allow_sleep(enable)
 	M.simulation.sleep = enable
-	if(M.scene_config.world)then
+	if (M.scene_config.world) then
 
 	end
 end
 
 function M.set_enable_gravity(enable)
 	M.simulation.gravity = enable
-	if(M.scene_config.world)then
+	if (M.scene_config.world) then
 
 	end
 end
@@ -87,6 +89,27 @@ function M.update(dt)
 		M.profiling.fps = M.profiling.frames
 		M.profiling.dt_max = 0
 		M.profiling.frames = 0
+	end
+
+
+end
+
+function M.updatePhysics(dt,objects)
+	if (not M.scene_config.world) then return end
+	local w = M.scene_config.world
+	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.CONTACT_POINT,
+			M.rendering.contact_points)
+	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.CONTACT_NORMAL,
+			M.rendering.contact_normals)
+	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.COLLIDER_BROADPHASE_AABB,
+			M.rendering.broad_phase)
+	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.COLLIDER_AABB,
+			M.rendering.colliders_aabb)
+	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.COLLISION_SHAPE,
+			M.rendering.shapes)
+
+	for _,object in ipairs(objects)do
+		object:updateTransform()
 	end
 end
 

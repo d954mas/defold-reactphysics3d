@@ -1,6 +1,5 @@
 local TESTS = require "tests.tests"
 local MONARCH = require "monarch.monarch"
-local SCENE_HELPER = require "main.gui.scene_helper"
 
 function init(self)
     TESTS.run()
@@ -9,6 +8,3 @@ function init(self)
     end)
 end
 
-function update(self, dt)
-    SCENE_HELPER.update(dt)
-end
