@@ -1,6 +1,6 @@
 [bootstrap]
 main_collection = /main/main.collectionc
-render = /rendercam/rendercam.renderc
+render = /scene3d/render/render3d.renderc
 
 [script]
 shared_state = 1
@@ -16,10 +16,10 @@ input_method = HiddenInputField
 
 [project]
 title = ReactPhysics3D
-dependencies#0 = https://github.com/rgrams/rendercam/archive/refs/tags/1.0.3.zip
-dependencies#1 = https://github.com/britzl/monarch/archive/refs/tags/3.4.0.zip
-dependencies#2 = https://github.com/britzl/gooey/archive/refs/tags/9.1.1.zip
-dependencies#3 = https://github.com/britzl/gooey-dirtylarry/archive/main.zip
+dependencies#0 = https://github.com/britzl/monarch/archive/refs/tags/3.4.0.zip
+dependencies#1 = https://github.com/britzl/gooey/archive/refs/tags/9.1.1.zip
+dependencies#2 = https://github.com/britzl/gooey-dirtylarry/archive/main.zip
+dependencies#3 = https://github.com/indiesoftby/defold-scene3d/archive/refs/tags/1.1.0.zip
 
 [native_extension]
 app_manifest = 

@@ -1,10 +1,66 @@
 name: "main"
 instances {
-  id: "camera"
-  prototype: "/rendercam/camera.go"
+  id: "light_directional"
+  prototype: "/scene3d/camera/light_directional.go"
   position {
     x: 0.0
-    y: 200.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: -0.25
+    y: 0.25
+    z: 0.0669873
+    w: 0.9330127
+  }
+  component_properties {
+    id: "light_directional"
+    properties {
+      id: "fog_intensity"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera3d"
+  prototype: "/scene3d/camera/camera3d.go"
+  position {
+    x: -8.0
+    y: 15.0
+    z: 50.0
+  }
+  rotation {
+    x: -0.043619387
+    y: 0.0
+    z: 0.0
+    w: 0.99904823
+  }
+  component_properties {
+    id: "camera3d"
+    properties {
+      id: "far_clip"
+      value: "1000.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "late_update"
+  prototype: "/scene3d/helpers/late_update.go"
+  position {
+    x: 0.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -12,24 +68,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "script"
-    properties {
-      id: "aspectRatio"
-      value: "960.0, 540.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
-    properties {
-      id: "useViewArea"
-      value: "true"
-      type: PROPERTY_TYPE_BOOLEAN
-    }
-    properties {
-      id: "viewArea"
-      value: "960.0, 540.0, 0.0"
-      type: PROPERTY_TYPE_VECTOR3
-    }
   }
   scale3 {
     x: 1.0

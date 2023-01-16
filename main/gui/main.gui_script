@@ -51,7 +51,7 @@ function init(self)
 	}
 	self.gui_functions = {
 		btn_play = function() SCENE_HELPER.simulation.play = true end,
-		btn_step = function()   SCENE_HELPER.simulation.step = true end,
+		btn_step = function()   SCENE_HELPER.simulation.make_step = true end,
 		btn_pause = function()  SCENE_HELPER.simulation.play = false end,
 		btn_restart = function() MONARCH.show(MONARCH.top(), { reload = true }) end,
 		btn_settings_physics = function() settings_set(self,"physics") end,

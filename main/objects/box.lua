@@ -8,8 +8,13 @@ function Box:initialize(rigid_body, size, world)
 	self.rigid_body = rigid_body
 	self.size = vmath.vector3(size)
 	self.world = assert(world)
-	self.shape = rp3d.createBoxShape(self.size)
-
+	self.shape = rp3d.createBoxShape(self.size/2)
+	self.collection = collectionfactory.create("/factory#box", nil, nil, nil, self.size)
+	self.go = {
+		root = msg.url(self.collection["/root"]),
+		mesh = nil
+	}
+	self.go.mesh = msg.url(self.go.root.socket,self.go.root.path,"mesh")
 	local transform_identity = {
 		position = vmath.vector3(),
 		quat = vmath.quat()
@@ -26,15 +31,18 @@ function Box:initialize(rigid_body, size, world)
 end
 
 function Box:update_transform()
-
+	local transform = self.body:getTransform()
+	go.set_position(transform.position, self.go.root)
+	go.set_rotation(transform.quat, self.go.root)
 end
 
 function Box:dispose()
-	if(self.rigid_body)then
+	if (self.rigid_body) then
 		self.world:destroyRigidBody(self.body)
 	else
 		self.world:destroyCollisionBody(self.body)
 	end
+	go.delete(self.go.root, true)
 	rp3d.destroyBoxShape(self.shape)
 end
 

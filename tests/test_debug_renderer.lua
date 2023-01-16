@@ -54,13 +54,13 @@ return function()
 
 
 		test("set/get ContactPointSphereRadius()", function()
-			UTILS.test_method_get_set(w, "ContactPointSphereRadius", {
+			UTILS.test_method_get_set(w:getDebugRenderer(), "ContactPointSphereRadius", {
 				values = { 1, 5, 10 }
 			})
 		end)
 
 		test("set/get ContactNormalLength()", function()
-			UTILS.test_method_get_set(w, "ContactNormalLength", {
+			UTILS.test_method_get_set(w:getDebugRenderer(), "ContactNormalLength", {
 				values = { 1, 5, 10 }
 			})
 		end)

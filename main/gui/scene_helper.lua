@@ -19,7 +19,7 @@ M.rendering = {
 }
 M.simulation = {
 	play = true,
-	step = false,
+	make_step = false,
 	sleep = true,
 	gravity = true,
 	velocity_iterations = 6,
@@ -70,11 +70,12 @@ end
 function M.update(dt)
 	local cfg = M.scene_config
 	if (cfg.world) then
-		if (M.simulation.play or M.simulation.step) then
-			M.simulation.step = false
+		if (M.simulation.play or M.simulation.make_step) then
+			M.simulation.make_step = false
 			local time = socket.gettime()
+			cfg.world:update(M.simulation.step)
 			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
-			-- M.world_step_time = socket.gettime() - time
+			 M.profiling.phys_step = socket.gettime() - time
 			--cfg.world:DebugDraw()
 		end
 
@@ -108,6 +109,7 @@ function M.updatePhysics(dt,objects)
 	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.COLLISION_SHAPE,
 			M.rendering.shapes)
 
+	w:update(M.simulation.step);
 	for _,object in ipairs(objects)do
 		object:update_transform()
 	end

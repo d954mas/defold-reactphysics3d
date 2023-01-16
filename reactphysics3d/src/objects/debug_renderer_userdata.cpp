@@ -81,7 +81,7 @@ static int GetContactNormalLength(lua_State *L){
 }
 
 static int Draw(lua_State *L){
-    DM_LUA_STACK_CHECK(L, 1);
+    DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
     DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
 	return 0;
