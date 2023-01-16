@@ -28,6 +28,48 @@ return function()
 			assert_equal(error,"rp3d::DebugRenderer was destroyed")
 		end)
 
+		test("set/get IsDebugItemDisplayed()", function()
+			local renderer = w:getDebugRenderer();
+			local items = {
+				rp3d.DebugRenderer.DebugItem.COLLIDER_AABB,
+				rp3d.DebugRenderer.DebugItem.COLLIDER_BROADPHASE_AABB,
+				rp3d.DebugRenderer.DebugItem.COLLISION_SHAPE,
+				rp3d.DebugRenderer.DebugItem.CONTACT_NORMAL,
+				rp3d.DebugRenderer.DebugItem.CONTACT_POINT
+			}
+			for _,item in ipairs(items)do
+				assert_false(renderer:getIsDebugItemDisplayed(item))
+
+				renderer:setIsDebugItemDisplayed(item,true)
+				assert_true(renderer:getIsDebugItemDisplayed(item))
+
+				renderer:setIsDebugItemDisplayed(item,false)
+				assert_false(renderer:getIsDebugItemDisplayed(item))
+
+				renderer:setIsDebugItemDisplayed(item,true)
+				assert_true(renderer:getIsDebugItemDisplayed(item))
+			end
+
+		end)
+
+
+		test("set/get ContactPointSphereRadius()", function()
+			UTILS.test_method_get_set(w, "ContactPointSphereRadius", {
+				values = { 1, 5, 10 }
+			})
+		end)
+
+		test("set/get ContactNormalLength()", function()
+			UTILS.test_method_get_set(w, "ContactNormalLength", {
+				values = { 1, 5, 10 }
+			})
+		end)
+
+		test("create()", function()
+			local renderer = w:getDebugRenderer()
+			renderer:draw()
+		end)
+
 		test("toString()", function()
 			local renderer = w:getDebugRenderer();
 			assert_equal(tostring(renderer):sub(1,19), "rp3d::DebugRenderer")

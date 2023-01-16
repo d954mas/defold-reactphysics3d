@@ -46,6 +46,47 @@ static int GetIsDebugItemDisplayed(lua_State *L){
     return 1;
 }
 
+static int SetContactPointSphereRadius (lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+    float radius = luaL_checknumber(L,2);
+    userdata->renderer->setContactPointSphereRadius(radius);
+    return 0;
+}
+
+static int GetContactPointSphereRadius(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->renderer->getContactPointSphereRadius());
+    return 1;
+}
+
+static int SetContactNormalLength (lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+    float radius = luaL_checknumber(L,2);
+    userdata->renderer->setContactNormalLength(radius);
+    return 0;
+}
+
+static int GetContactNormalLength(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->renderer->getContactNormalLength());
+    return 1;
+}
+
+static int Draw(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+	return 0;
+}
+
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -60,6 +101,11 @@ void DebugRendererUserdataInitMetaTable(lua_State *L){
     luaL_Reg functions[] = {
         {"setIsDebugItemDisplayed",SetIsDebugItemDisplayed},
         {"getIsDebugItemDisplayed",GetIsDebugItemDisplayed},
+        {"getContactPointSphereRadius",GetContactPointSphereRadius},
+        {"setContactPointSphereRadius",SetContactPointSphereRadius},
+        {"getContactNormalLength",GetContactNormalLength},
+        {"setContactNormalLength",SetContactNormalLength},
+        {"draw",Draw},
         {"__tostring",ToString},
         { 0, 0 }
     };

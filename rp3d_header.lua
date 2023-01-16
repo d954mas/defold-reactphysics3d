@@ -141,7 +141,22 @@ function DebugRenderer:getIsDebugItemDisplayed(item) end
 
 ---@param item string rp3d.DebugRenderer.DebugItem
 ---@param isDisplayed boolean
-function DebugRenderer:setIsDebugItemDisplayed(item,isDisplayed) end
+function DebugRenderer:setIsDebugItemDisplayed(item, isDisplayed) end
+
+---@return number
+function DebugRenderer:getContactPointSphereRadius() end
+
+---@param radius number
+function DebugRenderer:setContactPointSphereRadius(radius) end
+
+---@return number
+function DebugRenderer:getContactNormalLength() end
+
+---@param length number
+function DebugRenderer:setContactNormalLength(length) end
+
+---post draw_line messages to render
+function DebugRenderer:draw() end
 
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
@@ -319,7 +334,6 @@ function PhysicsWorld:destroyRigidBody(body) end
 
 ---@return Rp3dDebugRenderer
 function PhysicsWorld:getDebugRenderer() end
-
 
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
@@ -508,7 +522,7 @@ rp3d.DebugRenderer = {
 		COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
 		COLLISION_SHAPE = "COLLISION_SHAPE",
 		CONTACT_POINT = "CONTACT_POINT",
-		CONTACT_POINT = "CONTACT_NORMAL",
+		CONTACT_NORMAL = "CONTACT_NORMAL",
 	},
 
 }

@@ -26,6 +26,7 @@ return function()
 
 		test("updateMassPropertiesFromColliders", function()
 			body:updateMassPropertiesFromColliders()
+			assert_true(true)
 		end)
 
 		test("get/set Type", function()

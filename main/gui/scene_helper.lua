@@ -111,6 +111,8 @@ function M.updatePhysics(dt,objects)
 	for _,object in ipairs(objects)do
 		object:update_transform()
 	end
+
+	w:getDebugRenderer():draw()
 end
 
 function M.reset()

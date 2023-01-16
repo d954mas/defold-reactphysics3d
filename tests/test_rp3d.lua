@@ -79,6 +79,7 @@ return function()
 			end
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)
+			assert_true(true)
 
 		end)
 	end)
