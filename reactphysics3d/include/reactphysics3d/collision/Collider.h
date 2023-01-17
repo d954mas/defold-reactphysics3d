@@ -60,7 +60,7 @@ class Collider {
         CollisionBody* mBody;
 
         /// Pointer to user data
-        void* mUserData;
+        void* mUserData=NULL;
 
 #ifdef IS_RP3D_PROFILING_ENABLED
 

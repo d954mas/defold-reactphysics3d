@@ -17,6 +17,7 @@ ColliderUserdata::ColliderUserdata(Collider* collider): BaseUserData(USERDATA_TY
     this->collider = collider;
     this->obj = collider;
     this->collider->setUserData(this);
+    user_data_ref = LUA_REFNIL;
 }
 
 ColliderUserdata::~ColliderUserdata() {

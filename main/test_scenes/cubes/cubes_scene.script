@@ -1,5 +1,5 @@
 local SCENE_HELPER = require "main.gui.scene_helper"
-
+local MONARCH = require "monarch.monarch"
 local Box = require "main.objects.box"
 
 local SCENE_RADIUS = 30              -- Radius of the scene in meters
@@ -83,6 +83,9 @@ function init(self)
 		name = "cubes",
 		world = self.world
 	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
 end
 
 function update(self,dt)
