@@ -125,6 +125,58 @@ return function()
 
 		end)
 
+		test("getCollider()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for _,b in ipairs(bodies)do
+				local c = b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+				local c2 = b:getCollider(0)
+				assert_equal(c,c2)
+				local status,error = pcall(b.getCollider,b,1)
+				assert_false(status)
+				assert_equal(error,"bad idx:1. Size:1")
+			end
+
+		end)
+
+		test("testPointInside()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for _,b in ipairs(bodies)do
+				assert_false(b:testPointInside(vmath.vector3(0)))
+				b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+				assert_true(b:testPointInside(vmath.vector3(0)))
+				assert_true(b:testPointInside(vmath.vector3(1.99)))
+				assert_false(b:testPointInside(vmath.vector3(2.1)))
+			end
+
+		end)
+
+		test("testRaycast()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(2))
+			for _,b in ipairs(bodies)do
+				local c = b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+				local ray_miss = {point1 = vmath.vector3(-100,0,0),
+								  point2 = vmath.vector3(-100,100,0),
+								  maxFraction = 1}
+				local ray1 = {point1 = vmath.vector3(-100,0,0),
+							  point2 = vmath.vector3(-1.99,0,0),
+							  maxFraction = 1}
+
+				assert_nil(b:raycast(ray_miss))
+				local info = b:raycast(ray1)
+				assert_not_nil(info)
+				assert_equal_v3(info.worldNormal,vmath.vector3(-1,0,0))
+				assert_greater_than(info.hitFraction,0.99)
+				assert_less_than(info.hitFraction,1)
+				assert_equal(info.meshSubpart,-1)
+				assert_equal(info.triangleIndex,-1)
+				assert_equal(info.body,b)
+				assert_equal(c,c)
+				ray1.maxFraction = 0.9
+				assert_nil(b:raycast(ray1))
+			end
+
+		end)
+
 
 		test("toString()", function()
 			assert_equal(tostring(bodies[1]):sub(1,19),"rp3d::CollisionBody")

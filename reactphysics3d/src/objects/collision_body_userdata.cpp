@@ -167,6 +167,32 @@ static int RemoveCollider(lua_State *L){
 	return 0;
 }
 
+static int TestPointInside(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmPoint = dmScript::CheckVector3(L, 2);
+    Vector3 point(dmPoint->getX(),dmPoint->getY(),dmPoint->getZ());
+    lua_pushboolean(L,body->body->testPointInside(point));
+	return 1;
+}
+
+static int Raycast(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    Ray ray = CheckRay(L,2);
+    RaycastInfo info;
+    bool result =  body->body->raycast(ray,info);
+
+    if(result){
+         pushRp3dRaycastInfo(L,info);
+    }else{
+        lua_pushnil(L);
+    }
+    return 1;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -244,6 +270,9 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
         {"addCollider",AddCollider},
+        {"removeCollider",RemoveCollider},
+        {"testPointInside",TestPointInside},
+        {"raycast",Raycast},
         {"getCollider",	GetCollider},
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},
@@ -276,6 +305,8 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
         {"setTransform",SetTransform},
         {"addCollider",AddCollider},
         {"removeCollider ",RemoveCollider},
+        {"testPointInside",TestPointInside},
+        {"raycast",Raycast},
         {"getCollider",	GetCollider},
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},

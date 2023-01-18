@@ -32,12 +32,25 @@ local WorldSettings = {
 	cosAngleSimilarContactManifold = 0.95,
 }
 
+--The ray goes from point1 to point1 + maxFraction * (point2 - point1).
+--The points are specified in world-space coordinates.
 ---@class Rp3dRay
 local Rp3dRay = {
 	point1 = vmath.vector3(),
 	point2 = vmath.vector3(),
 	maxFraction = 0 --[0-1] if nil use 1.
 }
+
+---@class Rp3dRaycastInfo
+---@field worldPoint vector3 Hit point in world-space coordinates.
+---@field worldNormal vector3 Surface normal at hit point in world-space coordinates.
+---@field hitFraction number Fraction distance of the hit point between point1 and point2 of the ray The hit point "p" is such that p = point1 + hitFraction * (point2 - point1)
+---@field meshSubpart number Mesh subpart index that has been hit (only used for triangles mesh and -1 otherwise)
+---@field triangleIndex number Hit triangle index (only used for triangles mesh and -1 otherwise)
+---@field body Rp3dCollisionBody
+---@field collider Rp3dCollider
+local Rp3dRaycastInfo = {}
+
 
 ---@class Rp3dTransform
 local Rp3dTransform = {
@@ -113,6 +126,18 @@ function CollisionBody:getNbColliders() end
 
 ---@param collider Rp3dCollider
 function CollisionBody:removeCollider(collider) end
+
+--Return true if a point is inside the collision body.
+---@param worldPoint vector3 The point to test (in world-space coordinates)
+---@return boolean
+function CollisionBody:testPointInside(worldPoint) end
+
+
+--Raycast method with feedback information.
+--The method returns the closest hit among all the collision shapes of the body.
+---@param ray Rp3dRay
+---@return Rp3dRaycastInfo|nil nil if no hit point
+function CollisionBody:raycast(ray) end
 
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local RigidBody = {}

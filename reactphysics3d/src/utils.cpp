@@ -3,6 +3,8 @@
 
 #include "utils.h"
 #include "static_hash.h"
+#include "objects/collider_userdata.h"
+#include "objects/collision_body_userdata.h"
 
 namespace rp3dDefold {
 	void check_arg_count(lua_State *L, int count_exact) {
@@ -95,6 +97,38 @@ namespace rp3dDefold {
             lua_setfield(L, -2, "position");
             dmScript::PushQuat(L,dmQuat);
             lua_setfield(L, -2, "quat");
+
+    }
+
+    void pushRp3dRaycastInfo(lua_State *L, reactphysics3d::RaycastInfo &info){
+        dmVMath::Vector3 dmWorldPoint;
+        dmVMath::Vector3 dmWorldNormal;
+
+        dmWorldPoint.setX(info.worldPoint.x);
+        dmWorldPoint.setY(info.worldPoint.y);
+        dmWorldPoint.setZ(info.worldPoint.z);
+
+        dmWorldNormal.setX(info.worldNormal.x);
+        dmWorldNormal.setY(info.worldNormal.y);
+        dmWorldNormal.setZ(info.worldNormal.z);
+
+
+        lua_newtable(L);
+            dmScript::PushVector3(L, dmWorldPoint);
+            lua_setfield(L, -2, "worldPoint");
+            dmScript::PushVector3(L, dmWorldNormal);
+            lua_setfield(L, -2, "worldNormal");
+            lua_pushnumber(L,info.hitFraction);
+            lua_setfield(L, -2, "hitFraction");
+            lua_pushnumber(L,info.meshSubpart);
+            lua_setfield(L, -2, "meshSubpart");
+            lua_pushnumber(L,info.triangleIndex);
+            lua_setfield(L, -2, "triangleIndex");
+            CollisionBodyPush(L,info.body);
+            lua_setfield(L, -2, "body");
+            ColliderPush(L,info.collider);
+            lua_setfield(L, -2, "collider");
+
 
     }
 
