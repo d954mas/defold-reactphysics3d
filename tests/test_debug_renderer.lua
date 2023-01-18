@@ -25,7 +25,7 @@ return function()
 			rp3d.destroyPhysicsWorld(world)
 			local status, error = pcall(renderer.setIsDebugItemDisplayed,renderer,rp3d.DebugRenderer.DebugItem.COLLIDER_AABB,true)
 			assert_false(status)
-			assert_equal(error,"rp3d::DebugRenderer was destroyed")
+			UTILS.test_error(error,"rp3d::DebugRenderer was destroyed")
 		end)
 
 		test("set/get IsDebugItemDisplayed()", function()

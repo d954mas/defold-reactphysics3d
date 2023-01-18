@@ -21,7 +21,7 @@ return function()
 			local b = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
 			local status, error = pcall(body.updateMassPropertiesFromColliders,b)
 			assert_false(status)
-			assert_equal(error,"Need RigidBody.Get CollisionBody")
+			UTILS.test_error(error,"Need RigidBody.Get CollisionBody")
 		end)
 
 		test("updateMassPropertiesFromColliders", function()
@@ -39,7 +39,7 @@ return function()
 			assert_equal(body:getType(),rp3d.BodyType.DYNAMIC)
 			local status,error = pcall(body.setType,body,"ssss");
 			assert_false(status)
-			assert_equal(error,"unknown BodyType:ssss")
+			UTILS.test_error(error,"unknown BodyType:ssss")
 		end)
 
 	end)

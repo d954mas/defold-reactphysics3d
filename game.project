@@ -20,6 +20,7 @@ dependencies#0 = https://github.com/britzl/monarch/archive/refs/tags/3.4.0.zip
 dependencies#1 = https://github.com/britzl/gooey/archive/refs/tags/9.1.1.zip
 dependencies#2 = https://github.com/britzl/gooey-dirtylarry/archive/main.zip
 dependencies#3 = https://github.com/indiesoftby/defold-scene3d/archive/refs/tags/1.1.0.zip
+dependencies#4 = https://github.com/indiesoftby/defold-pointer-lock/archive/refs/tags/2.0.0.zip
 
 [native_extension]
 app_manifest = 
@@ -29,8 +30,11 @@ include_dirs =
 
 [html5]
 htmlfile = /builtins/manifests/web/engine_template.html
-scale_mode = fit
+scale_mode = stretch
 
 [graphics]
 verify_graphics_calls = 0
+
+[physics]
+type = 3D
 

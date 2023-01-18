@@ -16,7 +16,7 @@ return function()
 			rp3d.destroyBoxShape(shape)
 			local status, error = pcall(rp3d.destroyBoxShape,shape)
 			assert_false(status)
-			assert_equal(error,"rp3d::CollisionShape was destroyed")
+			UTILS.test_error(error,"rp3d::CollisionShape was destroyed")
 		end)
 
 

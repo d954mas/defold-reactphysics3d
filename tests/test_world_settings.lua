@@ -92,7 +92,7 @@ return function()
             }
             local status,error = pcall(rp3d.createPhysicsWorld,settings)
             assert_false(status)
-            assert_equal(error,"unknown key:world_name")
+            UTILS.test_error(error,"unknown key:world_name")
         end)
 
     end)

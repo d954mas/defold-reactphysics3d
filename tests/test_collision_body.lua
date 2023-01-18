@@ -29,11 +29,11 @@ return function()
 
 			local status, error = pcall(collision_body.isRigidBody,collision_body)
 			assert_false(status)
-			assert_equal(error,"rp3d::CollisionBody was destroyed")
+			UTILS.test_error(error,"rp3d::CollisionBody was destroyed")
 
 			status, error = pcall(rigid_body.isRigidBody,rigid_body)
 			assert_false(status)
-			assert_equal(error,"rp3d::CollisionBody was destroyed")
+			UTILS.test_error(error,"rp3d::CollisionBody was destroyed")
 		end)
 
 		test("getEntityId()", function()
@@ -71,7 +71,7 @@ return function()
 				assert_nil(body:getUserData())
 				local status,error = pcall(body.setUserData,body,"data")
 				assert_false(status)
-				assert_equal(error,"userdata can be only table or nil")
+				UTILS.test_error(error,"userdata can be only table or nil")
 
 			end
 		end)
@@ -89,7 +89,7 @@ return function()
 
 				local status,error = pcall(body.setTransform,body,{})
 				assert_false(status)
-				assert_equal(error,"transform need position")
+				UTILS.test_error(error,"transform need position")
 
 			end
 		end)
@@ -120,7 +120,7 @@ return function()
 				b:removeCollider(c)
 				local status, error = pcall(c.getEntityId,c)
 				assert_false(status)
-				assert_equal(error,"rp3d::Collider was destroyed")
+				UTILS.test_error(error,"rp3d::Collider was destroyed")
 			end
 
 		end)
@@ -133,7 +133,7 @@ return function()
 				assert_equal(c,c2)
 				local status,error = pcall(b.getCollider,b,1)
 				assert_false(status)
-				assert_equal(error,"bad idx:1. Size:1")
+				UTILS.test_error(error,"bad idx:1. Size:1")
 			end
 
 		end)

@@ -177,11 +177,11 @@ return function()
 			local aabb = box:computeAABB({position = pos, quat = quat})
 			local status, error = pcall(aabb.testCollisionTriangleAABB, aabb, 2)
 			assert_false(status)
-			assert_equal(error, "variable should be table")
+			UTILS.test_error(error, "variable should be table")
 
 			status, error = pcall(aabb.testCollisionTriangleAABB, aabb, { vmath.vector3() })
 			assert_false(status)
-			assert_equal(error, "Need 3 points. Get 1")
+			UTILS.test_error(error, "Need 3 points. Get 1")
 
 			assert_true(aabb:testCollisionTriangleAABB({ vmath.vector3(0, 0, 0), vmath.vector3(0.5, 0, 0), vmath.vector3(0.5, 0.5, 0) }))
 			assert_false(aabb:testCollisionTriangleAABB({ vmath.vector3(-1, -2, -3), vmath.vector3(-2, -2, -3), vmath.vector3(-1, -2, -2) }))
@@ -243,19 +243,19 @@ return function()
 
 			local status, error = pcall(aabb.raycast,aabb,2)
 			assert_false(status)
-			assert_equal(error,"ray should be table")
+			UTILS.test_error(error,"ray should be table")
 
 			status, error = pcall(aabb.raycast,aabb,{
 
 			})
 			assert_false(status)
-			assert_equal(error,"ray need point1")
+			UTILS.test_error(error,"ray need point1")
 
 			status, error = pcall(aabb.raycast,aabb,{
 				point1 = vmath.vector3()
 			})
 			assert_false(status)
-			assert_equal(error,"ray need point2")
+			UTILS.test_error(error,"ray need point2")
 
 			rp3d.destroyBoxShape(box)
 		end)
