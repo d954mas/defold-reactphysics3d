@@ -308,6 +308,20 @@ function RigidBody:applyLocalForceAtWorldPosition(force,point) end
 ---@param point vector3
 function RigidBody:applyWorldForceAtWorldPosition(force,point) end
 
+--Manually apply an external torque to the body (in local-space).
+---@param torque vector3
+function RigidBody:applyLocalTorque(torque) end
+
+--Manually apply an external torque to the body (in world-space).
+---@param torque vector3
+function RigidBody:applyWorldTorque(torque) end
+
+--Reset the manually applied force to zero.
+function RigidBody:resetForce() end
+
+--Reset the manually applied torque to zero.
+function RigidBody:resetTorque() end
+
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 

@@ -608,6 +608,44 @@ static int RigidBodyGetAngularLockAxisFactor(lua_State *L){
     return 1;
 }
 
+static int RigidBodyApplyWorldTorque(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->applyWorldTorque(v3);
+    return 0;
+}
+
+static int RigidBodyApplyLocalTorque(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->applyLocalTorque(v3);
+    return 0;
+}
+
+static int RigidBodyResetForce(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->resetForce();
+    return 0;
+}
+
+static int RigidBodyResetTorque(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->resetTorque();
+    return 0;
+}
+
 
 
 const char * BodyTypeEnumToString(BodyType name){
@@ -696,6 +734,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"applyWorldForceAtLocalPosition",RigidBodyApplyWorldForceAtLocalPosition },
         {"applyLocalForceAtWorldPosition",RigidBodyApplyLocalForceAtWorldPosition },
         {"applyWorldForceAtWorldPosition",RigidBodyApplyWorldForceAtWorldPosition },
+        {"applyWorldTorque",RigidBodyApplyWorldTorque },
+        {"applyLocalTorque",RigidBodyApplyLocalTorque },
+        {"resetForce",RigidBodyResetForce },
+        {"resetTorque",RigidBodyResetTorque},
         {"__tostring",ToString},
         { 0, 0 }
     };

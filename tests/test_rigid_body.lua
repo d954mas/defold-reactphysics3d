@@ -154,5 +154,26 @@ return function()
 			assert(true)
 		end)
 
+		test("applyLocalTorque()", function()
+			body:applyLocalTorque(vmath.vector3(1))
+			assert(true)
+		end)
+
+		test("applyWorldTorque()", function()
+			body:applyWorldTorque(vmath.vector3(1))
+			assert(true)
+		end)
+
+		test("resetForce()", function()
+			body:resetForce()
+			assert(true)
+		end)
+
+		test("resetTorque()", function()
+			body:resetTorque()
+			assert(true)
+		end)
+
+
 	end)
 end
