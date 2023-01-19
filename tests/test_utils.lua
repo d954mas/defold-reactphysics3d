@@ -44,7 +44,7 @@ function M.test_method_get_set(object, key, config)
     local get_f, set_f
     if(config.getter_full)then
         get_f = object[config.getter_full]
-        assert(get_f) end
+        assert(get_f,"no getter:" .. config.getter_full) end
     if(config.setter_full)then
         set_f = object[config.setter_full]
         assert(set_f) end

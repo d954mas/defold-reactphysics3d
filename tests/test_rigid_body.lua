@@ -82,5 +82,22 @@ return function()
 					})
 		end)
 
+		test("set/get IsGravityEnabled()", function()
+			UTILS.test_method_get_set(body, "GravityEnabled",
+					{  getter_full = "isGravityEnabled",
+					   setter_full = "enableGravity",
+					  values = { false,true,false }
+					})
+		end)
+
+		test("set/get IsSleeping()", function()
+			body:isSleeping()
+			UTILS.test_method_get_set(body, "IsSleeping",
+					{  getter_full = "isSleeping",
+					   setter_full = "setIsSleeping",
+					   values = { false,true,false }
+					})
+		end)
+
 	end)
 end

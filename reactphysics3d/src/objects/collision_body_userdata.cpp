@@ -423,6 +423,38 @@ static int RigidBodyGetLocalCenterOfMass(lua_State *L){
     return 1;
 }
 
+static int RigidBodyIsGravityEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushboolean(L,userdata->GetRigidBodyOrError(L)->isGravityEnabled());
+	return 1;
+}
+
+static int RigidBodyEnableGravity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->enableGravity(lua_toboolean(L,2));
+	return 0;
+}
+
+static int RigidBodyIsSleeping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushboolean(L,userdata->GetRigidBodyOrError(L)->isSleeping());
+	return 1;
+}
+
+static int RigidBodySetIsSleeping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setIsSleeping(lua_toboolean(L,2));
+	return 0;
+}
+
 
 
 const char * BodyTypeEnumToString(BodyType name){
@@ -493,6 +525,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"setLocalInertiaTensor",RigidBodySetLocalInertiaTensor},
         {"getLocalCenterOfMass",RigidBodyGetLocalCenterOfMass},
         {"setLocalCenterOfMass",RigidBodySetLocalCenterOfMass},
+        {"isGravityEnabled",RigidBodyIsGravityEnabled },
+        {"enableGravity",RigidBodyEnableGravity},
+        {"setIsSleeping",RigidBodySetIsSleeping },
+        {"isSleeping",RigidBodyIsSleeping },
         {"__tostring",ToString},
         { 0, 0 }
     };
