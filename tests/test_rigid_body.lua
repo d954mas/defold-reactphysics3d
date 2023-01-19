@@ -99,5 +99,19 @@ return function()
 					})
 		end)
 
+		test("set/get LinearDamping()", function()
+			UTILS.test_method_get_set(body, "LinearDamping",
+					{
+					  values = { 0,0.5,2,5 }
+					})
+		end)
+
+		test("set/get AngularDamping()", function()
+			UTILS.test_method_get_set(body, "AngularDamping",
+					{
+						values = { 0,0.5,2,5 }
+					})
+		end)
+
 	end)
 end

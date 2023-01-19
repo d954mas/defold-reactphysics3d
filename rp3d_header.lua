@@ -228,6 +228,40 @@ function RigidBody:getLocalCenterOfMass() end
 ---@param centerOfMass vector3
 function RigidBody:setLocalCenterOfMass(centerOfMass) end
 
+--Return true if the gravity needs to be applied to this rigid body.
+---@return boolean
+function RigidBody:isGravityEnabled() end
+
+--Set the variable to know if the gravity is applied to this rigid body.
+---@param isEnabled boolean
+function RigidBody:enableGravity(isEnabled) end
+
+--Set the variable to know whether or not the body is sleeping.
+---@param isSleeping boolean
+function RigidBody:setIsSleeping(isSleeping) end
+
+--Return whether or not the body is sleeping.
+---@return boolean
+function RigidBody:isSleeping() end
+
+--Return the linear velocity damping factor.
+---@return number
+function RigidBody:getLinearDamping() end
+
+--Set the linear damping factor.
+---@param linearDamping number
+function RigidBody:setLinearDamping(linearDamping) end
+
+--Return the angular velocity damping factor.
+---@return number
+function RigidBody:getAngularDamping() end
+
+--Set the angular damping factor.
+---@param angularDamping number
+function RigidBody:setAngularDamping(angularDamping) end
+
+
+
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 

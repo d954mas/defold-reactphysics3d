@@ -455,6 +455,38 @@ static int RigidBodySetIsSleeping(lua_State *L){
 	return 0;
 }
 
+static int RigidBodyGetLinearDamping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->GetRigidBodyOrError(L)->getLinearDamping());
+    return 1;
+}
+
+static int RigidBodySetLinearDamping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setLinearDamping(luaL_checknumber(L,2));
+    return 0;
+}
+
+static int RigidBodyGetAngularDamping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->GetRigidBodyOrError(L)->getAngularDamping());
+    return 1;
+}
+
+static int RigidBodySetAngularDamping(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setAngularDamping(luaL_checknumber(L,2));
+    return 0;
+}
+
 
 
 const char * BodyTypeEnumToString(BodyType name){
@@ -529,6 +561,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"enableGravity",RigidBodyEnableGravity},
         {"setIsSleeping",RigidBodySetIsSleeping },
         {"isSleeping",RigidBodyIsSleeping },
+        {"getLinearDamping",RigidBodyGetLinearDamping },
+        {"setLinearDamping",RigidBodySetLinearDamping },
+        {"getAngularDamping",RigidBodyGetAngularDamping },
+        {"setAngularDamping",RigidBodySetAngularDamping },
         {"__tostring",ToString},
         { 0, 0 }
     };
