@@ -34,7 +34,14 @@ scale_mode = stretch
 
 [graphics]
 verify_graphics_calls = 0
+max_draw_calls = 1024
 
 [physics]
 type = 3D
+
+[mesh]
+max_count = 1024
+
+[collection]
+max_instances = 1024
 

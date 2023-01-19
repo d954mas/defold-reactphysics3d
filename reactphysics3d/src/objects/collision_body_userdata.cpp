@@ -2,6 +2,7 @@
 #include "static_hash.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/collider_userdata.h"
+#include "objects/aabb.h"
 #include "utils.h"
 
 #define META_NAME "rp3d::CollisionBody"
@@ -176,6 +177,74 @@ static int TestPointInside(lua_State *L){
     lua_pushboolean(L,body->body->testPointInside(point));
 	return 1;
 }
+static int TestAABBOverlap(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    AABBLua *aabb = AABBCheck(L,2);
+    lua_pushboolean(L,body->body->testAABBOverlap(aabb->aabb));
+	return 1;
+}
+
+static int GetAABB(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    AABBPush(L,body->body->getAABB());
+	return 1;
+}
+
+static int GetWorldPoint(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    Vector3 result = body->body->getWorldPoint(v3);
+
+    dmVMath::Vector3 dmResult(result.x,result.y,result.z);
+    dmScript::PushVector3(L, dmResult);
+	return 1;
+}
+
+static int GetLocalPoint(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    Vector3 result = body->body->getLocalPoint(v3);
+
+    dmVMath::Vector3 dmResult(result.x,result.y,result.z);
+    dmScript::PushVector3(L, dmResult);
+	return 1;
+}
+
+static int GetWorldVector(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    Vector3 result = body->body->getWorldVector(v3);
+
+    dmVMath::Vector3 dmResult(result.x,result.y,result.z);
+    dmScript::PushVector3(L, dmResult);
+	return 1;
+}
+
+static int GetLocalVector(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *body = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    Vector3 result = body->body->getLocalVector(v3);
+
+    dmVMath::Vector3 dmResult(result.x,result.y,result.z);
+    dmScript::PushVector3(L, dmResult);
+	return 1;
+}
 
 static int Raycast(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -206,6 +275,30 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
+static int RigidBodyUpdateLocalCenterOfMassFromColliders(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->updateLocalCenterOfMassFromColliders();
+    return 0;
+}
+
+static int RigidBodyUpdateLocalInertiaTensorFromColliders(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->updateLocalInertiaTensorFromColliders();
+    return 0;
+}
+
+static int RigidBodyUpdateMassFromColliders(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->updateMassFromColliders();
+    return 0;
+}
+
 static int RigidBodyUpdateMassPropertiesFromColliders(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
@@ -229,6 +322,108 @@ static int RigidBodySetType(lua_State *L){
     userdata->GetRigidBodyOrError(L)->setType(BodyTypeStringToEnum(L,luaL_checkstring(L,2)));
     return 0;
 }
+
+static int RigidBodyGetMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->GetRigidBodyOrError(L)->getMass());
+    return 1;
+}
+
+static int RigidBodySetMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setMass(luaL_checknumber(L,2));
+    return 0;
+}
+
+static int RigidBodySetLinearVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setLinearVelocity(v3);
+    return 0;
+}
+
+static int RigidBodyGetLinearVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getLinearVelocity();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodySetAngularVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setAngularVelocity(v3);
+    return 0;
+}
+
+static int RigidBodyGetAngularVelocity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getAngularVelocity();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodySetLocalInertiaTensor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setLocalInertiaTensor(v3);
+    return 0;
+}
+
+static int RigidBodyGetLocalInertiaTensor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getLocalInertiaTensor();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodySetLocalCenterOfMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setLocalCenterOfMass(v3);
+    return 0;
+}
+
+static int RigidBodyGetLocalCenterOfMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getLocalCenterOfMass();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+
 
 const char * BodyTypeEnumToString(BodyType name){
     switch(name){
@@ -276,9 +471,28 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"getCollider",	GetCollider},
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},
+        {"testAABBOverlap",TestAABBOverlap},
+        {"getAABB",GetAABB},
+        {"getWorldPoint",GetWorldPoint},
+        {"getWorldVector",GetWorldVector},
+        {"getLocalPoint",GetLocalPoint},
+        {"getLocalVector",GetLocalVector},
+        {"updateLocalCenterOfMassFromColliders",RigidBodyUpdateLocalCenterOfMassFromColliders},
+        {"updateLocalInertiaTensorFromColliders",RigidBodyUpdateLocalInertiaTensorFromColliders},
+        {"updateMassFromColliders",RigidBodyUpdateMassFromColliders},
         {"updateMassPropertiesFromColliders",RigidBodyUpdateMassPropertiesFromColliders},
         {"getType",RigidBodyGetType},
         {"setType",RigidBodySetType},
+        {"getMass",RigidBodyGetMass},
+        {"setMass",RigidBodySetMass},
+        {"setLinearVelocity",RigidBodySetLinearVelocity},
+        {"getLinearVelocity",RigidBodyGetLinearVelocity},
+        {"getAngularVelocity",RigidBodyGetAngularVelocity},
+        {"setAngularVelocity",RigidBodySetAngularVelocity},
+        {"getLocalInertiaTensor",RigidBodyGetLocalInertiaTensor},
+        {"setLocalInertiaTensor",RigidBodySetLocalInertiaTensor},
+        {"getLocalCenterOfMass",RigidBodyGetLocalCenterOfMass},
+        {"setLocalCenterOfMass",RigidBodySetLocalCenterOfMass},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -310,6 +524,12 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
         {"getCollider",	GetCollider},
         {"getNbColliders",GetNbColliders},
         {"removeCollider",RemoveCollider},
+        {"testAABBOverlap",TestAABBOverlap},
+        {"getAABB",GetAABB},
+        {"getWorldPoint",GetWorldPoint},
+        {"getWorldVector",GetWorldVector},
+        {"getLocalPoint",GetLocalPoint},
+        {"getLocalVector",GetLocalVector},
         {"__tostring",ToString},
         { 0, 0 }
     };

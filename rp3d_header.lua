@@ -51,7 +51,6 @@ local Rp3dRay = {
 ---@field collider Rp3dCollider
 local Rp3dRaycastInfo = {}
 
-
 ---@class Rp3dTransform
 local Rp3dTransform = {
 	position = vmath.vector3(),
@@ -139,16 +138,48 @@ function CollisionBody:testPointInside(worldPoint) end
 ---@return Rp3dRaycastInfo|nil nil if no hit point
 function CollisionBody:raycast(ray) end
 
+--Test if the collision body overlaps with a given AABB
+---@param aabb Rp3dAABB
+---@return boolean
+function CollisionBody:testAABBOverlap(aabb) end
+
+--Compute and return the AABB of the body by merging all colliders AABBs.
+---@return Rp3dAABB
+function CollisionBody:getAABB() end
+
+--Return the world-space coordinates of a point given the local-space coordinates of the body.
+---@param localPoint vector3
+---@return vector3
+function CollisionBody:getWorldPoint(localPoint) end
+
+--Return the world-space vector of a vector given in local-space coordinates of the body.
+---@param localVector vector3
+---@return vector3
+function CollisionBody:getWorldVector(localVector) end
+
+--Return the body local-space coordinates of a point given in the world-space coordinates.
+---@param worldPoint vector3
+---@return vector3
+function CollisionBody:getLocalPoint(worldPoint) end
+
+--Return the body local-space coordinates of a vector given in the world-space coordinates.
+---@param worldVector vector3
+---@return vector3
+function CollisionBody:getLocalVector(worldVector) end
+
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local RigidBody = {}
 
--- Compute and set the center of mass, the mass and the local-space inertia
---tensor of the body using its colliders.
--- This method uses the shape, mass density and transform of the colliders
---of the body to set the total mass, the center of mass and the local inertia
---tensor of the body.
--- Note that calling this method will overwrite the mass that has been set
---with the RigidBody::setMass(), the center of mass that has been set with RigidBody::setCenterOfMass() and the local inertia tensor that has been set with RigidBody::setInertiaTensorLocal().
+--Compute and set the local-space center of mass of the body using its colliders.
+function RigidBody:updateLocalCenterOfMassFromColliders() end
+
+--Compute and set the local-space inertia tensor of the body using its colliders.
+function RigidBody:updateLocalInertiaTensorFromColliders() end
+
+--Compute and set the mass of the body using its colliders.
+function RigidBody:updateMassFromColliders() end
+
+--Compute and set the center of mass, the mass and the local-space inertia tensor of the body using its colliders.
 function RigidBody:updateMassPropertiesFromColliders() end
 
 ---@param type string rp3d.BodyType
@@ -156,6 +187,46 @@ function RigidBody:setType(type) end
 
 ---@return string
 function RigidBody:getType() end
+
+--Return the mass of the body.
+---@return number
+function RigidBody:getMass() end
+
+--Set the mass of the rigid body.
+---@param mass number
+function RigidBody:setMass(mass) end
+
+--Return the linear velocity.
+---@return vector3
+function RigidBody:getLinearVelocity() end
+
+--Set the linear velocity of the body.
+---@param linearVelocity vector3
+function RigidBody:setLinearVelocity(linearVelocity) end
+
+--Return the angular velocity.
+---@return vector3
+function RigidBody:getAngularVelocity() end
+
+--Set the angular velocity.
+---@param angularVelocity vector3
+function RigidBody:setAngularVelocity(angularVelocity) end
+
+--Return the local inertia tensor of the body (in body coordinates)
+---@return vector3
+function RigidBody:getLocalInertiaTensor() end
+
+--	Set the local inertia tensor of the body (in body coordinates)
+---@param inertiaTensorLocal vector3
+function RigidBody:setLocalInertiaTensor(inertiaTensorLocal) end
+
+--Return the center of mass of the body (in local-space coordinates)
+---@return vector3
+function RigidBody:getLocalCenterOfMass() end
+
+--Set the center of mass of the body (in local-space coordinates)
+---@param centerOfMass vector3
+function RigidBody:setLocalCenterOfMass(centerOfMass) end
 
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
@@ -407,23 +478,23 @@ local BoxShape = {}
 local Rp3dAABB = {}
 
 --Return the center point.
----@return number
+---@return vector3
 function Rp3dAABB:getCenter() end
 
 --Return the minimum coordinates of the AABB.
----@return number
+---@return vector3
 function Rp3dAABB:getMin() end
 
 --Set the minimum coordinates of the AABB.
----@param min number
+---@param vector3 number
 function Rp3dAABB:setMin(min) end
 
 --Return the maximum coordinates of the AABB.
----@return number
+---@return vector3
 function Rp3dAABB:getMax() end
 
 --Set the maximum coordinates of the AABB.
----@param max number
+---@param max vector3
 function Rp3dAABB:setMax(max) end
 
 --Return the size of the AABB in the three dimension x, y and z.

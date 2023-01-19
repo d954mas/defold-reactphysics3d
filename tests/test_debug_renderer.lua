@@ -67,6 +67,7 @@ return function()
 
 		test("create()", function()
 			local renderer = w:getDebugRenderer()
+			assert_not_nil(renderer)
 			renderer:draw()
 		end)
 
