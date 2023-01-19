@@ -98,6 +98,14 @@ return function()
 					   values = { false,true,false }
 					})
 		end)
+		test("set/get IsAllowedToSleep()", function()
+			body:isSleeping()
+			UTILS.test_method_get_set(body, "IsAllowedToSleep",
+					{  getter_full = "isAllowedToSleep",
+					   setter_full = "setIsAllowedToSleep",
+					   values = { false,true,false }
+					})
+		end)
 
 		test("set/get LinearDamping()", function()
 			UTILS.test_method_get_set(body, "LinearDamping",
@@ -172,6 +180,14 @@ return function()
 		test("resetTorque()", function()
 			body:resetTorque()
 			assert(true)
+		end)
+
+		test("getTorque()", function()
+			assert_equal_v3(body:getTorque(),vmath.vector3(0))
+		end)
+
+		test("getForce()", function()
+			assert_equal_v3(body:getForce(),vmath.vector3(0))
 		end)
 
 

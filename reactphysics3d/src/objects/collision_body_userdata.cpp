@@ -646,6 +646,42 @@ static int RigidBodyResetTorque(lua_State *L){
     return 0;
 }
 
+static int RigidBodyGetForce(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getForce();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodyGetTorque(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getTorque();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodyIsAllowedToSleep(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    lua_pushboolean(L,userdata->GetRigidBodyOrError(L)->isAllowedToSleep());
+	return 1;
+}
+
+static int RigidBodySetIsAllowedToSleep(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    userdata->GetRigidBodyOrError(L)->setIsAllowedToSleep(lua_toboolean(L,2));
+	return 0;
+}
+
 
 
 const char * BodyTypeEnumToString(BodyType name){
@@ -738,6 +774,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"applyLocalTorque",RigidBodyApplyLocalTorque },
         {"resetForce",RigidBodyResetForce },
         {"resetTorque",RigidBodyResetTorque},
+        {"getTorque",RigidBodyGetTorque},
+        {"isAllowedToSleep",RigidBodyIsAllowedToSleep},
+        {"setIsAllowedToSleep",RigidBodySetIsAllowedToSleep},
+        {"getForce",RigidBodyGetForce},
         {"__tostring",ToString},
         { 0, 0 }
     };

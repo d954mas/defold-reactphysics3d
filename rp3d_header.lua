@@ -322,6 +322,22 @@ function RigidBody:resetForce() end
 --Reset the manually applied torque to zero.
 function RigidBody:resetTorque() end
 
+--Return the total manually applied force on the body (in world-space)
+---@return vector3
+function RigidBody:getForce() end
+
+--	Return the total manually applied torque on the body (in world-space)
+---@return vector3
+function RigidBody:getTorque() end
+
+--Return whether or not the body is allowed to sleep.
+---@return boolean
+function RigidBody:isAllowedToSleep() end
+
+--Set whether or not the body is allowed to go to sleep.
+---@param isAllowedToSleep boolean
+function RigidBody:setIsAllowedToSleep(isAllowedToSleep) end
+
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 
