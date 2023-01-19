@@ -262,6 +262,22 @@ function RigidBody:setAngularDamping(angularDamping) end
 
 
 
+--Return the lock translation factor.
+---@return vector3
+function RigidBody:getLinearLockAxisFactor() end
+
+--Set the linear lock factor.
+---@param linearLockAxisFactor vector3
+function RigidBody:setLinearLockAxisFactor(linearLockAxisFactor) end
+
+--Return the lock rotation factor.
+---@return vector3
+function RigidBody:getAngularLockAxisFactor() end
+
+--Set the lock rotation factor.
+---@param angularLockAxisFactor vector3
+function RigidBody:setAngularLockAxisFactor(angularLockAxisFactor) end
+
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 

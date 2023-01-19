@@ -488,6 +488,49 @@ static int RigidBodySetAngularDamping(lua_State *L){
 }
 
 
+static int RigidBodySetLinearLockAxisFactor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setLinearLockAxisFactor(v3);
+    return 0;
+}
+
+static int RigidBodyGetLinearLockAxisFactor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getLinearLockAxisFactor();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+static int RigidBodySetAngularLockAxisFactor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->setAngularLockAxisFactor(v3);
+    return 0;
+}
+
+static int RigidBodyGetAngularLockAxisFactor(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    Vector3 v3 = userdata->GetRigidBodyOrError(L)->getAngularLockAxisFactor();
+    dmVMath::Vector3 result(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, result);
+    return 1;
+}
+
+
 
 const char * BodyTypeEnumToString(BodyType name){
     switch(name){
@@ -565,6 +608,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"setLinearDamping",RigidBodySetLinearDamping },
         {"getAngularDamping",RigidBodyGetAngularDamping },
         {"setAngularDamping",RigidBodySetAngularDamping },
+        {"getLinearLockAxisFactor",RigidBodyGetLinearLockAxisFactor },
+        {"setLinearLockAxisFactor",RigidBodySetLinearLockAxisFactor },
+        {"getAngularLockAxisFactor",RigidBodyGetAngularLockAxisFactor },
+        {"setAngularLockAxisFactor",RigidBodySetAngularLockAxisFactor },
         {"__tostring",ToString},
         { 0, 0 }
     };

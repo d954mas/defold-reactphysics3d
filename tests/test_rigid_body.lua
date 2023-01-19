@@ -113,5 +113,19 @@ return function()
 					})
 		end)
 
+		test("set/get LinearLockAxisFactor()", function()
+			UTILS.test_method_get_set(body, "LinearLockAxisFactor",
+					{ v3 = true,
+					  values = { vmath.vector3(0, 0, 0), vmath.vector3(0, -10, 0), vmath.vector3(5, 6, 7) }
+					})
+		end)
+
+		test("set/get AngularLockAxisFactor()", function()
+			UTILS.test_method_get_set(body, "AngularLockAxisFactor",
+					{ v3 = true,
+					  values = { vmath.vector3(0, 0, 0), vmath.vector3(0, -10, 0), vmath.vector3(5, 6, 7) }
+					})
+		end)
+
 	end)
 end
