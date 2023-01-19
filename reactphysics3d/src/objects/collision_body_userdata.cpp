@@ -520,6 +520,84 @@ static int RigidBodySetAngularLockAxisFactor(lua_State *L){
     return 0;
 }
 
+static int RigidBodyApplyLocalForceAtCenterOfMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->applyLocalForceAtCenterOfMass(v3);
+    return 0;
+}
+
+static int RigidBodyApplyWorldForceAtCenterOfMass(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    userdata->GetRigidBodyOrError(L)->applyWorldForceAtCenterOfMass(v3);
+    return 0;
+}
+
+static int RigidBodyApplyLocalForceAtLocalPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 3);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmForce = dmScript::CheckVector3(L, 2);
+    Vector3 force(dmForce->getX(),dmForce->getY(),dmForce->getZ());
+
+    dmVMath::Vector3* dmPos = dmScript::CheckVector3(L, 3);
+    Vector3 pos(dmPos->getX(),dmPos->getY(),dmPos->getZ());
+
+    userdata->GetRigidBodyOrError(L)->applyLocalForceAtLocalPosition(force,pos);
+    return 0;
+}
+
+static int RigidBodyApplyWorldForceAtLocalPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 3);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmForce = dmScript::CheckVector3(L, 2);
+    Vector3 force(dmForce->getX(),dmForce->getY(),dmForce->getZ());
+
+    dmVMath::Vector3* dmPos = dmScript::CheckVector3(L, 3);
+    Vector3 pos(dmPos->getX(),dmPos->getY(),dmPos->getZ());
+
+    userdata->GetRigidBodyOrError(L)->applyWorldForceAtLocalPosition(force,pos);
+    return 0;
+}
+
+static int RigidBodyApplyLocalForceAtWorldPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 3);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmForce = dmScript::CheckVector3(L, 2);
+    Vector3 force(dmForce->getX(),dmForce->getY(),dmForce->getZ());
+
+    dmVMath::Vector3* dmPos = dmScript::CheckVector3(L, 3);
+    Vector3 pos(dmPos->getX(),dmPos->getY(),dmPos->getZ());
+
+    userdata->GetRigidBodyOrError(L)->applyLocalForceAtWorldPosition(force,pos);
+    return 0;
+}
+
+static int RigidBodyApplyWorldForceAtWorldPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 3);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmForce = dmScript::CheckVector3(L, 2);
+    Vector3 force(dmForce->getX(),dmForce->getY(),dmForce->getZ());
+
+    dmVMath::Vector3* dmPos = dmScript::CheckVector3(L, 3);
+    Vector3 pos(dmPos->getX(),dmPos->getY(),dmPos->getZ());
+
+    userdata->GetRigidBodyOrError(L)->applyWorldForceAtWorldPosition(force,pos);
+    return 0;
+}
+
 static int RigidBodyGetAngularLockAxisFactor(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -612,6 +690,12 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"setLinearLockAxisFactor",RigidBodySetLinearLockAxisFactor },
         {"getAngularLockAxisFactor",RigidBodyGetAngularLockAxisFactor },
         {"setAngularLockAxisFactor",RigidBodySetAngularLockAxisFactor },
+        {"applyLocalForceAtCenterOfMass",RigidBodyApplyLocalForceAtCenterOfMass },
+        {"applyWorldForceAtCenterOfMass",RigidBodyApplyWorldForceAtCenterOfMass },
+        {"applyLocalForceAtLocalPosition",RigidBodyApplyLocalForceAtLocalPosition },
+        {"applyWorldForceAtLocalPosition",RigidBodyApplyWorldForceAtLocalPosition },
+        {"applyLocalForceAtWorldPosition",RigidBodyApplyLocalForceAtWorldPosition },
+        {"applyWorldForceAtWorldPosition",RigidBodyApplyWorldForceAtWorldPosition },
         {"__tostring",ToString},
         { 0, 0 }
     };

@@ -278,6 +278,36 @@ function RigidBody:getAngularLockAxisFactor() end
 ---@param angularLockAxisFactor vector3
 function RigidBody:setAngularLockAxisFactor(angularLockAxisFactor) end
 
+
+--Manually apply an external force (in local-space) to the body at its center of mass.
+---@param force vector3
+function RigidBody:applyLocalForceAtCenterOfMass(force) end
+
+--Manually apply an external force (in world-space) to the body at its center of mass.
+---@param force vector3
+function RigidBody:applyWorldForceAtCenterOfMass(force) end
+
+
+--Manually apply an external force (in local-space) to the body at a given point (in local-space).
+---@param force vector3
+---@param point vector3
+function RigidBody:applyLocalForceAtLocalPosition(force,point) end
+
+--Manually apply an external force (in world-space) to the body at a given point (in local-space).
+---@param force vector3
+---@param point vector3
+function RigidBody:applyWorldForceAtLocalPosition(force,point) end
+
+--Manually apply an external force (in local-space) to the body at a given point (in world-space).
+---@param force vector3
+---@param point vector3
+function RigidBody:applyLocalForceAtWorldPosition(force,point) end
+
+--Manually apply an external force (in world-space) to the body at a given point (in world-space).
+---@param force vector3
+---@param point vector3
+function RigidBody:applyWorldForceAtWorldPosition(force,point) end
+
 ---@class Rp3dDebugRenderer
 local DebugRenderer = {}
 
