@@ -3,7 +3,7 @@ local MONARCH = require "monarch.monarch"
 local Box = require "main.objects.box"
 
 local SCENE_RADIUS = 30              -- Radius of the scene in meters
-local NB_CUBES = 1000                             -- Number of boxes in the scene
+local NB_CUBES = 30                             -- Number of boxes in the scene
 local BOX_SIZE = vmath.vector3(2, 2, 2)    -- Box dimensions in meters
 local FLOOR_SIZE = vmath.vector3(30, 1, 30)   -- Floor dimensions in meters
 
