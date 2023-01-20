@@ -1,6 +1,7 @@
 #include "objects/collision_body_userdata.h"
 #include "static_hash.h"
 #include "objects/collider_userdata.h"
+#include "objects/aabb.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "utils.h"
 
@@ -96,6 +97,41 @@ static int SetLocalToBodyTransform(lua_State *L){
 	return 0;
 }
 
+static int GetLocalToWorldTransform(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    pushRp3dTransform(L,userdata->collider->getLocalToWorldTransform());
+	return 1;
+}
+
+
+static int GetWorldAABB(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    AABBPush(L,userdata->collider->getWorldAABB());
+	return 1;
+}
+
+static int TestPointInside(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    dmVMath::Vector3* dmPoint = dmScript::CheckVector3(L, 2);
+    Vector3 point(dmPoint->getX(),dmPoint->getY(),dmPoint->getZ());
+    lua_pushboolean(L,userdata->collider->testPointInside(point));
+	return 1;
+}
+static int TestAABBOverlap(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    AABBLua *aabb = AABBCheck(L,2);
+    lua_pushboolean(L,userdata->collider->testAABBOverlap(aabb->aabb));
+	return 1;
+}
+
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -115,6 +151,10 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"getUserData",GetUserData},
         {"setLocalToBodyTransform",SetLocalToBodyTransform},
         {"getLocalToBodyTransform",GetLocalToBodyTransform},
+        {"getLocalToWorldTransform",GetLocalToWorldTransform},
+        {"getWorldAABB",GetWorldAABB},
+        {"testAABBOverlap",TestAABBOverlap},
+        {"testPointInside",TestPointInside},
         {"__tostring",ToString},
         { 0, 0 }
     };

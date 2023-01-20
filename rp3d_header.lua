@@ -79,9 +79,28 @@ function Collider:setUserData(userdata) end
 ---@return Rp3dTransform
 function Collider:getLocalToBodyTransform() end
 
+
 --Set the local to parent body transform.
 ---@param transform Rp3dTransform
 function Collider:setLocalToBodyTransform(transform) end
+
+--Return the local to world transform.
+---@return Rp3dTransform
+function Collider:getLocalToWorldTransform() end
+
+--Return the AABB of the collider in world-space.
+---@return Rp3dAABB
+function Collider:getWorldAABB() end
+
+--return true if a point is inside the collision shape.
+---@return boolean
+---@param worldPoint vector3
+function Collider:testPointInside(worldPoint) end
+
+--Test if the collider overlaps with a given AABB.
+---@return boolean
+---@param worldAABB Rp3dAABB
+function Collider:testAABBOverlap(worldAABB) end
 
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
