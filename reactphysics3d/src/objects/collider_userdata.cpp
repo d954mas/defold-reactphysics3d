@@ -156,6 +156,62 @@ static int Raycast(lua_State *L){
     return 1;
 }
 
+static int GetCollideWithMaskBits(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->collider->getCollideWithMaskBits());
+    return 1;
+}
+
+static int SetCollideWithMaskBits(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    userdata->collider->setCollideWithMaskBits(luaL_checknumber(L,2));
+    return 0;
+}
+
+static int GetCollisionCategoryBits(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->collider->getCollisionCategoryBits());
+    return 1;
+}
+
+static int SetCollisionCategoryBits(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    userdata->collider->setCollisionCategoryBits(luaL_checknumber(L,2));
+    return 0;
+}
+
+static int GetBroadPhaseId(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->collider->getBroadPhaseId());
+    return 1;
+}
+
+static int GetIsTrigger(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    lua_pushboolean(L,userdata->collider->getIsTrigger());
+	return 1;
+}
+
+static int SetIsTrigger(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    userdata->collider->setIsTrigger(lua_toboolean(L,2));
+	return 0;
+}
+
 void ColliderUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -172,6 +228,13 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"testAABBOverlap",TestAABBOverlap},
         {"testPointInside",TestPointInside},
         {"raycast",Raycast},
+        {"getCollideWithMaskBits",GetCollideWithMaskBits},
+        {"setCollideWithMaskBits",SetCollideWithMaskBits},
+        {"getCollisionCategoryBits",GetCollisionCategoryBits},
+        {"setCollisionCategoryBits",SetCollisionCategoryBits},
+        {"getBroadPhaseId",GetBroadPhaseId},
+        {"setIsTrigger",SetIsTrigger},
+        {"getIsTrigger",GetIsTrigger},
         {"__tostring",ToString},
         { 0, 0 }
     };

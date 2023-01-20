@@ -102,11 +102,31 @@ function Collider:testPointInside(worldPoint) end
 ---@param worldAABB Rp3dAABB
 function Collider:testAABBOverlap(worldAABB) end
 
-
---Raycast method with feedback information.
----@param ray Rp3dRay
----@return Rp3dRaycastInfo|nil nil if no hit point
 function Collider:raycast(ray) end
+
+--Return the collision bits mask.
+---@return number
+function Collider:getCollideWithMaskBits() end
+
+--	Set the collision bits mask.
+---@param collideWithMaskBits number
+function Collider:setCollideWithMaskBits(collideWithMaskBits) end
+
+--Return the collision category bits.
+---@return number
+function Collider:getCollisionCategoryBits() end
+
+--Set the collision category bits.
+---@param collisionCategoryBits number
+function Collider:setCollisionCategoryBits(collisionCategoryBits) end
+
+--Return true if the collider is a trigger.
+---@return boolean
+function Collider:getIsTrigger() end
+
+--Set whether the collider is a trigger.
+---@param isTrigger boolean
+function Collider:setIsTrigger(isTrigger) end
 
 ---@class Rp3dCollisionBody
 local CollisionBody = {}

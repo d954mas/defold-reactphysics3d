@@ -162,6 +162,27 @@ return function()
 			assert_nil(collider:raycast(ray1))
 
 		end)
+		test("set/get CollideWithMaskBits()", function()
+			UTILS.test_method_get_set(collider, "CollideWithMaskBits", {
+				values = { bit.tobit(0), bit.lshift(1, 1), bit.lshift(1, 2), bit.lshift(1, 15) }
+			})
+		end)
+
+		test("set/get CollisionCategoryBits()", function()
+			UTILS.test_method_get_set(collider, "CollisionCategoryBits", {
+				values = { bit.tobit(0), bit.lshift(1, 1), bit.lshift(1, 2), bit.lshift(1, 15) }
+			})
+		end)
+
+		test("getBroadPhaseId()", function()
+			assert_equal(collider:getBroadPhaseId(), 0)
+		end)
+
+		test("set/get IsTrigger()", function()
+			UTILS.test_method_get_set(collider, "IsTrigger", {
+				values = { false, true, false, false }
+			})
+		end)
 
 		test("toString()", function()
 			assert_equal(tostring(collider):sub(1, 14), "rp3d::Collider")
