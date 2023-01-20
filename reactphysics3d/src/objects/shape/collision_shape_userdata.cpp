@@ -25,6 +25,7 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
     this->metatable_name = META_NAME;
     this->shape = shape;
     this->obj = shape;
+    shape->setUserData(this);
 }
 
 CollisionShapeUserdata::~CollisionShapeUserdata() {
