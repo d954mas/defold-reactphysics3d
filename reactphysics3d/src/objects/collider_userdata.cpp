@@ -140,6 +140,22 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
+static int Raycast(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ColliderUserdata *collider = ColliderUserdataCheck(L, 1);
+    Ray ray = CheckRay(L,2);
+    RaycastInfo info;
+    bool result =  collider->collider->raycast(ray,info);
+
+    if(result){
+         pushRp3dRaycastInfo(L,info);
+    }else{
+        lua_pushnil(L);
+    }
+    return 1;
+}
+
 void ColliderUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -155,6 +171,7 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"getWorldAABB",GetWorldAABB},
         {"testAABBOverlap",TestAABBOverlap},
         {"testPointInside",TestPointInside},
+        {"raycast",Raycast},
         {"__tostring",ToString},
         { 0, 0 }
     };

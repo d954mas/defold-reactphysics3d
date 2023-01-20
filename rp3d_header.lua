@@ -102,6 +102,12 @@ function Collider:testPointInside(worldPoint) end
 ---@param worldAABB Rp3dAABB
 function Collider:testAABBOverlap(worldAABB) end
 
+
+--Raycast method with feedback information.
+---@param ray Rp3dRay
+---@return Rp3dRaycastInfo|nil nil if no hit point
+function Collider:raycast(ray) end
+
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 

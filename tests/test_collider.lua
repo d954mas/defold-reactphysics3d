@@ -139,6 +139,30 @@ return function()
 			assert_true(collider:testAABBOverlap(aabb2))
 		end)
 
+		test("testRaycast()", function()
+			local ray_miss = { point1 = vmath.vector3(-100, 0, 0),
+							   point2 = vmath.vector3(-100, 100, 0),
+							   maxFraction = 1 }
+			local ray1 = { point1 = vmath.vector3(-100, 0, 0),
+						   point2 = vmath.vector3(-0.99, 0, 0),
+						   maxFraction = 1 }
+
+			assert_nil(collider:raycast(ray_miss))
+			local info = collider:raycast(ray1)
+			assert_not_nil(info)
+			assert_equal_v3(info.worldPoint, vmath.vector3(-1, 0, 0))
+			assert_equal_v3(info.worldNormal, vmath.vector3(-1, 0, 0))
+			assert_greater_than(info.hitFraction, 0.99)
+			assert_less_than(info.hitFraction, 1)
+			assert_equal(info.meshSubpart, -1)
+			assert_equal(info.triangleIndex, -1)
+			assert_equal(info.body, b)
+			assert_equal(info.collider, collider)
+			ray1.maxFraction = 0.9
+			assert_nil(collider:raycast(ray1))
+
+		end)
+
 		test("toString()", function()
 			assert_equal(tostring(collider):sub(1, 14), "rp3d::Collider")
 		end)
