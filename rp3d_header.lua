@@ -75,6 +75,14 @@ function Collider:getUserData() end
 ---@param userdata table|nil
 function Collider:setUserData(userdata) end
 
+--Return the local to parent body transform.
+---@return Rp3dTransform
+function Collider:getLocalToBodyTransform() end
+
+--Set the local to parent body transform.
+---@param transform Rp3dTransform
+function Collider:setLocalToBodyTransform(transform) end
+
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 
@@ -291,22 +299,22 @@ function RigidBody:applyWorldForceAtCenterOfMass(force) end
 --Manually apply an external force (in local-space) to the body at a given point (in local-space).
 ---@param force vector3
 ---@param point vector3
-function RigidBody:applyLocalForceAtLocalPosition(force,point) end
+function RigidBody:applyLocalForceAtLocalPosition(force, point) end
 
 --Manually apply an external force (in world-space) to the body at a given point (in local-space).
 ---@param force vector3
 ---@param point vector3
-function RigidBody:applyWorldForceAtLocalPosition(force,point) end
+function RigidBody:applyWorldForceAtLocalPosition(force, point) end
 
 --Manually apply an external force (in local-space) to the body at a given point (in world-space).
 ---@param force vector3
 ---@param point vector3
-function RigidBody:applyLocalForceAtWorldPosition(force,point) end
+function RigidBody:applyLocalForceAtWorldPosition(force, point) end
 
 --Manually apply an external force (in world-space) to the body at a given point (in world-space).
 ---@param force vector3
 ---@param point vector3
-function RigidBody:applyWorldForceAtWorldPosition(force,point) end
+function RigidBody:applyWorldForceAtWorldPosition(force, point) end
 
 --Manually apply an external torque to the body (in local-space).
 ---@param torque vector3

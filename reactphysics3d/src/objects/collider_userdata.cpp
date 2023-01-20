@@ -80,6 +80,22 @@ static int SetUserData(lua_State *L){
 	return 0;
 }
 
+static int GetLocalToBodyTransform(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    pushRp3dTransform(L,userdata->collider->getLocalToBodyTransform());
+	return 1;
+}
+
+static int SetLocalToBodyTransform(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    userdata->collider->setLocalToBodyTransform(checkRp3dTransform(L,2));
+	return 0;
+}
+
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -97,6 +113,8 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"getBody",GetBody},
         {"setUserData",SetUserData},
         {"getUserData",GetUserData},
+        {"setLocalToBodyTransform",SetLocalToBodyTransform},
+        {"getLocalToBodyTransform",GetLocalToBodyTransform},
         {"__tostring",ToString},
         { 0, 0 }
     };
