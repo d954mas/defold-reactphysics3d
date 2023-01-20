@@ -230,6 +230,60 @@ static int SetMaterial(lua_State *L){
 	return 0;
 }
 
+static int GetMaterialBounciness(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    lua_pushnumber(L,m.getBounciness());
+	return 1;
+}
+
+static int SetMaterialBounciness(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    m.setBounciness(luaL_checknumber(L,2));
+	return 0;
+}
+
+static int GetMaterialFrictionCoefficient(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    lua_pushnumber(L,m.getFrictionCoefficient());
+	return 1;
+}
+
+static int SetMaterialFrictionCoefficient(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    m.setFrictionCoefficient(luaL_checknumber(L,2));
+	return 0;
+}
+
+static int GetMaterialMassDensity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    lua_pushnumber(L,m.getMassDensity());
+	return 1;
+}
+
+static int SetMaterialMassDensity(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    m.setMassDensity(luaL_checknumber(L,2));
+	return 0;
+}
+
 void ColliderUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -255,6 +309,12 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"getIsTrigger",GetIsTrigger},
         {"getMaterial",GetMaterial},
         {"setMaterial",SetMaterial},
+        {"getMaterialBounciness",GetMaterialBounciness},
+        {"setMaterialBounciness",SetMaterialBounciness},
+        {"getMaterialFrictionCoefficient",GetMaterialFrictionCoefficient},
+        {"setMaterialFrictionCoefficient",SetMaterialFrictionCoefficient },
+        {"getMaterialMassDensity",GetMaterialMassDensity},
+        {"setMaterialMassDensity",SetMaterialMassDensity},
         {"__tostring",ToString},
         { 0, 0 }
     };

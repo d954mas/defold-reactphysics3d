@@ -217,6 +217,24 @@ return function()
 
 		end)
 
+		test("set/get MaterialBounciness()", function()
+			UTILS.test_method_get_set(collider, "MaterialBounciness", {
+				values = { 0,0.5,1 }, float = true
+			})
+		end)
+
+		test("set/get MaterialFrictionCoefficient()", function()
+			UTILS.test_method_get_set(collider, "MaterialFrictionCoefficient", {
+				values = { 0,0.5,1 }, float = true
+			})
+		end)
+
+		test("set/get MaterialMassDensity()", function()
+			UTILS.test_method_get_set(collider, "MaterialMassDensity", {
+				values = { 0,0.5,1 }, float = true
+			})
+		end)
+
 		test("toString()", function()
 			assert_equal(tostring(collider):sub(1, 14), "rp3d::Collider")
 		end)

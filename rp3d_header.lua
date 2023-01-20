@@ -146,6 +146,24 @@ function Collider:getMaterial() end
 ---@param material Rp3dMaterial
 function Collider:setMaterial(material) end
 
+---@return number
+function Collider:getMaterialBounciness() end
+
+---@param bounciness number
+function Collider:setMaterialBounciness(bounciness) end
+
+---@return number
+function Collider:getMaterialFrictionCoefficient() end
+
+---@param frictionCoefficient number
+function Collider:setMaterialFrictionCoefficient(frictionCoefficient) end
+
+---@return number
+function Collider:getMaterialMassDensity() end
+
+---@param massDensity number
+function Collider:setMaterialMassDensity(massDensity) end
+
 ---@class Rp3dCollisionBody
 local CollisionBody = {}
 
