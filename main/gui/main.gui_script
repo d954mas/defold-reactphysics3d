@@ -148,7 +148,7 @@ local function update_profiling(self)
 	gui.set_text(self.vh.profiling.lbl_fps, string.format("%d", SCENE_HELPER.profiling.fps))
 	gui.set_text(self.vh.profiling.lbl_dt, string.format("%.2fms(max)", SCENE_HELPER.profiling.dt * 1000))
 	gui.set_text(self.vh.profiling.lbl_physics_total, SCENE_HELPER.profiling.phys_total)
-	gui.set_text(self.vh.profiling.lbl_physics_step, SCENE_HELPER.profiling.phys_step)
+	gui.set_text(self.vh.profiling.lbl_physics_step, string.format("%.2fms",SCENE_HELPER.profiling.phys_step*1000))
 end
 
 function update(self, dt)
