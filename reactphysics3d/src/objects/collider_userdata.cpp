@@ -212,6 +212,24 @@ static int SetIsTrigger(lua_State *L){
 	return 0;
 }
 
+static int GetMaterial(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    pushRp3dMaterial(L,userdata->collider->getMaterial());
+	return 1;
+}
+
+static int SetMaterial(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    ColliderUserdata *userdata = ColliderUserdataCheck(L, 1);
+    Material &m = userdata->collider->getMaterial();
+    checkRp3dMaterial(L,2,m);
+    userdata->collider->setMaterial(m);
+	return 0;
+}
+
 void ColliderUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -235,6 +253,8 @@ void ColliderUserdataInitMetaTable(lua_State *L){
         {"getBroadPhaseId",GetBroadPhaseId},
         {"setIsTrigger",SetIsTrigger},
         {"getIsTrigger",GetIsTrigger},
+        {"getMaterial",GetMaterial},
+        {"setMaterial",SetMaterial},
         {"__tostring",ToString},
         { 0, 0 }
     };

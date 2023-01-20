@@ -25,56 +25,7 @@ namespace rp3dDefold {
         lua_pushlstring(L, str.c_str(), str.length());
 	}
 
-	reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index){
-        if (lua_istable(L, index)) {
-            reactphysics3d::Vector3 position;
-            bool positionExist = false;
-            reactphysics3d::Quaternion quat;
-            bool quatExist = false;
 
-            lua_pushvalue(L,index);
-            lua_pushnil(L);  /* first key */
-            while (lua_next(L, -2) != 0) {
-                /* uses 'key' (at index -2) and 'value' (at index -1) */
-                //printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
-                const char* key = lua_tostring(L, -2);
-                switch (hash_string(key)){
-                    case HASH_position:{
-                        dmVMath::Vector3* value = dmScript::CheckVector3(L, -1);
-                        position.x = value->getX();
-                        position.y = value->getY();
-                        position.z = value->getZ();
-                        positionExist = true;
-                        break;
-                    }
-                   case HASH_quat:{
-                        dmVMath::Quat* value =  dmScript::CheckQuat(L, -1);
-                        quat.x = value->getX();
-                        quat.y = value->getY();
-                        quat.z = value->getZ();
-                        quat.w = value->getW();
-                        quatExist = true;
-                        break;
-                   }
-                   default:
-                       luaL_error(L, "unknown key:%s", key);
-                       break;
-               }
-              /* removes 'value'; keeps 'key' for next iteration */
-              lua_pop(L, 1);
-            }
-            lua_pop(L,1);
-            if(!positionExist){
-                luaL_error(L,"transform need position");
-            }
-            if(!quatExist){
-                luaL_error(L,"transform need quat");
-            }
-            return reactphysics3d::Transform(position,quat);
-        }else{
-            luaL_error(L,"transform should be table");
-        }
-	}
 
     void pushRp3dTransform(lua_State *L, reactphysics3d::Transform transform){
         dmVMath::Vector3 dmPosition;
@@ -132,6 +83,66 @@ namespace rp3dDefold {
 
     }
 
+    void pushRp3dMaterial(lua_State *L, reactphysics3d::Material &material){
+        lua_newtable(L);
+            lua_pushnumber(L,material.getBounciness());
+            lua_setfield(L, -2, "bounciness");
+            lua_pushnumber(L, material.getFrictionCoefficient());
+            lua_setfield(L, -2, "frictionCoefficient");
+            lua_pushnumber(L,material.getMassDensity());
+            lua_setfield(L, -2, "massDensity");
+    }
+
+    reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index){
+            if (lua_istable(L, index)) {
+                reactphysics3d::Vector3 position;
+                bool positionExist = false;
+                reactphysics3d::Quaternion quat;
+                bool quatExist = false;
+
+                lua_pushvalue(L,index);
+                lua_pushnil(L);  /* first key */
+                while (lua_next(L, -2) != 0) {
+                    /* uses 'key' (at index -2) and 'value' (at index -1) */
+                    //printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
+                    const char* key = lua_tostring(L, -2);
+                    switch (hash_string(key)){
+                        case HASH_position:{
+                            dmVMath::Vector3* value = dmScript::CheckVector3(L, -1);
+                            position.x = value->getX();
+                            position.y = value->getY();
+                            position.z = value->getZ();
+                            positionExist = true;
+                            break;
+                        }
+                       case HASH_quat:{
+                            dmVMath::Quat* value =  dmScript::CheckQuat(L, -1);
+                            quat.x = value->getX();
+                            quat.y = value->getY();
+                            quat.z = value->getZ();
+                            quat.w = value->getW();
+                            quatExist = true;
+                            break;
+                       }
+                       default:
+                           luaL_error(L, "unknown key:%s", key);
+                           break;
+                   }
+                  /* removes 'value'; keeps 'key' for next iteration */
+                  lua_pop(L, 1);
+                }
+                lua_pop(L,1);
+                if(!positionExist){
+                    luaL_error(L,"transform need position");
+                }
+                if(!quatExist){
+                    luaL_error(L,"transform need quat");
+                }
+                return reactphysics3d::Transform(position,quat);
+            }else{
+                luaL_error(L,"transform should be table");
+            }
+    	}
 
     reactphysics3d::Ray CheckRay(lua_State *L, int index){
         if (lua_istable(L, index)) {
@@ -186,4 +197,55 @@ namespace rp3dDefold {
             luaL_error(L,"ray should be table");
         }
     }
+
+    void checkRp3dMaterial(lua_State *L, int index, reactphysics3d::Material &material){
+            if (lua_istable(L, index)) {
+                bool bouncinessExist = false;
+                bool frictionCoefficientExist = false;
+                bool massDensityExist = false;
+
+                lua_pushvalue(L,index);
+                lua_pushnil(L);  /* first key */
+                while (lua_next(L, -2) != 0) {
+                    /* uses 'key' (at index -2) and 'value' (at index -1) */
+                    //printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
+                    const char* key = lua_tostring(L, -2);
+                    switch (hash_string(key)){
+                        case HASH_bounciness:{
+                            material.setBounciness(luaL_checknumber(L,-1));
+                            bouncinessExist = true;
+                            break;
+                        }
+                       case HASH_frictionCoefficient:{
+                            material.setFrictionCoefficient(luaL_checknumber(L,-1));
+                            frictionCoefficientExist = true;
+                            break;
+                        }
+                       case HASH_massDensity:{
+                            material.setMassDensity(luaL_checknumber(L,-1));
+                            massDensityExist = true;
+                            break;
+                       }
+                       default:
+                           luaL_error(L, "unknown key:%s", key);
+                           break;
+                   }
+                  /* removes 'value'; keeps 'key' for next iteration */
+                  lua_pop(L, 1);
+                }
+                lua_pop(L,1);
+                if(!bouncinessExist){
+                    luaL_error(L,"material need bounciness");
+                }
+                if(!frictionCoefficientExist){
+                    luaL_error(L,"material need frictionCoefficient");
+                }
+                if(!massDensityExist){
+                    luaL_error(L,"material need massDensity");
+                }
+                return;
+            }else{
+                luaL_error(L,"material should be table");
+            }
+        }
 }

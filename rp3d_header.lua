@@ -57,6 +57,13 @@ local Rp3dTransform = {
 	quat = vmath.quat(),
 }
 
+---@class Rp3dMaterial
+local Rp3dMaterial = {
+	bounciness = 0,
+	frictionCoefficient = 0,
+	massDensity = 0,
+}
+
 ---@class Rp3dCollider
 local Collider = {}
 
@@ -104,8 +111,10 @@ function Collider:testAABBOverlap(worldAABB) end
 
 function Collider:raycast(ray) end
 
---Return the collision bits mask.
+--Return the broad-phase id.
 ---@return number
+function Collider:getBroadPhaseId() end
+
 function Collider:getCollideWithMaskBits() end
 
 --	Set the collision bits mask.
@@ -127,6 +136,15 @@ function Collider:getIsTrigger() end
 --Set whether the collider is a trigger.
 ---@param isTrigger boolean
 function Collider:setIsTrigger(isTrigger) end
+
+
+--	Return material properties of the collider.
+---@return Rp3dMaterial
+function Collider:getMaterial() end
+
+--Set a new material for this collider.
+---@param material Rp3dMaterial
+function Collider:setMaterial(material) end
 
 ---@class Rp3dCollisionBody
 local CollisionBody = {}

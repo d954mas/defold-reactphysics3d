@@ -14,8 +14,10 @@ namespace rp3dDefold {
 
 	void pushRp3dTransform(lua_State *L,reactphysics3d::Transform transform);
 	void pushRp3dRaycastInfo(lua_State *L, reactphysics3d::RaycastInfo &info);
+	void pushRp3dMaterial(lua_State *L, reactphysics3d::Material &material);
 	reactphysics3d::Transform checkRp3dTransform(lua_State *L, int index);
 	reactphysics3d::Ray CheckRay(lua_State *L, int index);
+    void checkRp3dMaterial(lua_State *L, int index, reactphysics3d::Material &material);
 
 }
 

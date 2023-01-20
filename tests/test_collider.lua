@@ -184,6 +184,39 @@ return function()
 			})
 		end)
 
+		test("set/get Material()", function()
+			local m = collider:getMaterial()
+			assert_equal(m.bounciness, 0.5)
+			assert_equal_float(m.frictionCoefficient, 0.3)
+			assert_equal_float(m.massDensity, 1)
+
+			local m2 = {}
+			local status, error = pcall(collider.setMaterial, collider, m2)
+			assert_false(status)
+			UTILS.test_error(error, "material need bounciness")
+
+			m2.bounciness = 0.1
+			status, error = pcall(collider.setMaterial, collider, m2)
+			assert_false(status)
+			UTILS.test_error(error, "material need frictionCoefficient")
+
+			m2.frictionCoefficient = 0.2
+			status, error = pcall(collider.setMaterial, collider, m2)
+			assert_false(status)
+			UTILS.test_error(error, "material need massDensity")
+
+			m2.massDensity = 0.3
+			status, error = pcall(collider.setMaterial, collider, m2)
+			assert_true(status)
+
+			local m3 = collider:getMaterial()
+			assert_equal_float(m3.bounciness,0.1)
+			assert_equal_float(m3.frictionCoefficient,0.2)
+			assert_equal_float(m3.massDensity,0.3)
+
+
+		end)
+
 		test("toString()", function()
 			assert_equal(tostring(collider):sub(1, 14), "rp3d::Collider")
 		end)
