@@ -13,6 +13,34 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+class LuaRayCastCallback : public RaycastCallback  {
+    public:
+        lua_State *L;
+        bool error;
+        const char *error_message;
+
+        LuaRayCastCallback(lua_State *L){  // This is the constructor
+            this->L = L;
+            error = false;
+            error_message = NULL;
+        }
+
+        float notifyRaycastHit(const RaycastInfo &raycastInfo) {
+            lua_pushvalue(L,-1);
+            pushRp3dRaycastInfo(L,raycastInfo);
+            if (lua_pcall(L, 1, 1, 0) == 0){
+                float result = lua_tonumber(L,-1);
+                lua_pop(L,1);
+                return result;
+            }else{
+                error = true;
+                error_message = lua_tostring(L,-1);
+                lua_pop(L,1);
+                return 0;
+            }
+        }
+};
+
 
 WorldUserdata::WorldUserdata(PhysicsWorld* world): BaseUserData(USERDATA_TYPE){
     this->world = world;
@@ -303,6 +331,41 @@ static int GetDebugRenderer(lua_State *L){
 	return 1;
 }
 
+static int Raycast(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 3,4);
+    WorldUserdata *world = WorldUserdataCheck(L, 1);
+    Ray ray = CheckRay(L,2);
+
+    if (!lua_isfunction(L, 3)){
+        luaL_error(L,"callback is not function");
+        return 0;
+    }
+
+    LuaRayCastCallback* cb = new LuaRayCastCallback(L);
+
+    //cb function on top
+    if (lua_gettop(L) == 4){
+        lua_pushvalue(L,3);
+        world->world->raycast(ray, cb, luaL_checknumber(L,4));
+     }else{
+        lua_pushvalue(L,3);
+        world->world->raycast(ray, cb);
+     }
+
+    lua_pop(L,1);
+    if(cb->error){
+        const char *error_message = cb->error_message;
+        delete cb;
+        luaL_error(L,"%s",error_message);
+    }else{
+        delete cb;
+    }
+
+
+    return 0;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -344,6 +407,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"createRigidBody",CreateRigidBody},
         {"destroyRigidBody",DestroyRigidBody},
         {"getDebugRenderer",GetDebugRenderer},
+        {"raycast",Raycast},
         {"__tostring",ToString},
         { 0, 0 }
     };

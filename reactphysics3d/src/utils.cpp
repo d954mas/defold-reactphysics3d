@@ -51,7 +51,7 @@ namespace rp3dDefold {
 
     }
 
-    void pushRp3dRaycastInfo(lua_State *L, reactphysics3d::RaycastInfo &info){
+    void pushRp3dRaycastInfo(lua_State *L, const reactphysics3d::RaycastInfo &info){
         dmVMath::Vector3 dmWorldPoint;
         dmVMath::Vector3 dmWorldNormal;
 
@@ -79,8 +79,6 @@ namespace rp3dDefold {
             lua_setfield(L, -2, "body");
             ColliderPush(L,info.collider);
             lua_setfield(L, -2, "collider");
-
-
     }
 
     void pushRp3dMaterial(lua_State *L, reactphysics3d::Material &material){

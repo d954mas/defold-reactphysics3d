@@ -220,6 +220,138 @@ return function()
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
+		test("RayCast()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(1))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(5, 0, 0),quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(10, 0, 0),quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(15, 0, 0),quat = vmath.quat() })
+
+			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+			---@type Rp3dRaycastInfo[]
+			local cb_results = {}
+			local cb_closest = function(info)
+				assert_not_nil(info)
+				assert_not_nil(info.worldPoint)
+				assert_not_nil(info.worldNormal)
+				assert_not_nil(info.hitFraction)
+				assert_not_nil(info.meshSubpart)
+				assert_not_nil(info.triangleIndex)
+				assert_not_nil(info.body)
+				assert_not_nil(info.collider)
+				table.insert(cb_results, info)
+				return info.hitFraction
+			end
+
+			local cb_all = function(info)
+				table.insert(cb_results, info)
+				return 1
+			end
+
+			local cb_any = function(info)
+				table.insert(cb_results, info)
+				return 0
+			end
+
+			local p1 = vmath.vector3(0, 0, 0)
+			local point_no = vmath.vector3(0, 10, 0)
+			local point_one = vmath.vector3(5, 0, 0)
+			local point_all = vmath.vector3(15, 0, 0)
+			local ray_no = {point1 = p1,point2 = point_no,maxFraction = 1}
+			local ray_1 = {point1 = p1,point2 = point_one,maxFraction = 1}
+			local ray_all = {point1 = p1,point2 = point_all,maxFraction = 1}
+
+			--*** NO ***
+			w:raycast(ray_no, cb_closest)
+			assert_equal(#cb_results, 0)
+			w:raycast(ray_no, cb_closest)
+			assert_equal(#cb_results, 0)
+			w:raycast(ray_no, cb_closest)
+			assert_equal(#cb_results, 0)
+
+			--*** ONE ***
+			w:raycast(ray_1, cb_closest)
+			assert_equal(#cb_results, 1)
+			assert_equal(cb_results[1].body, body_1)
+			cb_results = {}
+			w:raycast(ray_1,cb_all)
+			assert_equal(#cb_results, 1)
+			cb_results = {}
+			w:raycast(ray_1,cb_any)
+			assert_equal(#cb_results, 1)
+			cb_results = {}
+
+			--*** ALL ***
+			w:raycast(ray_all,cb_closest)
+			assert_equal(cb_results[#cb_results].body, body_1)
+			cb_results = {}
+			w:raycast(ray_all,cb_all)
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+			w:raycast(ray_all,cb_any)
+			assert_equal(#cb_results, 1)
+			cb_results = {}
+
+			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+
+			--c1:setCollideWithMaskBits(1)
+			--c2:setCollideWithMaskBits(1)
+			--c3:setCollideWithMaskBits(1)
+
+		--	c1:setCollisionCategoryBits(1)
+		--	c2:setCollisionCategoryBits(1)
+		--	c3:setCollisionCategoryBits(1)
+
+			w:raycast(ray_all,cb_all,bit.tobit(1))
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+
+			w:raycast(ray_all,cb_all,bit.tobit(2))
+			assert_equal(#cb_results, 0)
+			cb_results = {}
+
+			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+
+
+			c1:setCollisionCategoryBits(2)
+			c2:setCollisionCategoryBits(2)
+			c3:setCollisionCategoryBits(2)
+			w:raycast(ray_all,cb_all,bit.tobit(1))
+			assert_equal(#cb_results, 0)
+			cb_results = {}
+
+			w:raycast(ray_all,cb_all,bit.tobit(2))
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+
+			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			assert_equal(#cb_results, 3)
+			cb_results = {}
+
+			local cb_error = function() error("error happened") end
+			local status, error = pcall(w.raycast, w, ray_all,cb_error)
+			assert_false(status)
+			--remove line number
+			UTILS.test_error(error, "error happened")
+
+			cb_error = function() w.aaaa() end
+			status, error = pcall(w.raycast, w, ray_all,cb_error)
+			assert_false(status)
+			UTILS.test_error(error, " attempt to call field 'aaaa' (a nil value)")
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+		end)
+
+
 
 	end)
 end
