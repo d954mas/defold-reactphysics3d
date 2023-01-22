@@ -35,6 +35,7 @@ scale_mode = stretch
 [graphics]
 verify_graphics_calls = 0
 max_draw_calls = 1024
+max_debug_vertices = 100000
 
 [physics]
 type = 3D

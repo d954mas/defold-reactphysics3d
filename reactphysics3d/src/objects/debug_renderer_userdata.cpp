@@ -120,20 +120,15 @@ static int Draw(lua_State *L){
     dmMessage::URL receiver;
     dmMessage::ResetURL(&receiver);
     dmMessage::Result result = dmMessage::GetSocket(dmRender::RENDER_SOCKET_NAME, &receiver.m_Socket);
-    if (result != dmMessage::RESULT_OK)
-    {
+    if (result != dmMessage::RESULT_OK){
         luaL_error(L,"The socket '%s' could not be found.", dmRender::RENDER_SOCKET_NAME);
     }
 
-
+    dmRenderDDF::DrawLine msg;
     const Array<DebugRenderer::DebugLine>& lines = userdata->renderer->getLines();
     //dmLogInfo("lines:%d",lines.size());
-
-    dmRenderDDF::DrawLine msg;
     for(int i=0;i<lines.size();i++){
         DebugRenderer::DebugLine line = lines[i];
-
-
         DrawLine(msg,line.point1,line.point2,line.color1);
         result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
         if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
@@ -156,7 +151,6 @@ static int Draw(lua_State *L){
         result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
         if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
     }
-
 	return 0;
 }
 
