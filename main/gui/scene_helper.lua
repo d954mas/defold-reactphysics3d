@@ -109,6 +109,8 @@ function M.updatePhysics(dt,objects)
 	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.COLLISION_SHAPE,
 			M.rendering.shapes)
 
+	w:setIsDebugRenderingEnabled(M.rendering.debug_draw)
+
 	w:update(M.simulation.step);
 	for _,object in ipairs(objects)do
 		object:update_transform()

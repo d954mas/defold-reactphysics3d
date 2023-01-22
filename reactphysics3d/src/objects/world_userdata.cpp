@@ -259,6 +259,8 @@ static int SetIsDebugRenderingEnabled(lua_State *L){
     check_arg_count(L, 2);
     WorldUserdata *data = WorldUserdataCheck(L, 1);
     data->world->setIsDebugRenderingEnabled(lua_toboolean(L,2));
+    //reset or renderer will have prev frame data
+    data->world->getDebugRenderer().reset();
 	return 0;
 }
 

@@ -5,6 +5,19 @@
 #define META_NAME "rp3d::DebugRenderer"
 #define USERDATA_TYPE "rp3d::DebugRenderer"
 
+#include <render/render_ddf.h> // dmRenderDDF::DrawLine
+namespace dmRender
+{
+    extern const char* RENDER_SOCKET_NAME;
+}
+
+namespace dmMessage
+{
+    Result GetSocket(const char *name, HSocket* out_socket);
+}
+
+
+
 
 using namespace reactphysics3d;
 
@@ -80,10 +93,70 @@ static int GetContactNormalLength(lua_State *L){
     return 1;
 }
 
+inline void RGBUintToVector(uint rgb, dmVMath::Vector4 &color){
+    color.setX(((rgb & 0x00FF0000) >> 16)/256.0);
+    color.setY(((rgb & 0x0000FF00) >> 8)/256.0);
+    color.setZ(((rgb & 0x000000FF) >> 0)/256.0);
+}
+
+inline void DrawLine(dmRenderDDF::DrawLine &msg, Vector3 p1,Vector3 p2,uint32 color){;
+    msg.m_StartPoint.setX(p1.x);
+    msg.m_StartPoint.setY(p1.y);
+    msg.m_StartPoint.setZ(p1.z);
+
+    msg.m_EndPoint.setX(p2.x);
+    msg.m_EndPoint.setY(p2.y);
+    msg.m_EndPoint.setZ(p2.z);
+
+    RGBUintToVector(color,msg.m_Color);
+}
+
 static int Draw(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
     DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+
+    dmGameObject::HInstance instance = dmScript::CheckGOInstance(L);
+    dmMessage::URL receiver;
+    dmMessage::ResetURL(&receiver);
+    dmMessage::Result result = dmMessage::GetSocket(dmRender::RENDER_SOCKET_NAME, &receiver.m_Socket);
+    if (result != dmMessage::RESULT_OK)
+    {
+        luaL_error(L,"The socket '%s' could not be found.", dmRender::RENDER_SOCKET_NAME);
+    }
+
+
+    const Array<DebugRenderer::DebugLine>& lines = userdata->renderer->getLines();
+    //dmLogInfo("lines:%d",lines.size());
+
+    dmRenderDDF::DrawLine msg;
+    for(int i=0;i<lines.size();i++){
+        DebugRenderer::DebugLine line = lines[i];
+
+
+        DrawLine(msg,line.point1,line.point2,line.color1);
+        result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
+        if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
+    }
+
+    const Array<DebugRenderer::DebugTriangle>& triangles = userdata->renderer->getTriangles();
+    //dmLogInfo("triangles:%d",triangles.size());
+    for(int i=0;i<triangles.size();i++){
+        DebugRenderer::DebugTriangle triangle = triangles[i];
+
+        DrawLine(msg,triangle.point1,triangle.point2,triangle.color1);
+        result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
+        if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
+
+        DrawLine(msg,triangle.point2,triangle.point3,triangle.color2);
+        result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
+        if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
+
+        DrawLine(msg,triangle.point3,triangle.point1,triangle.color3);
+        result = dmMessage::PostDDF(&msg,0x0, &receiver, (uintptr_t) instance,0, 0);
+        if(result!=dmMessage::RESULT_OK){luaL_error(L,"can't draw line");}
+    }
+
 	return 0;
 }
 
