@@ -414,6 +414,30 @@ return function()
 			rp3d.destroyBoxShape(shape)
 		end)
 
+		test("testOverlapList()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+			local shape_big = rp3d.createBoxShape(vmath.vector3(10))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+
+			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c3= body_3:addCollider( shape_big,{position = vmath.vector3(),quat = vmath.quat()})
+
+
+			local list1 = w:testOverlapList()
+
+			assert_equal(#list1,3)
+
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+			rp3d.destroyBoxShape(shape_big)
+		end)
+
 
 
 	end)

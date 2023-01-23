@@ -421,6 +421,16 @@ static int TestOverlapBodyList(lua_State *L){
 	return 1;
 }
 
+static int TestOverlapList(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    NewTableOverlapCallback cb(L);
+    cb.begin();
+    data->world->testOverlap(cb);
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -465,6 +475,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"raycast",Raycast},
         {"testOverlap2Bodies",TestOverlap2Bodies},
         {"testOverlapBodyList",TestOverlapBodyList},
+        {"testOverlapList",TestOverlapList},
         {"__tostring",ToString},
         { 0, 0 }
     };
