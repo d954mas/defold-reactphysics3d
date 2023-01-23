@@ -35,6 +35,11 @@ return function()
 				COLLIDER_AABB = "COLLIDER_AABB", COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
 				COLLISION_SHAPE = "COLLISION_SHAPE", CONTACT_POINT = "CONTACT_POINT", CONTACT_NORMAL = "CONTACT_NORMAL"
 			})
+
+			test_enum_v2("OverlapPair","EventType", {
+				OverlapStart = "OverlapStart", OverlapStay = "OverlapStay",
+				OverlapExit = "OverlapExit"
+			})
 		end)
 
 		--crash if have some memory corrupted issues

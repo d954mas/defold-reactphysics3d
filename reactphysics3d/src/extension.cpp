@@ -167,6 +167,17 @@ static void LuaInit(lua_State* L){
         lua_setfield(L, -2, "DebugItem");
     lua_setfield(L, -2, "DebugRenderer");
 
+    lua_newtable(L);
+        lua_newtable(L);
+            lua_pushstring(L, "OverlapStart");
+            lua_setfield(L, -2, "OverlapStart");
+            lua_pushstring(L, "OverlapStay");
+            lua_setfield(L, -2, "OverlapStay");
+            lua_pushstring(L, "OverlapExit");
+            lua_setfield(L, -2, "OverlapExit");
+        lua_setfield(L, -2, "EventType");
+    lua_setfield(L, -2, "OverlapPair");
+
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));
 }

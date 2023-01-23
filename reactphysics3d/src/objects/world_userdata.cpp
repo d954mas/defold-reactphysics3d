@@ -1,6 +1,7 @@
 #include "objects/world_userdata.h"
 #include "objects/collision_body_userdata.h"
 #include "objects/debug_renderer_userdata.h"
+#include "objects/collider_userdata.h"
 #include "static_hash.h"
 #include "utils.h"
 
@@ -37,6 +38,37 @@ class LuaRayCastCallback : public RaycastCallback  {
                 error_message = lua_tostring(L,-1);
                 lua_pop(L,1);
                 return 0;
+            }
+        }
+};
+
+class NewTableOverlapCallback : public OverlapCallback  {
+    public:
+        lua_State *L;
+        NewTableOverlapCallback(lua_State *L) : L(L){}
+
+       void begin(){
+            lua_newtable(L);
+       }
+       void onOverlap(OverlapCallback::CallbackData &callbackData){
+            for(int i=0;i<callbackData.getNbOverlappingPairs();i++){
+                OverlapPair pair = callbackData.getOverlappingPair(i);
+                lua_newtable(L);
+                ColliderPush(L,pair.getCollider1());
+                lua_setfield(L, -2, "collider1");
+                ColliderPush(L,pair.getCollider2());
+                lua_setfield(L, -2, "collider2");
+
+                CollisionBodyPush(L,pair.getBody1());
+                lua_setfield(L, -2, "body1");
+                CollisionBodyPush(L,pair.getBody2());
+                lua_setfield(L, -2, "body2");
+
+                lua_pushstring(L,OverlapPairEventTypeEnumToString(pair.getEventType()));
+                lua_setfield(L, -2, "eventType");
+
+                lua_rawseti(L, -2, i+1);
+
             }
         }
 };
@@ -368,6 +400,27 @@ static int Raycast(lua_State *L){
     return 0;
 }
 
+static int TestOverlap2Bodies(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body1 = CollisionBodyUserdataCheck(L,2);
+    CollisionBodyUserdata* body2 = CollisionBodyUserdataCheck(L,3);
+    lua_pushboolean(L,data->world->testOverlap(body1->body,body2->body));
+	return 1;
+}
+
+static int TestOverlapBodyList(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body1 = CollisionBodyUserdataCheck(L,2);
+    NewTableOverlapCallback cb(L);
+    cb.begin();
+    data->world->testOverlap(body1->body,cb);
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -410,6 +463,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"destroyRigidBody",DestroyRigidBody},
         {"getDebugRenderer",GetDebugRenderer},
         {"raycast",Raycast},
+        {"testOverlap2Bodies",TestOverlap2Bodies},
+        {"testOverlapBodyList",TestOverlapBodyList},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -481,6 +536,20 @@ PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index){
         luaL_error(L,"WorldSettings should be table");
     }
     return settings;
+}
+
+
+const char * OverlapPairEventTypeEnumToString(OverlapCallback::OverlapPair::EventType name){
+    switch(name){
+        case OverlapCallback::OverlapPair::EventType::OverlapStart:
+            return "OverlapStart";
+        case OverlapCallback::OverlapPair::EventType::OverlapStay:
+            return "OverlapStay";
+        case OverlapCallback::OverlapPair::EventType::OverlapExit:
+            return "OverlapExit";
+        default:
+            assert(false);
+    }
 }
 
 }

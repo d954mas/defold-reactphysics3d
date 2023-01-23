@@ -220,7 +220,7 @@ return function()
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
-		test("RayCast()", function()
+		test("raycast()", function()
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(1))
 
@@ -346,6 +346,69 @@ return function()
 			status, error = pcall(w.raycast, w, ray_all,cb_error)
 			assert_false(status)
 			UTILS.test_error(error, " attempt to call field 'aaaa' (a nil value)")
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+		end)
+
+		test("testOverlap2Bodies()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+
+			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+			assert_false(w:testOverlap2Bodies(body_1,body_1))
+			assert_true(w:testOverlap2Bodies(body_1,body_2))
+			assert_true(w:testOverlap2Bodies(body_2,body_3))
+			assert_false(w:testOverlap2Bodies(body_1,body_3))
+
+
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+		end)
+
+
+		test("testOverlapBodyList()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+
+			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+
+			local list1 = w:testOverlapBodyList(body_1)
+			local list2 = w:testOverlapBodyList(body_2)
+			local list3 = w:testOverlapBodyList(body_3)
+
+			assert_equal(#list1,1)
+			assert_equal(#list2,2)
+			assert_equal(#list3,1)
+
+			assert_equal(list1[1].body1,body_2)
+			assert_equal(list1[1].body2,body_1)
+			assert_equal(list1[1].collider1,c2)
+			assert_equal(list1[1].collider2,c1)
+			assert_equal(list1[1].eventType,rp3d.OverlapPair.EventType.OverlapStart)
+
+			w:destroyRigidBody(body_2)
+			w:destroyRigidBody(body_3)
+
+			local list4 = w:testOverlapBodyList(body_1)
+			assert_equal(#list4,0)
+
+
 
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)

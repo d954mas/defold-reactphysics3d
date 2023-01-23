@@ -51,6 +51,16 @@ local Rp3dRay = {
 ---@field collider Rp3dCollider
 local Rp3dRaycastInfo = {}
 
+---@class Rp3dOverlapPair
+---@field collider1 Rp3dCollider
+---@field collider2 Rp3dCollider
+---@field body1 Rp3dCollisionBody
+---@field body2 Rp3dCollisionBody
+---@field eventType string OverlapPair.EventType
+local Rp3dOverlapPair = {}
+
+
+
 ---@class Rp3dTransform
 local Rp3dTransform = {
 	position = vmath.vector3(),
@@ -630,6 +640,19 @@ function PhysicsWorld:destroyRigidBody(body) end
 ---@return Rp3dDebugRenderer
 function PhysicsWorld:getDebugRenderer() end
 
+
+--Return true if two bodies overlap (collide)
+---@param body1 Rp3dCollisionBody
+---@param body2 Rp3dCollisionBody
+---@return boolean
+function PhysicsWorld:testOverlap2Bodies(body1, body2) end
+
+--Report all the bodies that overlap (collide) with the body in parameter.
+--Use this method if you are not interested in contacts but if you simply want to know which bodies overlap with the body in parameter.
+--If you want to get the contacts, you need to use the testCollisionBodyList() method instead.
+---@return Rp3dOverlapPair[]
+function PhysicsWorld:testOverlapBodyList(body1) end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
@@ -819,7 +842,14 @@ rp3d.DebugRenderer = {
 		CONTACT_POINT = "CONTACT_POINT",
 		CONTACT_NORMAL = "CONTACT_NORMAL",
 	},
+}
 
+rp3d.OverlapPair = {
+	EventType = {
+		OverlapStart = "OverlapStart",
+		OverlapStay = "OverlapStay",
+		OverlapExit = "OverlapExit",
+	},
 }
 
 
