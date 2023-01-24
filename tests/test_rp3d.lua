@@ -40,6 +40,11 @@ return function()
 				OverlapStart = "OverlapStart", OverlapStay = "OverlapStay",
 				OverlapExit = "OverlapExit"
 			})
+
+			test_enum_v2("ContactPair","EventType", {
+				ContactStart = "ContactStart", ContactStay = "ContactStay",
+				ContactExit = "ContactExit"
+			})
 		end)
 
 		--crash if have some memory corrupted issues

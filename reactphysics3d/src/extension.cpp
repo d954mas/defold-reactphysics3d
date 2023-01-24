@@ -178,6 +178,17 @@ static void LuaInit(lua_State* L){
         lua_setfield(L, -2, "EventType");
     lua_setfield(L, -2, "OverlapPair");
 
+    lua_newtable(L);
+        lua_newtable(L);
+            lua_pushstring(L, "ContactStart");
+            lua_setfield(L, -2, "ContactStart");
+            lua_pushstring(L, "ContactStay");
+            lua_setfield(L, -2, "ContactStay");
+            lua_pushstring(L, "ContactExit");
+            lua_setfield(L, -2, "ContactExit");
+        lua_setfield(L, -2, "EventType");
+    lua_setfield(L, -2, "ContactPair");
+
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));
 }

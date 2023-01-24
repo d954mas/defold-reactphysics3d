@@ -438,6 +438,42 @@ return function()
 			rp3d.destroyBoxShape(shape_big)
 		end)
 
+		test("testCollision2Bodies()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+
+			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+
+
+			assert_nil(w:testCollision2Bodies(body_1,body_3))
+			local l1 = w:testCollision2Bodies(body_1,body_2)
+			assert_equal(l1.body1,body_2)
+			assert_equal(l1.body2,body_1)
+			assert_equal(l1.collider1,c2)
+			assert_equal(l1.collider2,c1)
+			assert_equal(l1.eventType,rp3d.ContactPair.EventType.ContactStart)
+
+			local contacts = l1.contacts
+			assert_type(contacts,"table")
+			assert_equal(#contacts,4)
+			assert_equal_v3(contacts[1].worldNormal,vmath.vector3(-1,0,0))
+			assert_equal(contacts[1].penetrationDepth,2)
+			assert_equal_v3(contacts[1].localPointOnCollider1,vmath.vector3(-2.5, -2.5, 2.5))
+			assert_equal_v3(contacts[1].localPointOnCollider2,vmath.vector3(2.5, -2.5, 2.5))
+
+			local l3 = w:testCollision2Bodies(body_3,body_2)
+			assert_type(l3,"table")
+
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+		end)
 
 
 	end)

@@ -29,6 +29,7 @@ WorldUserdata* WorldUserdataCheck(lua_State *L, int index);
 PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index);
 
 const char * OverlapPairEventTypeEnumToString(OverlapCallback::OverlapPair::EventType name);
+const char * ContactPairEventTypeEnumToString(CollisionCallback::ContactPair::EventType name);
 
 }
 #endif

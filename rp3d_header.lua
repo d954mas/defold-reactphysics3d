@@ -59,6 +59,22 @@ local Rp3dRaycastInfo = {}
 ---@field eventType string OverlapPair.EventType
 local Rp3dOverlapPair = {}
 
+---@class Rp3dContactPair
+---@field collider1 Rp3dCollider
+---@field collider2 Rp3dCollider
+---@field body1 Rp3dCollisionBody
+---@field body2 Rp3dCollisionBody
+---@field eventType string ContactPair.EventType
+---@field contacts Rp3dContactPairContact[]
+local Rp3dContactPair = {}
+
+---@class Rp3dContactPairContact
+---@field penetrationDepth  number
+---@field worldNormal vector3
+---@field localPointOnCollider1 vector3
+---@field localPointOnCollider2 vector3
+local Rp3dContactPairContact = {}
+
 
 
 ---@class Rp3dTransform
@@ -660,6 +676,14 @@ function PhysicsWorld:testOverlapBodyList(body1) end
 ---@return Rp3dOverlapPair[]
 function PhysicsWorld:testOverlapList() end
 
+
+--Use this method if you only want to get all the contacts between two bodies.
+--If you are not interested in the contacts but you only want to know if the bodies collide,
+--you can use the testOverlap() method instead.
+---@param body1 Rp3dCollisionBody
+---@return Rp3dContactPair|nil
+function PhysicsWorld:testCollision2Bodies() end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
@@ -856,6 +880,14 @@ rp3d.OverlapPair = {
 		OverlapStart = "OverlapStart",
 		OverlapStay = "OverlapStay",
 		OverlapExit = "OverlapExit",
+	},
+}
+
+rp3d.ContactPair = {
+	EventType = {
+		ContactStart = "ContactStart",
+		ContactStay = "ContactStay",
+		ContactExit = "ContactExit",
 	},
 }
 

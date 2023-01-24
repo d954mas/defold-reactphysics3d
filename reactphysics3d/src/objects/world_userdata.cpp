@@ -73,6 +73,68 @@ class NewTableOverlapCallback : public OverlapCallback  {
         }
 };
 
+class NewTableCollisionCallback  : public CollisionCallback   {
+    public:
+        lua_State *L;
+        NewTableCollisionCallback(lua_State *L) : L(L){}
+
+        void begin(){
+            lua_newtable(L);
+        }
+        void onContact(const CollisionCallback::CallbackData &callbackData){
+            for(int i=0;i<callbackData.getNbContactPairs();i++){
+                ContactPair pair = callbackData.getContactPair(i);
+                lua_newtable(L);
+                    ColliderPush(L,pair.getCollider1());
+                    lua_setfield(L, -2, "collider1");
+                    ColliderPush(L,pair.getCollider2());
+                    lua_setfield(L, -2, "collider2");
+
+                    CollisionBodyPush(L,pair.getBody1());
+                    lua_setfield(L, -2, "body1");
+                    CollisionBodyPush(L,pair.getBody2());
+                    lua_setfield(L, -2, "body2");
+
+                    lua_pushstring(L,ContactPairEventTypeEnumToString(pair.getEventType()));
+                    lua_setfield(L, -2, "eventType");
+
+                    lua_newtable(L);
+                    for(int j=0;j<pair.getNbContactPoints();j++){
+                        ContactPoint point = pair.getContactPoint(j);
+                        dmVMath::Vector3 dmWorldNormal;
+                        dmVMath::Vector3 dmLocalPointOnCollider1;
+                        dmVMath::Vector3 dmLocalPointOnCollider2;
+
+                        dmWorldNormal.setX(point.getWorldNormal().x);
+                        dmWorldNormal.setY(point.getWorldNormal().y);
+                        dmWorldNormal.setZ(point.getWorldNormal().z);
+
+                        dmLocalPointOnCollider1.setX(point.getLocalPointOnCollider1().x);
+                        dmLocalPointOnCollider1.setY(point.getLocalPointOnCollider1().y);
+                        dmLocalPointOnCollider1.setZ(point.getLocalPointOnCollider1().z);
+
+                        dmLocalPointOnCollider2.setX(point.getLocalPointOnCollider2().x);
+                        dmLocalPointOnCollider2.setY(point.getLocalPointOnCollider2().y);
+                        dmLocalPointOnCollider2.setZ(point.getLocalPointOnCollider2().z);
+
+                        lua_newtable(L);
+                            dmScript::PushVector3(L, dmWorldNormal);
+                            lua_setfield(L, -2, "worldNormal");
+                            dmScript::PushVector3(L, dmLocalPointOnCollider1);
+                            lua_setfield(L, -2, "localPointOnCollider1");
+                            dmScript::PushVector3(L, dmLocalPointOnCollider2);
+                            lua_setfield(L, -2, "localPointOnCollider2");
+                            lua_pushnumber(L,point.getPenetrationDepth());
+                            lua_setfield(L, -2, "penetrationDepth");
+                        lua_rawseti(L, -2, j+1);
+                    }
+                    lua_setfield(L, -2, "contacts");
+
+                    lua_rawseti(L, -2, i+1);
+            }
+        }
+};
+
 
 WorldUserdata::WorldUserdata(PhysicsWorld* world): BaseUserData(USERDATA_TYPE){
     this->world = world;
@@ -431,6 +493,28 @@ static int TestOverlapList(lua_State *L){
 	return 1;
 }
 
+static int TestCollision2Bodies(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body1 = CollisionBodyUserdataCheck(L,2);
+    CollisionBodyUserdata* body2 = CollisionBodyUserdataCheck(L,3);
+    NewTableCollisionCallback cb(L);
+    cb.begin();
+    data->world->testCollision(body1->body,body2->body,cb);
+    int len = lua_objlen(L,-1);
+    if(len == 0){
+        lua_pop(L,1);
+        lua_pushnil(L);
+    }else if(len == 1){
+        lua_rawgeti(L,-1,1);
+        lua_remove(L,-2);
+    }else{
+        luaL_error(L,"Should be 1 or 0 collisions. Get:%d",len);
+    }
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -476,6 +560,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testOverlap2Bodies",TestOverlap2Bodies},
         {"testOverlapBodyList",TestOverlapBodyList},
         {"testOverlapList",TestOverlapList},
+        {"testCollision2Bodies",TestCollision2Bodies},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -547,6 +632,19 @@ PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index){
         luaL_error(L,"WorldSettings should be table");
     }
     return settings;
+}
+
+const char * ContactPairEventTypeEnumToString(CollisionCallback::ContactPair::EventType name){
+    switch(name){
+        case CollisionCallback::ContactPair::EventType::ContactStart:
+            return "ContactStart";
+        case CollisionCallback::ContactPair::EventType::ContactStay:
+            return "ContactStay";
+        case CollisionCallback::ContactPair::EventType::ContactExit:
+            return "ContactExit";
+        default:
+            assert(false);
+    }
 }
 
 
