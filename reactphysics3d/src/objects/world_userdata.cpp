@@ -515,6 +515,27 @@ static int TestCollision2Bodies(lua_State *L){
 	return 1;
 }
 
+static int TestCollisionBodyList(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    CollisionBodyUserdata* body1 = CollisionBodyUserdataCheck(L,2);
+    NewTableCollisionCallback cb(L);
+    cb.begin();
+    data->world->testCollision(body1->body,cb);
+	return 1;
+}
+
+
+static int TestCollisionList(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    NewTableCollisionCallback cb(L);
+    cb.begin();
+    data->world->testCollision(cb);
+	return 1;
+}
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -561,6 +582,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testOverlapBodyList",TestOverlapBodyList},
         {"testOverlapList",TestOverlapList},
         {"testCollision2Bodies",TestCollision2Bodies},
+        {"testCollisionBodyList",TestCollisionBodyList},
+        {"testCollisionList",TestCollisionList},
         {"__tostring",ToString},
         { 0, 0 }
     };

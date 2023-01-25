@@ -684,6 +684,22 @@ function PhysicsWorld:testOverlapList() end
 ---@return Rp3dContactPair|nil
 function PhysicsWorld:testCollision2Bodies() end
 
+
+--Test collision and report all the contacts involving the body in parameter.
+--Use this method if you only want to get all the contacts involving a given body.
+--If you are not interested in the contacts but you only want to know if the bodies collide,
+--you can use the testOverlap() method instead.
+---@param body1 Rp3dCollisionBody
+---@return Rp3dContactPair[]
+function PhysicsWorld:testCollisionBodyList(body1) end
+
+--Test collision and report contacts between each colliding bodies in the world.
+--Use this method if you want to get all the contacts between colliding bodies in the world.
+--If you are not interested in the contacts but you only want to know if the bodies collide,
+--you can use the testOverlap() method instead.
+---@return Rp3dContactPair[]
+function PhysicsWorld:testCollisionList() end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 

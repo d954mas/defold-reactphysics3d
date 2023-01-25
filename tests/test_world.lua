@@ -76,7 +76,7 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			UTILS.test_method_get_set(w, "SleepAngularVelocity",
 					{ float = true,
-					  values = { 0,0.002,1,0.05 }
+					  values = { 0, 0.002, 1, 0.05 }
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
@@ -85,7 +85,7 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			UTILS.test_method_get_set(w, "SleepLinearVelocity",
 					{ float = true,
-						values = { 0.1,0.2,0.3,0.4 }
+					  values = { 0.1, 0.2, 0.3, 0.4 }
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
@@ -94,7 +94,7 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			UTILS.test_method_get_set(w, "TimeBeforeSleep",
 					{ float = true,
-					  values = { 1,0.2,2,32,0.5 }
+					  values = { 1, 0.2, 2, 32, 0.5 }
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
@@ -102,10 +102,10 @@ return function()
 		test("Is/SetIs GravityEnabled()", function()
 			local w = rp3d.createPhysicsWorld()
 			UTILS.test_method_get_set(w, "GravityEnabled",
-					{ 
-					  getter_full = "isGravityEnabled",
-					  setter_full = "setIsGravityEnabled",
-					  values = { false, true, true, false }
+					{
+						getter_full = "isGravityEnabled",
+						setter_full = "setIsGravityEnabled",
+						values = { false, true, true, false }
 					})
 			rp3d.destroyPhysicsWorld(w)
 		end)
@@ -146,19 +146,19 @@ return function()
 
 		test("getNbRigidBodies()", function()
 			local w = rp3d.createPhysicsWorld()
-			assert_equal(0,w:getNbRigidBodies())
+			assert_equal(0, w:getNbRigidBodies())
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
 		test("getNbCollisionBodies()", function()
 			local w = rp3d.createPhysicsWorld()
-			assert_equal(0,w:getNbCollisionBodies())
+			assert_equal(0, w:getNbCollisionBodies())
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
 		test("createCollisionBody()", function()
 			local w = rp3d.createPhysicsWorld()
-			local collisionBody = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+			local collisionBody = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(collisionBody)
 			assert_false(collisionBody:isRigidBody())
 			rp3d.destroyPhysicsWorld(w)
@@ -166,7 +166,7 @@ return function()
 
 		test("createRigidBody()", function()
 			local w = rp3d.createPhysicsWorld()
-			local collisionBody = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+			local collisionBody = w:createRigidBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(collisionBody)
 			assert_true(collisionBody:isRigidBody())
 			rp3d.destroyPhysicsWorld(w)
@@ -174,43 +174,43 @@ return function()
 
 		test("destroyCollisionBody()", function()
 			local w = rp3d.createPhysicsWorld()
-			local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+			local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(body)
 			w:destroyCollisionBody(body)
-			local status, error = pcall(body.isRigidBody,body)
-			assert_false(status,error)
-			UTILS.test_error(error,"rp3d::CollisionBody was destroyed")
+			local status, error = pcall(body.isRigidBody, body)
+			assert_false(status, error)
+			UTILS.test_error(error, "rp3d::CollisionBody was destroyed")
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
 		test("destroyRigidBody()", function()
 			local w = rp3d.createPhysicsWorld()
-			local body = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+			local body = w:createRigidBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(body)
 			w:destroyRigidBody(body)
-			local status, error = pcall(body.isRigidBody,body)
-			assert_false(status,error)
-			UTILS.test_error(error,"rp3d::CollisionBody was destroyed")
+			local status, error = pcall(body.isRigidBody, body)
+			assert_false(status, error)
+			UTILS.test_error(error, "rp3d::CollisionBody was destroyed")
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
 		test("destroyCollisionBody(rigid)", function()
 			local w = rp3d.createPhysicsWorld()
-			local body = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+			local body = w:createRigidBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(body)
-			local status, error = pcall(w.destroyCollisionBody,w,body)
-			assert_false(status,error)
-			UTILS.test_error(error,"can't destroy RigidBody.Need CollisionBody")
+			local status, error = pcall(w.destroyCollisionBody, w, body)
+			assert_false(status, error)
+			UTILS.test_error(error, "can't destroy RigidBody.Need CollisionBody")
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
 		test("destroyRigidBody(collision)", function()
 			local w = rp3d.createPhysicsWorld()
-			local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+			local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 			assert_not_nil(body)
-			local status, error = pcall(w.destroyRigidBody,w,body)
-			assert_false(status,error)
-			UTILS.test_error(error,"can't destroy CollisionBody.Need RigidBody")
+			local status, error = pcall(w.destroyRigidBody, w, body)
+			assert_false(status, error)
+			UTILS.test_error(error, "can't destroy CollisionBody.Need RigidBody")
 			rp3d.destroyPhysicsWorld(w)
 		end)
 
@@ -224,13 +224,13 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(1))
 
-			local body_1 = w:createRigidBody({ position = vmath.vector3(5, 0, 0),quat = vmath.quat() })
-			local body_2 = w:createRigidBody({ position = vmath.vector3(10, 0, 0),quat = vmath.quat() })
-			local body_3 = w:createRigidBody({ position = vmath.vector3(15, 0, 0),quat = vmath.quat() })
+			local body_1 = w:createRigidBody({ position = vmath.vector3(5, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(10, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(15, 0, 0), quat = vmath.quat() })
 
-			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
 			---@type Rp3dRaycastInfo[]
 			local cb_results = {}
@@ -261,9 +261,9 @@ return function()
 			local point_no = vmath.vector3(0, 10, 0)
 			local point_one = vmath.vector3(5, 0, 0)
 			local point_all = vmath.vector3(15, 0, 0)
-			local ray_no = {point1 = p1,point2 = point_no,maxFraction = 1}
-			local ray_1 = {point1 = p1,point2 = point_one,maxFraction = 1}
-			local ray_all = {point1 = p1,point2 = point_all,maxFraction = 1}
+			local ray_no = { point1 = p1, point2 = point_no, maxFraction = 1 }
+			local ray_1 = { point1 = p1, point2 = point_one, maxFraction = 1 }
+			local ray_all = { point1 = p1, point2 = point_all, maxFraction = 1 }
 
 			--*** NO ***
 			w:raycast(ray_no, cb_closest)
@@ -278,25 +278,25 @@ return function()
 			assert_equal(#cb_results, 1)
 			assert_equal(cb_results[1].body, body_1)
 			cb_results = {}
-			w:raycast(ray_1,cb_all)
+			w:raycast(ray_1, cb_all)
 			assert_equal(#cb_results, 1)
 			cb_results = {}
-			w:raycast(ray_1,cb_any)
+			w:raycast(ray_1, cb_any)
 			assert_equal(#cb_results, 1)
 			cb_results = {}
 
 			--*** ALL ***
-			w:raycast(ray_all,cb_closest)
+			w:raycast(ray_all, cb_closest)
 			assert_equal(cb_results[#cb_results].body, body_1)
 			cb_results = {}
-			w:raycast(ray_all,cb_all)
+			w:raycast(ray_all, cb_all)
 			assert_equal(#cb_results, 3)
 			cb_results = {}
-			w:raycast(ray_all,cb_any)
+			w:raycast(ray_all, cb_any)
 			assert_equal(#cb_results, 1)
 			cb_results = {}
 
-			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			w:raycast(ray_all, cb_all, bit.tobit(math.pow(2, 16) - 1))
 			assert_equal(#cb_results, 3)
 			cb_results = {}
 
@@ -304,46 +304,45 @@ return function()
 			--c2:setCollideWithMaskBits(1)
 			--c3:setCollideWithMaskBits(1)
 
-		--	c1:setCollisionCategoryBits(1)
-		--	c2:setCollisionCategoryBits(1)
-		--	c3:setCollisionCategoryBits(1)
+			--	c1:setCollisionCategoryBits(1)
+			--	c2:setCollisionCategoryBits(1)
+			--	c3:setCollisionCategoryBits(1)
 
-			w:raycast(ray_all,cb_all,bit.tobit(1))
+			w:raycast(ray_all, cb_all, bit.tobit(1))
 			assert_equal(#cb_results, 3)
 			cb_results = {}
 
-			w:raycast(ray_all,cb_all,bit.tobit(2))
+			w:raycast(ray_all, cb_all, bit.tobit(2))
 			assert_equal(#cb_results, 0)
 			cb_results = {}
 
-			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			w:raycast(ray_all, cb_all, bit.tobit(math.pow(2, 16) - 1))
 			assert_equal(#cb_results, 3)
 			cb_results = {}
-
 
 			c1:setCollisionCategoryBits(2)
 			c2:setCollisionCategoryBits(2)
 			c3:setCollisionCategoryBits(2)
-			w:raycast(ray_all,cb_all,bit.tobit(1))
+			w:raycast(ray_all, cb_all, bit.tobit(1))
 			assert_equal(#cb_results, 0)
 			cb_results = {}
 
-			w:raycast(ray_all,cb_all,bit.tobit(2))
+			w:raycast(ray_all, cb_all, bit.tobit(2))
 			assert_equal(#cb_results, 3)
 			cb_results = {}
 
-			w:raycast(ray_all,cb_all,bit.tobit(math.pow(2,16)-1))
+			w:raycast(ray_all, cb_all, bit.tobit(math.pow(2, 16) - 1))
 			assert_equal(#cb_results, 3)
 			cb_results = {}
 
 			local cb_error = function() error("error happened") end
-			local status, error = pcall(w.raycast, w, ray_all,cb_error)
+			local status, error = pcall(w.raycast, w, ray_all, cb_error)
 			assert_false(status)
 			--remove line number
 			UTILS.test_error(error, "error happened")
 
 			cb_error = function() w.aaaa() end
-			status, error = pcall(w.raycast, w, ray_all,cb_error)
+			status, error = pcall(w.raycast, w, ray_all, cb_error)
 			assert_false(status)
 			UTILS.test_error(error, " attempt to call field 'aaaa' (a nil value)")
 
@@ -355,60 +354,54 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
 
-			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
-			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
-			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
 
-			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
-			assert_false(w:testOverlap2Bodies(body_1,body_1))
-			assert_true(w:testOverlap2Bodies(body_1,body_2))
-			assert_true(w:testOverlap2Bodies(body_2,body_3))
-			assert_false(w:testOverlap2Bodies(body_1,body_3))
-
-
+			assert_false(w:testOverlap2Bodies(body_1, body_1))
+			assert_true(w:testOverlap2Bodies(body_1, body_2))
+			assert_true(w:testOverlap2Bodies(body_2, body_3))
+			assert_false(w:testOverlap2Bodies(body_1, body_3))
 
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)
 		end)
 
-
 		test("testOverlapBodyList()", function()
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
 
-			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
-			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
-			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
 
-			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
 			local list1 = w:testOverlapBodyList(body_1)
 			local list2 = w:testOverlapBodyList(body_2)
 			local list3 = w:testOverlapBodyList(body_3)
 
-			assert_equal(#list1,1)
-			assert_equal(#list2,2)
-			assert_equal(#list3,1)
+			assert_equal(#list1, 1)
+			assert_equal(#list2, 2)
+			assert_equal(#list3, 1)
 
-			assert_equal(list1[1].body1,body_2)
-			assert_equal(list1[1].body2,body_1)
-			assert_equal(list1[1].collider1,c2)
-			assert_equal(list1[1].collider2,c1)
-			assert_equal(list1[1].eventType,rp3d.OverlapPair.EventType.OverlapStart)
+			assert_equal(list1[1].body1, body_2)
+			assert_equal(list1[1].body2, body_1)
+			assert_equal(list1[1].collider1, c2)
+			assert_equal(list1[1].collider2, c1)
+			assert_equal(list1[1].eventType, rp3d.OverlapPair.EventType.OverlapStart)
 
 			w:destroyRigidBody(body_2)
 			w:destroyRigidBody(body_3)
 
 			local list4 = w:testOverlapBodyList(body_1)
-			assert_equal(#list4,0)
-
-
+			assert_equal(#list4, 0)
 
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)
@@ -419,19 +412,17 @@ return function()
 			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
 			local shape_big = rp3d.createBoxShape(vmath.vector3(10))
 
-			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
-			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
-			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
 
-			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c3= body_3:addCollider( shape_big,{position = vmath.vector3(),quat = vmath.quat()})
-
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape_big, { position = vmath.vector3(), quat = vmath.quat() })
 
 			local list1 = w:testOverlapList()
 
-			assert_equal(#list1,3)
-
+			assert_equal(#list1, 3)
 
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)
@@ -442,37 +433,107 @@ return function()
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
 
-			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0),quat = vmath.quat() })
-			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0),quat = vmath.quat() })
-			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0),quat = vmath.quat() })
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
 
-			local c1= body_1:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c2= body_2:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
-			local c3= body_3:addCollider( shape,{position = vmath.vector3(),quat = vmath.quat()})
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
-
-			assert_nil(w:testCollision2Bodies(body_1,body_3))
-			local l1 = w:testCollision2Bodies(body_1,body_2)
-			assert_equal(l1.body1,body_2)
-			assert_equal(l1.body2,body_1)
-			assert_equal(l1.collider1,c2)
-			assert_equal(l1.collider2,c1)
-			assert_equal(l1.eventType,rp3d.ContactPair.EventType.ContactStart)
+			assert_nil(w:testCollision2Bodies(body_1, body_3))
+			local l1 = w:testCollision2Bodies(body_1, body_2)
+			assert_equal(l1.body1, body_2)
+			assert_equal(l1.body2, body_1)
+			assert_equal(l1.collider1, c2)
+			assert_equal(l1.collider2, c1)
+			assert_equal(l1.eventType, rp3d.ContactPair.EventType.ContactStart)
 
 			local contacts = l1.contacts
-			assert_type(contacts,"table")
-			assert_equal(#contacts,4)
-			assert_equal_v3(contacts[1].worldNormal,vmath.vector3(-1,0,0))
-			assert_equal(contacts[1].penetrationDepth,2)
-			assert_equal_v3(contacts[1].localPointOnCollider1,vmath.vector3(-2.5, -2.5, 2.5))
-			assert_equal_v3(contacts[1].localPointOnCollider2,vmath.vector3(2.5, -2.5, 2.5))
+			assert_type(contacts, "table")
+			assert_equal(#contacts, 4)
+			assert_equal_v3(contacts[1].worldNormal, vmath.vector3(-1, 0, 0))
+			assert_equal(contacts[1].penetrationDepth, 2)
+			assert_equal_v3(contacts[1].localPointOnCollider1, vmath.vector3(-2.5, -2.5, 2.5))
+			assert_equal_v3(contacts[1].localPointOnCollider2, vmath.vector3(2.5, -2.5, 2.5))
 
-			local l3 = w:testCollision2Bodies(body_3,body_2)
-			assert_type(l3,"table")
-
+			local l3 = w:testCollision2Bodies(body_3, body_2)
+			assert_type(l3, "table")
 
 			rp3d.destroyPhysicsWorld(w)
 			rp3d.destroyBoxShape(shape)
+		end)
+
+		test("testCollisionBodyList()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
+
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+
+			local list1 = w:testCollisionBodyList(body_1)
+			local list2 = w:testCollisionBodyList(body_2)
+			local list3 = w:testCollisionBodyList(body_3)
+
+			assert_equal(#list1, 1)
+			assert_equal(#list2, 2)
+			assert_equal(#list3, 1)
+
+			assert_equal(list1[1].body1, body_2)
+			assert_equal(list1[1].body2, body_1)
+			assert_equal(list1[1].collider1, c2)
+			assert_equal(list1[1].collider2, c1)
+			assert_equal(list1[1].eventType, rp3d.ContactPair.EventType.ContactStart)
+			assert_equal(#list1[1].contacts, 4)
+
+			w:destroyRigidBody(body_2)
+			w:destroyRigidBody(body_3)
+
+			local list4 = w:testCollisionBodyList(body_1)
+			assert_equal(#list4, 0)
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+		end)
+
+		test("testCollisionList()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+			local shape_big = rp3d.createBoxShape(vmath.vector3(10))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
+
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape_big, { position = vmath.vector3(), quat = vmath.quat() })
+
+			local list1 = w:testCollisionList()
+
+			assert_equal(#list1, 3)
+
+			assert_equal(list1[1].body1, body_2)
+			assert_equal(list1[1].body2, body_3)
+			assert_equal(list1[1].collider1, c2)
+			assert_equal(list1[1].collider2, c3)
+			assert_equal(list1[1].eventType, rp3d.ContactPair.EventType.ContactStart)
+			assert_equal(#list1[1].contacts, 4)
+
+			w:destroyRigidBody(body_2)
+			w:destroyRigidBody(body_3)
+
+			local list4 = w:testCollisionList()
+			assert_equal(#list4, 0)
+
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+			rp3d.destroyBoxShape(shape_big)
 		end)
 
 
