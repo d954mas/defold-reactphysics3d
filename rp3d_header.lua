@@ -75,8 +75,6 @@ local Rp3dContactPair = {}
 ---@field localPointOnCollider2 vector3
 local Rp3dContactPairContact = {}
 
-
-
 ---@class Rp3dTransform
 local Rp3dTransform = {
 	position = vmath.vector3(),
@@ -699,6 +697,16 @@ function PhysicsWorld:testCollisionBodyList(body1) end
 --you can use the testOverlap() method instead.
 ---@return Rp3dContactPair[]
 function PhysicsWorld:testCollisionList() end
+
+--Return a CollisionBody of the world
+---@param index number
+---@return Rp3dCollisionBody
+function PhysicsWorld:getCollisionBody(index) end
+
+--Return a RigidBody of the world
+---@param index number
+---@return Rp3dRigidBody
+function PhysicsWorld:getRigidBody(index) end
 
 ---@class Rp3dCollisionShape
 local CollisionShape = {}

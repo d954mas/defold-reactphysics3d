@@ -536,6 +536,31 @@ static int TestCollisionList(lua_State *L){
     data->world->testCollision(cb);
 	return 1;
 }
+
+static int GetCollisionBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    uint32 idx = luaL_checknumber(L,2);
+    if(idx>=data->world->getNbCollisionBodies() || idx <0){
+        luaL_error(L,"bad idx:%d",idx);
+    }
+    CollisionBodyPush(L,data->world->getCollisionBody(idx));
+	return 1;
+}
+
+static int GetRigidBody(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    uint32 idx = luaL_checknumber(L,2);
+    if(idx>=data->world->getNbRigidBodies() || idx <0){
+        luaL_error(L,"bad idx:%d",idx);
+    }
+    CollisionBodyPush(L,data->world->getRigidBody(idx));
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -584,6 +609,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testCollision2Bodies",TestCollision2Bodies},
         {"testCollisionBodyList",TestCollisionBodyList},
         {"testCollisionList",TestCollisionList},
+        {"getCollisionBody",GetCollisionBody},
+        {"getRigidBody",GetRigidBody},
         {"__tostring",ToString},
         { 0, 0 }
     };

@@ -536,6 +536,46 @@ return function()
 			rp3d.destroyBoxShape(shape_big)
 		end)
 
+		test("getCollisionBody()", function()
+			local w = rp3d.createPhysicsWorld()
 
+			local body_1 = w:createCollisionBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createCollisionBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createCollisionBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
+
+			assert_equal(w:getCollisionBody(0), body_1)
+			assert_equal(w:getCollisionBody(1), body_2)
+			assert_equal(w:getCollisionBody(2), body_3)
+
+			local status, error = pcall(w.getCollisionBody, w, -1)
+			assert_false(status)
+			UTILS.test_error(error, "bad idx:-1")
+
+			status, error = pcall(w.getCollisionBody, w, 3)
+			assert_false(status)
+			UTILS.test_error(error, "bad idx:3")
+
+		end)
+
+		test("getRigidBody()", function()
+			local w = rp3d.createPhysicsWorld()
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(3, 0, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(6, 0, 0), quat = vmath.quat() })
+
+			assert_equal(w:getRigidBody(0), body_1)
+			assert_equal(w:getRigidBody(1), body_2)
+			assert_equal(w:getRigidBody(2), body_3)
+
+			local status, error = pcall(w.getRigidBody, w, -1)
+			assert_false(status)
+			UTILS.test_error(error, "bad idx:-1")
+
+			status, error = pcall(w.getRigidBody, w, 3)
+			assert_false(status)
+			UTILS.test_error(error, "bad idx:3")
+
+		end)
 	end)
 end
