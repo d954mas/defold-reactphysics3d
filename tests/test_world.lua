@@ -577,5 +577,40 @@ return function()
 			UTILS.test_error(error, "bad idx:3")
 
 		end)
+
+		test("setEventListener()", function()
+			local w = rp3d.createPhysicsWorld()
+			w:update(1 / 60)
+			w:setEventListener(nil)
+			w:update(1/60)
+			w:setEventListener({ })
+			w:update(1/60)
+
+			w:setEventListener({
+				onContact = function(contacts)
+
+				end,
+				onTrigger = function(triggers)
+
+				end,
+
+			})
+			w:update(1/60)
+
+			w:setEventListener({ onContact = function()
+				error("error")
+			end })
+			local status, value = pcall(w.update, w, 1 / 60)
+			assert_false(status)
+			UTILS.test_error(value, "error")
+
+			w:setEventListener({ PreSolve = function()
+
+			end })
+			w:update(1 / 60)
+			w:update(1 / 60)
+
+			w:Destroy()
+		end)
 	end)
 end

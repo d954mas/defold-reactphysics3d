@@ -14,6 +14,8 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+
+
 class LuaRayCastCallback : public RaycastCallback  {
     public:
         lua_State *L;
@@ -251,7 +253,16 @@ static int Update(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
     WorldUserdata *data = WorldUserdataCheck(L, 1);
+    if(data->eventListener !=NULL){
+        data->eventListener->BeforeUpdate(L);
+    }
     data->world->update(lua_tonumber(L,2));
+    if(data->eventListener !=NULL){
+        data->eventListener->AfterUpdate(L);
+        if(data->eventListener->error){
+            luaL_error(L,"%s", data->eventListener->error_message);
+        }
+    }
 	return 0;
 }
 
@@ -561,6 +572,29 @@ static int GetRigidBody(lua_State *L){
 	return 1;
 }
 
+static int SetEventListener(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    if (!(lua_isnil(L, 2) || lua_istable(L, 2))) {
+         luaL_error(L,"listener can be only table or nil");
+    }
+
+    if(data->eventListener != NULL){
+        data->eventListener->Destroy(L);
+        delete data->eventListener;
+        data->eventListener = NULL;
+    }
+
+
+    if(lua_istable(L, 2)){
+        data->eventListener = new LuaEventListener();
+        data->eventListener->InitFromTable(L,2);
+    }
+
+   return 0;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -611,6 +645,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testCollisionList",TestCollisionList},
         {"getCollisionBody",GetCollisionBody},
         {"getRigidBody",GetRigidBody},
+        {"setEventListener",SetEventListener},
         {"__tostring",ToString},
         { 0, 0 }
     };
@@ -625,6 +660,11 @@ void WorldUserdataInitMetaTable(lua_State *L){
 
 void WorldUserdata::Destroy(lua_State *L){
     world = NULL;
+    if(eventListener != NULL){
+        eventListener->Destroy(L);
+        delete eventListener;
+        eventListener = NULL;
+    }
     BaseUserData::Destroy(L);
 }
 
