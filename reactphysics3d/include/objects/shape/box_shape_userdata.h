@@ -14,5 +14,6 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
     CollisionShapeUserdata* BoxShapeCheck(lua_State *L, int index);
+    void BoxShapeShapeUserdataInitMetaTable(lua_State *L);
 }
 #endif

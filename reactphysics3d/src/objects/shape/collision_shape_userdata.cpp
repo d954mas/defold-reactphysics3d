@@ -1,6 +1,3 @@
-#ifndef world_h
-#define world_h
-
 #include "objects/base_userdata.h"
 #include "static_hash.h"
 
@@ -13,7 +10,7 @@
 #define META_NAME "rp3d::CollisionShape"
 #define USERDATA_TYPE "rp3d::CollisionShape"
 
-#define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
+
 
 
 
@@ -26,6 +23,33 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
     this->shape = shape;
     this->obj = shape;
     shape->setUserData(this);
+
+     switch(this->shape->getName()){
+        case CollisionShapeName::TRIANGLE:
+           assert(false);
+        case CollisionShapeName::SPHERE:
+            assert(false);
+        case CollisionShapeName::CAPSULE:
+            assert(false);
+        case CollisionShapeName::BOX:
+            this->metatable_name = META_NAME_BOX_SHAPE;
+            break;
+        case CollisionShapeName::CONVEX_MESH:
+            assert(false);
+        case CollisionShapeName::TRIANGLE_MESH:
+            assert(false);
+        case CollisionShapeName::HEIGHTFIELD:
+            assert(false);
+        default:{
+            //ConvexPolyhedronShape
+            if(this->shape->getType()==CollisionShapeType::CONVEX_POLYHEDRON){
+                assert(false);
+            }else{
+                assert(false);
+            }
+
+        }
+    }
 }
 
 CollisionShapeUserdata::~CollisionShapeUserdata() {
@@ -167,26 +191,7 @@ int CollisionShape_ToString(lua_State *L){
 }
 
 void CollisionShapeUserdataInitMetaTable(lua_State *L){
-    int top = lua_gettop(L);
-    luaL_Reg functions[] ={
-            {"getName", CollisionShape_GetName},
-            {"getType", CollisionShape_GetType},
-            {"isPolyhedron", CollisionShape_IsPolyhedron},
-            {"isConvex", CollisionShape_IsConvex},
-            {"getLocalBounds", CollisionShape_GetLocalBounds},
-            {"getId", CollisionShape_GetId},
-            {"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},
-            {"getVolume", CollisionShape_GetVolume},
-            {"computeAABB", CollisionShape_ComputeAABB},
-            {"__tostring", CollisionShape_ToString},
-            {0, 0}
-        };
-    luaL_newmetatable(L, META_NAME);
-    luaL_register (L, NULL,functions);
-    lua_pushvalue(L, -1);
-    lua_setfield(L, -1, "__index");
-    lua_pop(L, 1);
-    assert(top == lua_gettop(L));
+    BoxShapeShapeUserdataInitMetaTable(L);
 }
 
 
@@ -210,4 +215,3 @@ void CollisionShapeUserdata::Destroy(lua_State *L){
 }
 
 }
-#endif

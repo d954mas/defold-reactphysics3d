@@ -7,6 +7,8 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "static_hash.h"
 
+#define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
+
 
 using namespace reactphysics3d;
 
@@ -21,13 +23,11 @@ class CollisionShapeUserdata : public BaseUserData {
         ~CollisionShapeUserdata();
 
         virtual void Destroy(lua_State *L);
-    };
+};
 
 
     int CollisionShape_GetName(lua_State *L);
     int CollisionShape_GetType(lua_State *L);
-    int CollisionShape_GC(lua_State *L);
-    int CollisionShape_ToString(lua_State *L);
     int CollisionShape_IsConvex(lua_State *L);
     int CollisionShape_IsPolyhedron(lua_State *L);
     int CollisionShape_GetLocalBounds(lua_State *L);
@@ -36,10 +36,7 @@ class CollisionShapeUserdata : public BaseUserData {
     int CollisionShape_GetVolume(lua_State *L);
     int CollisionShape_ComputeAABB(lua_State *L);
 
-   // const char* CollisionShapeNameEnumToString(CollisionShapeName name);
-
-    //CollisionShapeName CollisionShapeNameStringToEnum(lua_State *L,const char* str);
-
+    int CollisionShape_ToString(lua_State *L);
 
 
     void CollisionShapeUserdataInitMetaTable(lua_State *L);
