@@ -604,13 +604,58 @@ return function()
 			assert_false(status)
 			UTILS.test_error(value, "error")
 
-			w:setEventListener({ PreSolve = function()
-
-			end })
+			w:setEventListener({})
 			w:update(1 / 60)
 			w:update(1 / 60)
 
-			w:Destroy()
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("setEventListener() Bad Script Instance", function()
+			local w = rp3d.createPhysicsWorld()
+			local go_url = factory.create("/tests#test_go_instance")
+
+			local current_instance = lua_script_instance.Get()
+			local go_instance = script_instance_for_test
+			assert_not_nil(go_instance)
+
+			lua_script_instance.Set(go_instance)
+			w:setEventListener({
+				onContact = function(contacts)
+
+				end,
+				onTrigger = function(triggers)
+
+				end,
+
+			})
+			lua_script_instance.Set(current_instance)
+
+			w:update(1/60)
+
+			assert_not_nil(script_instance_for_test)
+			go.delete(go_url,true)
+			coroutine.yield()
+			coroutine.yield()
+			assert_nil(script_instance_for_test)
+
+			local status, value = pcall(lua_script_instance.Set, go_instance)
+			assert_false(status)
+			UTILS.test_error(value, "Instance is not valid")
+
+
+			status, value = pcall(w.update, w, 1 / 60)
+			assert_false(status)
+			UTILS.test_error(value, "EventListener script instance not valid")
+
+			status, value = pcall(w.update, w, 1 / 60)
+			assert_false(status)
+			UTILS.test_error(value, "EventListener script instance not valid")
+			w:setEventListener({})
+
+
+
+			rp3d.destroyPhysicsWorld(w)
 		end)
 	end)
 end

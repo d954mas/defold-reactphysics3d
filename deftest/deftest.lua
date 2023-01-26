@@ -70,7 +70,7 @@ function M.run(options)
 			return true
 		end
 	end
-	local co = coroutine.create(function()
+	M.co = coroutine.create(function()
 		local callbacks = {}
 		local results = telescope.run(contexts, callbacks, filter)
 		local summary, data = telescope.summary_report(contexts, results)
@@ -105,10 +105,20 @@ function M.run(options)
 		--os.exit(0)
 	end)
 
-	local ok, message = coroutine.resume(co)
+	local ok, message = coroutine.resume(M.co)
 	if not ok then
 		print("Something went wrong while running tests", message)
 	--	os.exit(1)
+	end
+end
+
+function M.update(dt)
+	if(M.co and coroutine.status(M.co) =="suspended")then
+		local ok, message = coroutine.resume(M.co,dt)
+		if not ok then
+			print("Something went wrong while running tests", message)
+			--	os.exit(1)
+		end
 	end
 end
 

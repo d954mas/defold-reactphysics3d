@@ -69,4 +69,8 @@ function M.run()
 	DEFTEST.run()
 end
 
+function update(self,dt)
+	DEFTEST.update(dt)
+end
+
 return M

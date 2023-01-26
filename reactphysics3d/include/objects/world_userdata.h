@@ -71,28 +71,25 @@ public:
    }
 
     inline void BeforeUpdate(lua_State *L){
+        int top = lua_gettop(L);
         this->L = L;
         error = false;
         error_message = NULL;
-        needResetScriptInstance = false;
+        //save current instance in stack
+        dmScript::GetInstance(L);
         if(defold_script_instance_ref != LUA_REFNIL){
-            //save current instance in stack
-            dmScript::GetInstance(L);
             lua_rawgeti(L, LUA_REGISTRYINDEX, defold_script_instance_ref);
+            dmScript::SetInstance(L);
             if (!dmScript::IsInstanceValid(L)){
                 error = true;
                 error_message = "EventListener script instance not valid";
-            }else{
-                needResetScriptInstance = true;
-                dmScript::SetInstance(L);
             }
         }
+        assert(lua_gettop(L) == top + 1);
     }
 
     inline void AfterUpdate(lua_State *L){
-        if(defold_script_instance_ref != LUA_REFNIL && needResetScriptInstance){
-           dmScript::SetInstance(L);
-        }
+        dmScript::SetInstance(L);
     }
 
     inline void onContact(const CollisionCallback::CallbackData &callbackData){

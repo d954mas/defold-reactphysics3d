@@ -1,0 +1,8 @@
+function init(self)
+	assert(not script_instance_for_test)
+	script_instance_for_test = lua_script_instance.Get()
+end
+
+function final(self)
+	script_instance_for_test = nil
+end
