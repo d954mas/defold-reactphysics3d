@@ -4,6 +4,7 @@ local TELESCOPE = require "deftest.telescope"
 local TEST_RP3D = require "tests.test_rp3d"
 local TEST_WORLD = require "tests.test_world"
 local TEST_COLLISION_SHAPE = require "tests.shape.test_collision_shape"
+local TEST_CONVEX_SHAPE = require "tests.shape.test_convex_shape"
 local TEST_BOX_SHAPE = require "tests.shape.test_box_shape"
 local TEST_COLLISION_BODY = require "tests.test_collision_body"
 local TEST_RIGID_BODY = require "tests.test_rigid_body"
@@ -60,6 +61,7 @@ function M.run()
 	DEFTEST.add(TEST_WORLD)
 	DEFTEST.add(TEST_WORLD_SETTINGS)
 	DEFTEST.add(TEST_COLLISION_SHAPE)
+	DEFTEST.add(TEST_CONVEX_SHAPE)
 	DEFTEST.add(TEST_BOX_SHAPE)
 	DEFTEST.add(TEST_AABB)
 	DEFTEST.add(TEST_COLLISION_BODY)

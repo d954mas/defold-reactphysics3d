@@ -1,13 +1,14 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
+#include "objects/shape/convex_shape_userdata.h"
 
 
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
-CollisionShapeUserdata* BoxShapeCheck(lua_State* L, int index){
+CollisionShapeUserdata* BoxShapeCheckUserdata(lua_State* L, int index){
     CollisionShapeUserdata *shape = CollisionShapeCheck(L,index);
     if (shape->shape->getName() == CollisionShapeName::BOX){
         return shape;
@@ -29,6 +30,8 @@ void BoxShapeShapeUserdataInitMetaTable(lua_State *L){
             {"getVolume", CollisionShape_GetVolume},
             {"computeAABB", CollisionShape_ComputeAABB},
             {"__tostring", CollisionShape_ToString},
+            //CONVEX
+            {"getMargin", ConvexShape_GetMargin},
             {0, 0}
         };
     luaL_newmetatable(L, META_NAME_BOX_SHAPE);

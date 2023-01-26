@@ -86,7 +86,7 @@ static int CreateBoxShape(lua_State* L){
 static int DestroyBoxShape(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
-    CollisionShapeUserdata * shapeUserdata = BoxShapeCheck(L,1);
+    CollisionShapeUserdata * shapeUserdata = BoxShapeCheckUserdata(L,1);
     BoxShape* shape = static_cast<BoxShape*>(shapeUserdata->shape);
     shapeUserdata->Destroy(L);
     delete shapeUserdata;
