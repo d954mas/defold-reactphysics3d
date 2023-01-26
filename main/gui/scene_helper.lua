@@ -113,7 +113,8 @@ function M.updatePhysics(dt,objects)
 
 	w:update(M.simulation.step);
 	for _,object in ipairs(objects)do
-		object:update_transform()
+		object:updateTransform()
+		object:updateColor()
 	end
 
 	w:getDebugRenderer():draw()

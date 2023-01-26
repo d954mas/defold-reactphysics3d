@@ -1,20 +1,21 @@
 local CLASS = require "libs.middleclass"
+local PhysObject = require "main.objects.physics_object"
 
----@class GameBox
-local Box = CLASS.class("Box")
+---@class GameBox:GamePhysObject
+local Box = CLASS.class("Box", PhysObject)
 
 ---@param world Rp3dPhysicsWorld
 function Box:initialize(rigid_body, size, world)
+	PhysObject.initialize(self,world)
 	self.rigid_body = rigid_body
 	self.size = vmath.vector3(size)
-	self.world = assert(world)
-	self.shape = rp3d.createBoxShape(self.size/2)
+	self.shape = rp3d.createBoxShape(self.size / 2)
 	self.collection = collectionfactory.create("/factory#box", nil, nil, nil, self.size)
 	self.go = {
 		root = msg.url(self.collection["/root"]),
 		mesh = nil
 	}
-	self.go.mesh = msg.url(self.go.root.socket,self.go.root.path,"mesh")
+	self.go.mesh = msg.url(self.go.root.socket, self.go.root.path, "mesh")
 	local transform_identity = {
 		position = vmath.vector3(),
 		quat = vmath.quat()
@@ -30,19 +31,8 @@ function Box:initialize(rigid_body, size, world)
 
 end
 
-function Box:update_transform()
-	local transform = self.body:getTransform()
-	go.set_position(transform.position, self.go.root)
-	go.set_rotation(transform.quat, self.go.root)
-end
-
 function Box:dispose()
-	if (self.rigid_body) then
-		self.world:destroyRigidBody(self.body)
-	else
-		self.world:destroyCollisionBody(self.body)
-	end
-	go.delete(self.go.root, true)
+	PhysObject.dispose(self)
 	rp3d.destroyBoxShape(self.shape)
 end
 

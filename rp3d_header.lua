@@ -280,6 +280,14 @@ function CollisionBody:getLocalPoint(worldPoint) end
 ---@return vector3
 function CollisionBody:getLocalVector(worldVector) end
 
+--	Set whether or not the body is active.
+---@param isActive boolean
+function CollisionBody:setIsActive(isActive) end
+
+--Return true if the body is active.
+---@return boolean
+function CollisionBody:isActive() end
+
 ---@class Rp3dRigidBody:Rp3dCollisionBody
 local RigidBody = {}
 
