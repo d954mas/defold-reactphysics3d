@@ -580,22 +580,49 @@ return function()
 
 		test("setEventListener()", function()
 			local w = rp3d.createPhysicsWorld()
+			w:setGravity(vmath.vector3(0,-9.81,0))
+
+			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
+
+			local body_1 = w:createRigidBody({ position = vmath.vector3(0, 0, 0), quat = vmath.quat() })
+			local body_2 = w:createRigidBody({ position = vmath.vector3(0, 1, 0), quat = vmath.quat() })
+			local body_3 = w:createRigidBody({ position = vmath.vector3(0, 2, 0), quat = vmath.quat() })
+
+			local c1 = body_1:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+
+
 			w:update(1 / 60)
 			w:setEventListener(nil)
 			w:update(1/60)
 			w:setEventListener({ })
 			w:update(1/60)
-
+			local contacts_t
+			local triggers_t
 			w:setEventListener({
 				onContact = function(contacts)
-
+					contacts_t = contacts
 				end,
 				onTrigger = function(triggers)
-
+					triggers_t = triggers
 				end,
-
 			})
 			w:update(1/60)
+			assert_not_nil(contacts_t)
+			assert_not_nil(triggers_t)
+			assert_equal(#contacts_t,3)
+			assert_equal(#triggers_t,0)
+
+			contacts_t = nil
+			triggers_t = nil
+			c3:setIsTrigger(true)
+
+			w:update(1/60)
+			assert_not_nil(contacts_t)
+			assert_not_nil(triggers_t)
+			assert_equal(#contacts_t,1)
+			assert_equal(#triggers_t,1)
 
 			w:setEventListener({ onContact = function()
 				error("error")

@@ -14,6 +14,82 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+//should have table on top of stack
+static void PushCollisionCallbackData(lua_State *L,const CollisionCallback::CallbackData &callbackData){
+    for(int i=0;i<callbackData.getNbContactPairs();i++){
+        CollisionCallback::ContactPair pair = callbackData.getContactPair(i);
+        lua_newtable(L);
+            ColliderPush(L,pair.getCollider1());
+            lua_setfield(L, -2, "collider1");
+            ColliderPush(L,pair.getCollider2());
+            lua_setfield(L, -2, "collider2");
+
+            CollisionBodyPush(L,pair.getBody1());
+            lua_setfield(L, -2, "body1");
+            CollisionBodyPush(L,pair.getBody2());
+            lua_setfield(L, -2, "body2");
+
+            lua_pushstring(L,ContactPairEventTypeEnumToString(pair.getEventType()));
+            lua_setfield(L, -2, "eventType");
+
+            lua_newtable(L);
+            for(int j=0;j<pair.getNbContactPoints();j++){
+                CollisionCallback::ContactPoint point = pair.getContactPoint(j);
+                dmVMath::Vector3 dmWorldNormal;
+                dmVMath::Vector3 dmLocalPointOnCollider1;
+                dmVMath::Vector3 dmLocalPointOnCollider2;
+
+                dmWorldNormal.setX(point.getWorldNormal().x);
+                dmWorldNormal.setY(point.getWorldNormal().y);
+                dmWorldNormal.setZ(point.getWorldNormal().z);
+
+                dmLocalPointOnCollider1.setX(point.getLocalPointOnCollider1().x);
+                dmLocalPointOnCollider1.setY(point.getLocalPointOnCollider1().y);
+                dmLocalPointOnCollider1.setZ(point.getLocalPointOnCollider1().z);
+
+                dmLocalPointOnCollider2.setX(point.getLocalPointOnCollider2().x);
+                dmLocalPointOnCollider2.setY(point.getLocalPointOnCollider2().y);
+                dmLocalPointOnCollider2.setZ(point.getLocalPointOnCollider2().z);
+
+                lua_newtable(L);
+                    dmScript::PushVector3(L, dmWorldNormal);
+                    lua_setfield(L, -2, "worldNormal");
+                    dmScript::PushVector3(L, dmLocalPointOnCollider1);
+                    lua_setfield(L, -2, "localPointOnCollider1");
+                    dmScript::PushVector3(L, dmLocalPointOnCollider2);
+                    lua_setfield(L, -2, "localPointOnCollider2");
+                    lua_pushnumber(L,point.getPenetrationDepth());
+                    lua_setfield(L, -2, "penetrationDepth");
+                lua_rawseti(L, -2, j+1);
+            }
+            lua_setfield(L, -2, "contacts");
+
+            lua_rawseti(L, -2, i+1);
+    }
+}
+//should have table on top of stack
+static void PushOverlapCallbackData(lua_State *L,const OverlapCallback::CallbackData &callbackData){
+    for(int i=0;i<callbackData.getNbOverlappingPairs();i++){
+        OverlapCallback::OverlapPair pair = callbackData.getOverlappingPair(i);
+        lua_newtable(L);
+        ColliderPush(L,pair.getCollider1());
+        lua_setfield(L, -2, "collider1");
+        ColliderPush(L,pair.getCollider2());
+        lua_setfield(L, -2, "collider2");
+
+        CollisionBodyPush(L,pair.getBody1());
+        lua_setfield(L, -2, "body1");
+        CollisionBodyPush(L,pair.getBody2());
+        lua_setfield(L, -2, "body2");
+
+        lua_pushstring(L,OverlapPairEventTypeEnumToString(pair.getEventType()));
+        lua_setfield(L, -2, "eventType");
+
+        lua_rawseti(L, -2, i+1);
+
+    }
+}
+
 
 
 class LuaRayCastCallback : public RaycastCallback  {
@@ -53,25 +129,7 @@ class NewTableOverlapCallback : public OverlapCallback  {
             lua_newtable(L);
        }
        void onOverlap(OverlapCallback::CallbackData &callbackData){
-            for(int i=0;i<callbackData.getNbOverlappingPairs();i++){
-                OverlapPair pair = callbackData.getOverlappingPair(i);
-                lua_newtable(L);
-                ColliderPush(L,pair.getCollider1());
-                lua_setfield(L, -2, "collider1");
-                ColliderPush(L,pair.getCollider2());
-                lua_setfield(L, -2, "collider2");
-
-                CollisionBodyPush(L,pair.getBody1());
-                lua_setfield(L, -2, "body1");
-                CollisionBodyPush(L,pair.getBody2());
-                lua_setfield(L, -2, "body2");
-
-                lua_pushstring(L,OverlapPairEventTypeEnumToString(pair.getEventType()));
-                lua_setfield(L, -2, "eventType");
-
-                lua_rawseti(L, -2, i+1);
-
-            }
+            PushOverlapCallbackData(L,callbackData);
         }
 };
 
@@ -84,56 +142,8 @@ class NewTableCollisionCallback  : public CollisionCallback   {
             lua_newtable(L);
         }
         void onContact(const CollisionCallback::CallbackData &callbackData){
-            for(int i=0;i<callbackData.getNbContactPairs();i++){
-                ContactPair pair = callbackData.getContactPair(i);
-                lua_newtable(L);
-                    ColliderPush(L,pair.getCollider1());
-                    lua_setfield(L, -2, "collider1");
-                    ColliderPush(L,pair.getCollider2());
-                    lua_setfield(L, -2, "collider2");
+            PushCollisionCallbackData(L,callbackData);
 
-                    CollisionBodyPush(L,pair.getBody1());
-                    lua_setfield(L, -2, "body1");
-                    CollisionBodyPush(L,pair.getBody2());
-                    lua_setfield(L, -2, "body2");
-
-                    lua_pushstring(L,ContactPairEventTypeEnumToString(pair.getEventType()));
-                    lua_setfield(L, -2, "eventType");
-
-                    lua_newtable(L);
-                    for(int j=0;j<pair.getNbContactPoints();j++){
-                        ContactPoint point = pair.getContactPoint(j);
-                        dmVMath::Vector3 dmWorldNormal;
-                        dmVMath::Vector3 dmLocalPointOnCollider1;
-                        dmVMath::Vector3 dmLocalPointOnCollider2;
-
-                        dmWorldNormal.setX(point.getWorldNormal().x);
-                        dmWorldNormal.setY(point.getWorldNormal().y);
-                        dmWorldNormal.setZ(point.getWorldNormal().z);
-
-                        dmLocalPointOnCollider1.setX(point.getLocalPointOnCollider1().x);
-                        dmLocalPointOnCollider1.setY(point.getLocalPointOnCollider1().y);
-                        dmLocalPointOnCollider1.setZ(point.getLocalPointOnCollider1().z);
-
-                        dmLocalPointOnCollider2.setX(point.getLocalPointOnCollider2().x);
-                        dmLocalPointOnCollider2.setY(point.getLocalPointOnCollider2().y);
-                        dmLocalPointOnCollider2.setZ(point.getLocalPointOnCollider2().z);
-
-                        lua_newtable(L);
-                            dmScript::PushVector3(L, dmWorldNormal);
-                            lua_setfield(L, -2, "worldNormal");
-                            dmScript::PushVector3(L, dmLocalPointOnCollider1);
-                            lua_setfield(L, -2, "localPointOnCollider1");
-                            dmScript::PushVector3(L, dmLocalPointOnCollider2);
-                            lua_setfield(L, -2, "localPointOnCollider2");
-                            lua_pushnumber(L,point.getPenetrationDepth());
-                            lua_setfield(L, -2, "penetrationDepth");
-                        lua_rawseti(L, -2, j+1);
-                    }
-                    lua_setfield(L, -2, "contacts");
-
-                    lua_rawseti(L, -2, i+1);
-            }
         }
 };
 
@@ -590,6 +600,9 @@ static int SetEventListener(lua_State *L){
     if(lua_istable(L, 2)){
         data->eventListener = new LuaEventListener();
         data->eventListener->InitFromTable(L,2);
+        data->world->setEventListener(data->eventListener);
+    }else{
+        data->world->setEventListener(NULL);
     }
 
    return 0;

@@ -11,6 +11,12 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+//should have table on top of stack
+static void PushCollisionCallbackData(lua_State *L,const CollisionCallback::CallbackData &callbackData);
+//should have table on top of stack
+static void PushOverlapCallbackData(lua_State *L,const OverlapCallback::CallbackData &callbackData);
+
+
 class LuaEventListener : public EventListener {
 public:
     int fun_onContact_ref=LUA_REFNIL;
@@ -93,15 +99,39 @@ public:
     }
 
     inline void onContact(const CollisionCallback::CallbackData &callbackData){
-
+        if(!error && fun_onContact_ref != LUA_REFNIL){
+            lua_rawgeti(L,LUA_REGISTRYINDEX,fun_onContact_ref);
+            lua_newtable(L);
+            PushCollisionCallbackData(L,callbackData);
+            if (lua_pcall(L, 1, 0, 0) != 0){
+                 error = true;
+                 error_message = lua_tostring(L,-1);
+                 lua_pop(L,1);
+            }
+        }
     }
 
     inline void onTrigger(const OverlapCallback::CallbackData &callbackData){
-
+        if(!error && fun_onTrigger_ref != LUA_REFNIL){
+            lua_rawgeti(L,LUA_REGISTRYINDEX,fun_onTrigger_ref);
+            lua_newtable(L);
+            PushOverlapCallbackData(L,callbackData);
+            if (lua_pcall(L, 1, 0, 0) != 0){
+                 error = true;
+                 error_message = lua_tostring(L,-1);
+                 lua_pop(L,1);
+            }
+        }
     }
 
     inline void Destroy(lua_State *L){
+        luaL_unref(L,LUA_REGISTRYINDEX, fun_onContact_ref);
+        luaL_unref(L,LUA_REGISTRYINDEX, fun_onTrigger_ref);
+        luaL_unref(L,LUA_REGISTRYINDEX, defold_script_instance_ref);
 
+        fun_onContact_ref = LUA_REFNIL;
+        fun_onTrigger_ref = LUA_REFNIL;
+        defold_script_instance_ref = LUA_REFNIL;
     }
 };
 
