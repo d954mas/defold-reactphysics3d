@@ -96,6 +96,7 @@ function M.update(dt)
 end
 
 function M.updatePhysics(dt,objects)
+	if(dt == 0)then return end
 	if (not M.scene_config.world) then return end
 	local w = M.scene_config.world
 	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.CONTACT_POINT,
