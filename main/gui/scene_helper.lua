@@ -70,6 +70,8 @@ end
 function M.update(dt)
 	local cfg = M.scene_config
 	if (cfg.world) then
+		cfg.world:setNbIterationsPositionSolver(M.simulation.position_iterations)
+		cfg.world:setNbIterationsVelocitySolver(M.simulation.velocity_iterations)
 		if (M.simulation.play or M.simulation.make_step) then
 			M.simulation.make_step = false
 			local time = socket.gettime()
@@ -112,7 +114,6 @@ function M.updatePhysics(dt,objects)
 
 	w:setIsDebugRenderingEnabled(M.rendering.debug_draw)
 
-	w:update(M.simulation.step);
 	for _,object in ipairs(objects)do
 		object:updateTransform()
 		object:updateColor()
