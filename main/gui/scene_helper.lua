@@ -118,8 +118,8 @@ function M.update(dt)
 	end
 
 	if (M.simulation.raycast_from) then
-		msg.post("@render:", "draw_line",
-				{ start_point = M.simulation.raycast_from, end_point = M.simulation.raycast_to, color = vmath.vector4(1, 0, 0, 0.5) })
+	--	msg.post("@render:", "draw_line",
+			--	{ start_point = M.simulation.raycast_from, end_point = M.simulation.raycast_to, color = vmath.vector4(1, 0, 0, 0.5) })
 	end
 end
 
@@ -260,7 +260,7 @@ function M.on_input(action_id, action)
 
 			if(not action.pressed and M.simulation.body_selected)then
 				local v3 = vmath.vector3(action.dx/960,action.dy/540,0)
-				local MOUSE_MOVE_BODY_FORCE = 100000.0
+				local MOUSE_MOVE_BODY_FORCE = 200000.0
 				local quat = vmath.quat_from_to(vmath.vector3(0,0,-1),RENDER_3D.view_front)
 				v3 = vmath.rotate(quat,v3)
 

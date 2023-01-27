@@ -1,0 +1,125 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+
+local SCENE_RADIUS = 30              -- Radius of the scene in meters
+local NB_BOXES = 16                             -- Number of boxes in the scene
+local BOX_SIZE = vmath.vector3(2, 2, 16)    -- Box dimensions in meters
+local FLOOR_SIZE = vmath.vector3(30, 0.5, 30)   -- Floor dimensions in meters
+local function create_physics(self)
+
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+	---@type GameBox[]
+	self.boxes = {}
+
+	for i = 1, NB_BOXES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		local box = Box(true, BOX_SIZE, self.world)
+		table.insert(self.objects, box)
+		table.insert(self.boxes, box)
+		box.collider:setMaterialBounciness(0.2)
+	end
+
+	--FLOOR
+	self.floor = Box(true, FLOOR_SIZE, self.world);
+	-- The floor must be a static rigid body
+	self.floor.body:setType(rp3d.BodyType.STATIC);
+	self.floor:setColor(self.floor.colors.floorColorDemo)
+	self.floor:setColorSleeping(self.floor.colors.floorColorDemo)
+	self.floor.collider:setMaterialBounciness(0.2)
+	table.insert(self.objects, self.floor)
+
+
+	--INIT POSITIONS
+	local distFromCenter = 4.0
+	local rotated = false;
+	local floorIndex = 0;
+	for index, box in ipairs(self.boxes) do
+		local i = index - 1
+		local position = vmath.vector3(i % 2 == 0 and -distFromCenter or distFromCenter,
+				4 + (floorIndex * (BOX_SIZE.y + 0.1)), 0)
+		local quat = vmath.quat()
+
+		if (rotated) then
+			quat = vmath.quat_rotation_y(math.pi / 2)
+			position = vmath.vector3(0, 3 + (floorIndex * (BOX_SIZE.y + 0.2)),
+					i % 2 == 0 and -distFromCenter or distFromCenter)
+		end
+
+		box.body:setTransform({ position = position, quat = quat })
+		if (i % 2 == 1) then
+			rotated = not rotated
+			floorIndex = floorIndex + 1
+		end
+	end
+	self.floor.body:setTransform({ position = vmath.vector3(0), quat = vmath.quat_rotation_z(0) })
+	--[[// Gravity vector in the physics world
+
+	// Create all the cubes of the scene
+	for (int i=0; i<NB_CUBES; i++) {
+
+
+
+	// Set the box color
+	cube->setColor(mObjectColorDemo);
+	cube->setSleepingColor(mSleepingColorDemo);
+
+	// Change the material properties of the rigid body
+	rp3d::Material& material = cube->getCollider()->getMaterial();
+	material.setBounciness(rp3d::decimal(0.4));
+
+	// Add the box the list of box in the scene
+	mBoxes.push_back(cube);
+	mPhysicsObjects.push_back(cube);
+	}
+
+	// ------------------------- FLOOR ----------------------- //
+
+	// Create the floor
+	mFloor = new Box(true, FLOOR_SIZE, mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+	mFloor->setColor(mFloorColorDemo);
+	mFloor->setSleepingColor(mFloorColorDemo);
+
+	// The floor must be a static rigid body
+	mFloor->getRigidBody()->setType(rp3d::BodyType::STATIC);
+	mPhysicsObjects.push_back(mFloor);
+	createPhysicsWorld();
+	initBodiesPositions();--]]
+end
+
+function init(self)
+	create_physics(self)
+
+	SCENE_HELPER.scene_new({
+		name = "cubes",
+		world = self.world
+	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
+end
+
+
+
