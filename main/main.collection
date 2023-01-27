@@ -28,34 +28,6 @@ instances {
   }
 }
 instances {
-  id: "camera3d"
-  prototype: "/scene3d/camera/camera3d.go"
-  position {
-    x: -8.0
-    y: 15.0
-    z: 50.0
-  }
-  rotation {
-    x: -0.043619387
-    y: 0.0
-    z: 0.0
-    w: 0.99904823
-  }
-  component_properties {
-    id: "camera3d"
-    properties {
-      id: "far_clip"
-      value: "1000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
   id: "late_update"
   prototype: "/scene3d/helpers/late_update.go"
   position {
@@ -68,6 +40,26 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera3d"
+  prototype: "/main/camera3d.go"
+  position {
+    x: -8.0
+    y: 15.0
+    z: 50.0
+  }
+  rotation {
+    x: -0.043619387
+    y: 0.0
+    z: 0.0
+    w: 0.99904823
   }
   scale3 {
     x: 1.0
@@ -368,6 +360,64 @@ embedded_instances {
   "    y: 0.0\n"
   "    z: 0.0\n"
   "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "camera_root"
+  children: "camera3d"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "controller"
+  data: "components {\n"
+  "  id: \"controller\"\n"
+  "  component: \"/main/controller.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
   "  }\n"
   "}\n"
   ""

@@ -36,6 +36,14 @@ M.profiling = {
 	phys_total = 0,
 }
 
+M.camera = {
+	input = false,
+	orbit_y = false,
+	orbit_x = false,
+	euler_y = 0,
+	euler_x = 0
+}
+
 function M.set_allow_sleep(enable)
 	M.simulation.sleep = enable
 	if (M.scene_config.world) then
@@ -94,7 +102,13 @@ function M.update(dt)
 		M.profiling.frames = 0
 	end
 
+	if(M.camera.orbit_y)then
+		M.camera.euler_y = M.camera.euler_y + 25 * dt
+	end
 
+	if(M.camera.orbit_x)then
+		M.camera.euler_x = M.camera.euler_x - 25 * dt
+	end
 end
 
 function M.updatePhysics(dt,objects)

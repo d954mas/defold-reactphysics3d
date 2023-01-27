@@ -46,3 +46,6 @@ max_count = 1024
 [collection]
 max_instances = 1024
 
+[input]
+game_binding = /builtins/input/all.input_bindingc
+
