@@ -227,10 +227,13 @@ function M.on_input(action_id, action)
 				M.simulation.raycast_to = vmath.vector3(ray_end)
 
 				if (M.scene_config.world) then
+					---@type Rp3dCollisionBody
 					local result = nil
+					local result_world_pos = nil
 					local ray_1 = { point1 = ray_start, point2 = ray_end, maxFraction = 1 }
 					M.scene_config.world:raycast(ray_1, function(info)
 						result = info.body
+						result_world_pos = info.worldPoint
 						return info.hitFraction
 					end)
 					if (M.simulation.body_selected) then
@@ -242,6 +245,7 @@ function M.on_input(action_id, action)
 						local phys_body = result:getUserData()
 						phys_body:setSelected(true)
 						M.simulation.body_selected = result
+						M.simulation.body_selected_pos =result:getLocalPoint(result_world_pos)
 					end
 				end
 			end
@@ -253,6 +257,20 @@ function M.on_input(action_id, action)
 					M.simulation.body_selected = nil
 				end
 			end
+
+			if(not action.pressed and M.simulation.body_selected)then
+				local v3 = vmath.vector3(action.dx/960,action.dy/540,0)
+				local MOUSE_MOVE_BODY_FORCE = 100000.0
+				local quat = vmath.quat_from_to(vmath.vector3(0,0,-1),RENDER_3D.view_front)
+				v3 = vmath.rotate(quat,v3)
+
+
+				local force = v3 * MOUSE_MOVE_BODY_FORCE
+
+				M.simulation.body_selected:applyWorldForceAtLocalPosition(force, M.simulation.body_selected_pos);
+			end
+
+
 		end
 	end
 
