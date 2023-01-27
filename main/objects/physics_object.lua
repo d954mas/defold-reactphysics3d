@@ -17,6 +17,11 @@ function Body:initialize(world)
 	}
 	self:setColor(self.colors.objectColorDemo)
 	self:setColorSleeping(self.colors.sleepingColorDemo)
+	self.selected = false
+end
+
+function Body:setSelected(selected)
+	self.selected = selected
 end
 
 
@@ -52,6 +57,9 @@ function Body:updateColor()
 		local color = self.color
 		if (self.body:isRigidBody() and self.body:isSleeping()) then
 			color = self.color_sleeping
+		end
+		if(self.selected)then
+			color = self.colors.selectedObjectColorDemo
 		end
 		go.set(self.go.mesh, "tint", color)
 	end

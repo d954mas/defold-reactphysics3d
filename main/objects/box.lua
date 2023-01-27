@@ -28,6 +28,7 @@ function Box:initialize(rigid_body, size, world)
 		self.body = world:createCollisionBody(transform_identity);
 		self.collider = self.body:addCollider(self.shape, transform_identity);
 	end
+	self.body:setUserData(self)
 
 end
 

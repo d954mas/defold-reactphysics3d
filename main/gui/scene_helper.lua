@@ -1,4 +1,5 @@
 local LUME = require "libs.lume"
+local RENDER_3D = require("scene3d.render.render3d")
 
 local M = {}
 
@@ -24,7 +25,10 @@ M.simulation = {
 	gravity = true,
 	velocity_iterations = 6,
 	position_iterations = 3,
-	step = 1 / 60
+	step = 1 / 60,
+	body_selected = nil,
+	raycast_from = nil,
+	raycast_to = nil
 }
 M.profiling = {
 	fps_delay = 1,
@@ -73,6 +77,9 @@ end
 
 function M.scene_final()
 	M.scene_config.world = nil
+	M.simulation.raycast_from = nil
+	M.simulation.raycast_to = nil
+	M.simulation.body_selected = nil
 end
 
 function M.update(dt)
@@ -85,7 +92,7 @@ function M.update(dt)
 			local time = socket.gettime()
 			cfg.world:update(M.simulation.step)
 			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
-			 M.profiling.phys_step = socket.gettime() - time
+			M.profiling.phys_step = socket.gettime() - time
 			--cfg.world:DebugDraw()
 		end
 
@@ -102,17 +109,22 @@ function M.update(dt)
 		M.profiling.frames = 0
 	end
 
-	if(M.camera.orbit_y)then
+	if (M.camera.orbit_y) then
 		M.camera.euler_y = M.camera.euler_y + 25 * dt
 	end
 
-	if(M.camera.orbit_x)then
+	if (M.camera.orbit_x) then
 		M.camera.euler_x = M.camera.euler_x - 25 * dt
+	end
+
+	if (M.simulation.raycast_from) then
+		msg.post("@render:", "draw_line",
+				{ start_point = M.simulation.raycast_from, end_point = M.simulation.raycast_to, color = vmath.vector4(1, 0, 0, 0.5) })
 	end
 end
 
-function M.updatePhysics(dt,objects)
-	if(dt == 0)then return end
+function M.updatePhysics(dt, objects)
+	if (dt == 0) then return end
 	if (not M.scene_config.world) then return end
 	local w = M.scene_config.world
 	w:getDebugRenderer():setIsDebugItemDisplayed(rp3d.DebugRenderer.DebugItem.CONTACT_POINT,
@@ -128,7 +140,7 @@ function M.updatePhysics(dt,objects)
 
 	w:setIsDebugRenderingEnabled(M.rendering.debug_draw)
 
-	for _,object in ipairs(objects)do
+	for _, object in ipairs(objects) do
 		object:updateTransform()
 		object:updateColor()
 	end
@@ -155,12 +167,92 @@ function M.debug_draw_remove_flag(flag)
 	--  M.debug_draw.draw:SetFlags(M.debug_draw.flags)
 end
 
-function M.on_input(action_id,action)
-	if(M.camera.input)then
-		if(action_id == hash("touch"))then
+-- Vectors used in calculations for public transform functions
+local nv = vmath.vector4(0, 0, -1, 1)
+local fv = vmath.vector4(0, 0, 1, 1)
+local pv = vmath.vector4(0, 0, 0, 1)
+
+local function world_to_screen(pos, raw)
+	local mat_view = RENDER_3D.camera_view()
+	local mat_proj = RENDER_3D.camera_perspective(math.rad(50))
+	local m = mat_proj * mat_view
+	pv.x, pv.y, pv.z, pv.w = pos.x, pos.y, pos.z, 1
+
+	pv = m * pv
+	pv = pv * (1 / pv.w)
+	pv.x = (pv.x / 2 + 0.5) * RENDER_3D.window_width
+	pv.y = (pv.y / 2 + 0.5) * RENDER_3D.window_height
+
+	if raw then return pv.x, pv.y, 0 end
+end
+-- Returns start and end points for a ray from the camera through the supplied screen coordinates
+-- Start point is on the camera near plane, end point is on the far plane.
+local QUAT_Z = vmath.quat_rotation_x(math.rad(0))
+local function screen_to_world_ray(x, y, raw)
+	local mat_view = RENDER_3D.camera_view()
+	local mat_proj = RENDER_3D.camera_perspective()
+
+	local window_x = RENDER_3D.window_width
+	local window_y = RENDER_3D.window_height
+	local m = vmath.inv(mat_proj * mat_view)
+
+	-- Remap coordinates to range -1 to 1
+	local x1 = (x - window_x * 0.5) / window_x * 2
+	local y1 = (y - window_y * 0.5) / window_y * 2
+
+	nv.x, nv.y = x1, y1
+	fv.x, fv.y = x1, y1
+	local np = m * nv
+	local fp = m * fv
+	np = np * (1 / np.w)
+	fp = fp * (1 / fp.w)
+
+	if raw then return np.x, np.y, np.z, fp.x, fp.y, fp.z
+	else return vmath.vector3(np.x, np.y, np.z), vmath.vector3(fp.x, fp.y, fp.z) end
+end
+
+function M.on_input(action_id, action)
+	if (M.camera.input) then
+		if (action_id == hash("touch")) then
 			M.camera.euler_y = M.camera.euler_y + action.dx * 0.05
 			M.camera.euler_x = M.camera.euler_x + action.dy * 0.05
 			--M.camera.euler_x = M.camera.euler_x + action.dx * 0.1
+		end
+	else
+		if (action_id == hash("touch")) then
+			if action.pressed then
+				--try raycast
+				local ray_start, ray_end = screen_to_world_ray(action.screen_x, action.screen_y)
+				M.simulation.raycast_from = vmath.vector3(ray_start)
+				M.simulation.raycast_to = vmath.vector3(ray_end)
+
+				if (M.scene_config.world) then
+					local result = nil
+					local ray_1 = { point1 = ray_start, point2 = ray_end, maxFraction = 1 }
+					M.scene_config.world:raycast(ray_1, function(info)
+						result = info.body
+						return info.hitFraction
+					end)
+					if (M.simulation.body_selected) then
+						local phys_body = M.simulation.body_selected:getUserData()
+						phys_body:setSelected(false)
+						M.simulation.body_selected = nil
+					end
+					if (result) then
+						local phys_body = result:getUserData()
+						phys_body:setSelected(true)
+						M.simulation.body_selected = result
+					end
+				end
+			end
+
+			if (action.released) then
+				if (M.simulation.body_selected) then
+					local phys_body = M.simulation.body_selected:getUserData()
+					phys_body:setSelected(false)
+					M.simulation.body_selected = nil
+				end
+			end
 		end
 	end
 
