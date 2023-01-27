@@ -155,6 +155,17 @@ function M.debug_draw_remove_flag(flag)
 	--  M.debug_draw.draw:SetFlags(M.debug_draw.flags)
 end
 
+function M.on_input(action_id,action)
+	if(M.camera.input)then
+		if(action_id == hash("touch"))then
+			M.camera.euler_y = M.camera.euler_y + action.dx * 0.05
+			M.camera.euler_x = M.camera.euler_x + action.dy * 0.05
+			--M.camera.euler_x = M.camera.euler_x + action.dx * 0.1
+		end
+	end
+
+end
+
 M.reset()
 
 return M
