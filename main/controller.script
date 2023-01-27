@@ -1,0 +1,13 @@
+local TESTS = require "tests.tests"
+local MONARCH = require "monarch.monarch"
+local SCENE_HELPER = require "main.gui.scene_helper"
+
+function init(self)
+end
+
+function update(self, dt)
+    local result = vmath.quat_rotation_y(math.rad(SCENE_HELPER.camera.euler_y))*
+            vmath.quat_rotation_x(math.rad(SCENE_HELPER.camera.euler_x))
+    go.set_rotation(result,"/camera_root")
+end
+
