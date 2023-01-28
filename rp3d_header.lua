@@ -75,6 +75,16 @@ local Rp3dContactPair = {}
 ---@field localPointOnCollider2 vector3
 local Rp3dContactPairContact = {}
 
+---@class Rp3dHalfEdgeStructureFace
+---@field edgeIndex number
+---@field faceVertices number[]
+local Rp3dHalfEdgeStructureFace = {}
+
+---@class Rp3dHalfEdgeStructureVertex
+---@field edgeIndex number
+---@field vertexPointIndex number
+local Rp3dHalfEdgeStructureVertex = {}
+
 ---@class Rp3dTransform
 local Rp3dTransform = {
 	position = vmath.vector3(),
@@ -763,13 +773,26 @@ local ConvexShape = {}
 ---@return number
 function ConvexShape:getMargin() end
 
-
 ---@class Rp3dConvexPolyhedronShape:Rp3dConvexShape
 local ConvexPolyhedronShape = {}
 
 --Return the number of faces of the polyhedron.
 ---@return number
 function ConvexPolyhedronShape:getNbFaces() end
+
+--Return a given face of the polyhedron.
+---@param faceIndex number
+---@return Rp3dHalfEdgeStructureFace
+function ConvexPolyhedronShape:getFace(faceIndex) end
+
+--Return the number of vertices of the polyhedron.
+---@return number
+function ConvexPolyhedronShape:getNbVertices() end
+
+--Return a given vertex of the polyhedron.
+---@param vertexIndex number
+---@return Rp3dHalfEdgeStructureVertex
+function ConvexPolyhedronShape:getVertex(vertexIndex) end
 
 ---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}

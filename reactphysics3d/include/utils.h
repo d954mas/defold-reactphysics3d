@@ -21,6 +21,7 @@ namespace rp3dDefold {
 
 
     void pushRp3dHalfEdgeStructureFace(lua_State *L,const reactphysics3d::HalfEdgeStructure::Face &face);
+    void pushRp3dHalfEdgeStructureVertex(lua_State *L,const reactphysics3d::HalfEdgeStructure::Vertex &vertex);
 
 }
 

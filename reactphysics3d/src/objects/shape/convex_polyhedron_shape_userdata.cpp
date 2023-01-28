@@ -44,6 +44,26 @@ int ConvexPolyhedronShape_GetFace(lua_State *L){
     return 1;
 }
 
+int ConvexPolyhedronShape_GetNbVertices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    lua_pushnumber(L,shape->getNbVertices());
+    return 1;
+}
+
+int ConvexPolyhedronShape_GetVertex(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    uint32 vertexIndex = luaL_checknumber(L,2);
+    if(vertexIndex<0 || vertexIndex>=shape->getNbVertices()){
+        luaL_error(L,"bad vertexIndex:%d",vertexIndex);
+    }
+    pushRp3dHalfEdgeStructureVertex(L,shape->getVertex(vertexIndex));
+    return 1;
+}
+
 
 }
 #endif
