@@ -80,6 +80,34 @@ return function()
 
 
 		end)
+		test("getVertexPosition()", function()
+			local status,error = pcall(shapes.box.getVertexPosition,shapes.box,-1)
+			assert_false(status)
+			UTILS.test_error(error,"bad vertexIndex:-1")
+			status,error = pcall(shapes.box.getVertexPosition,shapes.box,8)
+			assert_false(status)
+			UTILS.test_error(error,"bad vertexIndex:8")
 
+			local position = shapes.box:getVertexPosition(0)
+			assert_equal_v3(position,vmath.vector3(-1,-1,1))
+
+			position = shapes.box:getVertexPosition(7)
+			assert_equal_v3(position,vmath.vector3(-1,1,-1))
+		end)
+
+		test("getVertexPosition()", function()
+			local status,error = pcall(shapes.box.getFaceNormal,shapes.box,-1)
+			assert_false(status)
+			UTILS.test_error(error,"bad faceIndex:-1")
+			status,error = pcall(shapes.box.getFaceNormal,shapes.box,6)
+			assert_false(status)
+			UTILS.test_error(error,"bad faceIndex:6")
+
+			local position = shapes.box:getFaceNormal(0)
+			assert_equal_v3(position,vmath.vector3(0,0,1))
+
+			position = shapes.box:getFaceNormal(5)
+			assert_equal_v3(position,vmath.vector3(0,1,0))
+		end)
 	end)
 end

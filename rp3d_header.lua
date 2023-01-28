@@ -794,6 +794,16 @@ function ConvexPolyhedronShape:getNbVertices() end
 ---@return Rp3dHalfEdgeStructureVertex
 function ConvexPolyhedronShape:getVertex(vertexIndex) end
 
+--Return the position of a given vertex.
+---@param vertexIndex number
+---@return vector3
+function ConvexPolyhedronShape:getVertexPosition(vertexIndex) end
+
+--Return the normal vector of a given face of the polyhedron.
+---@param faceIndex number
+---@return vector3
+function ConvexPolyhedronShape:getFaceNormal(faceIndex) end
+
 ---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}
 

@@ -8,16 +8,19 @@
 {"getNbFaces", ConvexPolyhedronShape_GetNbFaces},\
 {"getFace", ConvexPolyhedronShape_GetFace},\
 {"getNbVertices", ConvexPolyhedronShape_GetNbVertices},\
-{"getVertex", ConvexPolyhedronShape_GetVertex}\
+{"getVertex", ConvexPolyhedronShape_GetVertex},\
+{"getVertexPosition", ConvexPolyhedronShape_GetVertexPosition},\
+{"getFaceNormal", ConvexPolyhedronShape_GetFaceNormal}\
 
 
 namespace rp3dDefold {
 
 int ConvexPolyhedronShape_GetNbFaces(lua_State *L);
 int ConvexPolyhedronShape_GetFace(lua_State *L);
-
 int ConvexPolyhedronShape_GetNbVertices(lua_State *L);
 int ConvexPolyhedronShape_GetVertex(lua_State *L);
+int ConvexPolyhedronShape_GetVertexPosition(lua_State *L);
+int ConvexPolyhedronShape_GetFaceNormal(lua_State *L);
 
 }
 #endif

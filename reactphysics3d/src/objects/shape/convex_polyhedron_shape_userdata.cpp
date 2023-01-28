@@ -64,6 +64,32 @@ int ConvexPolyhedronShape_GetVertex(lua_State *L){
     return 1;
 }
 
+int ConvexPolyhedronShape_GetVertexPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    uint32 vertexIndex = luaL_checknumber(L,2);
+    if(vertexIndex<0 || vertexIndex>=shape->getNbVertices()){
+        luaL_error(L,"bad vertexIndex:%d",vertexIndex);
+    }
+    Vector3 v3 = shape->getVertexPosition(vertexIndex);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
+int ConvexPolyhedronShape_GetFaceNormal(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    uint32 faceIndex = luaL_checknumber(L,2);
+    if(faceIndex<0 || faceIndex>=shape->getNbFaces()){
+        luaL_error(L,"bad faceIndex:%d",faceIndex);
+    }
+    Vector3 v3 = shape->getFaceNormal(faceIndex);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
 
 }
 #endif
