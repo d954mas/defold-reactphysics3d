@@ -10,7 +10,9 @@
 {"getNbVertices", ConvexPolyhedronShape_GetNbVertices},\
 {"getVertex", ConvexPolyhedronShape_GetVertex},\
 {"getVertexPosition", ConvexPolyhedronShape_GetVertexPosition},\
-{"getFaceNormal", ConvexPolyhedronShape_GetFaceNormal}\
+{"getFaceNormal", ConvexPolyhedronShape_GetFaceNormal},\
+{"getNbHalfEdges", ConvexPolyhedronShape_GetNbHalfEdges},\
+{"getHalfEdge", ConvexPolyhedronShape_GetHalfEdge}\
 
 
 namespace rp3dDefold {
@@ -21,6 +23,8 @@ int ConvexPolyhedronShape_GetNbVertices(lua_State *L);
 int ConvexPolyhedronShape_GetVertex(lua_State *L);
 int ConvexPolyhedronShape_GetVertexPosition(lua_State *L);
 int ConvexPolyhedronShape_GetFaceNormal(lua_State *L);
+int ConvexPolyhedronShape_GetNbHalfEdges(lua_State *L);
+int ConvexPolyhedronShape_GetHalfEdge(lua_State *L);
 
 }
 #endif

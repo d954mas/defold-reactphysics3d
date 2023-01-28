@@ -267,4 +267,16 @@ namespace rp3dDefold {
             lua_pushnumber(L,vertex.vertexPointIndex);
             lua_setfield(L, -2, "vertexPointIndex");
         }
+
+        void pushRp3dHalfEdgeStructureEdge(lua_State *L,const reactphysics3d::HalfEdgeStructure::Edge &edge){
+            lua_newtable(L);
+            lua_pushnumber(L,edge.vertexIndex);
+            lua_setfield(L, -2, "vertexIndex");
+            lua_pushnumber(L,edge.twinEdgeIndex);
+            lua_setfield(L, -2, "twinEdgeIndex");
+            lua_pushnumber(L,edge.faceIndex);
+            lua_setfield(L, -2, "faceIndex");
+            lua_pushnumber(L,edge.nextEdgeIndex);
+            lua_setfield(L, -2, "nextEdgeIndex");
+        }
 }

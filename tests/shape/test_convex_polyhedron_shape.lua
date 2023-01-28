@@ -95,7 +95,7 @@ return function()
 			assert_equal_v3(position,vmath.vector3(-1,1,-1))
 		end)
 
-		test("getVertexPosition()", function()
+		test("getFaceNormal()", function()
 			local status,error = pcall(shapes.box.getFaceNormal,shapes.box,-1)
 			assert_false(status)
 			UTILS.test_error(error,"bad faceIndex:-1")
@@ -108,6 +108,35 @@ return function()
 
 			position = shapes.box:getFaceNormal(5)
 			assert_equal_v3(position,vmath.vector3(0,1,0))
+		end)
+
+		test("getNbHalfEdges()", function()
+			assert_equal(shapes.box:getNbHalfEdges(),24)
+		end)
+
+		test("getHalfEdge()", function()
+			local status,error = pcall(shapes.box.getHalfEdge,shapes.box,-1)
+			assert_false(status)
+			UTILS.test_error(error,"bad edgeIndex:-1")
+			status,error = pcall(shapes.box.getHalfEdge,shapes.box,24)
+			assert_false(status)
+			UTILS.test_error(error,"bad edgeIndex:24")
+
+			local edge = shapes.box:getHalfEdge(0)
+			assert_not_nil(edge)
+			assert_equal(edge.vertexIndex,1)
+			assert_equal(edge.twinEdgeIndex,1)
+			assert_equal(edge.faceIndex,0)
+			assert_equal(edge.nextEdgeIndex,22)
+
+			edge = shapes.box:getHalfEdge(23)
+			assert_not_nil(edge)
+			assert_equal(edge.vertexIndex,3)
+			assert_equal(edge.twinEdgeIndex,22)
+			assert_equal(edge.faceIndex,5)
+			assert_equal(edge.nextEdgeIndex,17)
+
+
 		end)
 	end)
 end

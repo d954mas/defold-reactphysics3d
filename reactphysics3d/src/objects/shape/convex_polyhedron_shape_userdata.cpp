@@ -91,5 +91,25 @@ int ConvexPolyhedronShape_GetFaceNormal(lua_State *L){
     return 1;
 }
 
+int ConvexPolyhedronShape_GetNbHalfEdges(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    lua_pushnumber(L,shape->getNbHalfEdges());
+    return 1;
+}
+
+int ConvexPolyhedronShape_GetHalfEdge(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    uint32 edgeIndex = luaL_checknumber(L,2);
+    if(edgeIndex<0 || edgeIndex>=shape->getNbHalfEdges()){
+        luaL_error(L,"bad edgeIndex:%d",edgeIndex);
+    }
+    pushRp3dHalfEdgeStructureEdge(L,shape->getHalfEdge(edgeIndex));
+    return 1;
+}
+
 }
 #endif

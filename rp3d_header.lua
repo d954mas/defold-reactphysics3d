@@ -85,6 +85,13 @@ local Rp3dHalfEdgeStructureFace = {}
 ---@field vertexPointIndex number
 local Rp3dHalfEdgeStructureVertex = {}
 
+---@class Rp3dHalfEdgeStructureEdge
+---@field vertexIndex number
+---@field twinEdgeIndex number
+---@field faceIndex number
+---@field nextEdgeIndex number
+local Rp3dHalfEdgeStructureEdge = {}
+
 ---@class Rp3dTransform
 local Rp3dTransform = {
 	position = vmath.vector3(),
@@ -803,6 +810,13 @@ function ConvexPolyhedronShape:getVertexPosition(vertexIndex) end
 ---@param faceIndex number
 ---@return vector3
 function ConvexPolyhedronShape:getFaceNormal(faceIndex) end
+
+function ConvexPolyhedronShape:getNbHalfEdges() end
+
+--Return a given half-edge of the polyhedron.
+---@param edgeIndex number
+---@return Rp3dHalfEdgeStructureEdge
+function ConvexPolyhedronShape:getHalfEdge(edgeIndex) end
 
 ---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}
