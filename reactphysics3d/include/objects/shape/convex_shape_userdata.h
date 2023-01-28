@@ -4,6 +4,8 @@
 #include <dmsdk/sdk.h>
 #include "undefine_none.h"
 
+#define RP3D_CONVEX_SHAPE_META_FUNCTIONS \
+{"getMargin", ConvexShape_GetMargin}\
 
 namespace rp3dDefold {
 

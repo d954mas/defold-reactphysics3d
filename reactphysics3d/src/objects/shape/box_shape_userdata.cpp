@@ -2,6 +2,7 @@
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/convex_shape_userdata.h"
+#include "objects/shape/convex_polyhedron_shape_userdata.h"
 
 
 using namespace reactphysics3d;
@@ -20,18 +21,9 @@ CollisionShapeUserdata* BoxShapeCheckUserdata(lua_State* L, int index){
 void BoxShapeShapeUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
     luaL_Reg functions[] ={
-            {"getName", CollisionShape_GetName},
-            {"getType", CollisionShape_GetType},
-            {"isPolyhedron", CollisionShape_IsPolyhedron},
-            {"isConvex", CollisionShape_IsConvex},
-            {"getLocalBounds", CollisionShape_GetLocalBounds},
-            {"getId", CollisionShape_GetId},
-            {"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},
-            {"getVolume", CollisionShape_GetVolume},
-            {"computeAABB", CollisionShape_ComputeAABB},
-            {"__tostring", CollisionShape_ToString},
-            //CONVEX
-            {"getMargin", ConvexShape_GetMargin},
+            RP3D_COLLISION_SHAPE_META_FUNCTIONS,
+            RP3D_CONVEX_SHAPE_META_FUNCTIONS,
+            RP3D_CONVEX_POLYHEDRON_SHAPE_META_FUNCTIONS,
             {0, 0}
         };
     luaL_newmetatable(L, META_NAME_BOX_SHAPE);

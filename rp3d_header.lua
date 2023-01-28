@@ -756,7 +756,22 @@ function CollisionShape:getVolume() end
 ---@return Rp3dAABB
 function CollisionShape:computeAABB(transform) end
 
----@class Rp3dBoxShape:Rp3dCollisionShape
+---@class Rp3dConvexShape:Rp3dCollisionShape
+local ConvexShape = {}
+
+--Return the current object margin.
+---@return number
+function ConvexShape:getMargin() end
+
+
+---@class Rp3dConvexPolyhedronShape:Rp3dConvexShape
+local ConvexPolyhedronShape = {}
+
+--Return the number of faces of the polyhedron.
+---@return number
+function ConvexPolyhedronShape:getNbFaces() end
+
+---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}
 
 ---@class Rp3dAABB

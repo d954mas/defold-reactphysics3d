@@ -10,6 +10,19 @@
 #define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
 
 
+#define RP3D_COLLISION_SHAPE_META_FUNCTIONS \
+{"getName", CollisionShape_GetName},\
+{"getType", CollisionShape_GetType},\
+{"isPolyhedron", CollisionShape_IsPolyhedron},\
+{"isConvex", CollisionShape_IsConvex},\
+{"getLocalBounds", CollisionShape_GetLocalBounds},\
+{"getId", CollisionShape_GetId},\
+{"getLocalInertiaTensor", CollisionShape_GetLocalInertiaTensor},\
+{"getVolume", CollisionShape_GetVolume},\
+{"computeAABB", CollisionShape_ComputeAABB},\
+{"__tostring", CollisionShape_ToString}\
+
+
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
