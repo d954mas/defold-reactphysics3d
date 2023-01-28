@@ -111,5 +111,25 @@ int ConvexPolyhedronShape_GetHalfEdge(lua_State *L){
     return 1;
 }
 
+int ConvexPolyhedronShape_GetCentroid(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    Vector3 v3 = shape->getCentroid();
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
+
+int ConvexPolyhedronShape_FindMostAntiParallelFace(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+    Vector3 v3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    lua_pushnumber(L,shape->findMostAntiParallelFace(v3));
+    return 1;
+}
+
 }
 #endif

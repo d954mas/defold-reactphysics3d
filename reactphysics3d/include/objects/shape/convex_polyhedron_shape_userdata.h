@@ -12,7 +12,9 @@
 {"getVertexPosition", ConvexPolyhedronShape_GetVertexPosition},\
 {"getFaceNormal", ConvexPolyhedronShape_GetFaceNormal},\
 {"getNbHalfEdges", ConvexPolyhedronShape_GetNbHalfEdges},\
-{"getHalfEdge", ConvexPolyhedronShape_GetHalfEdge}\
+{"getHalfEdge", ConvexPolyhedronShape_GetHalfEdge},\
+{"getCentroid", ConvexPolyhedronShape_GetCentroid},\
+{"findMostAntiParallelFace", ConvexPolyhedronShape_FindMostAntiParallelFace}\
 
 
 namespace rp3dDefold {
@@ -25,6 +27,8 @@ int ConvexPolyhedronShape_GetVertexPosition(lua_State *L);
 int ConvexPolyhedronShape_GetFaceNormal(lua_State *L);
 int ConvexPolyhedronShape_GetNbHalfEdges(lua_State *L);
 int ConvexPolyhedronShape_GetHalfEdge(lua_State *L);
+int ConvexPolyhedronShape_GetCentroid(lua_State *L);
+int ConvexPolyhedronShape_FindMostAntiParallelFace(lua_State *L);
 
 }
 #endif

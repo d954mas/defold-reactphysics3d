@@ -818,6 +818,15 @@ function ConvexPolyhedronShape:getNbHalfEdges() end
 ---@return Rp3dHalfEdgeStructureEdge
 function ConvexPolyhedronShape:getHalfEdge(edgeIndex) end
 
+--Return the centroid of the polyhedron.
+---@return vector3
+function ConvexPolyhedronShape:getCentroid() end
+
+--Find and return the index of the polyhedron face with the most anti-parallel face normal given a direction vector.
+---@param direction vector3
+---@return number
+function ConvexPolyhedronShape:findMostAntiParallelFace(direction) end
+
 ---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}
 
