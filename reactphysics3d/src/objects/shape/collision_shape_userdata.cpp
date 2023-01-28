@@ -26,6 +26,8 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
 
      switch(this->shape->getName()){
         case CollisionShapeName::TRIANGLE:
+           // user cannot instanciate an object of this class. This class is for internal use only.
+           //Instances of this class are created when the user creates an HeightFieldShape and a ConcaveMeshShape
            assert(false);
         case CollisionShapeName::SPHERE:
             assert(false);
@@ -36,18 +38,12 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
             break;
         case CollisionShapeName::CONVEX_MESH:
             assert(false);
-        case CollisionShapeName::TRIANGLE_MESH:
+        case CollisionShapeName::TRIANGLE_MESH: //ConcaveMeshShape
             assert(false);
         case CollisionShapeName::HEIGHTFIELD:
             assert(false);
         default:{
-            //ConvexPolyhedronShape
-            if(this->shape->getType()==CollisionShapeType::CONVEX_POLYHEDRON){
-                assert(false);
-            }else{
-                assert(false);
-            }
-
+            assert(false);
         }
     }
 }
