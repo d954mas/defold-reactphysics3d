@@ -345,6 +345,7 @@ void PhysicsCommon::deleteBoxShape(BoxShape* boxShape) {
 
         RP3D_LOG("PhysicsCommon", Logger::Level::Error, Logger::Category::PhysicCommon,
                  "Error when destroying the BoxShape because it is still used by some colliders",  __FILE__, __LINE__);
+        assert(false);
     }
 
    // Call the destructor of the shape
