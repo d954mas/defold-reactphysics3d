@@ -32,6 +32,18 @@ int ConvexPolyhedronShape_GetNbFaces(lua_State *L){
     return 1;
 }
 
+int ConvexPolyhedronShape_GetFace(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
+    uint32 faceIndex = luaL_checknumber(L,2);
+    if(faceIndex<0 || faceIndex>=shape->getNbFaces()){
+        luaL_error(L,"bad faceIndex:%d",faceIndex);
+    }
+    pushRp3dHalfEdgeStructureFace(L,shape->getFace(faceIndex));
+    return 1;
+}
+
 
 }
 #endif

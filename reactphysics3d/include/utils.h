@@ -19,6 +19,9 @@ namespace rp3dDefold {
 	reactphysics3d::Ray CheckRay(lua_State *L, int index);
     void checkRp3dMaterial(lua_State *L, int index, reactphysics3d::Material &material);
 
+
+    void pushRp3dHalfEdgeStructureFace(lua_State *L,const reactphysics3d::HalfEdgeStructure::Face &face);
+
 }
 
 #endif

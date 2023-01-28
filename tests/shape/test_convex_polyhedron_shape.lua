@@ -36,5 +36,25 @@ return function()
 			assert_equal(shapes.box:getNbFaces(),6)
 		end)
 
+		test("getFace()", function()
+			local status,error = pcall(shapes.box.getFace,shapes.box,-1)
+			assert_false(status)
+			UTILS.test_error(error,"bad faceIndex:-1")
+			status,error = pcall(shapes.box.getFace,shapes.box,6)
+			assert_false(status)
+			UTILS.test_error(error,"bad faceIndex:6")
+
+			local face = shapes.box:getFace(0)
+			assert_not_nil(face)
+			assert_equal(face.edgeIndex,4)
+			assert_equal(#face.faceVertices,4)
+
+			face = shapes.box:getFace(5)
+			assert_not_nil(face)
+			assert_equal(face.edgeIndex,23)
+			assert_equal(#face.faceVertices,4)
+
+		end)
+
 	end)
 end

@@ -5,12 +5,14 @@
 #include "undefine_none.h"
 
 #define RP3D_CONVEX_POLYHEDRON_SHAPE_META_FUNCTIONS \
-{"getNbFaces", ConvexPolyhedronShape_GetNbFaces}\
+{"getNbFaces", ConvexPolyhedronShape_GetNbFaces},\
+{"getFace", ConvexPolyhedronShape_GetFace}\
 
 
 namespace rp3dDefold {
 
 int ConvexPolyhedronShape_GetNbFaces(lua_State *L);
+int ConvexPolyhedronShape_GetFace(lua_State *L);
 
 }
 #endif

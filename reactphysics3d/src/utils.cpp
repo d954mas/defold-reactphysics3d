@@ -246,4 +246,17 @@ namespace rp3dDefold {
                 luaL_error(L,"material should be table");
             }
         }
+
+        void pushRp3dHalfEdgeStructureFace(lua_State *L,const reactphysics3d::HalfEdgeStructure::Face &face){
+            lua_newtable(L);
+            lua_pushnumber(L,face.edgeIndex);
+            lua_setfield(L, -2, "edgeIndex");
+            lua_newtable(L);
+                const Array<uint32>& faceVertices = face.faceVertices;
+                for(int i=0;i<faceVertices.size();i++){
+                    lua_pushnumber(L,faceVertices[i]);
+                    lua_rawseti(L, -2, i+1);
+                }
+            lua_setfield(L, -2, "faceVertices");
+        }
 }
