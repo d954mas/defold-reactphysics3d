@@ -8,11 +8,17 @@
 #include "static_hash.h"
 #include "objects/shape/collision_shape_userdata.h"
 
-
+#define RP3D_BOX_SHAPE_META_FUNCTIONS \
+{"getHalfExtents", BoxShape_GetHalfExtents},\
+{"setHalfExtents", BoxShape_SetHalfExtents}\
 
 using namespace reactphysics3d;
 
 namespace rp3dDefold {
+
+    int BoxShape_GetHalfExtents(lua_State *L);
+    int BoxShape_SetHalfExtents(lua_State *L);
+
     CollisionShapeUserdata* BoxShapeCheckUserdata(lua_State *L, int index);
     void BoxShapeShapeUserdataInitMetaTable(lua_State *L);
 }

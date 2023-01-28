@@ -27,6 +27,7 @@ local function create_physics(self)
 		box.collider:setMaterialBounciness(0.4)
 	end
 
+
 	--FLOOR
 	self.floor = Box(true, FLOOR_SIZE,self.world);
 	-- The floor must be a static rigid body

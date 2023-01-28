@@ -19,6 +19,17 @@ return function()
 			UTILS.test_error(error,"rp3d::CollisionShape was destroyed")
 		end)
 
+		test("Set/Get HalfExtents()", function()
+			local w = rp3d.createPhysicsWorld()
+			local shape = rp3d.createBoxShape(vmath.vector3(1,1,1))
+			UTILS.test_method_get_set(shape, "HalfExtents",
+					{ v3 = true,
+					  values = { vmath.vector3(1, 1, 1), vmath.vector3(1, 2, 1), vmath.vector3(2, 2, 2) }
+					})
+			rp3d.destroyBoxShape(shape)
+			rp3d.destroyPhysicsWorld(w)
+		end)
+
 
 
 

@@ -11,7 +11,7 @@ M.scene_config = {
 	world = nil
 }
 M.rendering = {
-	debug_draw = true,
+	debug_draw = false,
 	contact_points = false,
 	contact_normals = false,
 	broad_phase = false,
@@ -91,6 +91,7 @@ function M.update(dt)
 			M.simulation.make_step = false
 			local time = socket.gettime()
 			cfg.world:update(M.simulation.step)
+			cfg.world:getDebugRenderer():draw()
 			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
 			M.profiling.phys_step = socket.gettime() - time
 			--cfg.world:DebugDraw()
@@ -144,8 +145,6 @@ function M.updatePhysics(dt, objects)
 		object:updateTransform()
 		object:updateColor()
 	end
-
-	w:getDebugRenderer():draw()
 end
 
 function M.reset()
