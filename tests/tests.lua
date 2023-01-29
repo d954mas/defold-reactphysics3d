@@ -7,6 +7,7 @@ local TEST_COLLISION_SHAPE = require "tests.shape.test_collision_shape"
 local TEST_CONVEX_SHAPE = require "tests.shape.test_convex_shape"
 local TEST_CONVEX_POLYHEDRON_SHAPE = require "tests.shape.test_convex_polyhedron_shape"
 local TEST_BOX_SHAPE = require "tests.shape.test_box_shape"
+local TEST_SPHERE_SHAPE = require "tests.shape.test_sphere_shape"
 local TEST_COLLISION_BODY = require "tests.test_collision_body"
 local TEST_RIGID_BODY = require "tests.test_rigid_body"
 local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
@@ -65,6 +66,7 @@ function M.run()
 	DEFTEST.add(TEST_CONVEX_SHAPE)
 	DEFTEST.add(TEST_CONVEX_POLYHEDRON_SHAPE)
 	DEFTEST.add(TEST_BOX_SHAPE)
+	DEFTEST.add(TEST_SPHERE_SHAPE)
 	DEFTEST.add(TEST_AABB)
 	DEFTEST.add(TEST_COLLISION_BODY)
 	DEFTEST.add(TEST_RIGID_BODY)

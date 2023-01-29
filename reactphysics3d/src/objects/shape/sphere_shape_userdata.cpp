@@ -14,7 +14,7 @@ static SphereShape* SphereShapeCheck(lua_State* L, int index){
     if (shape->shape->getName() == CollisionShapeName::SPHERE){
         return (SphereShape*)shape->shape;
     }else{
-        luaL_error(L, "shape not BoxShape");
+        luaL_error(L, "shape not SphereShape");
     }
 }
 
@@ -32,6 +32,7 @@ void SphereShapeUserdataInitMetaTable(lua_State *L){
     luaL_Reg functions[] ={
             RP3D_COLLISION_SHAPE_META_FUNCTIONS,
             RP3D_CONVEX_SHAPE_META_FUNCTIONS,
+          //  RP3D_SPHERE_SHAPE_META_FUNCTIONS,
             {0, 0}
         };
     luaL_newmetatable(L, META_NAME_SPHERE_SHAPE);

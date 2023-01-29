@@ -9,6 +9,7 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
+#include "objects/shape/sphere_shape_userdata.h"
 #include "objects/debug_renderer_userdata.h"
 #include "objects/base_userdata.h"
 #include "objects/world_userdata.h"
@@ -96,12 +97,33 @@ static int DestroyBoxShape(lua_State* L){
     return 0;
 }
 
+static int CreateSphereShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    SphereShape * shape = physicsCommon.createSphereShape(luaL_checknumber(L,1));
+    CollisionShapePush(L,shape);
+    return 1;
+}
+
+static int DestroySphereShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionShapeUserdata * shapeUserdata = SphereShapeCheckUserdata(L,1);
+    SphereShape* shape = static_cast<SphereShape*>(shapeUserdata->shape);
+    shapeUserdata->Destroy(L);
+    delete shapeUserdata;
+    physicsCommon.destroySphereShape(shape);
+    return 0;
+}
+
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
 	 {"createPhysicsWorld", CreatePhysicsWorldLua},
 	 {"destroyPhysicsWorld", DestroyPhysicsWorldLua},
 	 {"createBoxShape", CreateBoxShape},
 	 {"destroyBoxShape", DestroyBoxShape},
+	 {"createSphereShape", CreateSphereShape},
+	 {"destroySphereShape", DestroySphereShape},
 	{0, 0}
 };
 
