@@ -502,6 +502,8 @@ function DebugRenderer:setContactNormalLength(length) end
 ---post draw_line messages to render
 function DebugRenderer:draw() end
 
+function DebugRenderer:reset() end
+
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 

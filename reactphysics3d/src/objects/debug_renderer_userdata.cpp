@@ -111,6 +111,13 @@ inline void DrawLine(dmRenderDDF::DrawLine &msg, Vector3 p1,Vector3 p2,uint32 co
     RGBUintToVector(color,msg.m_Color);
 }
 
+static int Reset(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    DebugRendererUserdata *userdata = DebugRendererUserdataCheck(L, 1);
+    userdata->renderer->reset();
+    return 0;
+}
 static int Draw(lua_State *L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
@@ -173,6 +180,7 @@ void DebugRendererUserdataInitMetaTable(lua_State *L){
         {"getContactNormalLength",GetContactNormalLength},
         {"setContactNormalLength",SetContactNormalLength},
         {"draw",Draw},
+        {"reset",Reset},
         {"__tostring",ToString},
         { 0, 0 }
     };

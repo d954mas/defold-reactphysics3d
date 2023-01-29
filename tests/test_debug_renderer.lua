@@ -76,6 +76,11 @@ return function()
 			assert_equal(tostring(renderer):sub(1,19), "rp3d::DebugRenderer")
 		end)
 
+		test("reset()", function()
+			local renderer = w:getDebugRenderer();
+			assert_nil(renderer:reset())
+		end)
+
 
 
 

@@ -92,6 +92,7 @@ function M.update(dt)
 			local time = socket.gettime()
 			cfg.world:update(M.simulation.step)
 			cfg.world:getDebugRenderer():draw()
+			cfg.world:getDebugRenderer():reset()
 			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
 			M.profiling.phys_step = socket.gettime() - time
 			--cfg.world:DebugDraw()
