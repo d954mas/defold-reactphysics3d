@@ -19,5 +19,15 @@ return function()
 			UTILS.test_error(error,"rp3d::CollisionShape was destroyed")
 		end)
 
+		test("Set/Get Radius()", function()
+			local shape = rp3d.createSphereShape(1)
+			UTILS.test_method_get_set(shape, "Radius",
+					{ float = true,
+					  values = {1,0.1,2,5 }
+					})
+			rp3d.destroySphereShape(shape)
+		end)
+
+
 	end)
 end

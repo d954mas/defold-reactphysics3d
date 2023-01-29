@@ -3,6 +3,7 @@
 
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/shape/sphere_shape_userdata.h"
+#include "objects/shape/capsule_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
@@ -34,7 +35,8 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
             this->metatable_name = META_NAME_SPHERE_SHAPE;
             break;
         case CollisionShapeName::CAPSULE:
-            assert(false);
+            this->metatable_name = META_NAME_CAPSULE_SHAPE;
+            break;
         case CollisionShapeName::BOX:
             this->metatable_name = META_NAME_BOX_SHAPE;
             break;
@@ -191,6 +193,7 @@ int CollisionShape_ToString(lua_State *L){
 void CollisionShapeUserdataInitMetaTable(lua_State *L){
     BoxShapeUserdataInitMetaTable(L);
     SphereShapeUserdataInitMetaTable(L);
+    CapsuleShapeUserdataInitMetaTable(L);
 }
 
 

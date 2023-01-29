@@ -830,6 +830,48 @@ function ConvexPolyhedronShape:findMostAntiParallelFace(direction) end
 ---@class Rp3dBoxShape:Rp3dConvexPolyhedronShape
 local BoxShape = {}
 
+--Return the half-extents of the box.
+---@return vector3
+function BoxShape:getHalfExtents() end
+
+--Set the half-extents of the box.
+--Note that you might want to recompute the inertia tensor and center of mass of the body after changing the size of the collision shape.
+---@param halfExtents vector3
+function BoxShape:setHalfExtents(halfExtents) end
+
+---@class Rp3dSphereShape:Rp3dConvexPolyhedronShape
+local SphereShape = {}
+
+--Set the radius of the sphere.
+--Note that you might want to recompute the inertia tensor and center of mass of the body after changing the radius of the collision shape.
+---@param radius number
+function SphereShape:setRadius(radius) end
+
+--Return the radius of the sphere.
+---@return number
+function SphereShape:getRadius() end
+
+---@class Rp3dCapsuleShape:Rp3dConvexPolyhedronShape
+local CapsuleShape = {}
+
+--Set the radius of the capsule.
+--Note that you might want to recompute the inertia tensor and center of mass of the body after changing the radius of the collision shape.
+---@param radius number
+function CapsuleShape:setRadius(radius) end
+
+--Return the radius of the capsule.
+---@return number
+function CapsuleShape:getRadius() end
+
+--Set the height of the capsule.
+--Note that you might want to recompute the inertia tensor and center of mass of the body after changing the radius of the collision shape.
+---@param height number
+function CapsuleShape:setHeight(height) end
+
+--Return the height of the capsule.
+---@return number
+function CapsuleShape:getHeight() end
+
 ---@class Rp3dAABB
 local Rp3dAABB = {}
 
@@ -937,6 +979,25 @@ function rp3d.createBoxShape(halfExtents) end
 --Destroy a box collision shape.
 ---@param boxShape Rp3dBoxShape
 function rp3d.destroyBoxShape(boxShape) end
+
+--Create and return a sphere collision shape.
+---@param radius number
+---@return Rp3dSphereShape
+function rp3d.createSphereShape(radius) end
+
+--Destroy a sphere collision shape.
+---@param sphereShape Rp3dSphereShape
+function rp3d.destroySphereShape(sphereShape) end
+
+--Create and return a capsule collision shape.
+---@param radius number
+---@param height number
+---@return Rp3dCapsuleShape
+function rp3d.createCapsuleShape(radius, height) end
+
+--Destroy a capsule collision shape.
+---@param capsuleShape Rp3dCapsuleShape
+function rp3d.destroyCapsuleShape(capsuleShape) end
 
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",

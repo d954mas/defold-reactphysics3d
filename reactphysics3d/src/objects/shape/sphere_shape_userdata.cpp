@@ -2,7 +2,6 @@
 #include "objects/shape/sphere_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/convex_shape_userdata.h"
-#include "objects/shape/convex_polyhedron_shape_userdata.h"
 #include "utils.h"
 
 using namespace reactphysics3d;
