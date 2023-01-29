@@ -5,9 +5,9 @@
 #include "undefine_none.h"
 #include "objects/base_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
-#include "static_hash.h"
 
 #define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
+#define META_NAME_SPHERE_SHAPE "rp3d::SphereShapeClass"
 
 
 #define RP3D_COLLISION_SHAPE_META_FUNCTIONS \
@@ -23,16 +23,14 @@
 {"__tostring", CollisionShape_ToString}\
 
 
-using namespace reactphysics3d;
-
 namespace rp3dDefold {
 
 //use same for all Shaped
 //use diff meta tables
 class CollisionShapeUserdata : public BaseUserData {
     public:
-        CollisionShape* shape;
-        CollisionShapeUserdata(CollisionShape* shape);
+        reactphysics3d::CollisionShape* shape;
+        CollisionShapeUserdata(reactphysics3d::CollisionShape* shape);
         ~CollisionShapeUserdata();
 
         virtual void Destroy(lua_State *L);
@@ -53,7 +51,7 @@ class CollisionShapeUserdata : public BaseUserData {
 
 
     void CollisionShapeUserdataInitMetaTable(lua_State *L);
-    void CollisionShapePush(lua_State *L, CollisionShape* shape);
+    void CollisionShapePush(lua_State *L, reactphysics3d::CollisionShape* shape);
     CollisionShapeUserdata* CollisionShapeCheck(lua_State *L, int index);
 }
 #endif

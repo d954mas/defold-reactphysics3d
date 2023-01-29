@@ -7,18 +7,16 @@
 
 
 
-using namespace reactphysics3d;
-
 namespace rp3dDefold {
     class AABBLua {
     public:
-        AABB aabb;
-        AABBLua(AABB aabb);
+        reactphysics3d::AABB aabb;
+        AABBLua(reactphysics3d::AABB aabb);
         AABBLua();
         ~AABBLua();
     };
 
-    void AABBPush(lua_State *L, AABB aabb);
+    void AABBPush(lua_State *L, reactphysics3d::AABB aabb);
     AABBLua* AABBCheck(lua_State *L, int index);
 }
 #endif

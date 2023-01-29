@@ -5,12 +5,14 @@
 #include <dmsdk/sdk.h>
 #include "undefine_none.h"
 #include "utils.h"
-#include "objects/objects.h"
 #include "objects/collider_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/debug_renderer_userdata.h"
+#include "objects/base_userdata.h"
+#include "objects/world_userdata.h"
+#include "objects/collision_body_userdata.h"
 
 
 

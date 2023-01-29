@@ -27,7 +27,7 @@ CollisionShapeUserdata* BoxShapeCheckUserdata(lua_State* L, int index){
     }
 }
 
-void BoxShapeShapeUserdataInitMetaTable(lua_State *L){
+void BoxShapeUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
     luaL_Reg functions[] ={
             RP3D_COLLISION_SHAPE_META_FUNCTIONS,

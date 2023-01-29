@@ -5,9 +5,6 @@
 #include "undefine_none.h"
 #include "objects/base_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
-#include "static_hash.h"
-
-using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
@@ -17,10 +14,10 @@ class ColliderUserdata : public BaseUserData {
 private:
 
 public:
-    Collider *collider;
+    reactphysics3d::Collider *collider;
     int user_data_ref;
 
-    ColliderUserdata(Collider* collider);
+    ColliderUserdata(reactphysics3d::Collider* collider);
 	~ColliderUserdata();
 
 	virtual void Destroy(lua_State *L);
@@ -28,6 +25,6 @@ public:
 
 void ColliderUserdataInitMetaTable(lua_State *L);
 ColliderUserdata* ColliderUserdataCheck(lua_State *L, int index);
-void ColliderPush(lua_State *L, Collider* collider);
+void ColliderPush(lua_State *L, reactphysics3d::Collider* collider);
 }
 #endif

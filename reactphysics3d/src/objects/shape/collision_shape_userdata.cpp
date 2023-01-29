@@ -2,6 +2,7 @@
 #include "static_hash.h"
 
 #include "objects/shape/box_shape_userdata.h"
+#include "objects/shape/sphere_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
@@ -30,7 +31,8 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
            //Instances of this class are created when the user creates an HeightFieldShape and a ConcaveMeshShape
            assert(false);
         case CollisionShapeName::SPHERE:
-            assert(false);
+            this->metatable_name = META_NAME_SPHERE_SHAPE;
+            break;
         case CollisionShapeName::CAPSULE:
             assert(false);
         case CollisionShapeName::BOX:
@@ -187,7 +189,8 @@ int CollisionShape_ToString(lua_State *L){
 }
 
 void CollisionShapeUserdataInitMetaTable(lua_State *L){
-    BoxShapeShapeUserdataInitMetaTable(L);
+    BoxShapeUserdataInitMetaTable(L);
+    SphereShapeUserdataInitMetaTable(L);
 }
 
 

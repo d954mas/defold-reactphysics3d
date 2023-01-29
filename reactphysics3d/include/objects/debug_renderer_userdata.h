@@ -5,9 +5,6 @@
 #include "undefine_none.h"
 #include "objects/base_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
-#include "static_hash.h"
-
-using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
@@ -17,8 +14,8 @@ class DebugRendererUserdata : public BaseUserData {
 private:
 
 public:
-    DebugRenderer *renderer;
-    DebugRendererUserdata(DebugRenderer* renderer);
+    reactphysics3d::DebugRenderer *renderer;
+    DebugRendererUserdata(reactphysics3d::DebugRenderer* renderer);
 	~DebugRendererUserdata();
 
 	virtual void Destroy(lua_State *L);
@@ -26,8 +23,8 @@ public:
 
 void DebugRendererUserdataInitMetaTable(lua_State *L);
 DebugRendererUserdata* DebugRendererUserdataCheck(lua_State *L, int index);
-void DebugRendererPush(lua_State *L, DebugRenderer* renderer);
-DebugRenderer::DebugItem DebugRendererDebugItemStringToEnum(lua_State *L,const char* str);
-const char * DebugRendererDebugItemEnumToString(DebugRenderer::DebugItem name);
+void DebugRendererPush(lua_State *L,reactphysics3d::DebugRenderer* renderer);
+reactphysics3d::DebugRenderer::DebugItem DebugRendererDebugItemStringToEnum(lua_State *L,const char* str);
+const char * DebugRendererDebugItemEnumToString(reactphysics3d::DebugRenderer::DebugItem name);
 }
 #endif

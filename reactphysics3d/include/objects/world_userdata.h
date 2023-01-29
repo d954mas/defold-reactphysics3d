@@ -7,17 +7,16 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "static_hash.h"
 
-using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
 //should have table on top of stack
-static void PushCollisionCallbackData(lua_State *L,const CollisionCallback::CallbackData &callbackData);
+static void PushCollisionCallbackData(lua_State *L,const reactphysics3d::CollisionCallback::CallbackData &callbackData);
 //should have table on top of stack
-static void PushOverlapCallbackData(lua_State *L,const OverlapCallback::CallbackData &callbackData);
+static void PushOverlapCallbackData(lua_State *L,const reactphysics3d::OverlapCallback::CallbackData &callbackData);
 
 
-class LuaEventListener : public EventListener {
+class LuaEventListener : public reactphysics3d::EventListener {
 public:
     int fun_onContact_ref=LUA_REFNIL;
     int fun_onTrigger_ref=LUA_REFNIL;
@@ -111,7 +110,7 @@ public:
         }
     }
 
-    inline void onTrigger(const OverlapCallback::CallbackData &callbackData){
+    inline void onTrigger(const reactphysics3d::OverlapCallback::CallbackData &callbackData){
         if(!error && fun_onTrigger_ref != LUA_REFNIL){
             lua_rawgeti(L,LUA_REGISTRYINDEX,fun_onTrigger_ref);
             lua_newtable(L);
@@ -140,10 +139,10 @@ class WorldUserdata : public BaseUserData {
 private:
 
 public:
-    PhysicsWorld *world=NULL;
+    reactphysics3d::PhysicsWorld *world=NULL;
     LuaEventListener *eventListener=NULL;
 
-    WorldUserdata(PhysicsWorld* world);
+    WorldUserdata(reactphysics3d::PhysicsWorld* world);
 	~WorldUserdata();
 
 	virtual void Destroy(lua_State *L);
@@ -152,10 +151,10 @@ public:
 void WorldUserdataInitMetaTable(lua_State *L);
 WorldUserdata* WorldUserdataCheck(lua_State *L, int index);
 
-PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index);
+reactphysics3d::PhysicsWorld::WorldSettings WorldSettings_from_table(lua_State *L, int index);
 
-const char * OverlapPairEventTypeEnumToString(OverlapCallback::OverlapPair::EventType name);
-const char * ContactPairEventTypeEnumToString(CollisionCallback::ContactPair::EventType name);
+const char * OverlapPairEventTypeEnumToString(reactphysics3d::OverlapCallback::OverlapPair::EventType name);
+const char * ContactPairEventTypeEnumToString(reactphysics3d::CollisionCallback::ContactPair::EventType name);
 
 
 

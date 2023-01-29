@@ -252,7 +252,7 @@ namespace rp3dDefold {
             lua_pushnumber(L,face.edgeIndex);
             lua_setfield(L, -2, "edgeIndex");
             lua_newtable(L);
-                const Array<uint32>& faceVertices = face.faceVertices;
+                const reactphysics3d::Array<reactphysics3d::uint32>& faceVertices = face.faceVertices;
                 for(int i=0;i<faceVertices.size();i++){
                     lua_pushnumber(L,faceVertices[i]);
                     lua_rawseti(L, -2, i+1);
