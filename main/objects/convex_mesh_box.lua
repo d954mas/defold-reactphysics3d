@@ -11,7 +11,7 @@ function Box:initialize(rigid_body, mesh, world)
 	self.mesh = mesh
 	self.shape = rp3d.createConvexMeshShape(mesh)
 	self.scale = vmath.vector3(1)
-	self.collection = collectionfactory.create("/factory#box", nil, nil, nil, self.scale * 3)
+	self.collection = collectionfactory.create("/factory#box", nil, nil, nil, self.scale)
 	self.go = {
 		root = msg.url(self.collection["/root"]),
 		mesh = nil
@@ -33,10 +33,10 @@ function Box:initialize(rigid_body, mesh, world)
 
 end
 
-function Box:setScale(scale)
+function Box:setScale(scale,go_scale)
 	self.shape:setScale(scale)
 	self.scale = scale
-	go.set_scale(scale * 6,self.go.root)
+	go.set_scale(go_scale,self.go.root)
 end
 
 function Box:dispose()

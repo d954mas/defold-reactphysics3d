@@ -89,8 +89,16 @@ return function()
 			init_mesh()
 		end)
 
+		test("create from buffer", function()
+			local res = go.get("/meshes#box", "vertices")
+			local buf = resource.get_buffer(res)
+			local mesh_b = rp3d.createPolyhedronMeshFromBufferClone(buf)
+			assert_not_nil(mesh_b)
+			rp3d.destroyPolyhedronMesh(mesh_b)
+		end)
+
 		test("tostring()", function()
-			assert_equal(tostring(mesh):sub(1,20), "rp3d::PolyhedronMesh")
+			assert_equal(tostring(mesh):sub(1, 20), "rp3d::PolyhedronMesh")
 		end)
 	end)
 

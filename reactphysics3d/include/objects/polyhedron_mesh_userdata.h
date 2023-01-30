@@ -27,6 +27,7 @@ public:
 void PolyhedronMeshUserdataInitMetaTable(lua_State *L);
 PolyhedronMeshUserdata* PolyhedronMeshUserdataCheck(lua_State *L, int index);
 PolyhedronMeshUserdata* PolyhedronMeshUserdataFromLua(reactphysics3d::PhysicsCommon *physicsCommon,lua_State *L);
+PolyhedronMeshUserdata* PolyhedronMeshUserdataFromBufferClone(reactphysics3d::PhysicsCommon *physicsCommon,lua_State *L);
 
 }
 #endif

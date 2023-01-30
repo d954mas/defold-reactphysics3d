@@ -5,6 +5,7 @@
 #define META_NAME "rp3d::PolyhedronMesh"
 #define USERDATA_TYPE "rp3d::PolyhedronMesh"
 
+static const dmhash_t HASH_POSITION  = dmHashString64("position");
 
 
 using namespace reactphysics3d;
@@ -151,6 +152,101 @@ PolyhedronMeshUserdata* PolyhedronMeshUserdataFromLua(PhysicsCommon *physicsComm
    result->faces = faces;
    result->polygonVertexArray = polygonVertexArray;
    return result;
+}
+
+static bool AreSame(float a, float b){
+    return fabs(a - b) <  1.0e-6;
+}
+
+// Return the index of a given vertex in the mesh
+static int findVertexIndex(const dmArray<Vector3>& vertices, const Vector3& vertex) {
+    for (size_t i = 0; i < vertices.Size(); i++) {
+        const Vector3& v1 =vertices[i];
+		if (AreSame(v1.x,vertex.x)&&AreSame(v1.y,vertex.y)&&AreSame(v1.z,vertex.z)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+PolyhedronMeshUserdata* PolyhedronMeshUserdataFromBufferClone(PhysicsCommon *physicsCommon,lua_State *L){
+    int top = lua_gettop(L);
+    check_arg_count(L, 1);
+    dmBuffer::HBuffer buffer = dmScript::CheckBufferUnpack(L,1);
+    dmBuffer::Result validate = dmBuffer::ValidateBuffer(buffer);
+    if(validate!=dmBuffer::RESULT_OK ) luaL_error(L,"buffer invalid");
+    float* positions = 0x0;
+    uint32_t components = 0;
+    uint32_t stride = 0;
+    uint32_t count = 0;
+    dmBuffer::Result r = dmBuffer::GetStream(buffer, HASH_POSITION, (void**)&positions, &count, &components, &stride);
+    if (r != dmBuffer::RESULT_OK) luaL_error(L,"buffer can't get position");
+
+
+    float *vertices = new float[count*components];
+    float *verticesIter = positions;
+    for (int i = 0; i < count; ++i){
+        vertices[i*3] = verticesIter[0];
+        vertices[i*3+1] = verticesIter[1];
+        vertices[i*3+2] = verticesIter[2];
+        verticesIter += stride;
+        //dmLogInfo("vertex1(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
+    }
+    int *indices = new int[count];
+    int facesSize = count/3;
+    PolygonVertexArray::PolygonFace* faces = new PolygonVertexArray::PolygonFace[facesSize];
+    PolygonVertexArray::PolygonFace* face = faces;
+    Vector3 vertex;
+    dmArray<Vector3> verticesV3;
+    verticesV3.SetCapacity(count);
+    for (int f=0; f < facesSize; f++) {
+        for (int v = 0; v < 3; v++) {
+            int index = f*3+v;
+            vertex.x = vertices[index*3];
+            vertex.y = vertices[index*3+1];
+            vertex.z = vertices[index*3+2];
+            int vIndex = findVertexIndex(verticesV3, vertex);
+            if (vIndex == -1) {
+                vIndex = verticesV3.Size();
+                verticesV3.Push(vertex);
+            }
+            indices[index] = vIndex;
+        }
+        face->indexBase = f * 3;
+        face->nbVertices = 3;
+        face++;
+    }
+    for (int i = 0; i < verticesV3.Size(); ++i){
+        Vector3 v3 = verticesV3[i];
+    }
+
+    delete[] vertices;
+    vertices = new float[verticesV3.Size()*3];
+    for (int i = 0; i < verticesV3.Size(); ++i){
+        Vector3 v3 = verticesV3[i];
+        vertices[i*3] = v3.x;
+        vertices[i*3+1] = v3.y;
+        vertices[i*3+2] = v3.z;
+    }
+
+    PolygonVertexArray* polygonVertexArray = new PolygonVertexArray(
+        verticesV3.Size(), vertices,  3 * sizeof(float),
+        indices, sizeof(int),
+        facesSize, faces,
+        PolygonVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
+        PolygonVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
+
+    // Create the polyhedron mesh
+    PolyhedronMesh* polyhedronMesh = physicsCommon->createPolyhedronMesh(polygonVertexArray);
+    PolyhedronMeshUserdata* result = new PolyhedronMeshUserdata();
+    result->obj = polyhedronMesh;
+    result->mesh = polyhedronMesh;
+
+    result->vertices = vertices;
+    result->indices = indices;
+    result->faces = faces;
+    result->polygonVertexArray = polygonVertexArray;
+    return result;
 }
 
 

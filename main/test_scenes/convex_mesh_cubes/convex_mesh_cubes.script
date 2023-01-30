@@ -6,8 +6,10 @@ local Box = require "main.objects.box"
 local FLOOR_SIZE = vmath.vector3(30, 1, 30)   -- Floor dimensions in meters
 
 local mesh = nil
+local mesh_b = nil
 ---@type Rp3dConvexMeshShape
 local shape = nil
+local shape2 = nil
 local function init_mesh()
 	local vertices = {}
 	vertices[0] = -3;
@@ -73,13 +75,17 @@ local function init_mesh()
 		polygonFaces[f] = face
 	end
 	mesh = rp3d.createPolyhedronMesh(vertices, indices, polygonFaces)
+
+	local res = go.get("/meshes#box", "vertices")
+	local buf = resource.get_buffer(res)
+	mesh_b = rp3d.createPolyhedronMeshFromBufferClone(buf)
 end
 local function dispose_mesh()
 	rp3d.destroyPolyhedronMesh(mesh)
+	rp3d.destroyPolyhedronMesh(mesh_b)
 	mesh = nil
+	mesh_b = nil
 end
-
-
 
 local function create_physics(self)
 	local settings = {
@@ -91,9 +97,9 @@ local function create_physics(self)
 	---@type ConvexMeshBox[]
 	self.boxes = {}
 
-	for i=1,3 do
-		local box = ConvexMeshBox(true,mesh,self.world)
-		table.insert(self.boxes,box)
+	for i = 1, 3 do
+		local box = ConvexMeshBox(true, i == 1 and mesh_b or mesh, self.world)
+		table.insert(self.boxes, box)
 		table.insert(self.objects, box)
 	end
 
@@ -107,13 +113,13 @@ local function create_physics(self)
 
 	self.floor.body:setTransform({ position = vmath.vector3(0), quat = vmath.quat_rotation_z(0) })
 
-	self.boxes[1]:setScale(vmath.vector3(2))
-	self.boxes[2]:setScale(vmath.vector3(1))
-	self.boxes[3]:setScale(vmath.vector3(0.5))
+	self.boxes[1]:setScale(vmath.vector3(12),vmath.vector3(12))
+	self.boxes[2]:setScale(vmath.vector3(1),vmath.vector3(6))
+	self.boxes[3]:setScale(vmath.vector3(0.5),vmath.vector3(3))
 
-	self.boxes[1]:setTransform({position = vmath.vector3(0,6,0),quat = vmath.quat()})
-	self.boxes[2]:setTransform({position = vmath.vector3(0,15,0),quat = vmath.quat()})
-	self.boxes[3]:setTransform({position = vmath.vector3(0,20,0),quat = vmath.quat()})
+	self.boxes[1]:setTransform({ position = vmath.vector3(0, 6, 0), quat = vmath.quat() })
+	self.boxes[2]:setTransform({ position = vmath.vector3(0, 15, 0), quat = vmath.quat() })
+	self.boxes[3]:setTransform({ position = vmath.vector3(0, 20, 0), quat = vmath.quat() })
 end
 
 function init(self)
