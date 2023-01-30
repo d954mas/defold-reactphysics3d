@@ -16,6 +16,7 @@ local TEST_AABB = require "tests.test_aabb"
 local TEST_COLLIDER = require "tests.test_collider"
 local TEST_DEBUG_RENDERER = require "tests.test_debug_renderer"
 local TEST_POLYHEDRON_MESH = require "tests.shape.test_polyhedron_mesh"
+local TEST_CONVEX_MESH_SHAPE = require "tests.shape.test_convex_mesh_shape"
 local M = {}
 
 function M.run()
@@ -70,6 +71,7 @@ function M.run()
 	DEFTEST.add(TEST_BOX_SHAPE)
 	DEFTEST.add(TEST_SPHERE_SHAPE)
 	DEFTEST.add(TEST_CAPSULE_SHAPE)
+	DEFTEST.add(TEST_CONVEX_MESH_SHAPE)
 	DEFTEST.add(TEST_AABB)
 	DEFTEST.add(TEST_COLLISION_BODY)
 	DEFTEST.add(TEST_RIGID_BODY)

@@ -11,6 +11,7 @@
 #include "objects/shape/box_shape_userdata.h"
 #include "objects/shape/sphere_shape_userdata.h"
 #include "objects/shape/capsule_shape_userdata.h"
+#include "objects/shape/convex_mesh_shape_userdata.h"
 #include "objects/debug_renderer_userdata.h"
 #include "objects/base_userdata.h"
 #include "objects/world_userdata.h"
@@ -156,6 +157,33 @@ static int DestroyPolyhedronMesh(lua_State* L){
     return 0;
 }
 
+static int CreateConvexMeshShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1,2);
+    PolyhedronMeshUserdata * mesh = PolyhedronMeshUserdataCheck(L,1);
+    Vector3 scalingV3(1,1,1);
+    if(lua_gettop(L) == 2){
+        dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+        scalingV3.x = dmV3->getX();
+        scalingV3.y = dmV3->getY();
+        scalingV3.z = dmV3->getZ();
+    }
+    ConvexMeshShape * shape = physicsCommon.createConvexMeshShape(mesh->mesh,scalingV3);
+    CollisionShapePush(L,shape);
+    return 1;
+}
+
+static int DestroyConvexMeshShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionShapeUserdata * shapeUserdata = ConvexMeshShapeCheckUserdata(L,1);
+    ConvexMeshShape* shape = static_cast<ConvexMeshShape*>(shapeUserdata->shape);
+    shapeUserdata->Destroy(L);
+    delete shapeUserdata;
+    physicsCommon.destroyConvexMeshShape(shape);
+    return 0;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -169,6 +197,8 @@ static const luaL_reg Module_methods[] ={
 	 {"destroyCapsuleShape", DestroyCapsuleShape},
 	 {"createPolyhedronMesh", CreatePolyhedronMesh},
 	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
+	 {"createConvexMeshShape", CreateConvexMeshShape},
+	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
 	{0, 0}
 };
 

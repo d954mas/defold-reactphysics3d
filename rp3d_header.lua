@@ -105,6 +105,9 @@ local Rp3dMaterial = {
 	massDensity = 0,
 }
 
+---@class Rp3dPolyhedronMesh
+local Rp3dPolyhedronMesh = {}
+
 ---@class Rp3dCollider
 local Collider = {}
 
@@ -873,6 +876,10 @@ function CapsuleShape:setHeight(height) end
 --Return the height of the capsule.
 ---@return number
 function CapsuleShape:getHeight() end
+
+---@class Rp3dConvexMeshShape:Rp3dConvexPolyhedronShape
+local ConvexMeshShape = {}
+
 
 ---@class Rp3dAABB
 local Rp3dAABB = {}

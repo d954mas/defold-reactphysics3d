@@ -9,6 +9,7 @@
 #define META_NAME_BOX_SHAPE "rp3d::BoxShapeClass"
 #define META_NAME_SPHERE_SHAPE "rp3d::SphereShapeClass"
 #define META_NAME_CAPSULE_SHAPE "rp3d::CapsuleShapeClass"
+#define META_NAME_CONVEX_MESH_SHAPE "rp3d::ConvexMeshShapeClass"
 
 
 #define RP3D_COLLISION_SHAPE_META_FUNCTIONS \

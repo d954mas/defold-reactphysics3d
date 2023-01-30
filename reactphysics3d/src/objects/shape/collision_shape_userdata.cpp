@@ -5,6 +5,7 @@
 #include "objects/shape/sphere_shape_userdata.h"
 #include "objects/shape/capsule_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
+#include "objects/shape/convex_mesh_shape_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
 #include "objects/aabb.h"
@@ -41,7 +42,8 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
             this->metatable_name = META_NAME_BOX_SHAPE;
             break;
         case CollisionShapeName::CONVEX_MESH:
-            assert(false);
+            this->metatable_name = META_NAME_CONVEX_MESH_SHAPE;
+            break;
         case CollisionShapeName::TRIANGLE_MESH: //ConcaveMeshShape
             assert(false);
         case CollisionShapeName::HEIGHTFIELD:
@@ -194,6 +196,7 @@ void CollisionShapeUserdataInitMetaTable(lua_State *L){
     BoxShapeUserdataInitMetaTable(L);
     SphereShapeUserdataInitMetaTable(L);
     CapsuleShapeUserdataInitMetaTable(L);
+    ConvexMeshShapeUserdataInitMetaTable(L);
 }
 
 
