@@ -1,5 +1,5 @@
 #ifndef polyhedron_mesh_userdata_h
-#define collider_userdata_h
+#define polyhedron_mesh_userdata_h
 
 #include <dmsdk/sdk.h>
 #include "undefine_none.h"
@@ -12,7 +12,11 @@ class PolyhedronMeshUserdata : public BaseUserData {
 private:
 
 public:
-    reactphysics3d::PolyhedronMesh *mesh;
+    float *vertices=NULL;
+    int *indices=NULL;
+    reactphysics3d::PolygonVertexArray::PolygonFace* faces=NULL;
+    reactphysics3d::PolygonVertexArray* polygonVertexArray=NULL;
+    reactphysics3d::PolyhedronMesh *mesh=NULL;
 
     PolyhedronMeshUserdata();
 	~PolyhedronMeshUserdata();
@@ -22,6 +26,7 @@ public:
 
 void PolyhedronMeshUserdataInitMetaTable(lua_State *L);
 PolyhedronMeshUserdata* PolyhedronMeshUserdataCheck(lua_State *L, int index);
+PolyhedronMeshUserdata* PolyhedronMeshUserdataFromLua(reactphysics3d::PhysicsCommon *physicsCommon,lua_State *L);
 
 }
 #endif

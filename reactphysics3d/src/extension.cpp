@@ -140,7 +140,7 @@ static int DestroyCapsuleShape(lua_State* L){
 static int CreatePolyhedronMesh(lua_State* L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 3);
-    PolyhedronMeshUserdata *mesh = new PolyhedronMeshUserdata();
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataFromLua(&physicsCommon,L);
     mesh->Push(L);
     return 1;
 }
@@ -269,6 +269,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     CollisionShapeUserdataInitMetaTable(params->m_L);
     ColliderUserdataInitMetaTable(params->m_L);
     DebugRendererUserdataInitMetaTable(params->m_L);
+    PolyhedronMeshUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;
