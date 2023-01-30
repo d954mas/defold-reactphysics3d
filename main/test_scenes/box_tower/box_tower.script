@@ -97,7 +97,7 @@ function init(self)
 	create_physics(self)
 
 	SCENE_HELPER.scene_new({
-		name = "cubes",
+		name = "box_tower",
 		world = self.world
 	})
 	--timer.delay(0.05,false,function()

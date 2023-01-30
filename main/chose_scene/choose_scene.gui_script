@@ -54,7 +54,8 @@ function init(self)
 	self.list_data = {
 		{id = "cubes",scene = "cubes"},
 		{id = "cube_stack",scene = "cube_stack"},
-		{id = "box_tower",scene = "box_tower"}
+		{id = "box_tower",scene = "box_tower"},
+		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"}
 	}
 	update_list(self)
 

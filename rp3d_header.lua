@@ -1013,6 +1013,16 @@ function rp3d.createCapsuleShape(radius, height) end
 ---@param capsuleShape Rp3dCapsuleShape
 function rp3d.destroyCapsuleShape(capsuleShape) end
 
+
+--Create and return a convex mesh collision shape.
+---@param mesh Rp3dPolyhedronMesh
+---@return Rp3dConvexMeshShape
+function rp3d.createConvexMeshShape(mesh) end
+
+--Destroy a capsule collision shape.
+---@param convexMeshShape Rp3dConvexMeshShape
+function rp3d.destroyConvexMeshShape(convexMeshShape) end
+
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",
 	SPLIT_IMPULSES = "SPLIT_IMPULSES",
