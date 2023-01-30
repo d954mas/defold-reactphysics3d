@@ -182,7 +182,6 @@ PolyhedronMeshUserdata* PolyhedronMeshUserdataFromBufferClone(PhysicsCommon *phy
     dmBuffer::Result r = dmBuffer::GetStream(buffer, HASH_POSITION, (void**)&positions, &count, &components, &stride);
     if (r != dmBuffer::RESULT_OK) luaL_error(L,"buffer can't get position");
 
-
     float *vertices = new float[count*components];
     float *verticesIter = positions;
     for (int i = 0; i < count; ++i){
@@ -202,6 +201,7 @@ PolyhedronMeshUserdata* PolyhedronMeshUserdataFromBufferClone(PhysicsCommon *phy
     for (int f=0; f < facesSize; f++) {
         for (int v = 0; v < 3; v++) {
             int index = f*3+v;
+            //int indexCCW = f*3 + (2-v);
             vertex.x = vertices[index*3];
             vertex.y = vertices[index*3+1];
             vertex.z = vertices[index*3+2];
@@ -216,8 +216,13 @@ PolyhedronMeshUserdata* PolyhedronMeshUserdataFromBufferClone(PhysicsCommon *phy
         face->nbVertices = 3;
         face++;
     }
-    for (int i = 0; i < verticesV3.Size(); ++i){
-        Vector3 v3 = verticesV3[i];
+
+    face = faces;
+    for (int f=0; f < facesSize; f++) {
+        Vector3 p1 = verticesV3[indices[face->indexBase]];
+        Vector3 p2 = verticesV3[indices[face->indexBase+1]];
+        Vector3 p3 = verticesV3[indices[face->indexBase+2]];
+        face++;
     }
 
     delete[] vertices;
