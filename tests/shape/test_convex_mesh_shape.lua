@@ -91,9 +91,16 @@ return function()
 		test("create/destroy", function()
 			assert_not_nil(mesh)
 			assert_not_nil(shape)
-			--dispose_mesh()
-		--	init_mesh()
+			dispose_mesh()
+			init_mesh()
 			assert_equal(shape:getName(),rp3d.CollisionShapeName.CONVEX_MESH)
+		end)
+
+		test("set/get Scale()", function()
+			UTILS.test_method_get_set(shape, "Scale",
+					{ v3 = true,
+					  values = { vmath.vector3(1), vmath.vector3(3), vmath.vector3(1,2,3) }
+					})
 		end)
 	end)
 

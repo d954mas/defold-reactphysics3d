@@ -880,6 +880,11 @@ function CapsuleShape:getHeight() end
 ---@class Rp3dConvexMeshShape:Rp3dConvexPolyhedronShape
 local ConvexMeshShape = {}
 
+---@return vector3
+function ConvexMeshShape:getScale() end
+
+---@param scale vector3
+function ConvexMeshShape:setScale(scale) end
 
 ---@class Rp3dAABB
 local Rp3dAABB = {}
