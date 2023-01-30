@@ -15,6 +15,7 @@
 #include "objects/base_userdata.h"
 #include "objects/world_userdata.h"
 #include "objects/collision_body_userdata.h"
+#include "objects/polyhedron_mesh_userdata.h"
 
 
 
@@ -136,6 +137,25 @@ static int DestroyCapsuleShape(lua_State* L){
     return 0;
 }
 
+static int CreatePolyhedronMesh(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    PolyhedronMeshUserdata *mesh = new PolyhedronMeshUserdata();
+    mesh->Push(L);
+    return 1;
+}
+
+static int DestroyPolyhedronMesh(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    PolyhedronMeshUserdata * userdata = PolyhedronMeshUserdataCheck(L,1);
+    PolyhedronMesh* mesh = userdata->mesh;
+    userdata->Destroy(L);
+    delete userdata;
+    physicsCommon.destroyPolyhedronMesh(mesh);
+    return 0;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -147,6 +167,8 @@ static const luaL_reg Module_methods[] ={
 	 {"destroySphereShape", DestroySphereShape},
 	 {"createCapsuleShape", CreateCapsuleShape},
 	 {"destroyCapsuleShape", DestroyCapsuleShape},
+	 {"createPolyhedronMesh", CreatePolyhedronMesh},
+	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
 	{0, 0}
 };
 

@@ -15,6 +15,7 @@ local TEST_WORLD_SETTINGS = require "tests.test_world_settings"
 local TEST_AABB = require "tests.test_aabb"
 local TEST_COLLIDER = require "tests.test_collider"
 local TEST_DEBUG_RENDERER = require "tests.test_debug_renderer"
+local TEST_POLYHEDRON_MESH = require "tests.shape.test_polyhedron_mesh"
 local M = {}
 
 function M.run()
@@ -74,6 +75,7 @@ function M.run()
 	DEFTEST.add(TEST_RIGID_BODY)
 	DEFTEST.add(TEST_COLLIDER)
 	DEFTEST.add(TEST_DEBUG_RENDERER)
+	DEFTEST.add(TEST_POLYHEDRON_MESH)
 	DEFTEST.run()
 end
 
