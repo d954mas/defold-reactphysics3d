@@ -88,6 +88,10 @@ return function()
 			dispose_mesh()
 			init_mesh()
 		end)
+
+		test("tostring()", function()
+			assert_equal(tostring(mesh):sub(1,20), "rp3d::PolyhedronMesh")
+		end)
 	end)
 
 end
