@@ -42,7 +42,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"box\"\n"
   "  type: \"collectionfactory\"\n"
-  "  data: \"prototype: \\\"/main/go/box.collection\\\"\\n"
+  "  data: \"prototype: \\\"/assets/meshes/box.collection\\\"\\n"
   "load_dynamically: false\\n"
   "\"\n"
   "  position {\n"
