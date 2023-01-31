@@ -1,5 +1,5 @@
-[![GitHub release (latest by date)](https://github.com/d954mas/defold-reactphysics3d)](https://github.com/d954mas/defold-reactphysics3d/releases)
-
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/d954mas/defold-reactphysics3d)](https://github.com/d954mas/defold-reactphysics3d/releases)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/d954mas/defold-reactphysics3d/bob.yml?branch=main)](https://github.com/d954mas/defold-reactphysics3d)
 # ReactPhysics3D for Defold
 
 ReactPhysics3D lua bindings for the Defold Game Engine.
