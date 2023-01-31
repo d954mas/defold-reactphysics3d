@@ -24,7 +24,8 @@ It will help me make more libraries for defold.
 Try the [demo](https://d954mas.github.io/defold-reactphysics3d)
 
 
-##Be carefull
+## WARNING
+
 1. This is c++ library. I add some function parameters checks but you can crash it in some cases.
 
 2. Call destroy. Or you will have memory leaks.
