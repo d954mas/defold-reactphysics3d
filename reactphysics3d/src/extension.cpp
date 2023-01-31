@@ -146,7 +146,7 @@ static int CreatePolyhedronMesh(lua_State* L){
     return 1;
 }
 
-static int createPolyhedronMeshFromBufferClone(lua_State* L){
+static int CreatePolyhedronMeshFromMeshVerticesCopy(lua_State* L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
     PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataFromBufferClone(&physicsCommon,L);
@@ -204,7 +204,7 @@ static const luaL_reg Module_methods[] ={
 	 {"createCapsuleShape", CreateCapsuleShape},
 	 {"destroyCapsuleShape", DestroyCapsuleShape},
 	 {"createPolyhedronMesh", CreatePolyhedronMesh},
-	 {"createPolyhedronMeshFromBufferClone", createPolyhedronMeshFromBufferClone},
+	 {"createPolyhedronMeshFromMeshVerticesCopy", CreatePolyhedronMeshFromMeshVerticesCopy},
 	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
 	 {"createConvexMeshShape", CreateConvexMeshShape},
 	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
