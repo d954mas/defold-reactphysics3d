@@ -84,7 +84,7 @@ function init(self)
 	create_physics(self)
 
 	SCENE_HELPER.scene_new({
-		name = "cube stack",
+		name = "cubes",
 		world = self.world
 	})
 	--timer.delay(0.05,false,function()

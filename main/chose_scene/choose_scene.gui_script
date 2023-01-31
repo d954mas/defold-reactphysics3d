@@ -53,8 +53,8 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.list_data = {
 		{id = "cubes",scene = "cubes"},
-		{id = "cube_stack",scene = "cube_stack"},
-		{id = "box_tower",scene = "box_tower"},
+		{id = "cube stack",scene = "cube_stack"},
+		{id = "box tower",scene = "box_tower"},
 		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"}
 	}
 	update_list(self)
