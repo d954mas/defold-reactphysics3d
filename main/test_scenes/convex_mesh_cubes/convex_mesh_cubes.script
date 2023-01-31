@@ -1,6 +1,6 @@
 local SCENE_HELPER = require "main.gui.scene_helper"
 local MONARCH = require "monarch.monarch"
-local ConvexMeshBox = require "main.objects.convex_mesh_box"
+local ConvexMesh = require "main.objects.convex_mesh"
 local Box = require "main.objects.box"
 
 local FLOOR_SIZE = vmath.vector3(30, 1, 30)   -- Floor dimensions in meters
@@ -84,11 +84,11 @@ local function create_physics(self)
 	self.world = rp3d.createPhysicsWorld(settings)
 	---@type GameBox[]
 	self.objects = {}
-	---@type ConvexMeshBox[]
+	---@type ConvexMesh[]
 	self.boxes = {}
 
 	for i = 1, 3 do
-		local box = ConvexMeshBox(true, mesh, self.world)
+		local box = ConvexMesh(true, mesh,"factory#box", self.world)
 		table.insert(self.boxes, box)
 		table.insert(self.objects, box)
 	end

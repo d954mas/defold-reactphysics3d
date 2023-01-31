@@ -55,7 +55,8 @@ function init(self)
 		{id = "cubes",scene = "cubes"},
 		{id = "cube stack",scene = "cube_stack"},
 		{id = "box tower",scene = "box_tower"},
-		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"}
+		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"},
+		{id = "collision shapes",scene = "collision_shapes"}
 	}
 	update_list(self)
 

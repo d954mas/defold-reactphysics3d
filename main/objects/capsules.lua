@@ -1,17 +1,17 @@
 local CLASS = require "libs.middleclass"
 local PhysObject = require "main.objects.physics_object"
 
----@class ConvexMeshBox:GamePhysObject
-local Box = CLASS.class("ConvexMeshBox", PhysObject)
+---@class GameCapsule:GamePhysObject
+local Box = CLASS.class("Capsule", PhysObject)
 
 ---@param world Rp3dPhysicsWorld
-function Box:initialize(rigid_body, mesh, world)
-	PhysObject.initialize(self, world)
+function Box:initialize(rigid_body, radius,height, world)
+	PhysObject.initialize(self,world)
 	self.rigid_body = rigid_body
-	self.mesh = mesh
-	self.shape = rp3d.createConvexMeshShape(mesh)
-	self.scale = vmath.vector3(1)
-	self.collection = collectionfactory.create("/factory#box", nil, nil, nil, self.scale)
+	self.radius = radius
+	self.height = height
+	self.shape = rp3d.createCapsuleShape(self.radius,self.height)
+	self.collection = collectionfactory.create("/factory#capsule", nil, nil, nil, vmath.vector3(self.radius,self.height,self.radius))
 	self.go = {
 		root = msg.url(self.collection["/root"]),
 		mesh = nil
@@ -33,15 +33,9 @@ function Box:initialize(rigid_body, mesh, world)
 
 end
 
-function Box:setScale(scale,go_scale)
-	self.shape:setScale(scale)
-	self.scale = scale
-	go.set_scale(go_scale,self.go.root)
-end
-
 function Box:dispose()
 	PhysObject.dispose(self)
-	rp3d.destroyConvexMeshShape(self.shape)
+	rp3d.destroyCapsuleShape(self.shape)
 end
 
 return Box

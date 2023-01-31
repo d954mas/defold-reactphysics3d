@@ -1,0 +1,232 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+
+local SCENE_RADIUS = 30.0
+local NB_BOXES = 10
+local NB_SPHERES = 5
+local NB_CAPSULES = 5
+local NB_MESHES = 5
+local NB_COMPOUND_SHAPES = 5
+local BOX_SIZE = vmath.vector3(2, 2, 2)
+local SPHERE_RADIUS = 1.5
+local CONE_RADIUS = 2.0
+local CONE_HEIGHT = 3.0
+local CYLINDER_RADIUS = 1.0
+local CYLINDER_HEIGHT = 5.0
+local CAPSULE_RADIUS = 1.0
+local CAPSULE_HEIGHT = 1.0
+local DUMBBELL_HEIGHT = 1.0
+local FLOOR_SIZE = vmath.vector3(30, 0.5, 30)
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+	---@type GameBox[]
+	self.boxes = {}
+	---@type GameDumbBell[]
+	self.dumbbells = {}
+	---@type GameSphere[]
+	self.spheres = {}
+	---@type GameCapsule[]
+	self.capsules = {}
+	---@type GameConvexMesh[]
+	self.convex_meshes = {}
+
+	for i = 1, NB_COMPOUND_SHAPES do
+		local dumbbell = Dumbbell(true, self.world);
+		dumbbell.capsule:setMaterialBounciness(0.2)
+		dumbbell.sphere1:setMaterialBounciness(0.2)
+		dumbbell.sphere2:setMaterialBounciness(0.2)
+		table.insert(self.objects, dumbbell)
+		table.insert(self.dumbbells, dumbbell)
+	end
+
+	for i = 1, NB_BOXES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		local box = Box(true, SPHERE_RADIUS, self.world)
+		table.insert(self.objects, box)
+		table.insert(self.boxes, box)
+		box.collider:setMaterialBounciness(0.2)
+	end
+
+	for i = 1, NB_SPHERES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		local sphere = Sphere(true, SPHERE_RADIUS, self.world)
+		table.insert(self.objects, sphere)
+		table.insert(self.spheres, sphere)
+		sphere.collider:setMaterialBounciness(0.2)
+	end
+	local res = go.get("/meshes#convex", "vertices")
+	local buf = resource.get_buffer(res)
+	self.polyhedron_mesh = rp3d.createPolyhedronMeshFromMeshVerticesCopy(buf)
+
+	for i = 1, NB_MESHES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		local mesh = ConvexMesh(true, self.polyhedron_mesh, "/factory#convexmesh", self.world)
+		table.insert(self.objects, mesh)
+		table.insert(self.convex_meshes, mesh)
+		mesh.collider:setMaterialBounciness(0.2)
+	end
+
+	for i = 1, NB_CAPSULES do
+		-- Create a cube and a corresponding rigid in the physics world
+		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+		local capsule = Capsule(true, CAPSULE_RADIUS, CAPSULE_HEIGHT, self.world)
+		table.insert(self.objects, capsule)
+		table.insert(self.capsules, capsule)
+		capsule.collider:setMaterialBounciness(0.2)
+	end
+
+
+	--FLOOR
+	self.floor = Box(true, FLOOR_SIZE, self.world);
+	-- The floor must be a static rigid body
+	self.floor.body:setType(rp3d.BodyType.STATIC);
+	self.floor:setColor(self.floor.colors.floorColorDemo)
+	self.floor:setColorSleeping(self.floor.colors.floorColorDemo)
+	self.floor.collider:setMaterialBounciness(0.2)
+	table.insert(self.objects, self.floor)
+
+
+	--INIT POSITIONS
+	local radius = 3.0
+	for index, dumbbell in ipairs(self.dumbbells) do
+		local i = index - 1
+		local angle = i * 30.0
+		local position = vmath.vector3(
+				radius * math.cos(angle),
+				125 + i * (DUMBBELL_HEIGHT + 0.3),
+				radius * math.sin(angle))
+		dumbbell.body:setTransform({
+			position = position, quat = vmath.quat()
+		})
+	end
+
+	for index, box in ipairs(self.boxes) do
+		local i = index - 1
+		local angle = i * 30.0
+		local position = vmath.vector3(
+				radius * math.cos(angle),
+				85 + i * (BOX_SIZE.y + 0.8),
+				radius * math.sin(angle))
+		box.body:setTransform({
+			position = position, quat = vmath.quat()
+		})
+	end
+
+	for index, sphere in ipairs(self.spheres) do
+		local i = index - 1
+		local angle = i * 35.0
+		local position = vmath.vector3(
+				radius * math.cos(angle),
+				75 + i * (SPHERE_RADIUS + 0.8),
+				radius * math.sin(angle))
+		sphere.body:setTransform({
+			position = position, quat = vmath.quat()
+		})
+	end
+
+	for index, capsule in ipairs(self.capsules) do
+		local i = index - 1
+		local angle = i * 45.0
+		local position = vmath.vector3(
+				radius * math.cos(angle),
+				40 + i * (CAPSULE_HEIGHT + 0.3),
+				radius * math.sin(angle))
+		capsule.body:setTransform({
+			position = position, quat = vmath.quat()
+		})
+	end
+
+	for index, mesh in ipairs(self.convex_meshes) do
+		local i = index - 1
+		local angle = i * 30.0
+		local position = vmath.vector3(
+				radius * math.cos(angle),
+				30 + i * (CAPSULE_HEIGHT + 0.3),
+				radius * math.sin(angle))
+		mesh.body:setTransform({
+			position = position, quat = vmath.quat()
+		})
+	end
+
+	self.floor.body:setTransform({ position = vmath.vector3(0), quat = vmath.quat_rotation_z(0) })
+	--[[// Gravity vector in the physics world
+
+	// Create all the cubes of the scene
+	for (int i=0; i<NB_CUBES; i++) {
+
+
+
+	// Set the box color
+	cube->setColor(mObjectColorDemo);
+	cube->setSleepingColor(mSleepingColorDemo);
+
+	// Change the material properties of the rigid body
+	rp3d::Material& material = cube->getCollider()->getMaterial();
+	material.setBounciness(rp3d::decimal(0.4));
+
+	// Add the box the list of box in the scene
+	mBoxes.push_back(cube);
+	mPhysicsObjects.push_back(cube);
+	}
+
+	// ------------------------- FLOOR ----------------------- //
+
+	// Create the floor
+	mFloor = new Box(true, FLOOR_SIZE, mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
+	mFloor->setColor(mFloorColorDemo);
+	mFloor->setSleepingColor(mFloorColorDemo);
+
+	// The floor must be a static rigid body
+	mFloor->getRigidBody()->setType(rp3d::BodyType::STATIC);
+	mPhysicsObjects.push_back(mFloor);
+	createPhysicsWorld();
+	initBodiesPositions();--]]
+end
+
+function init(self)
+	create_physics(self)
+
+	SCENE_HELPER.scene_new({
+		name = "collision shapes",
+		world = self.world
+	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+	if (self.polyhedron_mesh) then
+		rp3d.destroyPolyhedronMesh(self.polyhedron_mesh)
+		self.convex_meshes = nil
+	end
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
+end
+
+
+
