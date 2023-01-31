@@ -1,3 +1,5 @@
+[![GitHub release (latest by date)](https://github.com/d954mas/defold-reactphysics3d)](https://github.com/d954mas/defold-reactphysics3d/releases)
+
 # ReactPhysics3D for Defold
 
 ReactPhysics3D lua bindings for the Defold Game Engine.
@@ -17,7 +19,9 @@ It will help me make more libraries for defold.
 
 [![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/d954mas)
 
-Try the demo: 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/d954mas)
+
+Try the [demo](https://d954mas.github.io/defold-reactphysics3d)
 
 
 ##Be carefull
@@ -39,8 +43,31 @@ self.world:destroyCollisionBody(self.body)
 rp3d.destroyBoxShape(self.shape)
 ```
 
+## TODO
+1.Add ConcaveShapes
+
+2.Add Joints
+
+3.Better Docs
+
 ## Limits
 1)Defold vector instead of rp3d::Vector
+
 2)Defold quaternion instead of rp3d::Quat
+
 3)no Transform userdata. Use table with vector3 and quaternion
 
+## Setup
+
+### Dependency
+
+You can use the **rp3d** extension in your own project by adding this project as a [Defold library dependency](https://www.defold.com/manuals/libraries/). Open your game.project file and in the dependencies field under project add:
+
+> [https://github.com/d954mas/defold-reactphysics3d/archive/master.zip](https://github.com/d954mas/defold-reactphysics3d/archive/master.zip)
+
+Or point to the ZIP file of a [specific release](https://github.com/d954mas/defold-reactphysics3d/releases).
+
+## Documentaion
+1.[ReactPhysics3D  doc](https://www.reactphysics3d.com/documentation.html)
+
+2.[Emmylua header](https://github.com/d954mas/defold-reactphysics3d/blob/master/rp3d_header.lua)
