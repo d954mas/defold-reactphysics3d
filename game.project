@@ -26,7 +26,7 @@ dependencies#4 = https://github.com/indiesoftby/defold-pointer-lock/archive/refs
 app_manifest = 
 
 [library]
-include_dirs = 
+include_dirs = reactphysics3d
 
 [html5]
 htmlfile = /builtins/manifests/web/engine_template.html
