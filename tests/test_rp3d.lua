@@ -31,6 +31,9 @@ return function()
 			test_enum("BodyType", {
 				STATIC = "STATIC", KINEMATIC = "KINEMATIC", DYNAMIC = "DYNAMIC"
 			})
+			test_enum("TriangleRaycastSide", {
+				FRONT = "FRONT", BACK = "BACK", FRONT_AND_BACK = "FRONT_AND_BACK"
+			})
 			test_enum_v2("DebugRenderer","DebugItem", {
 				COLLIDER_AABB = "COLLIDER_AABB", COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
 				COLLISION_SHAPE = "COLLISION_SHAPE", CONTACT_POINT = "CONTACT_POINT", CONTACT_NORMAL = "CONTACT_NORMAL"

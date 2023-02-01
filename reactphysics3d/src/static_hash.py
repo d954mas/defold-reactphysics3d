@@ -12,7 +12,6 @@ strings = set()
 def process(content):
 	for string in re.findall(r'case HASH_(.*):', content):
 		strings.add(string)
-
 def string_hash(string):
 	h = 0
 	for character in string:
@@ -38,4 +37,12 @@ for file in os.listdir('objects'):
 	if file.endswith('.cpp') or file.endswith('.c'):
 		with open('objects/' + file, 'r') as f:
 			process(f.read())
+for file in os.listdir('objects/shape'):
+	if file.endswith('.cpp') or file.endswith('.c'):
+		with open('objects/shape/' + file, 'r') as f:
+			process(f.read())
+for file in os.listdir('../include/objects'):
+        if file.endswith('.h'):
+        	with open('../include/objects/' + file, 'r') as f:
+        		process(f.read())
 generateEnum()

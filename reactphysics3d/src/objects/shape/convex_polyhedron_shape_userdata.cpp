@@ -1,5 +1,3 @@
-#ifndef world_h
-#define world_h
 
 #include "objects/base_userdata.h"
 #include "static_hash.h"
@@ -132,4 +130,3 @@ int ConvexPolyhedronShape_FindMostAntiParallelFace(lua_State *L){
 }
 
 }
-#endif

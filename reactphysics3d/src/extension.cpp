@@ -261,6 +261,15 @@ static void LuaInit(lua_State* L){
     lua_setfield(L, -2, "BodyType");
 
     lua_newtable(L);
+        lua_pushstring(L, "FRONT");
+        lua_setfield(L, -2, "FRONT");
+        lua_pushstring(L, "BACK");
+        lua_setfield(L, -2, "BACK");
+        lua_pushstring(L, "FRONT_AND_BACK");
+        lua_setfield(L, -2, "FRONT_AND_BACK");
+    lua_setfield(L, -2, "TriangleRaycastSide");
+
+    lua_newtable(L);
         lua_newtable(L);
             lua_pushstring(L, "COLLIDER_AABB");
             lua_setfield(L, -2, "COLLIDER_AABB");
