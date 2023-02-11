@@ -26,11 +26,20 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataCheck(lua_State *L, int 
 	return userdata;
 }
 
+static int ToString(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    lua_pushfstring( L, "rp3d::TriangleVertexArray[%p]",(void *) userdata->obj);
+	return 1;
+}
+
 
 void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"__tostring", ToString},
         { 0, 0 }
     };
     luaL_newmetatable(L, META_NAME);
@@ -51,13 +60,24 @@ void TriangleVertexArrayUserdata::Destroy(lua_State *L){
     BaseUserData::Destroy(L);
 }
 
-TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(PhysicsCommon *physicsCommon,lua_State *L){
+TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L){
     int top = lua_gettop(L);
     check_arg_count(L, 2,3);
+    if (!lua_istable(L, 1)) luaL_error(L,"vertices is not table");
+    if (!lua_istable(L, 2)) luaL_error(L,"indices is not table");
+
+    int verticesSize = lua_objlen(L,1)+1; //start from 0
+    int indicesSize = lua_objlen(L,2)+1; //start from 0
+    if(verticesSize%3 !=0) luaL_error(L,"vertices bad number.Should be power of 3");
+    if(indicesSize%3 !=0) luaL_error(L,"indices bad number.Should be power of 3");
+
+    if(top == 3){
+       if(!lua_istable(L, 3)) luaL_error(L,"normals should be nil or table");
+       int normalsSize = lua_objlen(L,3)+1;
+       if(normalsSize!=verticesSize) luaL_error(L,"normals count not same as vertices");
+    }
 
     //parse vertices
-    if (!lua_istable(L, 1)) luaL_error(L,"vertices is not table");
-    int verticesSize = lua_objlen(L,1)+1; //start from 0
     float *vertices = new float[verticesSize];
     for(int i=0;i<verticesSize;i++){
         lua_pushnumber(L, i);
@@ -71,12 +91,7 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(PhysicsCommon *p
     }
     assert(top == lua_gettop(L));
 
-    //parse indices
-    if (!lua_istable(L, 2)) {
-        delete[] vertices;
-        luaL_error(L,"indices is not table");
-    }
-    int indicesSize = lua_objlen(L,2)+1; //start from 0
+
     int *indices = new int[indicesSize];
     for(int i=0;i<indicesSize;i++){
         lua_pushnumber(L, i);
@@ -92,9 +107,30 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(PhysicsCommon *p
     assert(top == lua_gettop(L));
 
     TriangleVertexArray* triangleVertexArray = NULL;
-    //parse normals
-    if(top ==3){
 
+    if(top ==3){
+         //parse normals
+        float *normals = new float[verticesSize];
+        for(int i=0;i<verticesSize;i++){
+            lua_pushnumber(L, i);
+            lua_gettable(L, 3);
+            if(!lua_isnumber(L, -1)){
+                delete[] vertices;
+                delete[] indices;
+                delete[] normals;
+                luaL_error(L,"normals[%d] is not number",i);
+            }
+            normals[i] = lua_tonumber(L,-1);
+            lua_pop(L,1);
+        }
+        assert(top == lua_gettop(L));
+        triangleVertexArray = new TriangleVertexArray(verticesSize/3, vertices,  3 * sizeof(float),
+                                                                  normals, 3 * sizeof(float),
+                                                                  indicesSize/3,
+                                                                  indices,sizeof(int),
+                                                                  TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
+                                                                  TriangleVertexArray::NormalDataType::NORMAL_FLOAT_TYPE,
+                                                                  TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
     }else{
         triangleVertexArray = new TriangleVertexArray(verticesSize/3, vertices,  3 * sizeof(float),
                                                           indicesSize/3,

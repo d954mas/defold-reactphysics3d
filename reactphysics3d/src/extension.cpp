@@ -196,13 +196,17 @@ static int DestroyConvexMeshShape(lua_State* L){
 static int CreateTriangleVertexArray(lua_State* L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2,3);
-    lua_pushnil(L);
+    TriangleVertexArrayUserdata *array = TriangleVertexArrayUserdataFromLua(L);
+    array->Push(L);
     return 1;
 }
 
 static int DestroyTriangleVertexArray(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
+    TriangleVertexArrayUserdata * array = TriangleVertexArrayUserdataCheck(L,1);
+    array->Destroy(L);
+    delete array;
     return 0;
 }
 
@@ -222,7 +226,7 @@ static const luaL_reg Module_methods[] ={
 	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
 	 {"createConvexMeshShape", CreateConvexMeshShape},
 	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
-	 {"createTriangleVertexArray ", CreateTriangleVertexArray},
+	 {"createTriangleVertexArray", CreateTriangleVertexArray},
 	 {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
 	{0, 0}
 };

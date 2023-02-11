@@ -25,6 +25,6 @@ public:
 
 void TriangleVertexArrayUserdataInitMetaTable(lua_State *L);
 TriangleVertexArrayUserdata* TriangleVertexArrayUserdataCheck(lua_State *L, int index);
-TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(reactphysics3d::PhysicsCommon *physicsCommon,lua_State *L);
+TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L);
 }
 #endif
