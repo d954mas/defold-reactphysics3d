@@ -31,6 +31,10 @@ local WorldSettings = {
 	-- than the value bellow, the manifold are considered to be similar.
 	cosAngleSimilarContactManifold = 0.95,
 }
+---@class Rp3dTriangleVertexArray
+---@field vertices number[]
+---@field indices number[]
+
 
 --The ray goes from point1 to point1 + maxFraction * (point2 - point1).
 --The points are specified in world-space coordinates.

@@ -17,6 +17,7 @@
 #include "objects/world_userdata.h"
 #include "objects/collision_body_userdata.h"
 #include "objects/polyhedron_mesh_userdata.h"
+#include "objects/triangle_vertex_array_userdata.h"
 
 
 
@@ -192,6 +193,19 @@ static int DestroyConvexMeshShape(lua_State* L){
     return 0;
 }
 
+static int CreateTriangleVertexArray(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2,3);
+    lua_pushnil(L);
+    return 1;
+}
+
+static int DestroyTriangleVertexArray(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    return 0;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -208,6 +222,8 @@ static const luaL_reg Module_methods[] ={
 	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
 	 {"createConvexMeshShape", CreateConvexMeshShape},
 	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
+	 {"createTriangleVertexArray ", CreateTriangleVertexArray},
+	 {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
 	{0, 0}
 };
 
@@ -318,6 +334,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     ColliderUserdataInitMetaTable(params->m_L);
     DebugRendererUserdataInitMetaTable(params->m_L);
     PolyhedronMeshUserdataInitMetaTable(params->m_L);
+    TriangleVertexArrayUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;
