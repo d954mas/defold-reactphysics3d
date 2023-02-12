@@ -41,6 +41,44 @@ static int GetNbTriangles(lua_State *L){
     lua_pushnumber(L,userdata->triangleVertexArray->getNbTriangles());
 	return 1;
 }
+static int GetTriangleVertices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    int idx = luaL_checknumber(L,2);
+    if(idx<0 || idx>=userdata->triangleVertexArray->getNbTriangles()){
+        luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
+    }
+    Vector3 result[3];
+    userdata->triangleVertexArray->getTriangleVertices(0,result);
+    lua_newtable(L);
+    for(int i=0;i<3;++i){
+        dmVMath::Vector3 dmV3(result[i].x,result[i].y,result[i].z);
+        dmScript::PushVector3(L, dmV3);
+        lua_rawseti(L, -2, i+1);
+    }
+	return 1;
+}
+
+static int GetTriangleVerticesNormals(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    int idx = luaL_checknumber(L,2);
+    if(idx<0 || idx>=userdata->triangleVertexArray->getNbTriangles()){
+        luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
+    }
+    Vector3 result[3];
+    userdata->triangleVertexArray->getTriangleVerticesNormals(0,result);
+    lua_newtable(L);
+    for(int i=0;i<3;++i){
+        dmVMath::Vector3 dmV3(result[i].x,result[i].y,result[i].z);
+        dmScript::PushVector3(L, dmV3);
+        lua_rawseti(L, -2, i+1);
+    }
+	return 1;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -57,6 +95,8 @@ void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
     luaL_Reg functions[] = {
         {"getNbVertices", GetNbVertices},
         {"getNbTriangles", GetNbTriangles},
+        {"getTriangleVertices", GetTriangleVertices},
+        {"getTriangleVerticesNormals", GetTriangleVerticesNormals},
         {"__tostring", ToString},
         { 0, 0 }
     };
