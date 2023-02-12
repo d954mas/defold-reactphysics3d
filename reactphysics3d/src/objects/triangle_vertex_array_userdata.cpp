@@ -79,6 +79,24 @@ static int GetTriangleVerticesNormals(lua_State *L){
 	return 1;
 }
 
+static int GetTriangleVerticesIndices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    int idx = luaL_checknumber(L,2);
+    if(idx<0 || idx>=userdata->triangleVertexArray->getNbTriangles()){
+        luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
+    }
+    uint32 result[3];
+    userdata->triangleVertexArray->getTriangleVerticesIndices(0,result);
+    lua_newtable(L);
+    for(int i=0;i<3;++i){
+        lua_pushnumber(L,result[i]);
+        lua_rawseti(L, -2, i+1);
+    }
+	return 1;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -97,6 +115,7 @@ void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
         {"getNbTriangles", GetNbTriangles},
         {"getTriangleVertices", GetTriangleVertices},
         {"getTriangleVerticesNormals", GetTriangleVerticesNormals},
+        {"getTriangleVerticesIndices", GetTriangleVerticesIndices},
         {"__tostring", ToString},
         { 0, 0 }
     };
