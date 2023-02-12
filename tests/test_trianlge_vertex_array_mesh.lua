@@ -103,6 +103,12 @@ return function()
 			normals[9] = nil
 		end)
 
+		test("getNbVertices()", function()
+			assert_equal(array:getNbVertices(),3)
+		end)
+		test("getNbTriangles()", function()
+			assert_equal(array:getNbTriangles(),1)
+		end)
 		test("tostring()", function()
 			assert_equal(tostring(array):sub(1, 25), "rp3d::TriangleVertexArray")
 		end)

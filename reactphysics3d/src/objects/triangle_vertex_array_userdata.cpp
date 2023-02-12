@@ -26,6 +26,22 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataCheck(lua_State *L, int 
 	return userdata;
 }
 
+static int GetNbVertices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->triangleVertexArray->getNbVertices());
+	return 1;
+}
+
+static int GetNbTriangles(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    lua_pushnumber(L,userdata->triangleVertexArray->getNbTriangles());
+	return 1;
+}
+
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
@@ -39,6 +55,8 @@ void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"getNbVertices", GetNbVertices},
+        {"getNbTriangles", GetNbTriangles},
         {"__tostring", ToString},
         { 0, 0 }
     };
