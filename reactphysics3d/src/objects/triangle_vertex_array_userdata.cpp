@@ -97,6 +97,36 @@ static int GetTriangleVerticesIndices(lua_State *L){
 	return 1;
 }
 
+static int GetVertex(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    int idx = luaL_checknumber(L,2);
+    if(idx<0 || idx>=userdata->triangleVertexArray->getNbVertices()){
+        luaL_error(L,"Bad idx:%d. Vertices:%d",idx,userdata->triangleVertexArray->getNbVertices());
+    }
+    Vector3 v3;
+    userdata->triangleVertexArray->getVertex(0,&v3);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+	return 1;
+}
+
+static int GetNormal(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    TriangleVertexArrayUserdata *userdata = TriangleVertexArrayUserdataCheck(L, 1);
+    int idx = luaL_checknumber(L,2);
+    if(idx<0 || idx>=userdata->triangleVertexArray->getNbVertices()){
+        luaL_error(L,"Bad idx:%d. Vertices:%d",idx,userdata->triangleVertexArray->getNbVertices());
+    }
+    Vector3 v3;
+    userdata->triangleVertexArray->getNormal(0,&v3);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+	return 1;
+}
+
 
 static int ToString(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
@@ -116,6 +146,8 @@ void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
         {"getTriangleVertices", GetTriangleVertices},
         {"getTriangleVerticesNormals", GetTriangleVerticesNormals},
         {"getTriangleVerticesIndices", GetTriangleVerticesIndices},
+        {"getVertex", GetVertex},
+        {"getNormal", GetNormal},
         {"__tostring", ToString},
         { 0, 0 }
     };
