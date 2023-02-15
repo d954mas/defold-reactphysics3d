@@ -311,7 +311,7 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromBufferClone(PhysicsC
 
     TriangleVertexArray *triangleVertexArray = new TriangleVertexArray(pos_count, vertices,  3 * sizeof(float),
                                                                   normals, 3 * sizeof(float),
-                                                                  pos_count,
+                                                                  pos_count/3,
                                                                   indices,sizeof(int),
                                                                   TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
                                                                   TriangleVertexArray::NormalDataType::NORMAL_FLOAT_TYPE,

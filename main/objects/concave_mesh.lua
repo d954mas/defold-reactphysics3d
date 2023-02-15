@@ -9,9 +9,9 @@ function Box:initialize(rigid_body, mesh,factory_url, world)
 	PhysObject.initialize(self, world)
 	self.rigid_body = rigid_body
 	self.mesh = mesh
-	self.triangle_mesh = rp3d.createTriangleMesh()
-	self.shape = rp3d.createConcaveShape(mesh)
-	self.collection = collectionfactory.create(factory_url, nil, nil, nil)
+	self.shape = rp3d.createConcaveMeshShape(mesh)
+	self.scale = vmath.vector3(1)
+	self.collection = collectionfactory.create(factory_url, nil, nil, nil, self.scale)
 	self.go = {
 		root = msg.url(self.collection["/root"]),
 		mesh = nil
@@ -31,6 +31,12 @@ function Box:initialize(rigid_body, mesh,factory_url, world)
 	end
 	self.body:setUserData(self)
 
+end
+
+function Box:setScale(scale,go_scale)
+	self.shape:setScale(scale)
+	self.scale = scale
+	go.set_scale(go_scale,self.go.root)
 end
 
 function Box:dispose()
