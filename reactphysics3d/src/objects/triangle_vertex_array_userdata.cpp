@@ -306,7 +306,8 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromBufferClone(PhysicsC
 
         verticesIter += pos_stride;
         normalsIter += normal_stride;
-        //dmLogInfo("vertex1(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
+        //dmLogInfo("vertex(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
+        //dmLogInfo("normal(%f %f %f)",normals[i*3],normals[i*3+1],normals[i*3+2]);
     }
 
     TriangleVertexArray *triangleVertexArray = new TriangleVertexArray(pos_count, vertices,  3 * sizeof(float),

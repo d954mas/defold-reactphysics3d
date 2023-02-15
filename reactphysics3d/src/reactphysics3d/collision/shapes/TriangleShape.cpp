@@ -48,6 +48,12 @@ TriangleShape::TriangleShape(const Vector3* vertices, const Vector3* verticesNor
     mNormal = (vertices[1] - vertices[0]).cross(vertices[2] - vertices[0]);
     mNormal.normalize();
 
+   // printf("v0(%f %f %f)\n",vertices[0].x,vertices[0].y,vertices[0].z);
+   // printf("v1(%f %f %f)\n",vertices[1].x,vertices[1].y,vertices[1].z);
+  //  printf("v2(%f %f %f)\n",vertices[2].x,vertices[2].y,vertices[2].z);
+  //  assert(mNormal.length() > decimal(0.0));
+
+
     mVerticesNormals[0] = verticesNormals[0];
     mVerticesNormals[1] = verticesNormals[1];
     mVerticesNormals[2] = verticesNormals[2];

@@ -80,6 +80,7 @@ function M.scene_final()
 	M.simulation.raycast_from = nil
 	M.simulation.raycast_to = nil
 	M.simulation.body_selected = nil
+	msg.post("main:/camera3d", "reset")
 end
 
 function M.update(dt)
@@ -276,6 +277,5 @@ function M.on_input(action_id, action)
 
 end
 
-M.reset()
 
 return M

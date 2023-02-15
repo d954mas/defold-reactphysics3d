@@ -42,7 +42,7 @@ local function create_physics(self)
 
 	---@type GameConcaveMesh[]
 	self.concave_meshes = {}
-
+--[[
 	for i = 1, NB_COMPOUND_SHAPES do
 		local dumbbell = Dumbbell(true, self.world);
 		dumbbell.capsule:setMaterialBounciness(0.2)
@@ -51,16 +51,16 @@ local function create_physics(self)
 		table.insert(self.objects, dumbbell)
 		table.insert(self.dumbbells, dumbbell)
 	end
-
-	for i = 1, NB_BOXES do
+--]]
+	--[[]for i = 1, NB_BOXES do
 		-- Create a cube and a corresponding rigid in the physics world
 		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
 		local box = Box(true, SPHERE_RADIUS, self.world)
 		table.insert(self.objects, box)
 		table.insert(self.boxes, box)
 		box.collider:setMaterialBounciness(0.2)
-	end
-
+	end--]]
+--[[
 	for i = 1, NB_SPHERES do
 		-- Create a cube and a corresponding rigid in the physics world
 		--Box* cube = new Box(true, BOX_SIZE,  mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
@@ -89,10 +89,10 @@ local function create_physics(self)
 		table.insert(self.objects, capsule)
 		table.insert(self.capsules, capsule)
 		capsule.collider:setMaterialBounciness(0.2)
-	end
+	end--]]
 
-	res = go.get("/meshes#castle", "vertices")
-	buf = resource.get_buffer(res)
+	local res = go.get("/meshes#castle", "vertices")
+	local buf = resource.get_buffer(res)
 	self.triangle_array = rp3d.createTriangleVertexArrayFromMeshVerticesCopy(buf)
 	self.triangle_mesh = rp3d.createTriangleMesh()
 	self.triangle_mesh:addSubpart(self.triangle_array)
@@ -107,6 +107,7 @@ local function create_physics(self)
 
 	--INIT POSITIONS
 	local radius = 3.0
+	--[[
 	for index, dumbbell in ipairs(self.dumbbells) do
 		local i = index - 1
 		local angle = i * 30.0
@@ -118,7 +119,7 @@ local function create_physics(self)
 			position = position, quat = vmath.quat()
 		})
 	end
-
+--]]--[[
 	for index, box in ipairs(self.boxes) do
 		local i = index - 1
 		local angle = i * 30.0
@@ -129,8 +130,8 @@ local function create_physics(self)
 		box.body:setTransform({
 			position = position, quat = vmath.quat()
 		})
-	end
-
+	end--]]
+--[[
 	for index, sphere in ipairs(self.spheres) do
 		local i = index - 1
 		local angle = i * 35.0
@@ -165,7 +166,7 @@ local function create_physics(self)
 		mesh.body:setTransform({
 			position = position, quat = vmath.quat()
 		})
-	end
+	end--]]
 
 	--[[// Gravity vector in the physics world
 
@@ -203,6 +204,8 @@ end
 
 function init(self)
 	create_physics(self)
+
+	msg.post("main:/camera3d","set_position",{position = vmath.vector3(-8,15,50)})
 
 	SCENE_HELPER.scene_new({
 		name = "collision shapes",

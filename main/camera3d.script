@@ -49,6 +49,7 @@ end
 
 function init(self)
     assert(self.projection == PERSPECTIVE, "Only perspective projection is supported.")
+    self.position = go.get_position()
 
     self.late_update_id = lu_helper.subscribe(self.late_update_priority)
 
@@ -67,5 +68,11 @@ end
 function on_message(self, message_id, message, sender)
     if message_id == lu_helper.LATE_UPDATE then
         late_update(self)
+    end
+    if message_id == hash("reset") then
+        go.set_position(self.position)
+    end
+    if message_id == hash("set_position") then
+        go.set_position(message.position)
     end
 end

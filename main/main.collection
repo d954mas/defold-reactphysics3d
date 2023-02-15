@@ -61,6 +61,14 @@ instances {
     z: 0.0
     w: 0.99904823
   }
+  component_properties {
+    id: "camera3d"
+    properties {
+      id: "far_clip"
+      value: "1000.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
