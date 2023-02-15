@@ -104,6 +104,9 @@ class TriangleVertexArray {
         /// Compute the vertices normals when they are not provided by the user
         void computeVerticesNormals();
 
+        /// Pointer to user data
+        void* mUserData=NULL;
+
     public:
 
         // -------------------- Methods -------------------- //
@@ -176,6 +179,12 @@ class TriangleVertexArray {
 
         /// Return a vertex normal of the array
         void getNormal(uint32 vertexIndex, Vector3* outNormal);
+
+        /// Return a pointer to the user data attached to this body
+        void* getUserData() const;
+
+        /// Attach user data to this body
+        void setUserData(void* userData);
 };
 
 // Return the vertex data type
@@ -264,6 +273,23 @@ RP3D_FORCE_INLINE const void* TriangleVertexArray::getVerticesNormalsStart() con
  */
 RP3D_FORCE_INLINE const void* TriangleVertexArray::getIndicesStart() const {
     return mIndicesStart;
+}
+
+//@FIX ADD METHODS TO MAKE LUA BINDING EASY
+// Return a pointer to the user data attached to this body
+/**
+ * @return A pointer to the user data stored into the collider
+ */
+RP3D_FORCE_INLINE void* TriangleVertexArray::getUserData() const {
+    return mUserData;
+}
+
+// Attach user data to this body
+/**
+ * @param userData Pointer to the user data you want to store within the collider
+ */
+RP3D_FORCE_INLINE void TriangleVertexArray::setUserData(void* userData) {
+    mUserData = userData;
 }
 
 }

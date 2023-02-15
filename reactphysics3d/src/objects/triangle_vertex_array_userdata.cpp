@@ -12,8 +12,11 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
-TriangleVertexArrayUserdata::TriangleVertexArrayUserdata(): BaseUserData(USERDATA_TYPE){
+TriangleVertexArrayUserdata::TriangleVertexArrayUserdata(TriangleVertexArray *triangleVertexArray): BaseUserData(USERDATA_TYPE){
     this->metatable_name = META_NAME;
+    this->obj = triangleVertexArray;
+    this->triangleVertexArray = triangleVertexArray;
+    triangleVertexArray->setUserData(this);
 }
 
 TriangleVertexArrayUserdata::~TriangleVertexArrayUserdata() {
@@ -162,6 +165,7 @@ void TriangleVertexArrayUserdataInitMetaTable(lua_State *L){
 
 
 void TriangleVertexArrayUserdata::Destroy(lua_State *L){
+    triangleVertexArray->setUserData(NULL);
     triangleVertexArray = NULL;
     delete[] vertices;
     delete[] indices;
@@ -249,14 +253,22 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L){
     }
     assert(top == lua_gettop(L));
 
-   TriangleVertexArrayUserdata* result = new TriangleVertexArrayUserdata();
-   result->obj = triangleVertexArray;
-   result->triangleVertexArray = triangleVertexArray;
+   TriangleVertexArrayUserdata* result = new TriangleVertexArrayUserdata(triangleVertexArray);
 
    result->vertices = vertices;
    result->indices = indices;
    result->normals = NULL;
    return result;
+}
+
+void TriangleVertexArrayPush(lua_State *L, TriangleVertexArray* array){
+    if(array->getUserData()!=NULL){
+        TriangleVertexArrayUserdata* userdata =(TriangleVertexArrayUserdata*) array->getUserData();
+        userdata->Push(L);
+    }else{
+        TriangleVertexArrayUserdata* userdata = new TriangleVertexArrayUserdata(array);
+        userdata->Push(L);
+    }
 }
 
 

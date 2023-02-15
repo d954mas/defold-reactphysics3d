@@ -17,14 +17,15 @@ public:
     int *indices=NULL;
     reactphysics3d::TriangleVertexArray *triangleVertexArray=NULL;
 
-    TriangleVertexArrayUserdata();
+    TriangleVertexArrayUserdata(reactphysics3d::TriangleVertexArray *triangleVertexArray);
 	~TriangleVertexArrayUserdata();
 
 	virtual void Destroy(lua_State *L);
 };
-
+void TriangleVertexArrayPush(lua_State *L, reactphysics3d::TriangleVertexArray* array);
 void TriangleVertexArrayUserdataInitMetaTable(lua_State *L);
 TriangleVertexArrayUserdata* TriangleVertexArrayUserdataCheck(lua_State *L, int index);
 TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L);
+
 }
 #endif

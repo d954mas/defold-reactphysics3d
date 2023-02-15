@@ -43,7 +43,7 @@ static int GetSubpart(lua_State *L){
     if(idx<0 || idx >=userdata->mesh->getNbSubparts()){
            luaL_error(L,"bad idx:%d. Size:%d",idx,userdata->mesh->getNbSubparts());
     }
-    lua_pushnil(L);
+    TriangleVertexArrayPush(L,userdata->mesh->getSubpart(idx));
 	return 1;
 }
 
