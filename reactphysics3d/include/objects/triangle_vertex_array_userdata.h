@@ -26,6 +26,7 @@ void TriangleVertexArrayPush(lua_State *L, reactphysics3d::TriangleVertexArray* 
 void TriangleVertexArrayUserdataInitMetaTable(lua_State *L);
 TriangleVertexArrayUserdata* TriangleVertexArrayUserdataCheck(lua_State *L, int index);
 TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L);
+TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromBufferClone(reactphysics3d::PhysicsCommon *physicsCommon,lua_State *L);
 
 }
 #endif

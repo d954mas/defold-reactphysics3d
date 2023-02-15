@@ -6,6 +6,7 @@
 #define USERDATA_TYPE "rp3d::TriangleVertexArray"
 
 static const dmhash_t HASH_POSITION  = dmHashString64("position");
+static const dmhash_t HASH_NORMAL  = dmHashString64("normal");
 
 
 using namespace reactphysics3d;
@@ -260,6 +261,70 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L){
    result->normals = NULL;
    return result;
 }
+
+TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromBufferClone(PhysicsCommon *physicsCommon,lua_State *L){
+    int top = lua_gettop(L);
+    check_arg_count(L, 1);
+    dmBuffer::HBuffer buffer = dmScript::CheckBufferUnpack(L,1);
+    dmBuffer::Result validate = dmBuffer::ValidateBuffer(buffer);
+    if(validate!=dmBuffer::RESULT_OK ) luaL_error(L,"buffer invalid");
+    float* positions = 0x0;
+    uint32_t pos_components = 0;
+    uint32_t pos_stride = 0;
+    uint32_t pos_count = 0;
+    dmBuffer::Result r = dmBuffer::GetStream(buffer, HASH_POSITION, (void**)&positions, &pos_count, &pos_components, &pos_stride);
+    if (r != dmBuffer::RESULT_OK) luaL_error(L,"buffer can't get position");
+
+    float* normalsBuffer = 0x0;
+    uint32_t normal_components = 0;
+    uint32_t normal_stride = 0;
+    uint32_t normal_count = 0;
+    r = dmBuffer::GetStream(buffer, HASH_NORMAL, (void**)&normalsBuffer, &normal_count, &normal_components, &normal_stride);
+    if (r != dmBuffer::RESULT_OK) luaL_error(L,"buffer can't get normal");
+
+    if(normal_components!=pos_components) luaL_error(L,"positions and normal components not same");
+    if(normal_count!=pos_count) luaL_error(L,"positions and normal count not same");
+    if(pos_count%3 !=0) luaL_error(L,"bad number of vertices or triangles");
+
+
+    float *vertices = new float[pos_count*pos_components];
+    float *verticesIter = positions;
+    float *normals = new float[pos_count*pos_components];
+    float *normalsIter = normalsBuffer;
+
+    int *indices = new int[pos_count];
+    for (int i = 0; i < pos_count; ++i){
+        vertices[i*3] = verticesIter[0];
+        vertices[i*3+1] = verticesIter[1];
+        vertices[i*3+2] = verticesIter[2];
+
+        normals[i*3] = normalsIter[0];
+        normals[i*3+1] = normalsIter[1];
+        normals[i*3+2] = normalsIter[2];
+
+        indices[i] = i;
+
+        verticesIter += pos_stride;
+        normalsIter += normal_stride;
+        //dmLogInfo("vertex1(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
+    }
+
+    TriangleVertexArray *triangleVertexArray = new TriangleVertexArray(pos_count, vertices,  3 * sizeof(float),
+                                                                  normals, 3 * sizeof(float),
+                                                                  pos_count,
+                                                                  indices,sizeof(int),
+                                                                  TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
+                                                                  TriangleVertexArray::NormalDataType::NORMAL_FLOAT_TYPE,
+                                                                  TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
+
+    TriangleVertexArrayUserdata* result = new TriangleVertexArrayUserdata(triangleVertexArray);
+
+    result->vertices = vertices;
+    result->indices = indices;
+    result->normals = normals;
+    return result;
+}
+
 
 void TriangleVertexArrayPush(lua_State *L, TriangleVertexArray* array){
     if(array->getUserData()!=NULL){

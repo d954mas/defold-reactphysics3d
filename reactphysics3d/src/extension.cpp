@@ -156,6 +156,15 @@ static int CreatePolyhedronMeshFromMeshVerticesCopy(lua_State* L){
     return 1;
 }
 
+static int CreateTriangleVertexArrayFromMeshVerticesCopy(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    TriangleVertexArrayUserdata *array = TriangleVertexArrayUserdataFromBufferClone(&physicsCommon,L);
+    array->Push(L);
+    return 1;
+}
+
+
 static int DestroyPolyhedronMesh(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 1);
@@ -248,6 +257,7 @@ static const luaL_reg Module_methods[] ={
 	 {"createConvexMeshShape", CreateConvexMeshShape},
 	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
 	 {"createTriangleVertexArray", CreateTriangleVertexArray},
+	 {"createTriangleVertexArrayFromMeshVerticesCopy", CreateTriangleVertexArrayFromMeshVerticesCopy},
 	 {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
 	 {"createTriangleMesh", CreateTriangleMesh},
 	 {"destroyTriangleMesh", DestroyTriangleMesh},
