@@ -12,6 +12,7 @@
 #include "objects/shape/sphere_shape_userdata.h"
 #include "objects/shape/capsule_shape_userdata.h"
 #include "objects/shape/convex_mesh_shape_userdata.h"
+#include "objects/shape/concave_mesh_shape_userdata.h"
 #include "objects/debug_renderer_userdata.h"
 #include "objects/base_userdata.h"
 #include "objects/world_userdata.h"
@@ -203,6 +204,34 @@ static int DestroyConvexMeshShape(lua_State* L){
     return 0;
 }
 
+static int CreateConcaveMeshShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1,2);
+    TriangleMeshUserdata * mesh = TriangleMeshUserdataCheck(L,1);
+    Vector3 scalingV3(1,1,1);
+    if(lua_gettop(L) == 2){
+        dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 2);
+        scalingV3.x = dmV3->getX();
+        scalingV3.y = dmV3->getY();
+        scalingV3.z = dmV3->getZ();
+    }
+    ConcaveMeshShape * shape = physicsCommon.createConcaveMeshShape(mesh->mesh,scalingV3);
+    CollisionShapePush(L,shape);
+    return 1;
+}
+
+static int DestroyConcaveMeshShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionShapeUserdata * shapeUserdata = ConcaveMeshShapeCheckUserdata(L,1);
+    ConcaveMeshShape* shape = static_cast<ConcaveMeshShape*>(shapeUserdata->shape);
+    shapeUserdata->Destroy(L);
+    delete shapeUserdata;
+    physicsCommon.destroyConcaveMeshShape(shape);
+    return 0;
+}
+
+
 static int CreateTriangleVertexArray(lua_State* L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2,3);
@@ -243,25 +272,27 @@ static int DestroyTriangleMesh(lua_State* L){
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
-	 {"createPhysicsWorld", CreatePhysicsWorldLua},
-	 {"destroyPhysicsWorld", DestroyPhysicsWorldLua},
-	 {"createBoxShape", CreateBoxShape},
-	 {"destroyBoxShape", DestroyBoxShape},
-	 {"createSphereShape", CreateSphereShape},
-	 {"destroySphereShape", DestroySphereShape},
-	 {"createCapsuleShape", CreateCapsuleShape},
-	 {"destroyCapsuleShape", DestroyCapsuleShape},
-	 {"createPolyhedronMesh", CreatePolyhedronMesh},
-	 {"createPolyhedronMeshFromMeshVerticesCopy", CreatePolyhedronMeshFromMeshVerticesCopy},
-	 {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
-	 {"createConvexMeshShape", CreateConvexMeshShape},
-	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
-	 {"createTriangleVertexArray", CreateTriangleVertexArray},
-	 {"createTriangleVertexArrayFromMeshVerticesCopy", CreateTriangleVertexArrayFromMeshVerticesCopy},
-	 {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
-	 {"createTriangleMesh", CreateTriangleMesh},
-	 {"destroyTriangleMesh", DestroyTriangleMesh},
-	{0, 0}
+    {"createPhysicsWorld", CreatePhysicsWorldLua},
+    {"destroyPhysicsWorld", DestroyPhysicsWorldLua},
+    {"createBoxShape", CreateBoxShape},
+    {"destroyBoxShape", DestroyBoxShape},
+    {"createSphereShape", CreateSphereShape},
+    {"destroySphereShape", DestroySphereShape},
+    {"createCapsuleShape", CreateCapsuleShape},
+    {"destroyCapsuleShape", DestroyCapsuleShape},
+    {"createPolyhedronMesh", CreatePolyhedronMesh},
+    {"createPolyhedronMeshFromMeshVerticesCopy", CreatePolyhedronMeshFromMeshVerticesCopy},
+    {"destroyPolyhedronMesh", DestroyPolyhedronMesh},
+    {"createConvexMeshShape", CreateConvexMeshShape},
+    {"destroyConvexMeshShape", DestroyConvexMeshShape},
+    {"createConcaveMeshShape", CreateConcaveMeshShape},
+    {"destroyConcaveMeshShape", DestroyConcaveMeshShape},
+    {"createTriangleVertexArray", CreateTriangleVertexArray},
+    {"createTriangleVertexArrayFromMeshVerticesCopy", CreateTriangleVertexArrayFromMeshVerticesCopy},
+    {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
+    {"createTriangleMesh", CreateTriangleMesh},
+    {"destroyTriangleMesh", DestroyTriangleMesh},
+    {0, 0}
 };
 
 static void LuaInit(lua_State* L){

@@ -56,6 +56,15 @@ return function()
 			init_mesh()
 		end)
 
+		test("create triangleVertexArray from buffer", function()
+			local res = go.get("/meshes#castle", "vertices")
+			local buf = resource.get_buffer(res)
+			local array2 = rp3d.createTriangleVertexArrayFromMeshVerticesCopy(buf)
+			assert_not_nil(array2)
+			assert_equal(array2:getNbTriangles(),148962)
+			rp3d.destroyTriangleVertexArray(array2)
+		end)
+
 		test("create bad", function()
 			local vertices = {}
 			vertices[0] = -3;
