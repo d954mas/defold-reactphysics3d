@@ -12,9 +12,9 @@ class TriangleMeshUserdata : public BaseUserData {
 private:
 
 public:
-    reactphysics3d::TriangleMesh *triangleMesh=NULL;
+    reactphysics3d::TriangleMesh *mesh=NULL;
 
-    TriangleMeshUserdata();
+    TriangleMeshUserdata(reactphysics3d::TriangleMesh *triangleMesh);
 	~TriangleMeshUserdata();
 
 	virtual void Destroy(lua_State *L);

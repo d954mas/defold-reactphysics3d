@@ -211,6 +211,26 @@ static int DestroyTriangleVertexArray(lua_State* L){
     return 0;
 }
 
+static int CreateTriangleMesh(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 0);
+    TriangleMesh * mesh = physicsCommon.createTriangleMesh();
+    TriangleMeshUserdata *data = new TriangleMeshUserdata(mesh);
+    data->Push(L);
+    return 1;
+}
+
+static int DestroyTriangleMesh(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    TriangleMeshUserdata * data = TriangleMeshUserdataCheck(L,1);
+    TriangleMesh * mesh = data->mesh;
+    data->Destroy(L);
+    delete data;
+    physicsCommon.destroyTriangleMesh(mesh);
+    return 0;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -229,6 +249,8 @@ static const luaL_reg Module_methods[] ={
 	 {"destroyConvexMeshShape", DestroyConvexMeshShape},
 	 {"createTriangleVertexArray", CreateTriangleVertexArray},
 	 {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
+	 {"createTriangleMesh", CreateTriangleMesh},
+	 {"destroyTriangleMesh", DestroyTriangleMesh},
 	{0, 0}
 };
 

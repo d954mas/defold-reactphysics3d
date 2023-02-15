@@ -18,6 +18,7 @@ local TEST_DEBUG_RENDERER = require "tests.test_debug_renderer"
 local TEST_POLYHEDRON_MESH = require "tests.test_polyhedron_mesh"
 local TEST_TRIANGLE_VERTEX_ARRAY = require "tests.test_trianlge_vertex_array_mesh"
 local TEST_CONVEX_MESH_SHAPE = require "tests.shape.test_convex_mesh_shape"
+local TEST_TRIANGLE_MESH = require "tests.test_trianlge_mesh"
 local M = {}
 
 function M.run()
@@ -80,6 +81,7 @@ function M.run()
 	DEFTEST.add(TEST_DEBUG_RENDERER)
 	DEFTEST.add(TEST_POLYHEDRON_MESH)
 	DEFTEST.add(TEST_TRIANGLE_VERTEX_ARRAY)
+	DEFTEST.add(TEST_TRIANGLE_MESH)
 	DEFTEST.run()
 end
 
