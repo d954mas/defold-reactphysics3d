@@ -1,0 +1,7960 @@
+name: "COLLECTION_NAME"
+instances {
+  id: "steppe_grass_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrowbag.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrowbag.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword_fighter2_Mesh4_Model.001"
+  prototype: "/castle_scene/gameobjects/sword_fighter2_Mesh4_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "gate_tower_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/gate_tower_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lowpoly_forest.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/lowpoly_forest.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stairs.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stairs.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "dirtcliff_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/dirtcliff_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "pavement.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/pavement.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house7_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/house7_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "horse_Mesh5_Model.002"
+  prototype: "/castle_scene/gameobjects/horse_Mesh5_Model.002.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "axe_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/axe_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.024_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.024_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bull_Mesh1_bull1_Model.001"
+  prototype: "/castle_scene/gameobjects/bull_Mesh1_bull1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shield_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shield_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house3.001_Mesh2_Model.001"
+  prototype: "/castle_scene/gameobjects/house3.001_Mesh2_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "blacksmith_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/blacksmith_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door3_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door3_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_male1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_male1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_picking.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_picking.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "canopy_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/canopy_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "archer_shooting_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/archer_shooting_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "royal_stairs_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/royal_stairs_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall2.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall2.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "guard.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/guard.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.010_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.010_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.002_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.002_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "table.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/table.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "wheel.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/wheel.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "guard_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/guard_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "dirtcliff.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/dirtcliff.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sheep1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sheep1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house3_Mesh2_Model.001"
+  prototype: "/castle_scene/gameobjects/house3_Mesh2_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hammer.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hammer.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bow_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bow_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_grass_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_grass_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "swordsman2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/swordsman2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "archer_shooting.002_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/archer_shooting.002_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "chopped_tree_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/chopped_tree_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform2_Mesh1_Model.002"
+  prototype: "/castle_scene/gameobjects/platform2_Mesh1_Model.002.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.014_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.014_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.015_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.015_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.016_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.016_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.017_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.017_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spear_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/spear_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bow.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bow.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spear.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/spear.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part4_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part4_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_male2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_male2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "anvil_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/anvil_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ploughland_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/ploughland_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shed.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shed.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shed.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shed.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.017_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.017_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "royal_female2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/royal_female2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barn_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/barn_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/platform1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window7_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window7_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "canopy.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/canopy.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "table.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/table.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.006_Mesh1_Group1_Model.002"
+  prototype: "/castle_scene/gameobjects/bale.006_Mesh1_Group1_Model.002.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.007_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.007_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.008_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.008_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.015_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.015_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.012_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.012_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.018_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.018_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.017_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.017_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shed.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shed.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shed.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shed.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.012_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.012_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "pavement.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/pavement.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_walls_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_walls_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "wheel_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/wheel_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_grass.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_grass.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.025_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.025_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.014_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.014_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.027_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.027_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.026_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.026_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_female.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_female.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.024_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.024_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.023_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.023_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "horse.001_Mesh5_Model.001"
+  prototype: "/castle_scene/gameobjects/horse.001_Mesh5_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "woodcutter_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/woodcutter_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "charriot.003_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/charriot.003_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrow.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrow.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_picking_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_picking_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.025_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.025_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hoe_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hoe_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.023_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.023_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lowpoly_forest.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/lowpoly_forest.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shed_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shed_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house2_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/house2_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.022_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.022_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "pavement_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/pavement_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house4_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/house4_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_male1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_male1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "duke_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/duke_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_walk.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_walk.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.021_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.021_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.020_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.020_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.019_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.019_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.003_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.003_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.004_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.004_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.005_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.005_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shield.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shield.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrowbag_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrowbag_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.012_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.012_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waterbowl.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/waterbowl.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shield.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shield.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.018_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.018_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hay_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hay_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_grass.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_grass.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "target.001_Mesh2_Model.002"
+  prototype: "/castle_scene/gameobjects/target.001_Mesh2_Model.002.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "archer_Mesh1_Group1_archer1_Model.001"
+  prototype: "/castle_scene/gameobjects/archer_Mesh1_Group1_archer1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_grass.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_grass.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hammer_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hammer_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ploughland.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/ploughland.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lowpoly_forest.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/lowpoly_forest.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_female.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_female.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hoe.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/hoe.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ploughland.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/ploughland.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tower_Mesh5_Model.001"
+  prototype: "/castle_scene/gameobjects/tower_Mesh5_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part3_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part3_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_male1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_male1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_walk.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_walk.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_cliff.001_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_cliff.001_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "guard.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/guard.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.000_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.000_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.009_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.009_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale.001_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale.001_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house1_Mesh6_Model.002"
+  prototype: "/castle_scene/gameobjects/house1_Mesh6_Model.002.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "royal_female1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/royal_female1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "swordsman1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/swordsman1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spear.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/spear.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bow.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bow.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ladder_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/ladder_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "table.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/table.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lowpoly_forest_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/lowpoly_forest_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waterbowl_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/waterbowl_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "mountain_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/mountain_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lowpoly_forest.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/lowpoly_forest.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "steppe_grass.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/steppe_grass.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "mountain.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/mountain.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrowbag.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrowbag.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bow.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bow.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sheep2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sheep2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sheep1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sheep1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stairs_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stairs_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part1_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part1_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window4_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window4_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part6_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part6_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.016_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.016_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stable_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stable_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_part5_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_part5_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ladder.001_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/ladder.001_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "target_Mesh2_Model.001"
+  prototype: "/castle_scene/gameobjects/target_Mesh2_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.020_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.020_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spear.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/spear.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tombstone1_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tombstone1_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.012_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.012_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "forge_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/forge_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spear.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/spear.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/crate.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush.014_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush.014_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.014_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.014_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_male1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_male1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "castle_grass.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/castle_grass.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fence1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/fence1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "chopped_wood_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/chopped_wood_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "target.002_Mesh2_Model.001"
+  prototype: "/castle_scene/gameobjects/target.002_Mesh2_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tombstone2_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tombstone2_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.015_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.015_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword_fighter1_Mesh5_Model.001"
+  prototype: "/castle_scene/gameobjects/sword_fighter1_Mesh5_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bale_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/bale_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bush_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bush_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.011_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.011_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.010_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.010_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "guard.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/guard.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sheep2.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sheep2.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sheep1.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sheep1.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "table_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/table_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "shield.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/shield.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrow_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrow_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "arrowbag.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/arrowbag.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "guard.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/guard.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house5_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/house5_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sword1.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/sword1.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "peasant_female_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/peasant_female_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "royal_female3_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/royal_female3_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barrel.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/barrel.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "house6_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/house6_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "archer.001_Mesh1_Group1_archer1_Model.001"
+  prototype: "/castle_scene/gameobjects/archer.001_Mesh1_Group1_archer1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "tree.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/tree.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window4.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window4.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/bench.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cliff.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/cliff.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window3.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window3.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window2.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window2.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waterbowl.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/waterbowl.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.002_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.002_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.003_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.003_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.005_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.005_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "stone_wall1.026_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/stone_wall1.026_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "barracks_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/barracks_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.001_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.001_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.008_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.008_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.012_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.012_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.013_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.013_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.014_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.014_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "charriot.001_Mesh1_Group1_Model.001"
+  prototype: "/castle_scene/gameobjects/charriot.001_Mesh1_Group1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.015_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.015_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window6.016_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window6.016_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window5.004_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window5.004_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "window1.009_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/window1.009_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "vegetable_crate.006_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/vegetable_crate.006_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "door2.007_Mesh1_Model.001"
+  prototype: "/castle_scene/gameobjects/door2.007_Mesh1_Model.001.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.7071068
+    y: 0.0
+    z: 0.0
+    w: 0.7071067
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "__root"
+  children: "anvil_Mesh1_Model.001"
+  children: "archer.001_Mesh1_Group1_archer1_Model.001"
+  children: "archer_Mesh1_Group1_archer1_Model.001"
+  children: "archer_shooting.002_Mesh1_Group1_Model.001"
+  children: "archer_shooting_Mesh1_Group1_Model.001"
+  children: "arrow.002_Mesh1_Model.001"
+  children: "arrow_Mesh1_Model.001"
+  children: "arrowbag.002_Mesh1_Model.001"
+  children: "arrowbag.003_Mesh1_Model.001"
+  children: "arrowbag.004_Mesh1_Model.001"
+  children: "arrowbag_Mesh1_Model.001"
+  children: "axe_Mesh1_Model.001"
+  children: "bale.001_Mesh1_Group1_Model.001"
+  children: "bale.002_Mesh1_Group1_Model.001"
+  children: "bale.003_Mesh1_Group1_Model.001"
+  children: "bale.004_Mesh1_Group1_Model.001"
+  children: "bale.005_Mesh1_Group1_Model.001"
+  children: "bale.006_Mesh1_Group1_Model.002"
+  children: "bale.007_Mesh1_Group1_Model.001"
+  children: "bale.008_Mesh1_Group1_Model.001"
+  children: "bale.009_Mesh1_Group1_Model.001"
+  children: "bale.010_Mesh1_Group1_Model.001"
+  children: "bale_Mesh1_Group1_Model.001"
+  children: "barn_Mesh1_Group1_Model.001"
+  children: "barracks_Mesh1_Group1_Model.001"
+  children: "barrel.000_Mesh1_Model.001"
+  children: "barrel.001_Mesh1_Model.001"
+  children: "barrel.002_Mesh1_Model.001"
+  children: "barrel.003_Mesh1_Model.001"
+  children: "barrel.004_Mesh1_Model.001"
+  children: "barrel.006_Mesh1_Model.001"
+  children: "barrel.007_Mesh1_Model.001"
+  children: "barrel.008_Mesh1_Model.001"
+  children: "barrel.009_Mesh1_Model.001"
+  children: "barrel.010_Mesh1_Model.001"
+  children: "barrel.013_Mesh1_Model.001"
+  children: "bench.001_Mesh1_Model.001"
+  children: "bench.002_Mesh1_Model.001"
+  children: "bench.003_Mesh1_Model.001"
+  children: "bench.004_Mesh1_Model.001"
+  children: "bench.005_Mesh1_Model.001"
+  children: "bench_Mesh1_Model.001"
+  children: "blacksmith_Mesh1_Model.001"
+  children: "bow.002_Mesh1_Model.001"
+  children: "bow.003_Mesh1_Model.001"
+  children: "bow.004_Mesh1_Model.001"
+  children: "bow_Mesh1_Model.001"
+  children: "bull_Mesh1_bull1_Model.001"
+  children: "bush.001_Mesh1_Model.001"
+  children: "bush.002_Mesh1_Model.001"
+  children: "bush.003_Mesh1_Model.001"
+  children: "bush.004_Mesh1_Model.001"
+  children: "bush.005_Mesh1_Model.001"
+  children: "bush.006_Mesh1_Model.001"
+  children: "bush.007_Mesh1_Model.001"
+  children: "bush.008_Mesh1_Model.001"
+  children: "bush.009_Mesh1_Model.001"
+  children: "bush.010_Mesh1_Model.001"
+  children: "bush.011_Mesh1_Model.001"
+  children: "bush.012_Mesh1_Model.001"
+  children: "bush.013_Mesh1_Model.001"
+  children: "bush.014_Mesh1_Model.001"
+  children: "bush.015_Mesh1_Model.001"
+  children: "bush_Mesh1_Model.001"
+  children: "canopy.001_Mesh1_Model.001"
+  children: "canopy_Mesh1_Model.001"
+  children: "castle_cliff.001_Mesh1_Group1_Model.001"
+  children: "castle_grass.001_Mesh1_Model.001"
+  children: "castle_grass.002_Mesh1_Model.001"
+  children: "castle_grass.003_Mesh1_Model.001"
+  children: "castle_grass.004_Mesh1_Model.001"
+  children: "castle_grass_Mesh1_Model.001"
+  children: "castle_part1_Mesh1_Group1_Model.001"
+  children: "castle_part2.001_Mesh1_Model.001"
+  children: "castle_part2_Mesh1_Model.001"
+  children: "castle_part3_Mesh1_Group1_Model.001"
+  children: "castle_part4_Mesh1_Model.001"
+  children: "castle_part5_Mesh1_Model.001"
+  children: "castle_part6_Mesh1_Group1_Model.001"
+  children: "castle_walls_Mesh1_Group1_Model.001"
+  children: "charriot.001_Mesh1_Group1_Model.001"
+  children: "charriot.003_Mesh1_Group1_Model.001"
+  children: "chopped_tree_Mesh1_Model.001"
+  children: "chopped_wood_Mesh1_Model.001"
+  children: "cliff.001_Mesh1_Model.001"
+  children: "cliff.002_Mesh1_Model.001"
+  children: "cliff.003_Mesh1_Model.001"
+  children: "cliff.004_Mesh1_Model.001"
+  children: "cliff.005_Mesh1_Model.001"
+  children: "cliff_Mesh1_Model.001"
+  children: "crate.001_Mesh1_Model.001"
+  children: "crate.002_Mesh1_Model.001"
+  children: "crate.003_Mesh1_Model.001"
+  children: "crate.004_Mesh1_Model.001"
+  children: "crate.005_Mesh1_Model.001"
+  children: "crate.006_Mesh1_Model.001"
+  children: "crate.008_Mesh1_Model.001"
+  children: "crate.009_Mesh1_Model.001"
+  children: "crate.010_Mesh1_Model.001"
+  children: "crate.011_Mesh1_Model.001"
+  children: "crate.012_Mesh1_Model.001"
+  children: "crate.013_Mesh1_Model.001"
+  children: "crate.014_Mesh1_Model.001"
+  children: "crate_Mesh1_Model.001"
+  children: "dirtcliff.001_Mesh1_Model.001"
+  children: "dirtcliff_Mesh1_Model.001"
+  children: "door1.001_Mesh1_Model.001"
+  children: "door1.002_Mesh1_Model.001"
+  children: "door1.003_Mesh1_Model.001"
+  children: "door1.004_Mesh1_Model.001"
+  children: "door1.005_Mesh1_Model.001"
+  children: "door1_Mesh1_Model.001"
+  children: "door2.001_Mesh1_Model.001"
+  children: "door2.002_Mesh1_Model.001"
+  children: "door2.003_Mesh1_Model.001"
+  children: "door2.004_Mesh1_Model.001"
+  children: "door2.005_Mesh1_Model.001"
+  children: "door2.006_Mesh1_Model.001"
+  children: "door2.007_Mesh1_Model.001"
+  children: "door2.008_Mesh1_Model.001"
+  children: "door2.009_Mesh1_Model.001"
+  children: "door2.010_Mesh1_Model.001"
+  children: "door2.011_Mesh1_Model.001"
+  children: "door2.012_Mesh1_Model.001"
+  children: "door2_Mesh1_Model.001"
+  children: "door3_Mesh1_Model.001"
+  children: "duke_Mesh1_Model.001"
+  children: "fence1.001_Mesh1_Model.001"
+  children: "fence1.002_Mesh1_Model.001"
+  children: "fence1.003_Mesh1_Model.001"
+  children: "fence1.004_Mesh1_Model.001"
+  children: "fence1.005_Mesh1_Model.001"
+  children: "fence1.006_Mesh1_Model.001"
+  children: "fence1.007_Mesh1_Model.001"
+  children: "fence1_Mesh1_Model.001"
+  children: "fence2.001_Mesh1_Model.001"
+  children: "fence2.002_Mesh1_Model.001"
+  children: "fence2.003_Mesh1_Model.001"
+  children: "fence2.004_Mesh1_Model.001"
+  children: "fence2.005_Mesh1_Model.001"
+  children: "fence2_Mesh1_Model.001"
+  children: "forge_Mesh1_Model.001"
+  children: "gate_tower_Mesh1_Group1_Model.001"
+  children: "guard.001_Mesh1_Model.001"
+  children: "guard.002_Mesh1_Model.001"
+  children: "guard.003_Mesh1_Model.001"
+  children: "guard.004_Mesh1_Model.001"
+  children: "guard_Mesh1_Model.001"
+  children: "hammer.001_Mesh1_Model.001"
+  children: "hammer_Mesh1_Model.001"
+  children: "hay.001_Mesh1_Model.001"
+  children: "hay.002_Mesh1_Model.001"
+  children: "hay.003_Mesh1_Model.001"
+  children: "hay.004_Mesh1_Model.001"
+  children: "hay.005_Mesh1_Model.001"
+  children: "hay_Mesh1_Model.001"
+  children: "hoe.001_Mesh1_Model.001"
+  children: "hoe_Mesh1_Model.001"
+  children: "horse.001_Mesh5_Model.001"
+  children: "horse_Mesh5_Model.002"
+  children: "house1_Mesh6_Model.002"
+  children: "house2_Mesh1_Group1_Model.001"
+  children: "house3.001_Mesh2_Model.001"
+  children: "house3_Mesh2_Model.001"
+  children: "house4_Mesh1_Model.001"
+  children: "house5_Mesh1_Model.001"
+  children: "house6_Mesh1_Group1_Model.001"
+  children: "house7_Mesh1_Model.001"
+  children: "ladder.001_Mesh1_Group1_Model.001"
+  children: "ladder_Mesh1_Group1_Model.001"
+  children: "lowpoly_forest.001_Mesh1_Model.001"
+  children: "lowpoly_forest.002_Mesh1_Model.001"
+  children: "lowpoly_forest.003_Mesh1_Model.001"
+  children: "lowpoly_forest.004_Mesh1_Model.001"
+  children: "lowpoly_forest_Mesh1_Model.001"
+  children: "mountain.001_Mesh1_Model.001"
+  children: "mountain_Mesh1_Model.001"
+  children: "pavement.001_Mesh1_Model.001"
+  children: "pavement.002_Mesh1_Model.001"
+  children: "pavement_Mesh1_Model.001"
+  children: "peasant_female.001_Mesh1_Model.001"
+  children: "peasant_female.002_Mesh1_Model.001"
+  children: "peasant_female_Mesh1_Model.001"
+  children: "peasant_male1.001_Mesh1_Model.001"
+  children: "peasant_male1.002_Mesh1_Model.001"
+  children: "peasant_male1.003_Mesh1_Model.001"
+  children: "peasant_male1_Mesh1_Model.001"
+  children: "peasant_male2_Mesh1_Model.001"
+  children: "peasant_picking.001_Mesh1_Model.001"
+  children: "peasant_picking_Mesh1_Model.001"
+  children: "peasant_walk.001_Mesh1_Model.001"
+  children: "peasant_walk.002_Mesh1_Model.001"
+  children: "platform1_Mesh1_Model.001"
+  children: "platform2_Mesh1_Model.002"
+  children: "ploughland.001_Mesh1_Model.001"
+  children: "ploughland.003_Mesh1_Model.001"
+  children: "ploughland_Mesh1_Model.001"
+  children: "royal_female1_Mesh1_Model.001"
+  children: "royal_female2_Mesh1_Model.001"
+  children: "royal_female3_Mesh1_Model.001"
+  children: "royal_stairs_Mesh1_Group1_Model.001"
+  children: "shed.001_Mesh1_Model.001"
+  children: "shed.002_Mesh1_Model.001"
+  children: "shed.003_Mesh1_Model.001"
+  children: "shed.004_Mesh1_Model.001"
+  children: "shed_Mesh1_Model.001"
+  children: "sheep1.001_Mesh1_Model.001"
+  children: "sheep1.002_Mesh1_Model.001"
+  children: "sheep1_Mesh1_Model.001"
+  children: "sheep2.001_Mesh1_Model.001"
+  children: "sheep2_Mesh1_Model.001"
+  children: "shield.001_Mesh1_Model.001"
+  children: "shield.002_Mesh1_Model.001"
+  children: "shield.003_Mesh1_Model.001"
+  children: "shield_Mesh1_Model.001"
+  children: "spear.001_Mesh1_Model.001"
+  children: "spear.002_Mesh1_Model.001"
+  children: "spear.003_Mesh1_Model.001"
+  children: "spear.004_Mesh1_Model.001"
+  children: "spear_Mesh1_Model.001"
+  children: "stable_Mesh1_Model.001"
+  children: "stairs.001_Mesh1_Model.001"
+  children: "stairs_Mesh1_Model.001"
+  children: "steppe_grass.001_Mesh1_Model.001"
+  children: "steppe_grass.002_Mesh1_Model.001"
+  children: "steppe_grass.003_Mesh1_Model.001"
+  children: "steppe_grass.004_Mesh1_Model.001"
+  children: "steppe_grass.005_Mesh1_Model.001"
+  children: "steppe_grass.006_Mesh1_Model.001"
+  children: "steppe_grass.007_Mesh1_Model.001"
+  children: "steppe_grass.009_Mesh1_Model.001"
+  children: "steppe_grass_Mesh1_Model.001"
+  children: "stone_wall1.001_Mesh1_Model.001"
+  children: "stone_wall1.002_Mesh1_Model.001"
+  children: "stone_wall1.003_Mesh1_Model.001"
+  children: "stone_wall1.004_Mesh1_Model.001"
+  children: "stone_wall1.005_Mesh1_Model.001"
+  children: "stone_wall1.006_Mesh1_Model.001"
+  children: "stone_wall1.007_Mesh1_Model.001"
+  children: "stone_wall1.008_Mesh1_Model.001"
+  children: "stone_wall1.009_Mesh1_Model.001"
+  children: "stone_wall1.010_Mesh1_Model.001"
+  children: "stone_wall1.011_Mesh1_Model.001"
+  children: "stone_wall1.012_Mesh1_Model.001"
+  children: "stone_wall1.013_Mesh1_Model.001"
+  children: "stone_wall1.014_Mesh1_Model.001"
+  children: "stone_wall1.015_Mesh1_Model.001"
+  children: "stone_wall1.016_Mesh1_Model.001"
+  children: "stone_wall1.017_Mesh1_Model.001"
+  children: "stone_wall1.018_Mesh1_Model.001"
+  children: "stone_wall1.019_Mesh1_Model.001"
+  children: "stone_wall1.020_Mesh1_Model.001"
+  children: "stone_wall1.021_Mesh1_Model.001"
+  children: "stone_wall1.023_Mesh1_Model.001"
+  children: "stone_wall1.024_Mesh1_Model.001"
+  children: "stone_wall1.025_Mesh1_Model.001"
+  children: "stone_wall1.026_Mesh1_Model.001"
+  children: "stone_wall1_Mesh1_Model.001"
+  children: "stone_wall2.001_Mesh1_Model.001"
+  children: "stone_wall2.002_Mesh1_Model.001"
+  children: "stone_wall2_Mesh1_Model.001"
+  children: "sword1.001_Mesh1_Model.001"
+  children: "sword1.002_Mesh1_Model.001"
+  children: "sword1.003_Mesh1_Model.001"
+  children: "sword1_Mesh1_Model.001"
+  children: "sword2.001_Mesh1_Model.001"
+  children: "sword2_Mesh1_Model.001"
+  children: "sword_fighter1_Mesh5_Model.001"
+  children: "sword_fighter2_Mesh4_Model.001"
+  children: "swordsman1_Mesh1_Model.001"
+  children: "swordsman2_Mesh1_Model.001"
+  children: "table.001_Mesh1_Model.001"
+  children: "table.002_Mesh1_Model.001"
+  children: "table.003_Mesh1_Model.001"
+  children: "table_Mesh1_Model.001"
+  children: "target.001_Mesh2_Model.002"
+  children: "target.002_Mesh2_Model.001"
+  children: "target_Mesh2_Model.001"
+  children: "tombstone1_Mesh1_Model.001"
+  children: "tombstone2_Mesh1_Model.001"
+  children: "tower_Mesh5_Model.001"
+  children: "tree.001_Mesh1_Model.001"
+  children: "tree.002_Mesh1_Model.001"
+  children: "tree.003_Mesh1_Model.001"
+  children: "tree.004_Mesh1_Model.001"
+  children: "tree.005_Mesh1_Model.001"
+  children: "tree.006_Mesh1_Model.001"
+  children: "tree.007_Mesh1_Model.001"
+  children: "tree.009_Mesh1_Model.001"
+  children: "tree.010_Mesh1_Model.001"
+  children: "tree.011_Mesh1_Model.001"
+  children: "tree.013_Mesh1_Model.001"
+  children: "tree.014_Mesh1_Model.001"
+  children: "tree.015_Mesh1_Model.001"
+  children: "tree.016_Mesh1_Model.001"
+  children: "tree.017_Mesh1_Model.001"
+  children: "tree.018_Mesh1_Model.001"
+  children: "tree.020_Mesh1_Model.001"
+  children: "tree.022_Mesh1_Model.001"
+  children: "tree.023_Mesh1_Model.001"
+  children: "tree.024_Mesh1_Model.001"
+  children: "tree.025_Mesh1_Model.001"
+  children: "tree.026_Mesh1_Model.001"
+  children: "tree.027_Mesh1_Model.001"
+  children: "tree_Mesh1_Model.001"
+  children: "vegetable_crate.001_Mesh1_Model.001"
+  children: "vegetable_crate.002_Mesh1_Model.001"
+  children: "vegetable_crate.004_Mesh1_Model.001"
+  children: "vegetable_crate.005_Mesh1_Model.001"
+  children: "vegetable_crate.006_Mesh1_Model.001"
+  children: "vegetable_crate.007_Mesh1_Model.001"
+  children: "waterbowl.001_Mesh1_Model.001"
+  children: "waterbowl.002_Mesh1_Model.001"
+  children: "waterbowl_Mesh1_Model.001"
+  children: "wheel.001_Mesh1_Model.001"
+  children: "wheel_Mesh1_Model.001"
+  children: "window1.001_Mesh1_Model.001"
+  children: "window1.002_Mesh1_Model.001"
+  children: "window1.003_Mesh1_Model.001"
+  children: "window1.004_Mesh1_Model.001"
+  children: "window1.005_Mesh1_Model.001"
+  children: "window1.006_Mesh1_Model.001"
+  children: "window1.007_Mesh1_Model.001"
+  children: "window1.008_Mesh1_Model.001"
+  children: "window1.009_Mesh1_Model.001"
+  children: "window1_Mesh1_Model.001"
+  children: "window2.001_Mesh1_Model.001"
+  children: "window2.002_Mesh1_Model.001"
+  children: "window2.003_Mesh1_Model.001"
+  children: "window2.004_Mesh1_Model.001"
+  children: "window2.005_Mesh1_Model.001"
+  children: "window2.006_Mesh1_Model.001"
+  children: "window2.007_Mesh1_Model.001"
+  children: "window2_Mesh1_Model.001"
+  children: "window3.001_Mesh1_Model.001"
+  children: "window3.002_Mesh1_Model.001"
+  children: "window3.003_Mesh1_Model.001"
+  children: "window3.004_Mesh1_Model.001"
+  children: "window3.005_Mesh1_Model.001"
+  children: "window3.006_Mesh1_Model.001"
+  children: "window3.007_Mesh1_Model.001"
+  children: "window3.008_Mesh1_Model.001"
+  children: "window3.009_Mesh1_Model.001"
+  children: "window3.010_Mesh1_Model.001"
+  children: "window3.011_Mesh1_Model.001"
+  children: "window3_Mesh1_Model.001"
+  children: "window4.001_Mesh1_Model.001"
+  children: "window4_Mesh1_Model.001"
+  children: "window5.001_Mesh1_Model.001"
+  children: "window5.002_Mesh1_Model.001"
+  children: "window5.003_Mesh1_Model.001"
+  children: "window5.004_Mesh1_Model.001"
+  children: "window5.005_Mesh1_Model.001"
+  children: "window5.006_Mesh1_Model.001"
+  children: "window5.007_Mesh1_Model.001"
+  children: "window5.008_Mesh1_Model.001"
+  children: "window5.009_Mesh1_Model.001"
+  children: "window5_Mesh1_Model.001"
+  children: "window6.001_Mesh1_Model.001"
+  children: "window6.002_Mesh1_Model.001"
+  children: "window6.003_Mesh1_Model.001"
+  children: "window6.004_Mesh1_Model.001"
+  children: "window6.005_Mesh1_Model.001"
+  children: "window6.006_Mesh1_Model.001"
+  children: "window6.007_Mesh1_Model.001"
+  children: "window6.008_Mesh1_Model.001"
+  children: "window6.009_Mesh1_Model.001"
+  children: "window6.010_Mesh1_Model.001"
+  children: "window6.011_Mesh1_Model.001"
+  children: "window6.012_Mesh1_Model.001"
+  children: "window6.013_Mesh1_Model.001"
+  children: "window6.014_Mesh1_Model.001"
+  children: "window6.015_Mesh1_Model.001"
+  children: "window6.016_Mesh1_Model.001"
+  children: "window6.017_Mesh1_Model.001"
+  children: "window6_Mesh1_Model.001"
+  children: "window7_Mesh1_Model.001"
+  children: "woodcutter_Mesh1_Model.001"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: -0.70710677
+    y: 0.0
+    z: 0.0
+    w: 0.70710677
+  }
+  scale3 {
+    x: 0.999
+    y: 0.999
+    z: 0.999
+  }
+}

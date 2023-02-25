@@ -1,0 +1,7 @@
+material: "/assets/materials/base_3d.material"
+vertices: "/castle_scene/meshes/crate.006_Mesh1_Model.001.buffer"
+textures: "/castle_scene/images/Default OBJ 001_base_color_ccccccff.png"
+
+primitive_type: PRIMITIVE_TRIANGLES
+position_stream: "position"
+normal_stream: "normal"

@@ -61,7 +61,7 @@ return function()
 			local buf = resource.get_buffer(res)
 			local array2 = rp3d.createTriangleVertexArrayFromMeshVerticesCopy(buf)
 			assert_not_nil(array2)
-			assert_equal(array2:getNbTriangles(),49654)
+			assert_equal(array2:getNbTriangles(),1114)
 			rp3d.destroyTriangleVertexArray(array2)
 		end)
 

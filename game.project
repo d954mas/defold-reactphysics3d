@@ -16,6 +16,7 @@ input_method = HiddenInputField
 
 [project]
 title = ReactPhysics3D
+custom_resources = /assets/custom_resources/
 dependencies#0 = https://github.com/britzl/monarch/archive/refs/tags/3.4.0.zip
 dependencies#1 = https://github.com/britzl/gooey/archive/refs/tags/9.1.1.zip
 dependencies#2 = https://github.com/britzl/gooey-dirtylarry/archive/main.zip
@@ -48,4 +49,7 @@ max_instances = 1024
 
 [input]
 game_binding = /builtins/input/all.input_bindingc
+
+[resource]
+max_resources = 4096
 

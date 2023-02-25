@@ -1,0 +1,7 @@
+material: "/assets/materials/base_3d.material"
+vertices: "/test_scene/meshes/anvil_Mesh1_Model.006.buffer"
+textures: "/test_scene/images/Default OBJ_base_color_ccccccff.png"
+
+primitive_type: PRIMITIVE_TRIANGLES
+position_stream: "position"
+normal_stream: "normal"

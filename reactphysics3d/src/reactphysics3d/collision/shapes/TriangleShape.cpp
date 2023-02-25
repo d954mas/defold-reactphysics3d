@@ -33,6 +33,9 @@
 #include <reactphysics3d/configuration.h>
 #include <cassert>
 
+#include <dmsdk/sdk.h>
+#include "undefine_none.h"
+
 using namespace reactphysics3d;
 
 
@@ -44,13 +47,47 @@ TriangleShape::TriangleShape(const Vector3* vertices, const Vector3* verticesNor
     mPoints[1] = vertices[1];
     mPoints[2] = vertices[2];
 
-    // Compute the triangle normal
-    mNormal = (vertices[1] - vertices[0]).cross(vertices[2] - vertices[0]);
-    mNormal.normalize();
+
+
 
    // printf("v0(%f %f %f)\n",vertices[0].x,vertices[0].y,vertices[0].z);
    // printf("v1(%f %f %f)\n",vertices[1].x,vertices[1].y,vertices[1].z);
   //  printf("v2(%f %f %f)\n",vertices[2].x,vertices[2].y,vertices[2].z);
+  //Some fixes for castle model.
+  //fixed vertices with same position
+  //fixed vertices on one line by y
+  if(mNormal.length() <= decimal(0.0)){
+        //dmLogWarning("mNormal is zero.Need fix points");
+        //dmLogWarning("mNormal is zero.Need fix points\nv0(%f %f %f)\nv1(%f %f %f)\nv2(%f %f %f)"
+        //    ,vertices[0].x,vertices[0].y,vertices[0].z,
+        //    vertices[1].x,vertices[1].y,vertices[1].z,
+        //    vertices[2].x,vertices[2].y,vertices[2].z);
+        if(mPoints[0] == mPoints[1]){
+            mPoints[1] = mPoints[1]+ Vector3(0.01,0.01,0.01);
+        }else if(mPoints[0] == mPoints[2]){
+            mPoints[2] = mPoints[2]+ Vector3(0.01,0.01,0.01);
+        }else if(mPoints[1] == mPoints[2]){
+            mPoints[2] = mPoints[2]+ Vector3(0.01,0.01,0.01);
+        }
+        // Compute the triangle normal
+        mNormal = (mPoints[1] - mPoints[0]).cross(mPoints[2] - mPoints[0]);
+        mNormal.normalize();
+
+        if(mNormal.length() <= decimal(0.0)){
+            if(mPoints[0].x == mPoints[1].x && mPoints[1].x == mPoints[2].x){
+                mPoints[0].x = mPoints[0].x + 0.01;
+            }else if(mPoints[0].y == mPoints[1].y && mPoints[1].y == mPoints[2].y){
+                mPoints[0].y = mPoints[0].y + 0.01;
+            }else if(mPoints[0].x == mPoints[1].z && mPoints[1].z == mPoints[2].z){
+                mPoints[0].z = mPoints[0].z + 0.01;
+            }
+            // Compute the triangle normal
+            mNormal = (mPoints[1] - mPoints[0]).cross(mPoints[2] - mPoints[0]);
+            mNormal.normalize();
+        }
+
+        assert(mNormal.length() > decimal(0.0));
+  }
   //  assert(mNormal.length() > decimal(0.0));
 
 

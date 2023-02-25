@@ -674,7 +674,7 @@ embedded_instances {
   "  id: \"castle\"\n"
   "  type: \"mesh\"\n"
   "  data: \"material: \\\"/assets/materials/base_3d_notdraw.material\\\"\\n"
-  "vertices: \\\"/assets/meshes/castle.buffer\\\"\\n"
+  "vertices: \\\"/castle_scene/meshes/castle_walls_Mesh1_Group1_Model.001.buffer\\\"\\n"
   "textures: \\\"/scene3d/assets/textures/grid_10x10.png\\\"\\n"
   "primitive_type: PRIMITIVE_TRIANGLES\\n"
   "position_stream: \\\"position\\\"\\n"
