@@ -107,14 +107,6 @@ local function create_physics(self)
 	self.triangle_mesh:addSubpart(array)
 	table.insert(self.triangle_arrays, array)
 
-	print("ARRAY")
-	pprint(array:getNbVertices())
-	pprint(array:getNbTriangles())
-	for i=0,array:getNbTriangles()-1 do
-		print("i:" .. i)
-		pprint(array:getTriangleVertices(i))
-		pprint(array:getTriangleVerticesIndices(i))
-	end
 
 	local mesh = ConcaveMesh(true, self.triangle_mesh, pile_collection, self.world)
 	mesh.meshes = pile_collection_meshes

@@ -53,15 +53,15 @@ TriangleShape::TriangleShape(const Vector3* vertices, const Vector3* verticesNor
    // printf("v0(%f %f %f)\n",vertices[0].x,vertices[0].y,vertices[0].z);
    // printf("v1(%f %f %f)\n",vertices[1].x,vertices[1].y,vertices[1].z);
   //  printf("v2(%f %f %f)\n",vertices[2].x,vertices[2].y,vertices[2].z);
-  //Some fixes for castle model.
+  //Try some hot fixes
   //fixed vertices with same position
   //fixed vertices on one line by y
   if(mNormal.length() <= decimal(0.0)){
         //dmLogWarning("mNormal is zero.Need fix points");
-        //dmLogWarning("mNormal is zero.Need fix points\nv0(%f %f %f)\nv1(%f %f %f)\nv2(%f %f %f)"
-        //    ,vertices[0].x,vertices[0].y,vertices[0].z,
-        //    vertices[1].x,vertices[1].y,vertices[1].z,
-        //    vertices[2].x,vertices[2].y,vertices[2].z);
+       // dmLogWarning("mNormal is zero.Need fix points\nv0(%f %f %f)\nv1(%f %f %f)\nv2(%f %f %f)"
+         //   ,vertices[0].x,vertices[0].y,vertices[0].z,
+       //     vertices[1].x,vertices[1].y,vertices[1].z,
+       //     vertices[2].x,vertices[2].y,vertices[2].z);
         if(mPoints[0] == mPoints[1]){
             mPoints[1] = mPoints[1]+ Vector3(0.01,0.01,0.01);
         }else if(mPoints[0] == mPoints[2]){
