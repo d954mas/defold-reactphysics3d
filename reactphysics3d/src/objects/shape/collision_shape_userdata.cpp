@@ -48,6 +48,7 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
             this->metatable_name = META_NAME_CONCAVE_MESH_SHAPE;
             break;
         case CollisionShapeName::HEIGHTFIELD:
+            this->metatable_name = META_NAME_HEIGHTFIELD_SHAPE;
             assert(false);
         default:{
             assert(false);

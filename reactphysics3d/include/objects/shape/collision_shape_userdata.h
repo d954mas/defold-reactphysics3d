@@ -11,6 +11,7 @@
 #define META_NAME_CAPSULE_SHAPE "rp3d::CapsuleShapeClass"
 #define META_NAME_CONVEX_MESH_SHAPE "rp3d::ConvexMeshShapeClass"
 #define META_NAME_CONCAVE_MESH_SHAPE "rp3d::ConcaveMeshShapeClass"
+#define META_NAME_HEIGHTFIELD_SHAPE "rp3d::HeightFieldShapeClass"
 
 
 #define RP3D_COLLISION_SHAPE_META_FUNCTIONS \

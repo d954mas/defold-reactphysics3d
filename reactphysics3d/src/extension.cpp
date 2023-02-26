@@ -13,6 +13,7 @@
 #include "objects/shape/capsule_shape_userdata.h"
 #include "objects/shape/convex_mesh_shape_userdata.h"
 #include "objects/shape/concave_mesh_shape_userdata.h"
+#include "objects/shape/height_field_shape_userdata.h"
 #include "objects/debug_renderer_userdata.h"
 #include "objects/base_userdata.h"
 #include "objects/world_userdata.h"
@@ -405,6 +406,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     TriangleVertexArrayUserdataInitMetaTable(params->m_L);
     TriangleMeshUserdataInitMetaTable(params->m_L);
     ConcaveMeshShapeUserdataInitMetaTable(params->m_L);
+    HeightFieldShapeUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;
