@@ -54,7 +54,7 @@ static int GetTriangleVertices(lua_State *L){
         luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
     }
     Vector3 result[3];
-    userdata->triangleVertexArray->getTriangleVertices(0,result);
+    userdata->triangleVertexArray->getTriangleVertices(idx,result);
     lua_newtable(L);
     for(int i=0;i<3;++i){
         dmVMath::Vector3 dmV3(result[i].x,result[i].y,result[i].z);
@@ -73,7 +73,7 @@ static int GetTriangleVerticesNormals(lua_State *L){
         luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
     }
     Vector3 result[3];
-    userdata->triangleVertexArray->getTriangleVerticesNormals(0,result);
+    userdata->triangleVertexArray->getTriangleVerticesNormals(idx,result);
     lua_newtable(L);
     for(int i=0;i<3;++i){
         dmVMath::Vector3 dmV3(result[i].x,result[i].y,result[i].z);
@@ -92,7 +92,7 @@ static int GetTriangleVerticesIndices(lua_State *L){
         luaL_error(L,"Bad idx:%d. Triangles:%d",idx,userdata->triangleVertexArray->getNbTriangles());
     }
     uint32 result[3];
-    userdata->triangleVertexArray->getTriangleVerticesIndices(0,result);
+    userdata->triangleVertexArray->getTriangleVerticesIndices(idx,result);
     lua_newtable(L);
     for(int i=0;i<3;++i){
         lua_pushnumber(L,result[i]);
@@ -110,7 +110,7 @@ static int GetVertex(lua_State *L){
         luaL_error(L,"Bad idx:%d. Vertices:%d",idx,userdata->triangleVertexArray->getNbVertices());
     }
     Vector3 v3;
-    userdata->triangleVertexArray->getVertex(0,&v3);
+    userdata->triangleVertexArray->getVertex(idx,&v3);
     dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
     dmScript::PushVector3(L, dmV3);
 	return 1;
@@ -125,7 +125,7 @@ static int GetNormal(lua_State *L){
         luaL_error(L,"Bad idx:%d. Vertices:%d",idx,userdata->triangleVertexArray->getNbVertices());
     }
     Vector3 v3;
-    userdata->triangleVertexArray->getNormal(0,&v3);
+    userdata->triangleVertexArray->getNormal(idx,&v3);
     dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
     dmScript::PushVector3(L, dmV3);
 	return 1;
@@ -241,14 +241,14 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromLua(lua_State *L){
         triangleVertexArray = new TriangleVertexArray(verticesSize/3, vertices,  3 * sizeof(float),
                                                                   normals, 3 * sizeof(float),
                                                                   indicesSize/3,
-                                                                  indices,sizeof(int),
+                                                                  indices,3*sizeof(int),
                                                                   TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
                                                                   TriangleVertexArray::NormalDataType::NORMAL_FLOAT_TYPE,
                                                                   TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
     }else{
         triangleVertexArray = new TriangleVertexArray(verticesSize/3, vertices,  3 * sizeof(float),
                                                           indicesSize/3,
-                                                           indices,sizeof(int),
+                                                           indices,3*sizeof(int),
                                                           TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
                                                           TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
     }
@@ -306,14 +306,14 @@ TriangleVertexArrayUserdata* TriangleVertexArrayUserdataFromBufferClone(PhysicsC
 
         verticesIter += pos_stride;
         normalsIter += normal_stride;
-        //dmLogInfo("vertex(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
-        //dmLogInfo("normal(%f %f %f)",normals[i*3],normals[i*3+1],normals[i*3+2]);
+       // dmLogInfo("vertex(%f %f %f)",vertices[i*3],vertices[i*3+1],vertices[i*3+2]);
+     //   dmLogInfo("normal(%f %f %f)",normals[i*3],normals[i*3+1],normals[i*3+2]);
     }
 
     TriangleVertexArray *triangleVertexArray = new TriangleVertexArray(pos_count, vertices,  3 * sizeof(float),
                                                                   normals, 3 * sizeof(float),
                                                                   pos_count/3,
-                                                                  indices,sizeof(int),
+                                                                  indices,3*sizeof(int),
                                                                   TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
                                                                   TriangleVertexArray::NormalDataType::NORMAL_FLOAT_TYPE,
                                                                   TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);

@@ -57,7 +57,8 @@ function init(self)
 		{id = "box tower",scene = "box_tower"},
 		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"},
 		{id = "collision shapes",scene = "collision_shapes"},
-		{id = "concave shape",scene = "concave_shape"}
+		{id = "concave shape",scene = "concave_shape"},
+		{id = "pile",scene = "pile"}
 	}
 	update_list(self)
 
