@@ -271,6 +271,44 @@ static int DestroyTriangleMesh(lua_State* L){
 }
 
 
+
+static int CreateHeightFieldShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 6,9);
+    int nbGridColumns = luaL_checknumber(L,1);
+    if(nbGridColumns<=0) luaL_error(L, "nbGridColumns should be positive");
+    int nbGridRows = luaL_checknumber(L,2);
+    if(nbGridRows<=0) luaL_error(L, "nbGridRows should be positive");
+    decimal minHeight = luaL_checknumber(L,3);
+    decimal maxHeight = luaL_checknumber(L,4);
+
+    if (!lua_istable(L, 5)) luaL_error(L,"data should be table");
+    int dataSize = luaL_getn(L, 5);
+    if(dataSize!= nbGridRows*nbGridColumns) luaL_error(L,"bad data size.Need:%d. Get:%d",nbGridRows*nbGridColumns,dataSize);
+
+    HeightFieldShape::HeightDataType dataType =  HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE;
+    const char * str = luaL_checkstring(L,6);
+    switch (hash_string(str)){
+        case HASH_HEIGHT_FLOAT_TYPE:
+            dataType = HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE;
+            break;
+        case HASH_HEIGHT_DOUBLE_TYPE:
+            dataType = HeightFieldShape::HeightDataType::HEIGHT_DOUBLE_TYPE;
+            break;
+        case HASH_HEIGHT_INT_TYPE:
+            dataType = HeightFieldShape::HeightDataType::HEIGHT_INT_TYPE;
+            break;
+        default:
+            luaL_error(L, "unknown HeightDataType:%s", str);
+            break;
+    }
+
+
+
+    return 1;
+}
+
+
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
     {"createPhysicsWorld", CreatePhysicsWorldLua},
@@ -293,6 +331,7 @@ static const luaL_reg Module_methods[] ={
     {"destroyTriangleVertexArray", DestroyTriangleVertexArray},
     {"createTriangleMesh", CreateTriangleMesh},
     {"destroyTriangleMesh", DestroyTriangleMesh},
+    {"createHeightFieldShape", CreateHeightFieldShape},
     {0, 0}
 };
 
@@ -355,6 +394,15 @@ static void LuaInit(lua_State* L){
     lua_setfield(L, -2, "TriangleRaycastSide");
 
     lua_newtable(L);
+        lua_pushstring(L, "HEIGHT_FLOAT_TYPE");
+        lua_setfield(L, -2, "HEIGHT_FLOAT_TYPE");
+        lua_pushstring(L, "HEIGHT_DOUBLE_TYPE");
+        lua_setfield(L, -2, "HEIGHT_DOUBLE_TYPE");
+        lua_pushstring(L, "HEIGHT_INT_TYPE");
+        lua_setfield(L, -2, "HEIGHT_INT_TYPE");
+    lua_setfield(L, -2, "HeightDataType");
+
+    lua_newtable(L);
         lua_newtable(L);
             lua_pushstring(L, "COLLIDER_AABB");
             lua_setfield(L, -2, "COLLIDER_AABB");
@@ -390,6 +438,8 @@ static void LuaInit(lua_State* L){
             lua_setfield(L, -2, "ContactExit");
         lua_setfield(L, -2, "EventType");
     lua_setfield(L, -2, "ContactPair");
+
+
 
 	lua_pop(L, 1);
 	assert(top == lua_gettop(L));
