@@ -273,7 +273,7 @@ static int DestroyTriangleMesh(lua_State* L){
 
 
 static int CreateHeightFieldShape(lua_State* L){
-    DM_LUA_STACK_CHECK(L, 0);
+    DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 6,9);
     int count = lua_gettop(L);
     int nbGridColumns = luaL_checknumber(L,1);
@@ -358,9 +358,21 @@ static int CreateHeightFieldShape(lua_State* L){
         minHeight,maxHeight,data,dataType,upAxis,integerHeightScale,scaling);
 
 
-
+    CollisionShapeUserdata* userdata = CollisionShapePush(L,shape);
+    userdata->heightData = data;
 
     return 1;
+}
+
+static int DestroyHeightFieldShape(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 1);
+    CollisionShapeUserdata * shapeUserdata = HeightFieldShapeCheckUserdata(L,1);
+    HeightFieldShape* shape = static_cast<HeightFieldShape*>(shapeUserdata->shape);
+    shapeUserdata->Destroy(L);
+    delete shapeUserdata;
+    physicsCommon.destroyHeightFieldShape(shape);
+    return 0;
 }
 
 
@@ -387,6 +399,7 @@ static const luaL_reg Module_methods[] ={
     {"createTriangleMesh", CreateTriangleMesh},
     {"destroyTriangleMesh", DestroyTriangleMesh},
     {"createHeightFieldShape", CreateHeightFieldShape},
+    {"destroyHeightFieldShape", DestroyHeightFieldShape},
     {0, 0}
 };
 

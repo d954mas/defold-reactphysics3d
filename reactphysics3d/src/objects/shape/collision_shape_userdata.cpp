@@ -49,7 +49,7 @@ CollisionShapeUserdata::CollisionShapeUserdata(CollisionShape* shape):BaseUserDa
             break;
         case CollisionShapeName::HEIGHTFIELD:
             this->metatable_name = META_NAME_HEIGHTFIELD_SHAPE;
-            assert(false);
+            break;
         default:{
             assert(false);
         }
@@ -205,13 +205,15 @@ void CollisionShapeUserdataInitMetaTable(lua_State *L){
 
 
 
-void CollisionShapePush(lua_State *L, CollisionShape* shape){
+CollisionShapeUserdata* CollisionShapePush(lua_State *L, CollisionShape* shape){
     if(shape->getUserData()!=NULL){
          CollisionShapeUserdata* userdata =(CollisionShapeUserdata*) shape->getUserData();
          userdata->Push(L);
+         return userdata;
     }else{
         CollisionShapeUserdata* userdata = new CollisionShapeUserdata(shape);
         userdata->Push(L);
+        return userdata;
     }
 }
 

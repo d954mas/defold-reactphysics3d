@@ -11,6 +11,15 @@ using namespace reactphysics3d;
 
 namespace rp3dDefold {
 
+CollisionShapeUserdata* HeightFieldShapeCheckUserdata(lua_State* L, int index){
+    CollisionShapeUserdata *shape = CollisionShapeCheck(L,index);
+    if (shape->shape->getName() == CollisionShapeName::HEIGHTFIELD){
+        return shape;
+    }else{
+        luaL_error(L, "shape not HeightFieldShape");
+    }
+}
+
 static HeightFieldShape* HeightFieldShapeCheck(lua_State* L, int index){
     CollisionShapeUserdata *shape = CollisionShapeCheck(L,index);
     if (shape->shape->getName() == CollisionShapeName::HEIGHTFIELD){

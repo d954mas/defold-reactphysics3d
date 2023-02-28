@@ -56,7 +56,7 @@ class CollisionShapeUserdata : public BaseUserData {
 
 
     void CollisionShapeUserdataInitMetaTable(lua_State *L);
-    void CollisionShapePush(lua_State *L, reactphysics3d::CollisionShape* shape);
+    CollisionShapeUserdata* CollisionShapePush(lua_State *L, reactphysics3d::CollisionShape* shape);
     CollisionShapeUserdata* CollisionShapeCheck(lua_State *L, int index);
 }
 #endif
