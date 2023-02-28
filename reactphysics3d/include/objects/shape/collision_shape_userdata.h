@@ -33,7 +33,8 @@ namespace rp3dDefold {
 //use diff meta tables
 class CollisionShapeUserdata : public BaseUserData {
     public:
-        reactphysics3d::CollisionShape* shape;
+        reactphysics3d::CollisionShape* shape = NULL;
+        void* heightData = NULL;
         CollisionShapeUserdata(reactphysics3d::CollisionShape* shape);
         ~CollisionShapeUserdata();
 

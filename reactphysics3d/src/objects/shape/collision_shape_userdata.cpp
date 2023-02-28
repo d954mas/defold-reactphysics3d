@@ -218,6 +218,8 @@ void CollisionShapePush(lua_State *L, CollisionShape* shape){
 void CollisionShapeUserdata::Destroy(lua_State *L){
     shape->setUserData(NULL);
     shape = NULL;
+    delete[] heightData;
+    heightData = NULL;
     BaseUserData::Destroy(L);
 }
 

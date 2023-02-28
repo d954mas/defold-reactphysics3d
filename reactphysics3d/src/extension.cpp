@@ -275,6 +275,7 @@ static int DestroyTriangleMesh(lua_State* L){
 static int CreateHeightFieldShape(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 6,9);
+    int count = lua_gettop(L);
     int nbGridColumns = luaL_checknumber(L,1);
     if(nbGridColumns<=0) luaL_error(L, "nbGridColumns should be positive");
     int nbGridRows = luaL_checknumber(L,2);
@@ -302,6 +303,60 @@ static int CreateHeightFieldShape(lua_State* L){
             luaL_error(L, "unknown HeightDataType:%s", str);
             break;
     }
+
+    int upAxis = 1;
+    if(count>=7){
+        upAxis = luaL_checknumber(L,7);
+        if(upAxis<0 || upAxis>2)  luaL_error(L, "bad upAxis:%d", upAxis);
+    }
+
+    decimal integerHeightScale = 1;
+    if(count>=8){
+        integerHeightScale = luaL_checknumber(L,8);
+    }
+    Vector3 scaling(1,1,1);
+    if(count>=9){
+        dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, 9);
+        scaling = Vector3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    }
+    void* data;
+    switch(dataType){
+        case HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE:{
+            float *dataFloat = new float[dataSize];
+            for(int i=0;i<dataSize;++i){
+                lua_rawgeti(L,5,i+1);
+                dataFloat[i] = luaL_checknumber(L,-1);
+                lua_pop(L,1);
+            }
+            data = dataFloat;
+            break;
+        }
+        case HeightFieldShape::HeightDataType::HEIGHT_DOUBLE_TYPE:{
+            double *dataDouble = new double[dataSize];
+            for(int i=0;i<dataSize;++i){
+                lua_rawgeti(L,5,i+1);
+                dataDouble[i] = luaL_checknumber(L,-1);
+                lua_pop(L,1);
+            }
+            data = dataDouble;
+            break;
+        }
+        case HeightFieldShape::HeightDataType::HEIGHT_INT_TYPE:{
+            int *dataInt = new int[dataSize];
+            for(int i=0;i<dataSize;++i){
+                lua_rawgeti(L,5,i+1);
+                dataInt[i] = luaL_checknumber(L,-1);
+                lua_pop(L,1);
+            }
+            data = dataInt;
+            break;
+        }
+        default:
+            assert(false);
+    }
+    HeightFieldShape * shape = physicsCommon.createHeightFieldShape(nbGridColumns,nbGridRows,
+        minHeight,maxHeight,data,dataType,upAxis,integerHeightScale,scaling);
+
 
 
 
