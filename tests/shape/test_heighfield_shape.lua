@@ -1,7 +1,6 @@
 local UTILS = require "tests.test_utils"
 local PERLIN = require "libs.perlin"
 
-PERLIN.init()
 
 local NB_POINTS_WIDTH = 100;
 local NB_POINTS_LENGTH = 100;
@@ -15,11 +14,17 @@ local function init_shape()
 	local max = 0
 	local width = (NB_POINTS_WIDTH - 1);
 	local length = (NB_POINTS_LENGTH - 1);
+	local persistence = 9;
+	local frequency = 0.28;
+	local amplitude = 12;
+	local octaves = 1;
+	local randomseed = 23;
+	local perlinNoise = PERLIN(persistence, frequency, amplitude, octaves, randomseed);
 
 	for i = 1, NB_POINTS_WIDTH do
 		for j = 1, NB_POINTS_LENGTH do
 			local arrayIndex = (j - 1) * NB_POINTS_WIDTH + i;
-			local h = PERLIN.noise(0, -width * 0.5 + i, -length * 0.5 + j)
+			local h = perlinNoise:GetHeight( -width * 0.5 + i, -length * 0.5 + j)
 
 			if (i == 1 and j == 1) then
 				min = h
