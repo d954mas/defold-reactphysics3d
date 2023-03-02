@@ -6,6 +6,7 @@ local Sphere = require "main.objects.sphere"
 local Capsule = require "main.objects.capsules"
 local ConvexMesh = require "main.objects.convex_mesh"
 local ConcaveMesh = require "main.objects.concave_mesh"
+local Heightfield = require "main.objects.heightfield"
 
 local SCENE_RADIUS = 50.0
 local NB_BOXES = 10
@@ -85,6 +86,13 @@ local function create_physics(self)
 		capsule.collider:setMaterialBounciness(0.2)
 	end
 
+	self.heightfield = Heightfield(true,self.world)
+	self.heightfield.body:setType(rp3d.BodyType.STATIC);
+	self.heightfield:setColor(self.heightfield.colors.floorColorDemo)
+	self.heightfield:setColorSleeping(self.heightfield.colors.floorColorDemo)
+	self.heightfield.collider:setMaterialBounciness(0.2)
+	self.heightfield.collider:setMaterialFrictionCoefficient(0.1)
+	table.insert(self.objects, self.heightfield)
 	--local res = go.get("/meshes#castle", "vertices")
 	--local buf = resource.get_buffer(res)
 	--self.triangle_array = rp3d.createTriangleVertexArrayFromMeshVerticesCopy(buf)
