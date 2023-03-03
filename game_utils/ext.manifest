@@ -1,0 +1,8 @@
+name: "game_utils"
+platforms:
+    x86-osx:
+        context:
+            flags:      ["-std=c++11"]
+    x86_64-osx:
+        context:
+            flags:      ["-std=c++11"]

@@ -10,12 +10,20 @@ local NB_POINTS_LENGTH = 100;
 local HeightField = CLASS.class("HeightField", PhysObject)
 
 ---@param world Rp3dPhysicsWorld
-function HeightField:initialize(rigid_body, world)
+function HeightField:initialize(rigid_body, world, mesh_url)
 	PhysObject.initialize(self, world)
 	self.rigid_body = rigid_body
 
 	self:generateHeightField()
 	self:generateGraphicsMesh()
+
+	self.mesh_url = assert(mesh_url)
+	self.mesh_vertices = go.get(mesh_url, hash("vertices"))
+	self.go = {
+		mesh = self.mesh_url
+	}
+	local buffer = game_utils.heightfield_update_mesh(self.mIndices,self.mVertices,self.mNormals)
+	resource.set_buffer(self.mesh_vertices,buffer)
 
 	local transform_identity = {
 		position = vmath.vector3(),

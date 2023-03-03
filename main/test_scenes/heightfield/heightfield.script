@@ -86,7 +86,7 @@ local function create_physics(self)
 		capsule.collider:setMaterialBounciness(0.2)
 	end
 
-	self.heightfield = Heightfield(true,self.world)
+	self.heightfield = Heightfield(true,self.world,msg.url("/meshes#heightfield"))
 	self.heightfield.body:setType(rp3d.BodyType.STATIC);
 	self.heightfield:setColor(self.heightfield.colors.floorColorDemo)
 	self.heightfield:setColorSleeping(self.heightfield.colors.floorColorDemo)
