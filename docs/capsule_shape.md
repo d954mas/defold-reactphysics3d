@@ -15,3 +15,33 @@ rp3d.createCapsuleShape(radius, height)
 * CapsuleShape:[setRadius](#capsuleshapesetradius)(radius)
 * CapsuleShape:[getHeight](#capsuleshapegetheight)() number
 * CapsuleShape:[setHeight](#capsuleshapesetheight)(height)
+
+---
+### CapsuleShape:getRadius()
+Return the radius of the capsule.
+
+**RETURN**
+* (number)
+
+---
+### CapsuleShape:setRadius(radius)
+Set the radius of the capsule.
+
+Note that you might want to recompute the inertia tensor and center of mass of the body after changing the radius of the collision shape.
+
+**PARAMETERS**
+* `radius` (number)
+### CapsuleShape:getHeight()
+Return the height of the capsule.
+
+**RETURN**
+* (number)
+
+---
+### CapsuleShape:setHeight(height)
+Return the height of the capsule.
+
+Note that you might want to recompute the inertia tensor and center of mass of the body after changing the radius of the collision shape.
+
+**PARAMETERS**
+* `height` (number)
