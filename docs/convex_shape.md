@@ -1,5 +1,5 @@
 # ConvexShape
-ConvexShape extends [CollisionShape](convex_shape.md)
+ConvexShape extends [CollisionShape](collision_shape.md)
 
 This abstract class represents a convex collision shape associated with a body that is used during the narrow-phase collision detection.
 
