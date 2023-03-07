@@ -20,21 +20,21 @@ A rigid body. These are created via world:CreateBody.
 
 * AABB:[getCenter](#aabbgetcenter)() vector3
 * AABB:[getMin](#aabbgetmin)() vector3
-* AABB:[setMin](#aabbsetmin)(min) 
+* AABB:[setMin](#aabbsetminmin)(min) 
 * AABB:[getMax](#aabbgetmax)() vector3
-* AABB:[setMax](#aabbsetmax)(max)
+* AABB:[setMax](#aabbsetmaxmax)(max)
 * AABB:[getExtent](#aabbgetextent)() vector3
-* AABB:[inflate](#aabbinflate)(dx, dy, dz)
-* AABB:[testCollision](#aabbtestcollision)(aabb) bool
+* AABB:[inflate](#aabbinflatedx-dy-dz)(dx, dy, dz)
+* AABB:[testCollision](#aabbtestcollisionaabb)(aabb) bool
 * AABB:[getVolume](#aabbgetvolume)() number
-* AABB:[mergeWithAABB](#aabbmergewithaabb)(aabb)
-* AABB:[mergeTwoAABBs](#aabbmergetwoaabbs)(aabb1,aabb2)
-* AABB:[contains](#aabbcontains)(aabb) bool
-* AABB:[containsPoint](#aabbcontainspoint)(point) bool
-* AABB:[testCollisionTriangleAABB](#aabbtestcollisiontriangleaabb)(p1, p2, p3) bool
-* AABB:[testRayIntersect](#aabbtestrayintersect)(rayOrigin, rayDirectionInv, rayMaxFraction) bool
-* AABB:[raycast](#aabbraycast)(ray) nil|vector3
-* AABB:[applyScale](#aabbapplyscale)(scale)
+* AABB:[mergeWithAABB](#aabbmergewithaabbaabb)(aabb)
+* AABB:[mergeTwoAABBs](#aabbmergetwoaabbsaabb1-aabb2)(aabb1,aabb2)
+* AABB:[contains](#aabbcontainsaabb)(aabb) bool
+* AABB:[containsPoint](#aabbcontainspointpoint)(point) bool
+* AABB:[testCollisionTriangleAABB](#aabbtestcollisiontriangleaabbp1-p2-p3)(p1, p2, p3) bool
+* AABB:[testRayIntersect](#aabbtestrayintersectrayOrigin-rayDirectionInv-rayMaxFraction)(rayOrigin, rayDirectionInv, rayMaxFraction) bool
+* AABB:[raycast](#aabbraycastray)(ray) nil|vector3
+* AABB:[applyScale](#aabbapplyscalescale)(scale)
 
 
 ---
