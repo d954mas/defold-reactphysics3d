@@ -11,4 +11,4 @@ You can create 6 types of shape:
 
 Inheritance diagram for Collision Shape.
 
-<img src="https://github.com/d954mas/defold-reactphysics3d/blob/master/files/docs/collision_shape_classes.png">
+<img src="https://github.com/d954mas/defold-reactphysics3d/blob/master/docs/collision_shape_classes.png">
