@@ -954,9 +954,11 @@ function Rp3dAABB:contains(aabb) end
 function Rp3dAABB:containsPoint(point) end
 
 --Return true if the AABB of a triangle intersects the AABB.
----@param trianglePoints vector3[] 3 points
+---@param p1 vector3
+---@param p2 vector3
+---@param p3 vector3
 ---@return bool
-function Rp3dAABB:testCollisionTriangleAABB(trianglePoints) end
+function Rp3dAABB:testCollisionTriangleAABB(p1,p2,p3) end
 
 
 --Return true if the ray intersects the AABB.
@@ -1026,6 +1028,12 @@ function rp3d.createConvexMeshShape(mesh) end
 --Destroy a capsule collision shape.
 ---@param convexMeshShape Rp3dConvexMeshShape
 function rp3d.destroyConvexMeshShape(convexMeshShape) end
+
+--Create AABB
+---@param minCoordinates vector3
+---@param maxCoordinates vector3
+function rp3d.createAABB(minCoordinates,maxCoordinates) end
+
 
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",

@@ -6,6 +6,7 @@
 #include "undefine_none.h"
 #include "utils.h"
 #include "objects/collider_userdata.h"
+#include "objects/aabb.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
@@ -375,6 +376,19 @@ static int DestroyHeightFieldShape(lua_State* L){
     return 0;
 }
 
+static int CreateAABB(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    dmVMath::Vector3* dmVMin= dmScript::CheckVector3(L, 1);
+    dmVMath::Vector3* dmVMax= dmScript::CheckVector3(L, 2);
+
+    Vector3 vMin(dmVMin->getX(),dmVMin->getY(),dmVMin->getZ());
+    Vector3 vMax(dmVMax->getX(),dmVMax->getY(),dmVMax->getZ());
+    AABB aabb(vMin,vMax);
+    AABBPush(L,aabb);
+    return 1;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -400,6 +414,7 @@ static const luaL_reg Module_methods[] ={
     {"destroyTriangleMesh", DestroyTriangleMesh},
     {"createHeightFieldShape", CreateHeightFieldShape},
     {"destroyHeightFieldShape", DestroyHeightFieldShape},
+    {"createAABB", CreateAABB},
     {0, 0}
 };
 
