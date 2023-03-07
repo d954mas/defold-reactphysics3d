@@ -12,9 +12,9 @@ rp3d.createCapsuleShape(radius, height)
 ## Methods
 
 * CapsuleShape:[getRadius](#capsuleshapegetradius)() number
-* CapsuleShape:[setRadius](#capsuleshapesetradius)(radius)
+* CapsuleShape:[setRadius](#capsuleshapesetradiusradius)(radius)
 * CapsuleShape:[getHeight](#capsuleshapegetheight)() number
-* CapsuleShape:[setHeight](#capsuleshapesetheight)(height)
+* CapsuleShape:[setHeight](#capsuleshapesetheightheight)(height)
 
 ---
 ### CapsuleShape:getRadius()
