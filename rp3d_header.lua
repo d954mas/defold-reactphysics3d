@@ -968,17 +968,15 @@ function Rp3dAABB:testCollisionTriangleAABB(p1,p2,p3) end
 ---@return bool
 function Rp3dAABB:testRayIntersect(rayOrigin, rayDirectionInv, rayMaxFraction) end
 
---Apply a scale factor to the AABB.
----@param scale vector3
-function Rp3dAABB:applyScale(scale) end
-
-
 --Compute the intersection of a ray and the AABB.
 ---@param ray Rp3dRay infinity ray. Ignore maxFraction. Ignore distance of ray
 ---@return nil|vector3
 function Rp3dAABB:raycast(ray) end
 
 
+--Apply a scale factor to the AABB.
+---@param scale vector3
+function Rp3dAABB:applyScale(scale) end
 
 
 
