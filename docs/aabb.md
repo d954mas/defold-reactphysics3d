@@ -156,6 +156,18 @@ Return true if the AABB of a triangle intersects the AABB.
 * (bool)
 
 ---
+### AABB:testRayIntersect(rayOrigin, rayDirectionInv, rayMaxFraction)
+Return true if the ray intersects the AABB.
+
+**PARAMETERS**
+* `rayOrigin` (vector3)
+* `rayDirectionInv` (vector3) - inverse direction. (1 / rayDirection.x, 1 / rayDirection.y, 1 / rayDirection.z);
+* `rayMaxFraction` (vector3)
+
+**RETURN**
+* (bool)
+
+---
 ### AABB:raycast(ray)
 Compute the intersection of a ray and the AABB. 
 
