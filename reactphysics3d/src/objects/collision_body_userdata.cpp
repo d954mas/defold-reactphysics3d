@@ -121,6 +121,67 @@ static int SetTransform(lua_State *L){
 	return 0;
 }
 
+static int GetTransformPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+
+    Transform transform = userdata->body->getTransform();
+
+    dmVMath::Vector3 dmPosition;
+    const reactphysics3d::Vector3& position = transform.getPosition();
+    dmPosition.setX(position.x);
+    dmPosition.setY(position.y);
+    dmPosition.setZ(position.z);
+
+    dmScript::PushVector3(L, dmPosition);
+	return 1;
+}
+
+static int SetTransformPosition(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Vector3* dmPosition = dmScript::CheckVector3(L, 2);
+
+    Transform transform = userdata->body->getTransform();
+    transform.setPosition(Vector3(dmPosition->getX(),dmPosition->getY(),dmPosition->getZ()));
+
+    userdata->body->setTransform(transform);
+	return 0;
+}
+
+static int GetTransformQuat(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+
+    Transform transform = userdata->body->getTransform();
+
+    dmVMath::Quat dmQuat;
+    const reactphysics3d::Quaternion& quat = transform.getOrientation();
+    dmQuat.setX(quat.x);
+    dmQuat.setY(quat.y);
+    dmQuat.setZ(quat.z);
+    dmQuat.setW(quat.w);
+
+    dmScript::PushQuat(L,dmQuat);
+	return 1;
+}
+
+static int SetTransformQuat(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+    CollisionBodyUserdata *userdata = CollisionBodyUserdataCheck(L, 1);
+    dmVMath::Quat* dmQuat = dmScript::CheckQuat(L, 2);
+
+    Transform transform = userdata->body->getTransform();
+    transform.setOrientation(Quaternion(dmQuat->getX(),dmQuat->getY(),dmQuat->getZ(),dmQuat->getW()));
+
+    userdata->body->setTransform(transform);
+	return 0;
+}
+
 static int AddCollider(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 3);
@@ -723,6 +784,10 @@ static void CollisionBodyUserdataRigidInitMetaTable(lua_State *L){
         {"setUserData",SetUserData},
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
+        {"getTransformPosition",GetTransformPosition},
+        {"setTransformPosition",SetTransformPosition},
+        {"getTransformQuat",GetTransformQuat},
+        {"setTransformQuat",SetTransformQuat},
         {"addCollider",AddCollider},
         {"removeCollider",RemoveCollider},
         {"testPointInside",TestPointInside},
@@ -802,6 +867,10 @@ void CollisionBodyUserdataInitMetaTable(lua_State *L){
         {"setUserData",SetUserData},
         {"getTransform",GetTransform},
         {"setTransform",SetTransform},
+        {"getTransformPosition",GetTransformPosition},
+        {"setTransformPosition",SetTransformPosition},
+        {"getTransformQuat",GetTransformQuat},
+        {"setTransformQuat",SetTransformQuat},
         {"addCollider",AddCollider},
         {"removeCollider ",RemoveCollider},
         {"testPointInside",TestPointInside},

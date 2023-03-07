@@ -55,7 +55,7 @@ function HeightField:generateHeightField()
 
 	for i = 0, NB_POINTS_WIDTH - 1 do
 		for j = 0, NB_POINTS_LENGTH - 1 do
-			local arrayIndex = j * NB_POINTS_WIDTH + i;
+			local arrayIndex = i * NB_POINTS_LENGTH+j;
 			local h = perlinNoise:GetHeight(-width * 0.5 + i, -length * 0.5 + j)
 
 			if (i == 0 and j == 0) then
@@ -65,7 +65,7 @@ function HeightField:generateHeightField()
 
 			min = math.min(min, h)
 			max = math.max(max, h)
-			self.heightfield[arrayIndex + 1] = h
+			self.heightfield[arrayIndex] = h
 		end
 	end
 	self.mMaxHeight = max
@@ -82,7 +82,7 @@ function HeightField:generateGraphicsMesh()
 	for i = 0, NB_POINTS_WIDTH - 1 do
 		for j = 0, NB_POINTS_LENGTH - 1 do
 			local originHeight = -(self.mMaxHeight - self.mMinHeight) * 0.5 - self.mMinHeight;
-			local height = originHeight + self.heightfield[j * NB_POINTS_WIDTH + i + 1];
+			local height = originHeight + self.heightfield[j * NB_POINTS_WIDTH + i];
 			local vertex = vmath.vector3(-(NB_POINTS_WIDTH - 1) * 0.5 + i, height, -(NB_POINTS_LENGTH - 1) * 0.5 + j)
 			self.mVertices[vertexId] = vertex
 			if ((i < NB_POINTS_WIDTH - 1) and (j < NB_POINTS_LENGTH - 1)) then

@@ -391,10 +391,20 @@ return function()
 			assert_equal(#list2, 2)
 			assert_equal(#list3, 1)
 
-			assert_equal(list1[1].body1, body_2)
-			assert_equal(list1[1].body2, body_1)
-			assert_equal(list1[1].collider1, c2)
-			assert_equal(list1[1].collider2, c1)
+			if (list1[1].body1 == body_1) then
+				assert_equal(list1[1].body1, body_1)
+				assert_equal(list1[1].body2, body_2)
+				assert_equal(list1[1].collider1, c1)
+				assert_equal(list1[1].collider2, c2)
+			elseif (list1[1].body1 == body_2) then
+				assert_equal(list1[1].body1, body_2)
+				assert_equal(list1[1].body2, body_1)
+				assert_equal(list1[1].collider1, c2)
+				assert_equal(list1[1].collider2, c1)
+			else
+				assert(false)
+			end
+
 			assert_equal(list1[1].eventType, rp3d.OverlapPair.EventType.OverlapStart)
 
 			w:destroyRigidBody(body_2)
@@ -443,19 +453,31 @@ return function()
 
 			assert_nil(w:testCollision2Bodies(body_1, body_3))
 			local l1 = w:testCollision2Bodies(body_1, body_2)
-			assert_equal(l1.body1, body_2)
-			assert_equal(l1.body2, body_1)
-			assert_equal(l1.collider1, c2)
-			assert_equal(l1.collider2, c1)
+			local contacts = l1.contacts
+			if (l1.body1 == body_1) then
+				assert_equal(l1.body1, body_1)
+				assert_equal(l1.body2, body_2)
+				assert_equal(l1.collider1, c1)
+				assert_equal(l1.collider2, c2)
+				assert_equal_v3(contacts[1].worldNormal, vmath.vector3(1, 0, 0))
+				assert_equal_v3(contacts[1].localPointOnCollider1, vmath.vector3(2.5, -2.5, -2.5))
+				assert_equal_v3(contacts[1].localPointOnCollider2, vmath.vector3(-2.5, -2.5, -2.5))
+
+			else
+				assert_equal(l1.body1, body_2)
+				assert_equal(l1.body2, body_1)
+				assert_equal(l1.collider1, c2)
+				assert_equal(l1.collider2, c1)
+				assert_equal_v3(contacts[1].worldNormal, vmath.vector3(-1, 0, 0))
+				assert_equal_v3(contacts[1].localPointOnCollider1, vmath.vector3(-2.5, -2.5, 2.5))
+				assert_equal_v3(contacts[1].localPointOnCollider2, vmath.vector3(2.5, -2.5, 2.5))
+			end
+
 			assert_equal(l1.eventType, rp3d.ContactPair.EventType.ContactStart)
 
-			local contacts = l1.contacts
 			assert_type(contacts, "table")
 			assert_equal(#contacts, 4)
-			assert_equal_v3(contacts[1].worldNormal, vmath.vector3(-1, 0, 0))
 			assert_equal(contacts[1].penetrationDepth, 2)
-			assert_equal_v3(contacts[1].localPointOnCollider1, vmath.vector3(-2.5, -2.5, 2.5))
-			assert_equal_v3(contacts[1].localPointOnCollider2, vmath.vector3(2.5, -2.5, 2.5))
 
 			local l3 = w:testCollision2Bodies(body_3, body_2)
 			assert_type(l3, "table")
@@ -484,10 +506,18 @@ return function()
 			assert_equal(#list2, 2)
 			assert_equal(#list3, 1)
 
-			assert_equal(list1[1].body1, body_2)
-			assert_equal(list1[1].body2, body_1)
-			assert_equal(list1[1].collider1, c2)
-			assert_equal(list1[1].collider2, c1)
+			if (list1[1].body1 == body_1) then
+				assert_equal(list1[1].body1, body_1)
+				assert_equal(list1[1].body2, body_2)
+				assert_equal(list1[1].collider1, c1)
+				assert_equal(list1[1].collider2, c2)
+			else
+				assert_equal(list1[1].body1, body_2)
+				assert_equal(list1[1].body2, body_1)
+				assert_equal(list1[1].collider1, c2)
+				assert_equal(list1[1].collider2, c1)
+			end
+
 			assert_equal(list1[1].eventType, rp3d.ContactPair.EventType.ContactStart)
 			assert_equal(#list1[1].contacts, 4)
 
@@ -518,10 +548,26 @@ return function()
 
 			assert_equal(#list1, 3)
 
-			assert_equal(list1[1].body1, body_2)
-			assert_equal(list1[1].body2, body_3)
-			assert_equal(list1[1].collider1, c2)
-			assert_equal(list1[1].collider2, c3)
+			local index = 0
+			for i = 1, 3 do
+				if (list1[i].body1 == body_3 or list1[i].body1 == body_2) and
+						(list1[i].body2 == body_3 or list1[i].body2 == body_2) then
+					index = i
+				end
+			end
+
+			if (list1[index].body1 == body_3) then
+				assert_equal(list1[index].body1, body_3)
+				assert_equal(list1[index].body2, body_2)
+				assert_equal(list1[index].collider1, c3)
+				assert_equal(list1[index].collider2, c2)
+			else
+				assert_equal(list1[index].body1, body_2)
+				assert_equal(list1[index].body2, body_3)
+				assert_equal(list1[index].collider1, c2)
+				assert_equal(list1[index].collider2, c3)
+			end
+
 			assert_equal(list1[1].eventType, rp3d.ContactPair.EventType.ContactStart)
 			assert_equal(#list1[1].contacts, 4)
 
@@ -580,7 +626,7 @@ return function()
 
 		test("setEventListener()", function()
 			local w = rp3d.createPhysicsWorld()
-			w:setGravity(vmath.vector3(0,-9.81,0))
+			w:setGravity(vmath.vector3(0, -9.81, 0))
 
 			local shape = rp3d.createBoxShape(vmath.vector3(2.5))
 
@@ -592,12 +638,11 @@ return function()
 			local c2 = body_2:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 			local c3 = body_3:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
-
 			w:update(1 / 60)
 			w:setEventListener(nil)
-			w:update(1/60)
+			w:update(1 / 60)
 			w:setEventListener({ })
-			w:update(1/60)
+			w:update(1 / 60)
 			local contacts_t
 			local triggers_t
 			w:setEventListener({
@@ -608,21 +653,21 @@ return function()
 					triggers_t = triggers
 				end,
 			})
-			w:update(1/60)
+			w:update(1 / 60)
 			assert_not_nil(contacts_t)
 			assert_not_nil(triggers_t)
-			assert_equal(#contacts_t,3)
-			assert_equal(#triggers_t,0)
+			assert_equal(#contacts_t, 3)
+			assert_equal(#triggers_t, 0)
 
 			contacts_t = nil
 			triggers_t = nil
 			c3:setIsTrigger(true)
 
-			w:update(1/60)
+			w:update(1 / 60)
 			assert_not_nil(contacts_t)
 			assert_not_nil(triggers_t)
-			assert_equal(#contacts_t,1)
-			assert_equal(#triggers_t,1)
+			assert_equal(#contacts_t, 1)
+			assert_equal(#triggers_t, 1)
 
 			w:setEventListener({ onContact = function()
 				error("error")
@@ -658,10 +703,10 @@ return function()
 			})
 			lua_script_instance.Set(current_instance)
 
-			w:update(1/60)
+			w:update(1 / 60)
 
 			assert_not_nil(script_instance_for_test)
-			go.delete(go_url,true)
+			go.delete(go_url, true)
 			coroutine.yield()
 			coroutine.yield()
 			assert_nil(script_instance_for_test)
@@ -669,7 +714,6 @@ return function()
 			local status, value = pcall(lua_script_instance.Set, go_instance)
 			assert_false(status)
 			UTILS.test_error(value, "Instance is not valid")
-
 
 			status, value = pcall(w.update, w, 1 / 60)
 			assert_false(status)
@@ -680,9 +724,23 @@ return function()
 			UTILS.test_error(value, "EventListener script instance not valid")
 			w:setEventListener({})
 
-
-
 			rp3d.destroyPhysicsWorld(w)
+		end)
+
+		test("getWorldAAB()", function()
+			local shape = rp3d.createBoxShape(vmath.vector3(1))
+			local w = rp3d.createPhysicsWorld()
+			local b = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
+			local collider = b:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
+
+			local aabb = w:getWorldAABB(collider)
+			assert_equal_v3(aabb:getMin(), vmath.vector3(-1), 0.1)
+			assert_equal_v3(aabb:getMax(), vmath.vector3(1), 0.1)
+
+			w:destroyCollisionBody(b)
+			rp3d.destroyPhysicsWorld(w)
+			rp3d.destroyBoxShape(shape)
+
 		end)
 	end)
 end

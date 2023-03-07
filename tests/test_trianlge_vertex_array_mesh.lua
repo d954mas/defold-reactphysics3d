@@ -1,6 +1,8 @@
 local UTILS = require "tests.test_utils"
 
+---@type Rp3dTriangleVertexArray
 local array = nil
+---@type Rp3dTriangleVertexArray
 local array_normals = nil
 local function init_mesh()
 	local vertices = {}

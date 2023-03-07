@@ -34,7 +34,7 @@ int ConvexPolyhedronShape_GetFace(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
-    uint32 faceIndex = luaL_checknumber(L,2);
+    int faceIndex = luaL_checknumber(L,2);
     if(faceIndex<0 || faceIndex>=shape->getNbFaces()){
         luaL_error(L,"bad faceIndex:%d",faceIndex);
     }
@@ -54,7 +54,7 @@ int ConvexPolyhedronShape_GetVertex(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
-    uint32 vertexIndex = luaL_checknumber(L,2);
+    int vertexIndex = luaL_checknumber(L,2);
     if(vertexIndex<0 || vertexIndex>=shape->getNbVertices()){
         luaL_error(L,"bad vertexIndex:%d",vertexIndex);
     }
@@ -66,7 +66,7 @@ int ConvexPolyhedronShape_GetVertexPosition(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
-    uint32 vertexIndex = luaL_checknumber(L,2);
+    int vertexIndex = luaL_checknumber(L,2);
     if(vertexIndex<0 || vertexIndex>=shape->getNbVertices()){
         luaL_error(L,"bad vertexIndex:%d",vertexIndex);
     }
@@ -79,7 +79,7 @@ int ConvexPolyhedronShape_GetFaceNormal(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
-    uint32 faceIndex = luaL_checknumber(L,2);
+    int faceIndex = luaL_checknumber(L,2);
     if(faceIndex<0 || faceIndex>=shape->getNbFaces()){
         luaL_error(L,"bad faceIndex:%d",faceIndex);
     }
@@ -101,7 +101,7 @@ int ConvexPolyhedronShape_GetHalfEdge(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConvexPolyhedronShape* shape = ConvexPolyhedronShapeCheck(L,1);
-    uint32 edgeIndex = luaL_checknumber(L,2);
+    int edgeIndex = luaL_checknumber(L,2);
     if(edgeIndex<0 || edgeIndex>=shape->getNbHalfEdges()){
         luaL_error(L,"bad edgeIndex:%d",edgeIndex);
     }

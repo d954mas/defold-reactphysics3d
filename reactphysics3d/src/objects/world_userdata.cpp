@@ -2,6 +2,7 @@
 #include "objects/collision_body_userdata.h"
 #include "objects/debug_renderer_userdata.h"
 #include "objects/collider_userdata.h"
+#include "objects/aabb.h"
 #include "static_hash.h"
 #include "utils.h"
 
@@ -562,7 +563,7 @@ static int GetCollisionBody(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     WorldUserdata *data = WorldUserdataCheck(L, 1);
-    uint32 idx = luaL_checknumber(L,2);
+    int idx = luaL_checknumber(L,2);
     if(idx>=data->world->getNbCollisionBodies() || idx <0){
         luaL_error(L,"bad idx:%d",idx);
     }
@@ -574,7 +575,7 @@ static int GetRigidBody(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     WorldUserdata *data = WorldUserdataCheck(L, 1);
-    uint32 idx = luaL_checknumber(L,2);
+    int idx = luaL_checknumber(L,2);
     if(idx>=data->world->getNbRigidBodies() || idx <0){
         luaL_error(L,"bad idx:%d",idx);
     }
@@ -608,6 +609,16 @@ static int SetEventListener(lua_State *L){
    return 0;
 }
 
+static int GetWorldAABB(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    WorldUserdata *data = WorldUserdataCheck(L, 1);
+    ColliderUserdata *collider = ColliderUserdataCheck(L, 2);
+    AABB aabb = data->world->getWorldAABB(collider->collider);
+    AABBPush(L,aabb);
+	return 1;
+}
+
 static int ToString(lua_State *L){
     check_arg_count(L, 1);
 
@@ -623,8 +634,12 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getName",GetName},
         {"getGravity",GetGravity},
         {"setGravity",SetGravity},
+        {"isGravityEnabled",IsGravityEnabled},
+        {"setIsGravityEnabled",SetIsGravityEnabled},
         {"getNbIterationsVelocitySolver",GetNbIterationsVelocitySolver},
+        {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
         {"getNbIterationsPositionSolver",GetNbIterationsPositionSolver},
+        {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
         {"isSleepingEnabled",IsSleepingEnabled},
         {"enableSleeping",EnableSleeping},
         {"getTimeBeforeSleep",GetTimeBeforeSleep},
@@ -634,14 +649,12 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"getSleepAngularVelocity",GetSleepAngularVelocity},
         {"setSleepAngularVelocity",SetSleepAngularVelocity},
         {"update",Update},
-        {"setNbIterationsVelocitySolver",SetNbIterationsVelocitySolver},
-        {"setNbIterationsPositionSolver",SetNbIterationsPositionSolver},
         {"setContactsPositionCorrectionTechnique",SetContactsPositionCorrectionTechnique},
         {"enableDisableJoints",EnableDisableJoints},
-        {"isGravityEnabled",IsGravityEnabled},
-        {"setIsGravityEnabled",SetIsGravityEnabled},
         {"getNbCollisionBodies",GetNbCollisionBodies},
+        {"getCollisionBody",GetCollisionBody},
         {"getNbRigidBodies",GetNbRigidBodies},
+        {"getRigidBody",GetRigidBody},
         {"getIsDebugRenderingEnabled",GetIsDebugRenderingEnabled},
         {"setIsDebugRenderingEnabled",SetIsDebugRenderingEnabled},
         {"createCollisionBody",CreateCollisionBody},
@@ -656,9 +669,8 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testCollision2Bodies",TestCollision2Bodies},
         {"testCollisionBodyList",TestCollisionBodyList},
         {"testCollisionList",TestCollisionList},
-        {"getCollisionBody",GetCollisionBody},
-        {"getRigidBody",GetRigidBody},
         {"setEventListener",SetEventListener},
+        {"getWorldAABB",GetWorldAABB},
         {"__tostring",ToString},
         { 0, 0 }
     };

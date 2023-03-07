@@ -100,6 +100,54 @@ return function()
 		test("tostring()", function()
 			assert_equal(tostring(mesh):sub(1, 20), "rp3d::PolyhedronMesh")
 		end)
+
+		test("getNbVertices()", function()
+			assert_equal(mesh:getNbVertices(), 8)
+		end)
+
+		test("getVertex()", function()
+			local status, error = pcall(mesh.getVertex, mesh, -1)
+			assert_false(status)
+			UTILS.test_error(error, "bad vertexIndex:-1")
+			status, error = pcall(mesh.getVertex, mesh, 8)
+			assert_false(status)
+			UTILS.test_error(error, "bad vertexIndex:8")
+
+			local vertex = mesh:getVertex(0)
+			assert_equal_v3(vertex,vmath.vector3(-3,-3,3))
+
+			vertex = mesh:getVertex(7)
+			assert_equal_v3(vertex,vmath.vector3(-3,3,-3))
+
+
+		end)
+
+		test("getNbFaces()", function()
+			assert_equal(mesh:getNbFaces(), 6)
+		end)
+
+		test("getFaceNormal()", function()
+			local status, error = pcall(mesh.getFaceNormal, mesh, -1)
+			assert_false(status)
+			UTILS.test_error(error, "bad faceIndex:-1")
+			status, error = pcall(mesh.getFaceNormal, mesh, 6)
+			assert_false(status)
+			UTILS.test_error(error, "bad faceIndex:6")
+
+			local position = mesh:getFaceNormal(0)
+			assert_equal_v3(position, vmath.vector3(0, -1, 0))
+
+			position = mesh:getFaceNormal(5)
+			assert_equal_v3(position, vmath.vector3(-1, 0, 0))
+		end)
+
+		test("getCentroid()", function()
+			assert_equal_v3(mesh:getCentroid(), vmath.vector3(0))
+		end)
+
+		test("getVolume()", function()
+			assert_equal_float(mesh:getVolume(),216)
+		end)
 	end)
 
 end

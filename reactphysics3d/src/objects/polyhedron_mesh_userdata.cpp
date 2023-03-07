@@ -35,10 +35,79 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
+
+static int GetNbVertices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    lua_pushnumber(L,mesh->mesh->getNbVertices());
+    return 1;
+}
+
+static int GetVertex(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    int vertexIndex = luaL_checknumber(L,2);
+    if(vertexIndex<0 || vertexIndex>=mesh->mesh->getNbVertices()){
+        luaL_error(L,"bad vertexIndex:%d",vertexIndex);
+    }
+    Vector3 v3 = mesh->mesh->getVertex(vertexIndex);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
+
+static int GetNbFaces(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    lua_pushnumber(L,mesh->mesh->getNbFaces());
+    return 1;
+}
+
+static int GetFaceNormal(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    int faceIndex = luaL_checknumber(L,2);
+    if(faceIndex<0 || faceIndex>=mesh->mesh->getNbFaces()){
+        luaL_error(L,"bad faceIndex:%d",faceIndex);
+    }
+    Vector3 v3 = mesh->mesh->getFaceNormal(faceIndex);
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
+
+static int GetCentroid(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    Vector3 v3 = mesh->mesh->getCentroid();
+    dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+    dmScript::PushVector3(L, dmV3);
+    return 1;
+}
+
+static int GetVolume(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    PolyhedronMeshUserdata *mesh = PolyhedronMeshUserdataCheck(L, 1);
+    lua_pushnumber(L,mesh->mesh->getVolume());
+    return 1;
+}
+
 void PolyhedronMeshUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
     luaL_Reg functions[] = {
+        {"getNbVertices",GetNbVertices},
+        {"getVertex",GetVertex },
+        {"getNbFaces",GetNbFaces },
+        {"getFaceNormal",GetFaceNormal },
+        {"getCentroid",GetCentroid },
+        {"getVolume",GetVolume  },
         {"__tostring",ToString},
         { 0, 0 }
     };

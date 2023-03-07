@@ -6,6 +6,7 @@
 #include "undefine_none.h"
 #include "utils.h"
 #include "objects/collider_userdata.h"
+#include "objects/aabb.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/box_shape_userdata.h"
@@ -284,7 +285,7 @@ static int CreateHeightFieldShape(lua_State* L){
     decimal maxHeight = luaL_checknumber(L,4);
 
     if (!lua_istable(L, 5)) luaL_error(L,"data should be table");
-    int dataSize = luaL_getn(L, 5);
+    int dataSize = luaL_getn(L, 5)+1;
     if(dataSize!= nbGridRows*nbGridColumns) luaL_error(L,"bad data size.Need:%d. Get:%d",nbGridRows*nbGridColumns,dataSize);
 
     HeightFieldShape::HeightDataType dataType =  HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE;
@@ -324,7 +325,7 @@ static int CreateHeightFieldShape(lua_State* L){
         case HeightFieldShape::HeightDataType::HEIGHT_FLOAT_TYPE:{
             float *dataFloat = new float[dataSize];
             for(int i=0;i<dataSize;++i){
-                lua_rawgeti(L,5,i+1);
+                lua_rawgeti(L,5,i);
                 dataFloat[i] = luaL_checknumber(L,-1);
                 lua_pop(L,1);
             }
@@ -375,6 +376,19 @@ static int DestroyHeightFieldShape(lua_State* L){
     return 0;
 }
 
+static int CreateAABB(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    dmVMath::Vector3* dmVMin= dmScript::CheckVector3(L, 1);
+    dmVMath::Vector3* dmVMax= dmScript::CheckVector3(L, 2);
+
+    Vector3 vMin(dmVMin->getX(),dmVMin->getY(),dmVMin->getZ());
+    Vector3 vMax(dmVMax->getX(),dmVMax->getY(),dmVMax->getZ());
+    AABB aabb(vMin,vMax);
+    AABBPush(L,aabb);
+    return 1;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -400,6 +414,7 @@ static const luaL_reg Module_methods[] ={
     {"destroyTriangleMesh", DestroyTriangleMesh},
     {"createHeightFieldShape", CreateHeightFieldShape},
     {"destroyHeightFieldShape", DestroyHeightFieldShape},
+    {"createAABB", CreateAABB},
     {0, 0}
 };
 

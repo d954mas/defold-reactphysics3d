@@ -44,6 +44,7 @@ embedded_instances {
   "  type: \"collectionfactory\"\n"
   "  data: \"prototype: \\\"/assets/meshes/box.collection\\\"\\n"
   "load_dynamically: false\\n"
+  "dynamic_prototype: false\\n"
   "\"\n"
   "  position {\n"
   "    x: 0.0\n"

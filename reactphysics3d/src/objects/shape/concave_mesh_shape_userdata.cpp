@@ -38,7 +38,34 @@ int ConcaveMeshShape_GetNbTriangles(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 2);
     ConcaveMeshShape* shape = ConcaveMeshShapeCheck(L,1);
-    lua_pushnumber(L,shape->getNbTriangles(luaL_checknumber(L,2)));
+    int subPart = luaL_checknumber(L,2);
+    if (subPart<0 || subPart >= shape->getNbSubparts()){
+        luaL_error(L,"Bad subPart:%d. Subparts:%d",subPart,shape->getNbSubparts());
+    }
+    lua_pushnumber(L,shape->getNbTriangles(subPart));
+    return 1;
+}
+
+int ConcaveMeshShape_GetTriangleVerticesIndices(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+    ConcaveMeshShape* shape = ConcaveMeshShapeCheck(L,1);
+    int subPart = luaL_checknumber(L,2);
+    if (subPart<0 || subPart >= shape->getNbSubparts()){
+        luaL_error(L,"Bad subPart:%d. Subparts:%d",subPart,shape->getNbSubparts());
+    }
+    int triangleIndex = luaL_checknumber(L,3);
+    if (triangleIndex<0 || triangleIndex >= shape->getNbTriangles(subPart)){
+        luaL_error(L,"Bad triangle:%d. Triangles:%d",triangleIndex,shape->getNbTriangles(subPart));
+    }
+    uint32 result[3];
+    shape->getTriangleVerticesIndices(subPart,triangleIndex,result);
+
+    lua_newtable(L);
+    for(int i=0;i<3;++i){
+        lua_pushnumber(L,result[i]);
+        lua_rawseti(L, -2, i+1);
+    }
     return 1;
 }
 

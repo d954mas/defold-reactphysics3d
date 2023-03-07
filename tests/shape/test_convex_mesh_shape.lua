@@ -70,7 +70,6 @@ local function init_mesh()
 	mesh = rp3d.createPolyhedronMesh(vertices, indices, polygonFaces)
 
 	shape = rp3d.createConvexMeshShape(mesh)
-
 end
 
 local function dispose_mesh()
@@ -93,13 +92,18 @@ return function()
 			assert_not_nil(shape)
 			dispose_mesh()
 			init_mesh()
-			assert_equal(shape:getName(),rp3d.CollisionShapeName.CONVEX_MESH)
+			assert_equal(shape:getName(), rp3d.CollisionShapeName.CONVEX_MESH)
+
+			local shape_scaling = rp3d.createConvexMeshShape(mesh, vmath.vector3(2))
+			assert_equal_v3(shape_scaling:getScale(), vmath.vector3(2))
+
+			rp3d.destroyConvexMeshShape(shape_scaling)
 		end)
 
 		test("set/get Scale()", function()
 			UTILS.test_method_get_set(shape, "Scale",
 					{ v3 = true,
-					  values = { vmath.vector3(1), vmath.vector3(3), vmath.vector3(1,2,3) }
+					  values = { vmath.vector3(1), vmath.vector3(3), vmath.vector3(1, 2, 3) }
 					})
 		end)
 	end)

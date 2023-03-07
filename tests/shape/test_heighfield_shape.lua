@@ -1,12 +1,11 @@
 local UTILS = require "tests.test_utils"
 local PERLIN = require "libs.perlin"
 
-
-local NB_POINTS_WIDTH = 100;
+local NB_POINTS_WIDTH = 90;
 local NB_POINTS_LENGTH = 100;
 local DATA = {}
 
----@type Rp3dCollisionShape
+---@type Rp3dHeightFieldShape
 local shape = nil
 local function init_shape()
 	DATA = {}
@@ -21,12 +20,12 @@ local function init_shape()
 	local randomseed = 23;
 	local perlinNoise = PERLIN(persistence, frequency, amplitude, octaves, randomseed);
 
-	for i = 1, NB_POINTS_WIDTH do
-		for j = 1, NB_POINTS_LENGTH do
-			local arrayIndex = (j - 1) * NB_POINTS_WIDTH + i;
-			local h = perlinNoise:GetHeight( -width * 0.5 + i, -length * 0.5 + j)
+	for i = 0, NB_POINTS_WIDTH-1 do
+		for j = 0, NB_POINTS_LENGTH-1 do
+			local arrayIndex = i * NB_POINTS_LENGTH+j;
+			local h = perlinNoise:GetHeight(-width * 0.5 + i, -length * 0.5 + j)
 
-			if (i == 1 and j == 1) then
+			if (i == 0 and j == 0) then
 				min = h
 				max = h
 			end
@@ -64,6 +63,42 @@ return function()
 			assert_false(status)
 			UTILS.test_error(error, "rp3d::CollisionShape was destroyed")
 			init_shape()
+		end)
+
+		test("getNbRows()", function()
+			assert_equal(shape:getNbRows(), 100)
+		end)
+
+		test("getNbColumns()", function()
+			assert_equal(shape:getNbColumns(), 90)
+		end)
+
+		test("getVertexAt()", function()
+			assert_type(shape:getVertexAt(0, 0), "userdata")
+			assert_type(shape:getVertexAt(89, 99), "userdata")
+			local status, error = pcall(shape.getVertexAt,shape,90, 99)
+			assert_false(status)
+			UTILS.test_error(error, 'Bad x:90. Columns:90.')
+
+			status, error = pcall(shape.getVertexAt,shape,89, 100)
+			assert_false(status)
+			UTILS.test_error(error, 'Bad y:100. Rows:100.')
+		end)
+
+		test("getHeightAt()", function()
+			assert_type(shape:getHeightAt(0, 0), "number")
+			assert_type(shape:getHeightAt(89, 99), "number")
+			local status, error = pcall(shape.getHeightAt,shape,90, 99)
+			assert_false(status)
+			UTILS.test_error(error, 'Bad x:90. Columns:90.')
+
+			status, error = pcall(shape.getHeightAt,shape,89, 100)
+			assert_false(status)
+			UTILS.test_error(error, 'Bad y:100. Rows:100.')
+		end)
+
+		test("getHeightDataType()", function()
+			assert_equal(shape:getHeightDataType(),rp3d.HeightDataType.HEIGHT_FLOAT_TYPE)
 		end)
 
 

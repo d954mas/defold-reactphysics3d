@@ -149,24 +149,14 @@ int AABB_ContainsPoint(lua_State *L){
 
 int AABB_TestCollisionTriangleAABB(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
-    check_arg_count(L, 2);
+    check_arg_count(L, 4);
     AABBLua *aabb = AABBCheck(L, 1);
-    if (!lua_istable(L, 2)) {
-        luaL_error(L,"variable should be table");
-    }
-    int n = luaL_getn(L, 2);  /* get size of table */
-    if(n!=3){
-        luaL_error(L, "Need 3 points. Get %d",n);
-    }
-
     Vector3 trianglePoints[3];
-    for (int i=1; i<=n; i++) {
-        lua_rawgeti(L, 2, i); //get entity
-        Vectormath::Aos::Vector3 *point = dmScript::CheckVector3(L, -1);
+    for (int i=1; i<=3; i++) {
+        Vectormath::Aos::Vector3 *point = dmScript::CheckVector3(L, i+1);
         trianglePoints[i-1].x = point->getX();
         trianglePoints[i-1].y = point->getY();
         trianglePoints[i-1].z = point->getZ();
-        lua_pop(L,1);
     }
     lua_pushboolean(L,aabb->aabb.testCollisionTriangleAABB(trianglePoints));
     return 1;

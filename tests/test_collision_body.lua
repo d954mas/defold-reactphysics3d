@@ -93,6 +93,40 @@ return function()
 			end
 		end)
 
+		test("get/set TransformPosition()", function()
+			for _, body in ipairs(bodies) do
+				local initTransform = body:getTransform()
+				assert_not_nil(initTransform)
+				assert_equal_v3(initTransform.position, vmath.vector3(0, 0, 0))
+				assert_equal_quat(initTransform.quat, vmath.quat())
+				body:setTransform({ position = vmath.vector3(1, 2, 3), quat = vmath.quat_rotation_z(math.pi) })
+				local position = body:getTransformPosition()
+				assert_equal_v3(position, vmath.vector3(1, 2, 3))
+
+				body:setTransformPosition(vmath.vector3(5,6,7))
+				position = body:getTransformPosition()
+				assert_equal_v3(position, vmath.vector3(5, 6, 7))
+
+			end
+		end)
+
+		test("get/set TransformQuat()", function()
+			for _, body in ipairs(bodies) do
+				local initTransform = body:getTransform()
+				assert_not_nil(initTransform)
+				assert_equal_v3(initTransform.position, vmath.vector3(0, 0, 0))
+				assert_equal_quat(initTransform.quat, vmath.quat())
+				body:setTransform({ position = vmath.vector3(1, 2, 3), quat = vmath.quat_rotation_z(math.pi) })
+				local quat = body:getTransformQuat()
+				assert_equal_quat(quat, vmath.quat_rotation_z(math.pi))
+
+				body:setTransformQuat(vmath.quat_rotation_z(math.pi/2))
+				quat = body:getTransformQuat()
+				assert_equal_quat(quat, vmath.quat_rotation_z(math.pi/2))
+
+			end
+		end)
+
 		test("addCollider()", function()
 			for _, b in ipairs(bodies) do
 				local shape = rp3d.createBoxShape(vmath.vector3(2))

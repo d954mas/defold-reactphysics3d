@@ -7,7 +7,8 @@
 
 #define RP3D_CONCAVE_MESH_SHAPE_META_FUNCTIONS \
 {"getNbSubparts", ConcaveMeshShape_GetNbSubparts},\
-{"getNbTriangles", ConcaveMeshShape_GetNbTriangles}\
+{"getNbTriangles", ConcaveMeshShape_GetNbTriangles},\
+{"getTriangleVerticesIndices", ConcaveMeshShape_GetTriangleVerticesIndices}\
 
 namespace rp3dDefold {
     int ConcaveMeshShape_GetNbSubparts(lua_State *L);

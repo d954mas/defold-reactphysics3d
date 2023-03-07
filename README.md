@@ -23,14 +23,14 @@ It will help me make more libraries for defold.
 
 Try the [demo](https://d954mas.github.io/defold-reactphysics3d)
 
-
+---
 ## WARNING
 
 1. This is c++ library. I add some function parameters checks but you can crash it in some cases.
 
 2. Call destroy. Or you will have memory leaks.
 
-3. rp3d.destroyPhysicsWorld will destroy and free all used memory,except shapes.
+3. rp3d.destroyPhysicsWorld will destroy and free all used memory by world objects. But for example shapes will not be free.
 
 4. Destroy shapes after destroy all objects that use shape
 or you will get crash.
@@ -43,13 +43,10 @@ self.world:destroyCollisionBody(self.body)
 self.world:destroyCollisionBody(self.body)
 rp3d.destroyBoxShape(self.shape)
 ```
-
+---
 ## TODO
-1.Add ConcaveShapes
+1.Add Joints
 
-2.Add Joints
-
-3.Better Docs
 
 ## Limits
 1)Defold vector instead of rp3d::Vector
@@ -58,6 +55,7 @@ rp3d.destroyBoxShape(self.shape)
 
 3)no Transform userdata. Use table with vector3 and quaternion
 
+---
 ## Setup
 
 ### Dependency
@@ -68,7 +66,57 @@ You can use the **rp3d** extension in your own project by adding this project as
 
 Or point to the ZIP file of a [specific release](https://github.com/d954mas/defold-reactphysics3d/releases).
 
-## Documentaion
-1.[ReactPhysics3D  doc](https://www.reactphysics3d.com/documentation.html)
+### Emmylua
+Make lua file with Emmylua annotations. Use it for autocomplete.
 
-2.[Emmylua header](https://github.com/d954mas/defold-reactphysics3d/blob/master/rp3d_header.lua)
+[Emmylua header](https://github.com/d954mas/defold-reactphysics3d/blob/master/rp3d_header.lua)
+
+---
+## How to use
+1.[ReactPhysics3D c++ manual](https://www.reactphysics3d.com/documentation.html)
+
+User manual and api for c++ library. Read it first
+
+2.[Lua API](#api)
+
+3.[Examples](https://github.com/d954mas/defold-reactphysics3d/tree/master/main/test_scenes)
+
+Look at examples. You can download this repository and run them.
+
+4.[Tests](https://github.com/d954mas/defold-reactphysics3d/tree/master/tests)
+
+Every function have a test. You can use test as example.
+
+---
+## Lua API
+
+[rp3d](docs/rp3d.md)
+
+[AABB](docs/aabb.md)\
+[BoxShape](docs/shapes/box_shape.md)\
+[CapsuleShape](docs/shapes/capsule_shape.md)\
+[Collider](docs/collider.md)\
+[CollisionBody](docs/collision_body.md)\
+[CollisionShape](docs/shapes/collision_shape.md)\
+[ConcaveMeshShape](docs/shapes/concave_mesh_shape.md)\
+[ConcaveShape](docs/shapes/concave_shape.md)\
+[ConvexMeshShape](docs/shapes/convex_mesh_shape.md)\
+[ConvexPolyhedronShape](docs/shapes/convex_polyhedron_shape.md)\
+[ConvexShape](docs/shapes/convex_shape.md)\
+[DebugRenderer](docs/debug_renderer.md)\
+[EventListener](docs/world.md#eventlistener)\
+[HalfEdgeStructure](docs/half_edge_structure.md)\
+[HeightFieldShape](docs/shapes/heightfield_shape.md)\
+[Material](docs/material.md)\
+[PhysicsCommon](docs/rp3d.md) rp3d in lua\
+[PhysicsWorld](docs/world.md)\
+[PolyhedronMesh](docs/polyhedron_mesh.md)\
+[Ray](docs/ray.md)\
+[RaycastCallback](docs/world.md#raycastcallback)\
+[RaycastInfo](docs/raycast_info.md)\
+[RigidBody](docs/rigid_body.md)\
+[SphereShape](docs/shapes/sphere_shape.md)\
+[Transform](docs/transform.md)\
+[TriangleMesh](docs/triangle_mesh.md)\
+[TriangleVertexArray](docs/triangle_vertex_array.md)\
+

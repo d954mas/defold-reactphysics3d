@@ -10,6 +10,17 @@ return function()
 
 		end)
 
+		test("createAABB()", function()
+			local aabb = rp3d.createAABB(vmath.vector3(0),vmath.vector3(1))
+			assert_equal("rp3d::AABB", tostring(aabb):sub(1, 10))
+			assert_equal_v3(aabb:getMin(),vmath.vector3())
+			assert_equal_v3(aabb:getMax(),vmath.vector3(1))
+
+			local status,error = pcall(rp3d.createAABB)
+			assert_false(status)
+			UTILS.test_error(error,"function requires 2 arguments. Got 0.")
+		end)
+
 		test("getAABB()", function()
 			local box = rp3d.createBoxShape(vmath.vector3(1))
 			local pos = vmath.vector3()
@@ -175,16 +186,12 @@ return function()
 			local pos = vmath.vector3()
 			local quat = vmath.quat()
 			local aabb = box:computeAABB({position = pos, quat = quat})
-			local status, error = pcall(aabb.testCollisionTriangleAABB, aabb, 2)
+			local status, error = pcall(aabb.testCollisionTriangleAABB, aabb)
 			assert_false(status)
-			UTILS.test_error(error, "variable should be table")
+			UTILS.test_error(error, "function requires 4 arguments. Got 1.")
 
-			status, error = pcall(aabb.testCollisionTriangleAABB, aabb, { vmath.vector3() })
-			assert_false(status)
-			UTILS.test_error(error, "Need 3 points. Get 1")
-
-			assert_true(aabb:testCollisionTriangleAABB({ vmath.vector3(0, 0, 0), vmath.vector3(0.5, 0, 0), vmath.vector3(0.5, 0.5, 0) }))
-			assert_false(aabb:testCollisionTriangleAABB({ vmath.vector3(-1, -2, -3), vmath.vector3(-2, -2, -3), vmath.vector3(-1, -2, -2) }))
+			assert_true(aabb:testCollisionTriangleAABB( vmath.vector3(0, 0, 0), vmath.vector3(0.5, 0, 0), vmath.vector3(0.5, 0.5, 0) ))
+			assert_false(aabb:testCollisionTriangleAABB( vmath.vector3(-1, -2, -3), vmath.vector3(-2, -2, -3), vmath.vector3(-1, -2, -2) ))
 
 			rp3d.destroyBoxShape(box)
 		end)

@@ -31,9 +31,16 @@ local WorldSettings = {
 	-- than the value bellow, the manifold are considered to be similar.
 	cosAngleSimilarContactManifold = 0.95,
 }
----@class Rp3dTriangleVertexArray
----@field vertices number[]
----@field indices number[]
+
+--Represent a polygon face of the polyhedron.
+---@class Rp3dPolygonFace
+local Rp3dPolygonFace = {
+	--Number of vertices in the polygon face.
+	nbVertices = 4;
+	--Index of the first vertex of the polygon face inside the array with all vertex indices.
+	indexBase = 0;
+}
+
 
 
 --The ray goes from point1 to point1 + maxFraction * (point2 - point1).
@@ -44,6 +51,24 @@ local Rp3dRay = {
 	point2 = vmath.vector3(),
 	maxFraction = 0 --[0-1] if nil use 1.
 }
+
+---@class Rp3dEventListener
+local Rp3dEventListener = {
+	---@param contacts Rp3dContactPair[]
+	onContact = function(contacts)
+
+	end,
+	---@param triggers Rp3dOverlapPair[]
+	onTrigger = function(triggers)
+
+	end
+}
+
+---@class Rp3dRaycastCallback
+---@param info Rp3dRaycastInfo
+local Rp3dRaycastCallback = function(info)
+	return info.hitFraction
+end
 
 ---@class Rp3dRaycastInfo
 ---@field worldPoint vector3 Hit point in world-space coordinates.
@@ -112,6 +137,32 @@ local Rp3dMaterial = {
 ---@class Rp3dPolyhedronMesh
 local Rp3dPolyhedronMesh = {}
 
+--Return the number of vertices.
+---@return number
+function Rp3dPolyhedronMesh:getNbVertices() end
+
+--Return a vertex
+---@param index number
+---@return vector3
+function Rp3dPolyhedronMesh:getVertex(index) end
+
+--Return the number of faces.
+---@return number
+function Rp3dPolyhedronMesh:getNbFaces() end
+
+--Return a face normal.
+---@param faceIndex number
+---@return vector3
+function Rp3dPolyhedronMesh:getFaceNormal(faceIndex) end
+
+--Return the centroid of the polyhedron
+---@return vector3
+function Rp3dPolyhedronMesh:getCentroid() end
+
+--Compute and return the volume of the polyhedron.
+---@return number
+function Rp3dPolyhedronMesh:getVolume() end
+
 ---@class Rp3dCollider
 local Collider = {}
 
@@ -133,7 +184,6 @@ function Collider:setUserData(userdata) end
 --Return the local to parent body transform.
 ---@return Rp3dTransform
 function Collider:getLocalToBodyTransform() end
-
 
 --Set the local to parent body transform.
 ---@param transform Rp3dTransform
@@ -157,6 +207,8 @@ function Collider:testPointInside(worldPoint) end
 ---@param worldAABB Rp3dAABB
 function Collider:testAABBOverlap(worldAABB) end
 
+---@param ray Rp3dRay
+---@return Rp3dRaycastInfo|nil nil if no hit point
 function Collider:raycast(ray) end
 
 --Return the broad-phase id.
@@ -184,7 +236,6 @@ function Collider:getIsTrigger() end
 --Set whether the collider is a trigger.
 ---@param isTrigger boolean
 function Collider:setIsTrigger(isTrigger) end
-
 
 --	Return material properties of the collider.
 ---@return Rp3dMaterial
@@ -242,6 +293,20 @@ function CollisionBody:getTransform() end
 --Set the current position and orientation.
 ---@param transform Rp3dTransform
 function CollisionBody:setTransform(transform) end
+
+--Return the current position.
+---@return vector3
+function CollisionBody:getTransformPosition() end
+
+---@param position vector3
+function CollisionBody:setTransformPosition(position) end
+
+--Return the current rotation.
+---@return quaternion
+function CollisionBody:getTransformQuat() end
+
+---@param quat quaternion
+function CollisionBody:setTransformQuat(quat) end
 
 --Create a new collider and add it to the body.
 --A collider is an object with a collision shape that is attached to a body.
@@ -514,64 +579,6 @@ function DebugRenderer:reset() end
 ---@class Rp3dPhysicsWorld
 local PhysicsWorld = {}
 
-
---[[
-CollisionDispatch & 	getCollisionDispatch ()
-	 Get the collision dispatch configuration.
-
-void 	raycast (const Ray &ray, RaycastCallback *raycastCallback, unsigned short raycastWithCategoryMaskBits=0xFFFF) const
-	 Ray cast method.
-
-bool 	testOverlap (CollisionBody *body1, CollisionBody *body2)
-	 Return true if two bodies overlap (collide)
-
-void 	testOverlap (CollisionBody *body, OverlapCallback &overlapCallback)
-	 Report all the bodies that overlap (collide) with the body in parameter.
-
-void 	testOverlap (OverlapCallback &overlapCallback)
-	 Report all the bodies that overlap (collide) in the world.
-
-void 	testCollision (CollisionBody *body1, CollisionBody *body2, CollisionCallback &callback)
-	 Test collision and report contacts between two bodies.
-
-void 	testCollision (CollisionBody *body, CollisionCallback &callback)
-	 Test collision and report all the contacts involving the body in parameter.
-
-void 	testCollision (CollisionCallback &callback)
-	 Test collision and report contacts between each colliding bodies in the world.
-
-MemoryManager & 	getMemoryManager ()
-	 Return a reference to the memory manager of the world.
-
-AABB 	getWorldAABB (const Collider *collider) const
-	 Return the current world-space AABB of given collider.
-
-Joint * 	createJoint (const JointInfo &jointInfo)
-	 Create a joint between two bodies in the world and return a pointer to the new joint.
-
-void 	destroyJoint (Joint *joint)
-	 Destroy a joint.
-void 	setEventListener (EventListener *eventListener)
-	 Set an event listener object to receive events callbacks.
-
-uint32 	getNbCollisionBodies () const
-	 Return the number of CollisionBody in the physics world.
-
-const CollisionBody * 	getCollisionBody (uint32 index) const
-	 Return a constant pointer to a given CollisionBody of the world.
-
-CollisionBody * 	getCollisionBody (uint32 index)
-	 Return a pointer to a given CollisionBody of the world.
-
-
-const RigidBody * 	getRigidBody (uint32 index) const
-	 Return a constant pointer to a given RigidBody of the world.
-
-RigidBody * 	getRigidBody (uint32 index)
-	 Return a pointer to a given RigidBody of the world.
-
---]]
-
 --Return the name of the world.
 function PhysicsWorld:getName() end
 
@@ -698,9 +705,9 @@ function PhysicsWorld:testOverlap2Bodies(body1, body2) end
 --Return all the bodies that overlap (collide) with the body in parameter.
 --Use this method if you are not interested in contacts but if you simply want to know which bodies overlap with the body in parameter.
 --If you want to get the contacts, you need to use the testCollisionBodyList() method instead.
----@param body1 Rp3dCollisionBody
+---@param body Rp3dCollisionBody
 ---@return Rp3dOverlapPair[]
-function PhysicsWorld:testOverlapBodyList(body1) end
+function PhysicsWorld:testOverlapBodyList(body) end
 
 --Return all the bodies that overlap (collide) in the world.
 --Use this method if you are not interested in contacts but if you simply want to know which bodies overlap.
@@ -714,7 +721,7 @@ function PhysicsWorld:testOverlapList() end
 --you can use the testOverlap() method instead.
 ---@param body1 Rp3dCollisionBody
 ---@return Rp3dContactPair|nil
-function PhysicsWorld:testCollision2Bodies() end
+function PhysicsWorld:testCollision2Bodies(body1, body2) end
 
 
 --Test collision and report all the contacts involving the body in parameter.
@@ -742,13 +749,26 @@ function PhysicsWorld:getCollisionBody(index) end
 ---@return Rp3dRigidBody
 function PhysicsWorld:getRigidBody(index) end
 
+---@param ray Rp3dRay
+---@param cb Rp3dRaycastCallback
+---@param categoryMaskBits number|nil
+function PhysicsWorld:raycast(ray, cb, categoryMaskBits) end
+
+---@param eventListener Rp3dEventListener|nil
+function PhysicsWorld:setEventListener(eventListener) end
+
+---@param collider Rp3dCollider
+function PhysicsWorld:getWorldAABB(collider) end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
----@return string the type of the collision shape.
+---@return string rp3d.CollisionShapeType. The type of the collision shape.
+---SPHERE, CAPSULE, CONVEX_POLYHEDRON, CONCAVE_SHAPE
 function CollisionShape:getType() end
 
----@return string the name of the collision shape.
+---@return string rp3d.CollisionShapeName. The name of the collision shape.
+---TRIANGLE, SPHERE, CAPSULE, BOX, CONVEX_MESH, TRIANGLE_MESH, HEIGHTFIELD
 function CollisionShape:getName() end
 
 ---@return bool true if the collision shape is a polyhedron.
@@ -756,7 +776,6 @@ function CollisionShape:isPolyhedron() end
 
 ---@return bool true if the collision shape is convex, false if it is concave.
 function CollisionShape:isConvex() end
-
 
 --Return the local bounds of the shape in x, y and z directions.
 ---@return vector3 min
@@ -778,7 +797,6 @@ function CollisionShape:getVolume() end
 
 --Compute the world-space AABB of the collision shape given a transform.
 ---@param transform Rp3dTransform
----@param quaternion quaternion
 ---@return Rp3dAABB
 function CollisionShape:computeAABB(transform) end
 
@@ -848,7 +866,7 @@ function BoxShape:getHalfExtents() end
 ---@param halfExtents vector3
 function BoxShape:setHalfExtents(halfExtents) end
 
----@class Rp3dSphereShape:Rp3dConvexPolyhedronShape
+---@class Rp3dSphereShape:Rp3dConvexShape
 local SphereShape = {}
 
 --Set the radius of the sphere.
@@ -860,7 +878,7 @@ function SphereShape:setRadius(radius) end
 ---@return number
 function SphereShape:getRadius() end
 
----@class Rp3dCapsuleShape:Rp3dConvexPolyhedronShape
+---@class Rp3dCapsuleShape:Rp3dConvexShape
 local CapsuleShape = {}
 
 --Set the radius of the capsule.
@@ -889,6 +907,71 @@ function ConvexMeshShape:getScale() end
 
 ---@param scale vector3
 function ConvexMeshShape:setScale(scale) end
+
+---@class Rp3dConcaveShape:Rp3dCollisionShape
+local ConcaveShape = {}
+
+--Return the raycast test type (FRONT, BACK, FRONT_AND_BACK)
+---@return string
+function ConcaveShape:getRaycastTestType() end
+
+--Set the raycast test type (FRONT, BACK, FRONT_AND_BACK)
+---@param testType string
+function ConcaveShape:setRaycastTestType(testType) end
+
+--Return the scale.
+---@return vector3
+function ConcaveShape:getScale() end
+
+--Set the scale.
+--Note that you might want to recompute the inertia tensor and center of mass of the body after changing the scale of a collision shape.
+---@param scale vector3
+function ConcaveShape:setScale(scale) end
+
+---@class Rp3dConcaveMeshShape:Rp3dConcaveShape
+local ConcaveMeshShape = {}
+
+--Return the number of sub parts contained in this mesh.
+---@return number
+function ConcaveMeshShape:getNbSubparts() end
+
+--Return the number of triangles in a sub part of the mesh.
+---@param subPart number
+---@return number
+function ConcaveMeshShape:getNbTriangles(subPart) end
+
+--Return the indices of the three vertices of a given triangle in the array.
+---@param subPart number
+---@param triangleIndex number
+---@return vector3[]
+function ConcaveMeshShape:getTriangleVerticesIndices(subPart, triangleIndex) end
+
+---@class Rp3dHeightFieldShape:Rp3dConcaveShape
+local HeightFieldShape = {}
+
+--Return the number of rows in the height field.
+---@return number
+function HeightFieldShape:getNbRows() end
+
+--Return the number of columns in the height field.
+---@return number
+function HeightFieldShape:getNbColumns() end
+
+--Return the vertex (local-coordinates) of the height field at a given (x,y) position.
+---@param x number
+---@param y number
+---@return vector3
+function HeightFieldShape:getVertexAt(x, y) end
+
+--Return the height of a given (x,y) point in the height field.
+---@param x number
+---@param y number
+---@return number
+function HeightFieldShape:getHeightAt(x, y) end
+
+---@return string rp3d.getHeightDataType.The type of height value in the height field.
+---HEIGHT_FLOAT_TYPE, HEIGHT_DOUBLE_TYPE, HEIGHT_INT_TYPE
+function HeightFieldShape:getHeightDataType() end
 
 ---@class Rp3dAABB
 local Rp3dAABB = {}
@@ -954,9 +1037,11 @@ function Rp3dAABB:contains(aabb) end
 function Rp3dAABB:containsPoint(point) end
 
 --Return true if the AABB of a triangle intersects the AABB.
----@param trianglePoints vector3[] 3 points
+---@param p1 vector3
+---@param p2 vector3
+---@param p3 vector3
 ---@return bool
-function Rp3dAABB:testCollisionTriangleAABB(trianglePoints) end
+function Rp3dAABB:testCollisionTriangleAABB(p1, p2, p3) end
 
 
 --Return true if the ray intersects the AABB.
@@ -966,17 +1051,69 @@ function Rp3dAABB:testCollisionTriangleAABB(trianglePoints) end
 ---@return bool
 function Rp3dAABB:testRayIntersect(rayOrigin, rayDirectionInv, rayMaxFraction) end
 
---Apply a scale factor to the AABB.
----@param scale vector3
-function Rp3dAABB:applyScale(scale) end
-
-
 --Compute the intersection of a ray and the AABB.
 ---@param ray Rp3dRay infinity ray. Ignore maxFraction. Ignore distance of ray
 ---@return nil|vector3
 function Rp3dAABB:raycast(ray) end
 
 
+--Apply a scale factor to the AABB.
+---@param scale vector3
+function Rp3dAABB:applyScale(scale) end
+
+---@class Rp3dTriangleMesh
+local Rp3dTriangleMesh = {}
+
+--Add a subpart of the mesh.
+---@param triangleVertexArray Rp3dTriangleVertexArray
+function Rp3dTriangleMesh:addSubpart(triangleVertexArray) end
+
+
+--Return a subpart (triangle vertex array) of the mesh.
+---@param indexSubpart number
+---@return Rp3dTriangleVertexArray
+function Rp3dTriangleMesh:getSubpart(indexSubpart) end
+
+--Return the number of subparts of the mesh.
+---@return number
+function Rp3dTriangleMesh:getNbSubparts() end
+
+---@class Rp3dTriangleVertexArray
+local Rp3dTriangleVertexArray = {}
+
+--Return the number of vertices.
+---@return number
+function Rp3dTriangleVertexArray:getNbVertices() end
+
+--Return the number of triangles.
+---@return number
+function Rp3dTriangleVertexArray:getNbTriangles() end
+
+--Return the vertices coordinates of a triangle.
+---@param triangleIndex number
+---@return vector3[]
+function Rp3dTriangleVertexArray:getTriangleVertices(triangleIndex) end
+
+--Return the three vertices normals of a triangle.
+---@param triangleIndex number
+---@return vector3[]
+function Rp3dTriangleVertexArray:getTriangleVerticesNormals(triangleIndex) end
+
+
+--Return the vertices coordinates of a triangle.
+---@param triangleIndex number
+---@return number[]
+function Rp3dTriangleVertexArray:getTriangleVerticesIndices(triangleIndex) end
+
+--Return a vertex of the array.
+---@param vertexIndex number
+---@return vector3
+function Rp3dTriangleVertexArray:getVertex(vertexIndex) end
+
+--Return a vertex normal of the array.
+---@param vertexIndex number
+---@return vector3
+function Rp3dTriangleVertexArray:getNormal(vertexIndex) end
 
 
 
@@ -1017,6 +1154,22 @@ function rp3d.createCapsuleShape(radius, height) end
 ---@param capsuleShape Rp3dCapsuleShape
 function rp3d.destroyCapsuleShape(capsuleShape) end
 
+--Create a polyhedron mesh.
+---@param vertices number[]
+---@param indices number[]
+---@param indices Rp3dPolygonFace[]
+---@return Rp3dPolyhedronMesh
+function rp3d.createPolyhedronMesh(vertices, indices, polygonFaces) end
+
+--Create a polyhedron mesh, from mesh vertices
+---@param buffer buffer
+---@return Rp3dPolyhedronMesh
+function rp3d.createPolyhedronMeshFromMeshVerticesCopy(buffer) end
+
+--Destroy a polyhedron mesh.
+---@param polyhedronMesh Rp3dPolyhedronMesh
+function rp3d.destroyPolyhedronMesh(polyhedronMesh) end
+
 
 --Create and return a convex mesh collision shape.
 ---@param mesh Rp3dPolyhedronMesh
@@ -1027,20 +1180,71 @@ function rp3d.createConvexMeshShape(mesh) end
 ---@param convexMeshShape Rp3dConvexMeshShape
 function rp3d.destroyConvexMeshShape(convexMeshShape) end
 
+---@param triangleMesh Rp3dTriangleMesh
+---@param scaling vector3|nil
+---@return Rp3dConvexMeshShape
+function rp3d.createConcaveMeshShape(triangleMesh, scaling) end
+
+---@param concaveMeshShape Rp3dConcaveMeshShape
+function rp3d.destroyConcaveMeshShape(concaveMeshShape) end
+
+---@param vertices number[]
+---@param indices number[]
+---@return Rp3dTriangleVertexArray
+function rp3d.createTriangleVertexArray(vertices, indices) end
+
+---@param buffer buffer
+function rp3d.createTriangleVertexArrayFromMeshVerticesCopy(buffer) end
+
+---@param triangleArray Rp3dTriangleVertexArray
+function rp3d.destroyTriangleVertexArray(triangleArray) end
+
+---@return Rp3dTriangleMesh
+function rp3d.createTriangleMesh() end
+
+---@param triangleMesh Rp3dTriangleMesh
+function rp3d.destroyTriangleMesh(triangleMesh) end
+
+---@param nbGridColumns number
+---@param nbGridRows number
+---@param minHeight number
+---@param maxHeight number
+---@param heightFieldData number[]
+---@param dataType string rp3d.HeightDataType
+---@param upAxis number [0,2] optional
+---@param integerHeightScale number optional
+---@param scaling vector3 optional
+---@return Rp3dHeightFieldShape
+function rp3d.createHeightFieldShape(nbGridColumns, nbGridRows, minHeight, maxHeight, heightFieldData, dataType, upAxis, integerHeightScale, scaling) end
+
+function rp3d.destroyHeightFieldShape(heightFieldShape) end
+
+--Create AABB
+---@param minCoordinates vector3
+---@param maxCoordinates vector3
+---@return Rp3dAABB
+function rp3d.createAABB(minCoordinates, maxCoordinates) end
+
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",
 	SPLIT_IMPULSES = "SPLIT_IMPULSES",
 }
 
 rp3d.CollisionShapeName = {
-	TRIANGLE = "TRIANGLE", SPHERE = "SPHERE", CAPSULE = "CAPSULE",
-	BOX = "BOX", CONVEX_MESH = "CONVEX_MESH", TRIANGLE_MESH = "TRIANGLE_MESH",
+	TRIANGLE = "TRIANGLE",
+	SPHERE = "SPHERE",
+	CAPSULE = "CAPSULE",
+	BOX = "BOX",
+	CONVEX_MESH = "CONVEX_MESH",
+	RIANGLE_MESH = "TRIANGLE_MESH",
 	HEIGHTFIELD = "HEIGHTFIELD"
 }
 
 rp3d.CollisionShapeType = {
-	SPHERE = "SPHERE", CAPSULE = "CAPSULE",
-	CONVEX_POLYHEDRON = "CONVEX_POLYHEDRON", CONCAVE_SHAPE = "CONCAVE_SHAPE"
+	SPHERE = "SPHERE",
+	CAPSULE = "CAPSULE",
+	CONVEX_POLYHEDRON = "CONVEX_POLYHEDRON",
+	CONCAVE_SHAPE = "CONCAVE_SHAPE"
 }
 --Enumeration for the type of a body
 -- STATIC : A static body has infinite mass, zero velocity but the position can be
@@ -1081,6 +1285,18 @@ rp3d.ContactPair = {
 		ContactStay = "ContactStay",
 		ContactExit = "ContactExit",
 	},
+}
+
+rp3d.TriangleRaycastSide = {
+	FRONT = "FRONT",
+	BACK = "BACK",
+	FRONT_AND_BACK = "FRONT_AND_BACK"
+}
+
+rp3d.HeightDataType = {
+	HEIGHT_FLOAT_TYPE = "HEIGHT_FLOAT_TYPE",
+	HEIGHT_DOUBLE_TYPE = "HEIGHT_DOUBLE_TYPE",
+	HEIGHT_INT_TYPE = "HEIGHT_INT_TYPE"
 }
 
 
