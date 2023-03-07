@@ -7,7 +7,7 @@ A rigid body. These are created via world:CreateBody.
 
 ## Create
 
-### rp3d:CreateAABB(minCoordinates,maxCoordinates)
+### rp3d:createAABB(minCoordinates, maxCoordinates)
 
 **PARAMETERS**
 * `minCoordinates` (vector3)

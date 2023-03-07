@@ -1032,6 +1032,7 @@ function rp3d.destroyConvexMeshShape(convexMeshShape) end
 --Create AABB
 ---@param minCoordinates vector3
 ---@param maxCoordinates vector3
+---@return Rp3dAABB
 function rp3d.createAABB(minCoordinates,maxCoordinates) end
 
 
