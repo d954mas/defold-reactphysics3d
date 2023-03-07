@@ -3,8 +3,6 @@ This class represents a bounding volume of type "Axis Aligned Bounding Box".
 
 It's a box where all the edges are always aligned with the world coordinate system. The AABB is defined by the minimum and maximum world coordinates of the three axis.
 
-A rigid body. These are created via world:CreateBody.
-
 ## Create
 
 ### rp3d:createAABB(minCoordinates, maxCoordinates)
