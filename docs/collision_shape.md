@@ -9,7 +9,7 @@ You can create 6 types of shape:
 5. ConcaveMeshShape
 6. HeightFieldShape
 
-Inheritance diagram for Collision Shape.
+Inheritance diagram for CollisionShape.
 
 <img src="https://github.com/d954mas/defold-reactphysics3d/blob/master/docs/collision_shape_classes.png">
 
