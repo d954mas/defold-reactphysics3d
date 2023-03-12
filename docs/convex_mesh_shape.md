@@ -17,7 +17,7 @@ TODO
 ## Methods
 
 * ConvexMeshShape:[getScale](#convexmeshshapegetscale)() vector3
-* ConvexMeshShape:[setScale](#convexmeshshapesetscale)(scale)
+* ConvexMeshShape:[setScale](#convexmeshshapesetscalescale)(scale)
 
 ---
 ### ConvexMeshShape:getScale()

@@ -18,7 +18,7 @@ rp3d.createBoxShape(vmath.vector3(1,1,1))
 ## Methods
 
 * BoxShape:[getHalfExtents](#boxshapegethalfextents)() vector3
-* BoxShape:[setHalfExtents](#boxshapesethalfextents)(halfExtents)
+* BoxShape:[setHalfExtents](#boxshapesethalfextentshalfextents)(halfExtents)
 
 ---
 ### BoxShape:getHalfExtents()
