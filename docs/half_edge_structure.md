@@ -1,19 +1,16 @@
 # HalfEdgeStructure
 ```lua
----@class Rp3dHalfEdgeStructureFace
+---@class HalfEdgeStructureFace
 ---@field edgeIndex number
 ---@field faceVertices number[]
-local Rp3dHalfEdgeStructureFace = {}
 
----@class Rp3dHalfEdgeStructureVertex
+---@class HalfEdgeStructureVertex
 ---@field edgeIndex number
 ---@field vertexPointIndex number
-local Rp3dHalfEdgeStructureVertex = {}
 
----@class Rp3dHalfEdgeStructureEdge
+---@class HalfEdgeStructureEdge
 ---@field vertexIndex number
 ---@field twinEdgeIndex number
 ---@field faceIndex number
 ---@field nextEdgeIndex number
-local Rp3dHalfEdgeStructureEdge = {}
 ```
