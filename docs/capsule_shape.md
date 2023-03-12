@@ -11,7 +11,10 @@ Inheritance diagram for CapsuleShape.
 
 
 ## Create
+```lua
 rp3d.createCapsuleShape(radius, height)
+```
+
 
 ## Methods
 

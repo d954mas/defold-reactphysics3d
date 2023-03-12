@@ -11,8 +11,9 @@ Inheritance diagram for SphereShape.
 
 
 ## Create
+```lua
 rp3d.createSphereShape(radius)
-
+```
 ## Methods
 
 * SphereShape:[getRadius](#sphereshapegetradius)() number
