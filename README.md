@@ -118,5 +118,5 @@ Every function have a test. You can use test as example.
 [SphereShape](docs/shapes/sphere_shape.md)\
 [Transform](docs/transform.md)\
 [TriangleMesh](docs/triangle_mesh.md)\
-[TriangleVertexArray](docs/triangle_vertex_array.md)\
+[TriangleVertexArray](docs/triangle_vertex_array.md)
 
