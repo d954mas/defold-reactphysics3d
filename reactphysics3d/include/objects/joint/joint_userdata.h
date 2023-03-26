@@ -41,7 +41,7 @@ class JointUserdata : public BaseUserData {
 
 
     void JointUserdataInitMetaTable(lua_State *L);
-    void JointUserdataPush(lua_State *L, reactphysics3d::CollisionShape* shape);
+    void JointUserdataPush(lua_State *L, reactphysics3d::Joint* joint);
     JointUserdata* JointUserdataCheck(lua_State *L, int index);
 }
 #endif

@@ -7,9 +7,7 @@
 
 
 namespace rp3dDefold {
-  //  BallAndSocketJointInfo BallAndSocketJointInfoCheck(lua_State *L, int index);
-   // JointInfo JointInfoCheck(lua_State *L, int index);
-
     void JointInfoPush(lua_State *L, reactphysics3d::JointInfo *);
+    reactphysics3d::JointInfo* JointInfoCheck(lua_State *L, int index);
 }
 #endif

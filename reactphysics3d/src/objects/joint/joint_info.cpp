@@ -49,7 +49,7 @@ static JointsPositionCorrectionTechnique JointsPositionCorrectionTechniqueString
         case HASH_NON_LINEAR_GAUSS_SEIDEL:
             return JointsPositionCorrectionTechnique::NON_LINEAR_GAUSS_SEIDEL;
         default:
-            luaL_error(L, "unknown JointType:%s", str);
+            luaL_error(L, "unknown JointsPositionCorrectionTechnique:%s", str);
             break;
     }
 }
@@ -104,6 +104,62 @@ void JointInfoPush(lua_State *L,  JointInfo *info){
         default:
             assert(false);
     }
+}
+
+static BallAndSocketJointInfo* BallAndSocketJointInfoCheck(lua_State *L, int index){
+    //check Joint class
+    lua_getfield(L, index, "type");
+    JointType type = JointTypeStringToEnum(L,luaL_checkstring(L,-1));
+    lua_pop(L,1);
+    if(type != JointType::BALLSOCKETJOINT){
+        luaL_error(L, "need BallAndSocketJointInfo get:%s", JointTypeEnumToString(type));
+    }
+
+    lua_getfield(L, index, "body1");
+    RigidBody* body1 = (RigidBody*)CollisionBodyRigidUserdataCheck(L,-1)->body;
+    lua_pop(L,1);
+
+    lua_getfield(L, index, "body2");
+    RigidBody* body2 = (RigidBody*)CollisionBodyRigidUserdataCheck(L,-1)->body;
+    lua_pop(L,1);
+
+    BallAndSocketJointInfo* info = new BallAndSocketJointInfo(body1,body2,Vector3(0,0,0));
+
+    //TODO ADD switch here
+
+    return info;
+
+}
+
+//YOU NEED DELETE JointInfo after use.
+JointInfo* JointInfoCheck(lua_State *L, int index){
+    if (!lua_istable(L, index))  luaL_error(L,"JointInfo should be table");
+
+    //check Joint class
+    lua_getfield(L, index, "type");
+    JointType type = JointTypeStringToEnum(L,luaL_checkstring(L,-1));
+    lua_pop(L,1);
+    JointInfo *info = NULL;
+    switch(type){
+        case JointType::BALLSOCKETJOINT:
+            info = BallAndSocketJointInfoCheck(L, index);
+            break;
+        case JointType::SLIDERJOINT:{
+            assert(false);
+            break;
+        }
+        case JointType::HINGEJOINT:{
+            assert(false);
+            break;
+        }
+        case JointType::FIXEDJOINT:
+            assert(false);
+            break;
+        default:
+            assert(false);
+    }
+    assert(info == NULL);
+    return info;
 }
 
 }

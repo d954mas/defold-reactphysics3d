@@ -3,6 +3,8 @@
 #include "objects/debug_renderer_userdata.h"
 #include "objects/collider_userdata.h"
 #include "objects/aabb.h"
+#include "objects/joint/joint_info.h"
+#include "objects/joint/joint_userdata.h"
 #include "static_hash.h"
 #include "utils.h"
 
@@ -627,6 +629,19 @@ static int ToString(lua_State *L){
 	return 1;
 }
 
+static int CreateJoint(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+
+    WorldUserdata *world = WorldUserdataCheck(L, 1);
+    JointInfo* info = JointInfoCheck(L,2);
+    Joint *joint = world->world->createJoint(*info);
+    delete info;
+
+    JointUserdataPush(L,joint);
+    return 1;
+}
+
 void WorldUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -671,6 +686,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"testCollisionList",TestCollisionList},
         {"setEventListener",SetEventListener},
         {"getWorldAABB",GetWorldAABB},
+        {"createJoint",CreateJoint},
         {"__tostring",ToString},
         { 0, 0 }
     };

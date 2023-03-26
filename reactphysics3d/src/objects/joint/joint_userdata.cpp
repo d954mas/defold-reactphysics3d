@@ -63,15 +63,13 @@ void JointUserdataInitMetaTable(lua_State *L){
 
 
 
-JointUserdata* JointUserdataPush(lua_State *L, Joint* joint){
+void JointUserdataPush(lua_State *L, Joint* joint){
     if(joint->getUserData()!=NULL){
          JointUserdata* userdata =(JointUserdata*) joint->getUserData();
          userdata->Push(L);
-         return userdata;
     }else{
         JointUserdata* userdata = new JointUserdata(joint);
         userdata->Push(L);
-        return userdata;
     }
 }
 
