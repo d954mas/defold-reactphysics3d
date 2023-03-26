@@ -29,6 +29,7 @@ public:
 
 void CollisionBodyUserdataInitMetaTable(lua_State *L);
 CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index);
+CollisionBodyUserdata* CollisionBodyRigidUserdataCheck(lua_State *L, int index);
 void CollisionBodyPush(lua_State *L, reactphysics3d::CollisionBody *body);
 reactphysics3d::BodyType BodyTypeStringToEnum(lua_State *L,const char* str);
 const char * BodyTypeEnumToString(reactphysics3d::BodyType name);

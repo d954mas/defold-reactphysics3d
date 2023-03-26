@@ -43,6 +43,14 @@ CollisionBodyUserdata* CollisionBodyUserdataCheck(lua_State *L, int index) {
 	return userdata;
 }
 
+CollisionBodyUserdata* CollisionBodyRigidUserdataCheck(lua_State *L, int index) {
+    CollisionBodyUserdata *userdata = (CollisionBodyUserdata*) BaseUserData_get_userdata(L, index, USERDATA_TYPE);
+    if(!userdata->isRigidBody){
+        luaL_error(L,"need RigidBody.Get CollisionBody.");
+    }
+	return userdata;
+}
+
 RigidBody* CollisionBodyUserdata::GetRigidBodyOrError(lua_State *L){
     if(!isRigidBody){
         luaL_error(L,"Need RigidBody.Get CollisionBody");

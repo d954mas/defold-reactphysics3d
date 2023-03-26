@@ -22,6 +22,8 @@ local TEST_CONVEX_MESH_SHAPE = require "tests.shape.test_convex_mesh_shape"
 local TEST_TRIANGLE_MESH = require "tests.test_trianlge_mesh"
 local TEST_CONCAVE_MESH_SHAPE = require "tests.shape.test_concave_mesh_shape"
 local TEST_CONCAVE_SHAPE = require "tests.shape.test_concave_shape"
+
+local TEST_BALL_AND_SOCKET_JOINT_INFO = require "tests.joint.tests_ball_and_socket_joint_info"
 local M = {}
 
 function M.run()
@@ -88,6 +90,7 @@ function M.run()
 	DEFTEST.add(TEST_TRIANGLE_MESH)
 	DEFTEST.add(TEST_CONCAVE_SHAPE)
 	DEFTEST.add(TEST_CONCAVE_MESH_SHAPE)
+	DEFTEST.add(TEST_BALL_AND_SOCKET_JOINT_INFO)
 	DEFTEST.run()
 end
 

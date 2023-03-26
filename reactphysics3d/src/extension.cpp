@@ -22,7 +22,7 @@
 #include "objects/polyhedron_mesh_userdata.h"
 #include "objects/triangle_vertex_array_userdata.h"
 #include "objects/triangle_mesh_userdata.h"
-
+#include "objects/joint/joint_info.h"
 
 
 using namespace reactphysics3d;
@@ -388,6 +388,36 @@ static int CreateAABB(lua_State* L){
     AABBPush(L,aabb);
     return 1;
 }
+static int CreateBallAndSocketJointInfoLocalSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 4);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 anchorPointBody1LocalSpace = checkRp3dVector3(L,3);
+    Vector3 anchorPointBody2LocalSpace = checkRp3dVector3(L,4);
+
+    BallAndSocketJointInfo jointInfo = BallAndSocketJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+        anchorPointBody1LocalSpace,anchorPointBody2LocalSpace) ;
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
+
+static int CreateBallAndSocketJointInfoWorldSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 3);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 initAnchorPointWorldSpace = checkRp3dVector3(L,3);
+
+    BallAndSocketJointInfo jointInfo = BallAndSocketJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+       initAnchorPointWorldSpace);
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
 
 
 // Functions exposed to Lua
@@ -415,6 +445,8 @@ static const luaL_reg Module_methods[] ={
     {"createHeightFieldShape", CreateHeightFieldShape},
     {"destroyHeightFieldShape", DestroyHeightFieldShape},
     {"createAABB", CreateAABB},
+    {"createBallAndSocketJointInfoLocalSpace", CreateBallAndSocketJointInfoLocalSpace},
+    {"createBallAndSocketJointInfoWorldSpace", CreateBallAndSocketJointInfoWorldSpace},
     {0, 0}
 };
 
@@ -522,6 +554,23 @@ static void LuaInit(lua_State* L){
         lua_setfield(L, -2, "EventType");
     lua_setfield(L, -2, "ContactPair");
 
+    lua_newtable(L);
+        lua_pushstring(L, "BALLSOCKETJOINT");
+        lua_setfield(L, -2, "BALLSOCKETJOINT");
+        lua_pushstring(L, "SLIDERJOINT");
+        lua_setfield(L, -2, "SLIDERJOINT");
+        lua_pushstring(L, "HINGEJOINT");
+        lua_setfield(L, -2, "HINGEJOINT");
+        lua_pushstring(L, "FIXEDJOINT");
+        lua_setfield(L, -2, "FIXEDJOINT");
+    lua_setfield(L, -2, "JointType");
+
+     lua_newtable(L);
+        lua_pushstring(L, "BAUMGARTE_JOINTS");
+        lua_setfield(L, -2, "BAUMGARTE_JOINTS");
+        lua_pushstring(L, "NON_LINEAR_GAUSS_SEIDEL");
+        lua_setfield(L, -2, "NON_LINEAR_GAUSS_SEIDEL");
+    lua_setfield(L, -2, "JointsPositionCorrectionTechnique");
 
 
 	lua_pop(L, 1);

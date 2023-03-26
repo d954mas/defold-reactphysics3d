@@ -14,7 +14,7 @@ return function()
 					assert_equal(rp3d[enum_name][k], v)
 				end
 			end
-			local function test_enum_v2(parent,enum_name, config)
+			local function test_enum_v2(parent, enum_name, config)
 				assert_not_nil(rp3d[parent])
 				assert_not_nil(rp3d[parent][enum_name])
 				for k, v in pairs(config) do
@@ -35,48 +35,60 @@ return function()
 				FRONT = "FRONT", BACK = "BACK", FRONT_AND_BACK = "FRONT_AND_BACK"
 			})
 			test_enum("HeightDataType", {
-				HEIGHT_FLOAT_TYPE = "HEIGHT_FLOAT_TYPE", HEIGHT_DOUBLE_TYPE = "HEIGHT_DOUBLE_TYPE", HEIGHT_INT_TYPE  = "HEIGHT_INT_TYPE"
+				HEIGHT_FLOAT_TYPE = "HEIGHT_FLOAT_TYPE", HEIGHT_DOUBLE_TYPE = "HEIGHT_DOUBLE_TYPE", HEIGHT_INT_TYPE = "HEIGHT_INT_TYPE"
 			})
-			test_enum_v2("DebugRenderer","DebugItem", {
+			test_enum_v2("DebugRenderer", "DebugItem", {
 				COLLIDER_AABB = "COLLIDER_AABB", COLLIDER_BROADPHASE_AABB = "COLLIDER_BROADPHASE_AABB",
 				COLLISION_SHAPE = "COLLISION_SHAPE", CONTACT_POINT = "CONTACT_POINT", CONTACT_NORMAL = "CONTACT_NORMAL"
 			})
 
-			test_enum_v2("OverlapPair","EventType", {
+			test_enum_v2("OverlapPair", "EventType", {
 				OverlapStart = "OverlapStart", OverlapStay = "OverlapStay",
 				OverlapExit = "OverlapExit"
 			})
 
-			test_enum_v2("ContactPair","EventType", {
+			test_enum_v2("ContactPair", "EventType", {
 				ContactStart = "ContactStart", ContactStay = "ContactStay",
 				ContactExit = "ContactExit"
+			})
+
+			test_enum("JointType", {
+				BALLSOCKETJOINT = "BALLSOCKETJOINT",
+				SLIDERJOINT = "SLIDERJOINT",
+				HINGEJOINT = "HINGEJOINT",
+				FIXEDJOINT = "FIXEDJOINT"
+			})
+
+			test_enum("JointsPositionCorrectionTechnique", {
+				BAUMGARTE_JOINTS = "BAUMGARTE_JOINTS",
+				NON_LINEAR_GAUSS_SEIDEL = "NON_LINEAR_GAUSS_SEIDEL",
 			})
 		end)
 
 		--crash if have some memory corrupted issues
 		test("test memory errors", function()
-			for i=1,1000 do
+			for i = 1, 1000 do
 				local w = rp3d.createPhysicsWorld()
-				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+				local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 				w:destroyCollisionBody(body)
 				rp3d.destroyPhysicsWorld(w)
 			end
 
-			for i=1,100 do
+			for i = 1, 100 do
 				local w = rp3d.createPhysicsWorld()
-				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+				local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 				rp3d.destroyPhysicsWorld(w)
 			end
 
 			local w = rp3d.createPhysicsWorld()
 			local shape = rp3d.createBoxShape(vmath.vector3(2))
-			for i=1,100 do
-				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+			for i = 1, 100 do
+				local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 
-				local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+				local collision = body:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
-				local body_rigid = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
-				local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
+				local body_rigid = w:createRigidBody({ position = vmath.vector3(), quat = vmath.quat() })
+				local collision2 = body_rigid:addCollider(shape, { position = vmath.vector3(), quat = vmath.quat() })
 
 				w:destroyCollisionBody(body)
 				w:destroyRigidBody(body_rigid)
@@ -86,11 +98,11 @@ return function()
 
 			w = rp3d.createPhysicsWorld()
 			shape = rp3d.createBoxShape(vmath.vector3(2))
-			for i=1,100 do
-				local body = w:createCollisionBody({position = vmath.vector3(),quat = vmath.quat()})
+			for i = 1, 100 do
+				local body = w:createCollisionBody({ position = vmath.vector3(), quat = vmath.quat() })
 				--local collision = body:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
 
-				local body_rigid = w:createRigidBody({position = vmath.vector3(),quat = vmath.quat()})
+				local body_rigid = w:createRigidBody({ position = vmath.vector3(), quat = vmath.quat() })
 				--local collision2 = body_rigid:addCollider(shape,{position = vmath.vector3(),quat = vmath.quat()})
 			end
 			rp3d.destroyPhysicsWorld(w)

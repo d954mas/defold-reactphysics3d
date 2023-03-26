@@ -27,7 +27,8 @@ This object is used by the user as a factory to create the physics world and oth
 * rp3d.[createHeightFieldShape](#rp3dcreateheightfieldshapenbgridcolumns-nbgridrows-minheight-maxheight-heightfielddata-datatype-upaxis-integerheightscale-scaling)(nbGridColumns, nbGridRows, minHeight, maxHeight, heightFieldData, dataType, upAxis, integerHeightScale, scaling) [HeightFieldShape](shapes/heightfield_shape.md)
 * rp3d.[destroyHeightFieldShape](#rp3ddestroyheightfieldshapeheightfieldshape)(heightFieldShape)
 * rp3d.[createAABB](#rp3dcreateaabbmincoordinates-maxcoordinates)(minCoordinates, maxCoordinates) [AABB](aabb.md)
-
+* rp3d.[createBallAndSocketJointInfoLocalSpace](#rp3dcreateballandsocketjointinfolocalspacebody1-body2-anchorpointbody1localspace-anchorpointbody2localspace)(body1, body2, anchorPointBody1LocalSpace, anchorPointBody2LocalSpace) [BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md)
+* rp3d.[createBallAndSocketJointInfoWorldSpace](#rp3dcreateballandsocketjointinfoworldspacebody1-body2-initanchorpointworldspace)(body1, body2, initAnchorPointWorldSpace) [BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md)
 ---
 ### rp3d.createPhysicsWorld(settings)
 Create and return an instance of PhysicsWorld.
@@ -241,6 +242,31 @@ Create and return a AABB
 **RETURN**
 * ([AABB](aabb.md))
 
+---
+### rp3d.createBallAndSocketJointInfoLocalSpace(body1, body2, anchorPointBody1LocalSpace, anchorPointBody2LocalSpace)
+Create BallAndSocketJointInfo
+
+**PARAMETERS**
+* `body1` ([RigidBody](rigid_body.md))
+* `body2` ([RigidBody](rigid_body.md))
+* `anchorPointBody1LocalSpace` (vector3)
+* `anchorPointBody2LocalSpace` (vector3)
+
+**RETURN**
+* ([BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md))
+
+---
+### rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace)
+Create BallAndSocketJointInfo
+
+**PARAMETERS**
+* `body1` ([RigidBody](rigid_body.md))
+* `body2` ([RigidBody](rigid_body.md))
+* `initAnchorPointWorldSpace` (vector3)
+
+**RETURN**
+* ([BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md))
+
 ## Enums
 
 ### rp3d.CollisionShapeName
@@ -343,5 +369,25 @@ rp3d.HeightDataType = {
 	HEIGHT_FLOAT_TYPE = "HEIGHT_FLOAT_TYPE",
 	HEIGHT_DOUBLE_TYPE = "HEIGHT_DOUBLE_TYPE",
 	HEIGHT_INT_TYPE = "HEIGHT_INT_TYPE"
+}
+```
+
+### rp3d.JointType
+
+```lua
+rp3d.JointType = {
+    BALLSOCKETJOINT  = "BALLSOCKETJOINT",
+	SLIDERJOINT  = "SLIDERJOINT",
+	HINGEJOINT  = "HINGEJOINT",
+	FIXEDJOINT   = "FIXEDJOINT"
+}
+```
+
+### rp3d.JointsPositionCorrectionTechnique
+
+```lua
+rp3d.JointsPositionCorrectionTechnique = {
+	BAUMGARTE_JOINTS  = "BAUMGARTE_JOINTS",
+	NON_LINEAR_GAUSS_SEIDEL  = "NON_LINEAR_GAUSS_SEIDEL",
 }
 ```

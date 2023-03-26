@@ -41,6 +41,10 @@ for file in os.listdir('objects/shape'):
 	if file.endswith('.cpp') or file.endswith('.c'):
 		with open('objects/shape/' + file, 'r') as f:
 			process(f.read())
+for file in os.listdir('objects/joint'):
+	if file.endswith('.cpp') or file.endswith('.c'):
+		with open('objects/joint/' + file, 'r') as f:
+			process(f.read())
 for file in os.listdir('../include/objects'):
         if file.endswith('.h'):
         	with open('../include/objects/' + file, 'r') as f:

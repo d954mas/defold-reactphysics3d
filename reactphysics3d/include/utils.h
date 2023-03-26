@@ -24,6 +24,16 @@ namespace rp3dDefold {
     void pushRp3dHalfEdgeStructureVertex(lua_State *L,const reactphysics3d::HalfEdgeStructure::Vertex &vertex);
     void pushRp3dHalfEdgeStructureEdge(lua_State *L,const reactphysics3d::HalfEdgeStructure::Edge &edge);
 
+    inline void pushRp3dVector3(lua_State *L, reactphysics3d::Vector3 v3){
+        dmVMath::Vector3 dmV3(v3.x,v3.y,v3.z);
+        dmScript::PushVector3(L, dmV3);
+    }
+
+    inline reactphysics3d::Vector3 checkRp3dVector3(lua_State *L, int index){
+        dmVMath::Vector3* dmV3 = dmScript::CheckVector3(L, index);
+        return reactphysics3d::Vector3(dmV3->getX(),dmV3->getY(),dmV3->getZ());
+    }
+
 }
 
 #endif

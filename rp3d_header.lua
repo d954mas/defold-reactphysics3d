@@ -134,6 +134,22 @@ local Rp3dMaterial = {
 	massDensity = 0,
 }
 
+---@class Rp3dJointInfo
+---@field body1 Rp3dRigidBody
+---@field body2 Rp3dRigidBody
+---@field type string rp3d.JointInfoType
+---@field positionCorrectionTechnique string rp3d.JointsPositionCorrectionTechnique
+---@field isCollisionEnabled bool True if the two bodies of the joint are allowed to collide with each other.
+local Rp3dJointInfo = {}
+
+
+---@class Rp3dBallAndSocketJointInfo:Rp3dJointInfo
+---@field isUsingLocalSpaceAnchors bool rue if this object has been constructed using local-space anchors.
+---@field anchorPointWorldSpace vector3 Anchor point (in world-space coordinates)
+---@field anchorPointBody1LocalSpace vector3 Anchor point on body 1 (in local-space coordinates)
+---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
+local Rp3dBallAndSocketJointInfo = {}
+
 ---@class Rp3dPolyhedronMesh
 local Rp3dPolyhedronMesh = {}
 
@@ -1225,6 +1241,21 @@ function rp3d.destroyHeightFieldShape(heightFieldShape) end
 ---@return Rp3dAABB
 function rp3d.createAABB(minCoordinates, maxCoordinates) end
 
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param anchorPointBody1LocalSpace vector3
+---@param anchorPointBody2LocalSpace vector3
+---@return Rp3dBallAndSocketJointInfo
+function rp3d.createBallAndSocketJointInfoLocalSpace(body1, body2, anchorPointBody1LocalSpace, anchorPointBody2LocalSpace) end
+
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param initAnchorPointWorldSpace vector3
+---@return Rp3dBallAndSocketJointInfo
+function rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace) end
+
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",
 	SPLIT_IMPULSES = "SPLIT_IMPULSES",
@@ -1297,6 +1328,18 @@ rp3d.HeightDataType = {
 	HEIGHT_FLOAT_TYPE = "HEIGHT_FLOAT_TYPE",
 	HEIGHT_DOUBLE_TYPE = "HEIGHT_DOUBLE_TYPE",
 	HEIGHT_INT_TYPE = "HEIGHT_INT_TYPE"
+}
+
+rp3d.JointType = {
+	BALLSOCKETJOINT  = "BALLSOCKETJOINT",
+	SLIDERJOINT  = "SLIDERJOINT",
+	HINGEJOINT  = "HINGEJOINT",
+	FIXEDJOINT   = "FIXEDJOINT"
+}
+
+rp3d.JointsPositionCorrectionTechnique = {
+	BAUMGARTE_JOINTS  = "BAUMGARTE_JOINTS",
+	NON_LINEAR_GAUSS_SEIDEL  = "NON_LINEAR_GAUSS_SEIDEL",
 }
 
 
