@@ -104,6 +104,9 @@ class Joint {
         /// Reference to the physics world
         PhysicsWorld& mWorld;
 
+        /// Pointer to user data
+        void* mUserData=NULL;
+
         // -------------------- Methods -------------------- //
 
         /// Return the number of bytes used by the joint
@@ -152,6 +155,12 @@ class Joint {
         /// Return a string representation
         virtual std::string to_string() const=0;
 
+        /// Return a pointer to the user data attached to this body
+        void* getUserData() const;
+
+        /// Attach user data to this body
+        void setUserData(void* userData);
+
         // -------------------- Friendship -------------------- //
 
         friend class PhysicsWorld;
@@ -165,6 +174,23 @@ class Joint {
  */
 RP3D_FORCE_INLINE Entity Joint::getEntity() const {
     return mEntity;
+}
+
+//@FIX ADD METHODS TO MAKE LUA BINDING EASY
+// Return a pointer to the user data attached to this body
+/**
+ * @return A pointer to the user data stored into the collider
+ */
+RP3D_FORCE_INLINE void* Joint::getUserData() const {
+    return mUserData;
+}
+
+// Attach user data to this body
+/**
+ * @param userData Pointer to the user data you want to store within the collider
+ */
+RP3D_FORCE_INLINE void Joint::setUserData(void* userData) {
+    mUserData = userData;
 }
 
 }

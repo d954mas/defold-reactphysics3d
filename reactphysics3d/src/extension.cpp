@@ -23,6 +23,7 @@
 #include "objects/triangle_vertex_array_userdata.h"
 #include "objects/triangle_mesh_userdata.h"
 #include "objects/joint/joint_info.h"
+#include "objects/joint/joint_userdata.h"
 
 
 using namespace reactphysics3d;
@@ -587,8 +588,7 @@ static dmExtension::Result InitializeMyExtension(dmExtension::Params* params){
     PolyhedronMeshUserdataInitMetaTable(params->m_L);
     TriangleVertexArrayUserdataInitMetaTable(params->m_L);
     TriangleMeshUserdataInitMetaTable(params->m_L);
-    ConcaveMeshShapeUserdataInitMetaTable(params->m_L);
-    HeightFieldShapeUserdataInitMetaTable(params->m_L);
+    JointUserdataInitMetaTable(params->m_L);
 	LuaInit(params->m_L);
 	printf("Registered %s Extension\n", MODULE_NAME);
 	return dmExtension::RESULT_OK;

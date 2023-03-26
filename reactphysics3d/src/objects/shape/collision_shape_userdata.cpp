@@ -6,6 +6,8 @@
 #include "objects/shape/capsule_shape_userdata.h"
 #include "objects/shape/collision_shape_userdata.h"
 #include "objects/shape/convex_mesh_shape_userdata.h"
+#include "objects/shape/concave_mesh_shape_userdata.h"
+#include "objects/shape/height_field_shape_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
 #include "objects/aabb.h"
@@ -199,6 +201,8 @@ void CollisionShapeUserdataInitMetaTable(lua_State *L){
     SphereShapeUserdataInitMetaTable(L);
     CapsuleShapeUserdataInitMetaTable(L);
     ConvexMeshShapeUserdataInitMetaTable(L);
+    ConcaveMeshShapeUserdataInitMetaTable(L);
+    HeightFieldShapeUserdataInitMetaTable(L);
 }
 
 
