@@ -27,7 +27,7 @@ return function()
 		test("create", function()
 			local info = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, vmath.vector3(0, 1, 0))
 			local joint = w:createJoint(info)
-			TEST_JOINT.test_joint(joint, { type = rp3d.JointType.BALLSOCKETJOINT })
+			TEST_JOINT.test_joint(joint, { type = rp3d.JointType.BALLSOCKETJOINT, body1 = body1, body2 = body2 })
 		end)
 
 

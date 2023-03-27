@@ -3,6 +3,7 @@
 #include "objects/joint/joint_info.h"
 #include "objects/joint/joint_userdata.h"
 #include "objects/joint/ball_and_socket_joint_userdata.h"
+#include "objects/collision_body_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
 
@@ -48,12 +49,64 @@ JointUserdata* JointUserdataCheck(lua_State* L, int index){
     return userdata;
 }
 
+int Joint_GetBody1(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    CollisionBodyPush(L, joint->joint->getBody1());
+    return 1;
+}
+
+int Joint_GetBody2(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    CollisionBodyPush(L, joint->joint->getBody2());
+    return 1;
+}
 
 int Joint_GetType(lua_State *L){
     DM_LUA_STACK_CHECK(L, 1);
     check_arg_count(L, 1);
     JointUserdata* joint = JointUserdataCheck(L,1);
     lua_pushstring(L,JointTypeEnumToString(joint->joint->getType()));
+    return 1;
+}
+
+int Joint_GetReactionForce(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    double timestamp = luaL_checknumber(L,2);
+    if(timestamp < MACHINE_EPSILON)  luaL_error(L, "timestamp < MACHINE_EPSILON");
+
+    pushRp3dVector3(L,joint->joint->getReactionForce(timestamp));
+    return 1;
+}
+
+int Joint_GetReactionTorque(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 2);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    double timestamp = luaL_checknumber(L,2);
+    if(timestamp < MACHINE_EPSILON)  luaL_error(L, "timestamp < MACHINE_EPSILON");
+    pushRp3dVector3(L,joint->joint->getReactionTorque(timestamp));
+    return 1;
+}
+
+int Joint_IsCollisionEnabled(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    lua_pushboolean(L,joint->joint->isCollisionEnabled());
+    return 1;
+}
+
+int Joint_GetEntityId(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    lua_pushnumber(L,joint->joint->getEntity().id);
     return 1;
 }
 

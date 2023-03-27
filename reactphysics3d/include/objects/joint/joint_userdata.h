@@ -14,7 +14,13 @@
 
 #define RP3D_JOINT_META_FUNCTIONS \
 {"__tostring", Joint_ToString},\
-{"getType", Joint_GetType}\
+{"getBody1", Joint_GetBody1},\
+{"getBody2", Joint_GetBody2},\
+{"getType", Joint_GetType},\
+{"getReactionForce", Joint_GetReactionForce},\
+{"getReactionTorque", Joint_GetReactionTorque},\
+{"isCollisionEnabled", Joint_IsCollisionEnabled},\
+{"getEntityId", Joint_GetEntityId}\
 
 
 namespace rp3dDefold {
@@ -31,13 +37,13 @@ class JointUserdata : public BaseUserData {
 };
 
 
-   // int Joint_GetBody1(lua_State *L);
-   // int Joint_GetBody2(lua_State *L);
+    int Joint_GetBody1(lua_State *L);
+    int Joint_GetBody2(lua_State *L);
     int Joint_GetType(lua_State *L);
-   // int Joint_GetReactionForce(lua_State *L);
-  //  int Joint_GetReactionTorque(lua_State *L);
-  //  int Joint_IsCollisionEnabled(lua_State *L);
-  //  int Joint_GetEntityId(lua_State *L);
+    int Joint_GetReactionForce(lua_State *L);
+    int Joint_GetReactionTorque(lua_State *L);
+    int Joint_IsCollisionEnabled(lua_State *L);
+    int Joint_GetEntityId(lua_State *L);
     int Joint_ToString(lua_State *L);
 
 

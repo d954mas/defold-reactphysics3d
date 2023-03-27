@@ -6,6 +6,16 @@ local M = {}
 function M.test_joint(joint, data)
 	assert_not_nil(joint)
 	assert_equal(joint:getType(),data.type)
+	assert_equal(joint:getBody1(),data.body1)
+	assert_equal(joint:getBody2(),data.body2)
+	assert_type(joint:getReactionForce(1/60),"userdata")
+	assert_type(joint:getReactionTorque(1/60),"userdata")
+	assert_type(joint:getEntityId(),"number")
+	if (data.isCollisionEnabled ~= nil) then
+		assert_equal(joint:isCollisionEnabled(), data.isCollisionEnabled)
+	else
+		assert_true(joint:isCollisionEnabled())
+	end
 end
 
 function M.set_env(env)
