@@ -27,7 +27,7 @@ static JointType JointTypeStringToEnum(lua_State *L,const char* str){
             break;
     }
 }
-static const char * JointTypeEnumToString(JointType type){
+const char * JointTypeEnumToString(JointType type){
     switch(type){
         case JointType::BALLSOCKETJOINT:
             return "BALLSOCKETJOINT";
@@ -158,7 +158,7 @@ JointInfo* JointInfoCheck(lua_State *L, int index){
         default:
             assert(false);
     }
-    assert(info == NULL);
+    assert(info != NULL);
     return info;
 }
 

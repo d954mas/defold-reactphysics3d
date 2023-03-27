@@ -1,5 +1,6 @@
 #include "objects/base_userdata.h"
 #include "static_hash.h"
+#include "objects/joint/joint_info.h"
 #include "objects/joint/joint_userdata.h"
 #include "objects/joint/ball_and_socket_joint_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
@@ -45,6 +46,15 @@ JointUserdata::~JointUserdata() {
 JointUserdata* JointUserdataCheck(lua_State* L, int index){
     JointUserdata *userdata = (JointUserdata*) BaseUserData_get_userdata(L, index, USERDATA_TYPE);
     return userdata;
+}
+
+
+int Joint_GetType(lua_State *L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 1);
+    JointUserdata* joint = JointUserdataCheck(L,1);
+    lua_pushstring(L,JointTypeEnumToString(joint->joint->getType()));
+    return 1;
 }
 
 int Joint_ToString(lua_State *L){

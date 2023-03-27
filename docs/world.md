@@ -128,6 +128,7 @@ end
 * World:[testCollisionBodyList](#worldtestcollisionbodylistbody)(body) [ContactPair](#contactpair)[]
 * World:[testCollisionList](#worldtestcollisionlist)() [ContactPair](#overlappair)[]
 * World:[setEventListener](#worldseteventlistenerlistener)(listener)
+* World:[createJoint](#worldcreatejointjointinfo)(jointInfo) [Joint](joints/join.md)
 
 ---
 ### World:getName()
@@ -426,3 +427,13 @@ Set an event listener object to receive events callbacks.
 
 **PARAMETERS**
 * `listener` ([EventListener](#eventlistener)|nil)
+
+---
+### World:createJoint(jointInfo)
+Create a joint between two bodies in the world and return a new joint.
+
+**PARAMETERS**
+* `jointInfo` ([JointInfo](joints/joint_info.md))
+
+**RETURN**
+* ([Joint](joints/joint.md))

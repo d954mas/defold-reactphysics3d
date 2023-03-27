@@ -13,7 +13,8 @@
 
 
 #define RP3D_JOINT_META_FUNCTIONS \
-{"__tostring", Joint_ToString}\
+{"__tostring", Joint_ToString},\
+{"getType", Joint_GetType}\
 
 
 namespace rp3dDefold {
@@ -32,7 +33,7 @@ class JointUserdata : public BaseUserData {
 
    // int Joint_GetBody1(lua_State *L);
    // int Joint_GetBody2(lua_State *L);
-   // int Joint_GetType(lua_State *L);
+    int Joint_GetType(lua_State *L);
    // int Joint_GetReactionForce(lua_State *L);
   //  int Joint_GetReactionTorque(lua_State *L);
   //  int Joint_IsCollisionEnabled(lua_State *L);

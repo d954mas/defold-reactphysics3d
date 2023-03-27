@@ -9,5 +9,6 @@
 namespace rp3dDefold {
     void JointInfoPush(lua_State *L, reactphysics3d::JointInfo *);
     reactphysics3d::JointInfo* JointInfoCheck(lua_State *L, int index);
+    const char * JointTypeEnumToString(reactphysics3d::JointType type);
 }
 #endif

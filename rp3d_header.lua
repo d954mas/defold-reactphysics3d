@@ -142,13 +142,41 @@ local Rp3dMaterial = {
 ---@field isCollisionEnabled bool True if the two bodies of the joint are allowed to collide with each other.
 local Rp3dJointInfo = {}
 
-
 ---@class Rp3dBallAndSocketJointInfo:Rp3dJointInfo
 ---@field isUsingLocalSpaceAnchors bool rue if this object has been constructed using local-space anchors.
 ---@field anchorPointWorldSpace vector3 Anchor point (in world-space coordinates)
 ---@field anchorPointBody1LocalSpace vector3 Anchor point on body 1 (in local-space coordinates)
 ---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
 local Rp3dBallAndSocketJointInfo = {}
+
+---@class Rp3dJoint
+local Rp3dJoint = {}
+
+---@return Rp3dRigidBody
+function Rp3dJoint:getBody1() end
+
+---@return Rp3dRigidBody
+function Rp3dJoint:getBody2() end
+
+---@return string rp3d.JointType
+function Rp3dJoint:getType() end
+
+--Return the force (in Newtons) on body 2 required to satisfy the joint constraint.
+---@param timeStep number
+---@return vector3
+function Rp3dJoint:getReactionForce(timeStep) end
+
+--Return the torque (in Newtons * meters) on body 2 required to satisfy the joint constraint.
+---@param timeStep number
+---@return vector3
+function Rp3dJoint:getReactionTorque(timeStep) end
+
+---@return bool
+function Rp3dJoint:isCollisionEnabled() end
+
+--Return the entity id of the joint.
+---@return number
+function Rp3dJoint:getEntityId() end
 
 ---@class Rp3dPolyhedronMesh
 local Rp3dPolyhedronMesh = {}
@@ -776,6 +804,11 @@ function PhysicsWorld:setEventListener(eventListener) end
 ---@param collider Rp3dCollider
 function PhysicsWorld:getWorldAABB(collider) end
 
+--Create a joint between two bodies in the world and return a new joint.
+---@param jointInfo Rp3dJointInfo
+---@return Rp3dJoint
+function PhysicsWorld:createJoint(jointInfo) end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 
@@ -1241,14 +1274,12 @@ function rp3d.destroyHeightFieldShape(heightFieldShape) end
 ---@return Rp3dAABB
 function rp3d.createAABB(minCoordinates, maxCoordinates) end
 
-
 ---@param body1 Rp3dRigidBody
 ---@param body2 Rp3dRigidBody
 ---@param anchorPointBody1LocalSpace vector3
 ---@param anchorPointBody2LocalSpace vector3
 ---@return Rp3dBallAndSocketJointInfo
 function rp3d.createBallAndSocketJointInfoLocalSpace(body1, body2, anchorPointBody1LocalSpace, anchorPointBody2LocalSpace) end
-
 
 ---@param body1 Rp3dRigidBody
 ---@param body2 Rp3dRigidBody
@@ -1331,15 +1362,15 @@ rp3d.HeightDataType = {
 }
 
 rp3d.JointType = {
-	BALLSOCKETJOINT  = "BALLSOCKETJOINT",
-	SLIDERJOINT  = "SLIDERJOINT",
-	HINGEJOINT  = "HINGEJOINT",
-	FIXEDJOINT   = "FIXEDJOINT"
+	BALLSOCKETJOINT = "BALLSOCKETJOINT",
+	SLIDERJOINT = "SLIDERJOINT",
+	HINGEJOINT = "HINGEJOINT",
+	FIXEDJOINT = "FIXEDJOINT"
 }
 
 rp3d.JointsPositionCorrectionTechnique = {
-	BAUMGARTE_JOINTS  = "BAUMGARTE_JOINTS",
-	NON_LINEAR_GAUSS_SEIDEL  = "NON_LINEAR_GAUSS_SEIDEL",
+	BAUMGARTE_JOINTS = "BAUMGARTE_JOINTS",
+	NON_LINEAR_GAUSS_SEIDEL = "NON_LINEAR_GAUSS_SEIDEL",
 }
 
 
