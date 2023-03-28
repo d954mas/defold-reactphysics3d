@@ -40,7 +40,7 @@ function M.run()
 			"equal_v3",
 			function(_, a, b) return string.format(TELESCOPE.assertion_message_prefix .. "'%s' to be equal to '%s'", tostring(a), tostring(b)) end,
 			function(a, b, epsilon)
-				epsilon = epsilon or 0.0000001
+				epsilon = epsilon or 0.000001
 				if (type(a) ~= "userdata" or type(b) ~= "userdata") then assert("not v3") end
 				local dx = math.abs(a.x - b.x)
 				local dy = math.abs(a.y - b.y)
@@ -52,7 +52,7 @@ function M.run()
 			"equal_quat",
 			function(_, a, b) return string.format(TELESCOPE.assertion_message_prefix .. "'%s' to be equal to '%s'", tostring(a), tostring(b)) end,
 			function(a, b, epsilon)
-				epsilon = epsilon or 0.0000001
+				epsilon = epsilon or 0.000001
 				if (type(a) ~= "userdata" or type(b) ~= "userdata") then assert("not quat") end
 				local dx = math.abs(a.x - b.x)
 				local dy = math.abs(a.y - b.y)
@@ -64,10 +64,11 @@ function M.run()
 	TELESCOPE.make_assertion(
 			"equal_float",
 			function(_, a, b) return string.format(TELESCOPE.assertion_message_prefix .. "'%s' to be equal to '%s'", a, b) end,
-			function(a, b)
+			function(a, b, epsilon)
 				if (type(a) ~= "number" or type(b) ~= "number") then assert("not v3") end
+				epsilon = epsilon or 0.000001
 				local d = math.abs(a - b)
-				return d >= 0 and d <= 0.0000001
+				return d >= 0 and d <= epsilon
 			end
 	)
 	DEFTEST.add(TEST_RP3D)

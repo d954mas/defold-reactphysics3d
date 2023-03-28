@@ -1,0 +1,84 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+local ConcaveMesh = require "main.objects.concave_mesh"
+
+local SCENE_RADIUS = 70.0
+local BOX_SIZE = vmath.vector3(2, 2, 2)
+local FLOOR_SIZE = vmath.vector3(50, 0.5, 50)
+
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+	---@type GameBox[]
+	self.boxes = {}
+
+	self.joints = {}
+
+	local box1 = Box(true, vmath.vector3(4, 4, 4), self.world);
+	box1.body:setTransformPosition(vmath.vector3(0, 8, 0));
+	box1.body:setType(rp3d.BodyType.STATIC);
+
+	table.insert(self.objects,box1)
+
+
+	local box2 = Box(true, vmath.vector3(4, 8, 4), self.world);
+	box2.body:setTransformPosition(vmath.vector3(0, 0, 0));
+	box2.body:setType(rp3d.BodyType.DYNAMIC);
+
+
+	table.insert(self.objects,box2)
+
+	local body1Position = box1.body:getTransformPosition()
+	local body2Position = box2.body:getTransformPosition()
+
+	local anchorPointWorldSpace = 0.5 * (body1Position + body2Position);
+	local info = rp3d.createBallAndSocketJointInfoWorldSpace(box1.body, box2.body, anchorPointWorldSpace);
+	info.isCollisionEnabled = false;
+
+	self.joint = self.world:createJoint(info)
+	self.joint:setConeLimitHalfAngle(90.0 * math.pi / 180.0)
+	self.joint:enableConeLimit(true)
+end
+
+function init(self)
+	create_physics(self)
+
+	--msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
+
+	SCENE_HELPER.scene_new({
+		name = "BallSocket Joint",
+		world = self.world
+	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
+end
+
+
+

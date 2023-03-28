@@ -59,7 +59,9 @@ function init(self)
 		{id = "collision shapes",scene = "collision_shapes"},
 		{id = "concave shape",scene = "concave_shape"},
 		{id = "pile",scene = "pile"},
-		{id = "heightfield",scene = "heightfield"}
+		{id = "heightfield",scene = "heightfield"},
+		{id = "BallSocket Joint",scene = "ball_and_socket_joint"},
+		{id = "BallSocket Chain",scene = "ball_and_socket_joints_chain"}
 	}
 	update_list(self)
 

@@ -178,6 +178,25 @@ function Rp3dJoint:isCollisionEnabled() end
 ---@return number
 function Rp3dJoint:getEntityId() end
 
+---@class Rp3dBallAndSocketJoint:Rp3dJoint
+local Rp3dBallAndSocketJoint = {}
+
+---@param isLimitEnabled bool
+function Rp3dBallAndzSocketJoint:enableConeLimit(isLimitEnabled) end
+
+---@return bool
+function Rp3dBallAndSocketJoint:isConeLimitEnabled() end
+
+---@param coneHalfAngle number  The angle of the cone limit (in radian) from [0; PI]
+function Rp3dBallAndSocketJoint:setConeLimitHalfAngle(coneHalfAngle) end
+
+---@return number
+function Rp3dBallAndSocketJoint:getConeLimitHalfAngle() end
+
+---@return number
+function Rp3dBallAndSocketJoint:getConeHalfAngle() end
+
+
 ---@class Rp3dPolyhedronMesh
 local Rp3dPolyhedronMesh = {}
 

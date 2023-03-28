@@ -125,7 +125,41 @@ static BallAndSocketJointInfo* BallAndSocketJointInfoCheck(lua_State *L, int ind
 
     BallAndSocketJointInfo* info = new BallAndSocketJointInfo(body1,body2,Vector3(0,0,0));
 
-    //TODO ADD switch here
+    /* table is in the stack at index 't' */
+    lua_pushnil(L);  /* first key */
+    while (lua_next(L, -2) != 0) {
+        /* uses 'key' (at index -2) and 'value' (at index -1) */
+        // printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
+        const char* key = lua_tostring(L, -2);
+        switch (hash_string(key)) {
+            case HASH_body1:break;
+            case HASH_body2:break;
+            case HASH_type:break;
+            case HASH_positionCorrectionTechnique:
+                info->positionCorrectionTechnique = JointsPositionCorrectionTechniqueStringToEnum(L,luaL_checkstring(L,-1));
+                break;
+            case HASH_isCollisionEnabled:
+                info->isCollisionEnabled = lua_toboolean(L,-1);
+                break;
+            case HASH_isUsingLocalSpaceAnchors:
+                info->isUsingLocalSpaceAnchors = lua_toboolean(L,-1);
+                break;
+            case HASH_anchorPointBody1LocalSpace:
+                info->anchorPointBody1LocalSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_anchorPointBody2LocalSpace:
+                info->anchorPointBody2LocalSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_anchorPointWorldSpace:
+                info->anchorPointWorldSpace = checkRp3dVector3(L,-1);
+                break;
+           default:
+               luaL_error(L, "unknown key:%s", key);
+               break;
+       }
+      /* removes 'value'; keeps 'key' for next iteration */
+      lua_pop(L, 1);
+    }
 
     return info;
 

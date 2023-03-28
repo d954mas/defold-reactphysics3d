@@ -68,6 +68,26 @@ return function()
 			UTILS.test_error(error, "rp3d::Joint was destroyed")
 		end)
 
+		test("isEnabled/enableConeLimit", function()
+			UTILS.test_method_get_set(joint, "ConeLimit",
+					{ getter_full = "isConeLimitEnabled",
+					  setter_full = "enableConeLimit",
+					  values = { false, true, false }
+					})
+		end)
+
+		test("set/get ConeLimitHalfAngle", function()
+			UTILS.test_method_get_set(joint, "ConeLimitHalfAngle",
+					{
+						float = true, epsilwon = 0.001,
+						values = { 1, 2, math.pi, math.pi * 5 }
+					})
+		end)
+
+		test("getConeHalfAngle", function()
+			assert_equal_float( 0.1993366, joint:getConeHalfAngle())
+		end)
+
 
 	end)
 end
