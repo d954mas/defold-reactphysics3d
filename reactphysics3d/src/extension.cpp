@@ -419,6 +419,40 @@ static int CreateBallAndSocketJointInfoWorldSpace(lua_State* L){
     return 1;
 }
 
+static int CreateHingeJointInfoLocalSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 6);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 anchorPointBody1Local = checkRp3dVector3(L,3);
+    Vector3 anchorPointBody2Local = checkRp3dVector3(L,4);
+    Vector3 rotationBody1AxisLocal = checkRp3dVector3(L,5);
+    Vector3 rotationBody2AxisLocal = checkRp3dVector3(L,6);
+
+    HingeJointInfo jointInfo = HingeJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+        anchorPointBody1Local, anchorPointBody2Local, rotationBody1AxisLocal, rotationBody2AxisLocal);
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
+
+static int CreateHingeJointInfoWorldSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 4);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 initAnchorPointWorldSpace = checkRp3dVector3(L,3);
+    Vector3 initRotationAxisWorld = checkRp3dVector3(L,4);;
+
+    HingeJointInfo jointInfo = HingeJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+        initAnchorPointWorldSpace, initRotationAxisWorld);
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -447,6 +481,8 @@ static const luaL_reg Module_methods[] ={
     {"createAABB", CreateAABB},
     {"createBallAndSocketJointInfoLocalSpace", CreateBallAndSocketJointInfoLocalSpace},
     {"createBallAndSocketJointInfoWorldSpace", CreateBallAndSocketJointInfoWorldSpace},
+    {"createHingeJointInfoLocalSpace", CreateHingeJointInfoLocalSpace},
+    {"createHingeJointInfoWorldSpace", CreateHingeJointInfoWorldSpace},
     {0, 0}
 };
 

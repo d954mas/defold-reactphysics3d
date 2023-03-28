@@ -149,6 +149,22 @@ local Rp3dJointInfo = {}
 ---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
 local Rp3dBallAndSocketJointInfo = {}
 
+---@class Rp3dHingeJointInfo:Rp3dJointInfo
+---@field isUsingLocalSpaceAnchors bool rue if this object has been constructed using local-space anchors.
+---@field anchorPointWorldSpace vector3 Anchor point (in world-space coordinates)
+---@field anchorPointBody1LocalSpace vector3 Anchor point on body 1 (in local-space coordinates)
+---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
+---@field rotationAxisWorld vector3 Hinge rotation axis (in world-space coordinates)s)
+---@field rotationAxisBody1Local vector3  Hinge rotation axis of body 1 (in local-space coordinates)
+---@field rotationAxisBody2Local vector3  Hinge rotation axis of body 2 (in local-space coordinates)
+---@field isLimitEnabled bool True if the hinge joint limits are enabled.
+---@field isMotorEnabled bool True if the hinge joint motor is enabled.
+---@field minAngleLimit number Minimum allowed rotation angle (in radian) if limits are enabled.
+---@field maxAngleLimit number Maximum allowed rotation angle (in radian) if limits are enabled.
+---@field motorSpeed number Motor speed (in radian/second)
+---@field maxMotorTorque number Maximum motor torque (in Newtons * meters) that can be applied to reach to desired motor speed.
+local Rp3dHingetJointInfo = {}
+
 ---@class Rp3dJoint
 local Rp3dJoint = {}
 
@@ -182,7 +198,7 @@ function Rp3dJoint:getEntityId() end
 local Rp3dBallAndSocketJoint = {}
 
 ---@param isLimitEnabled bool
-function Rp3dBallAndzSocketJoint:enableConeLimit(isLimitEnabled) end
+function Rp3dBallAndSocketJoint:enableConeLimit(isLimitEnabled) end
 
 ---@return bool
 function Rp3dBallAndSocketJoint:isConeLimitEnabled() end
@@ -195,6 +211,53 @@ function Rp3dBallAndSocketJoint:getConeLimitHalfAngle() end
 
 ---@return number
 function Rp3dBallAndSocketJoint:getConeHalfAngle() end
+
+---@class Rp3dHingeJoint:Rp3dJoint
+local Rp3dHingeJoint = {}
+
+---@return bool
+function Rp3dHingeJoint:isLimitEnabled() end
+
+---@return bool
+function Rp3dHingeJoint:isMotorEnabled() end
+
+---@param isLimitEnabled bool
+function Rp3dHingeJoint:enableLimit(isLimitEnabled) end
+
+---@param isMotorEnabled bool
+function Rp3dHingeJoint:enableMotor(isMotorEnabled) end
+
+---@return number
+function Rp3dHingeJoint:getMinAngleLimit() end
+
+---@param lowerLimit number
+function Rp3dHingeJoint:setMinAngleLimit(lowerLimit) end
+
+---@return number
+function Rp3dHingeJoint:getMaxAngleLimit() end
+
+---@param upperLimit number
+function Rp3dHingeJoint:setMaxAngleLimit(upperLimit) end
+
+---@return number
+function Rp3dHingeJoint:getMotorSpeed() end
+
+---@param motorSpeed number
+function Rp3dHingeJoint:setMotorSpeed(motorSpeed) end
+
+---@return number
+function Rp3dHingeJoint:getMaxMotorTorque() end
+
+---@param maxMotorTorque number
+function Rp3dHingeJoint:setMaxMotorTorque(maxMotorTorque) end
+
+---@param timeStep number
+---@return number
+function Rp3dHingeJoint:getMotorTorque(timeStep) end
+
+--Return the current hinge angle (in radians)
+---@return number
+function Rp3dHingeJoint:getAngle() end
 
 
 ---@class Rp3dPolyhedronMesh
@@ -1309,6 +1372,23 @@ function rp3d.createBallAndSocketJointInfoLocalSpace(body1, body2, anchorPointBo
 ---@param initAnchorPointWorldSpace vector3
 ---@return Rp3dBallAndSocketJointInfo
 function rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param anchorPointBody1Local vector3
+---@param anchorPointBody2Local vector3
+---@param rotationBody1AxisLocal vector3
+---@param rotationBody2AxisLocal vector3
+---@return Rp3dHingeJointInfo
+function rp3d.createHingeJointInfoLocalSpace(body1, body2, anchorPointBody1Local, anchorPointBody2Local,
+											 rotationBody1AxisLocal, rotationBody2AxisLocal) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param initAnchorPointWorldSpace vector3
+---@param initRotationAxisWorld vector3
+---@return Rp3dHingeJointInfo
+function rp3d.createHingeJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace, initRotationAxisWorld) end
 
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",

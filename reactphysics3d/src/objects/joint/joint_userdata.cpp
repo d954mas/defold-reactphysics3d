@@ -3,6 +3,7 @@
 #include "objects/joint/joint_info.h"
 #include "objects/joint/joint_userdata.h"
 #include "objects/joint/ball_and_socket_joint_userdata.h"
+#include "objects/joint/hinge_joint_userdata.h"
 #include "objects/collision_body_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
@@ -120,6 +121,7 @@ int Joint_ToString(lua_State *L){
 
 void JointUserdataInitMetaTable(lua_State *L){
     BallAndSocketJointUserdataInitMetaTable(L);
+    HingeJointUserdataInitMetaTable(L);
 }
 
 

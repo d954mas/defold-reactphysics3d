@@ -1,4 +1,4 @@
-# BallAndSocketJointinfo
+# BallAndSocketJointInfo
 
 This structure is used to gather the information needed to create a ball-and-socket joint.
 

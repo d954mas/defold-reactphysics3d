@@ -1,5 +1,5 @@
-#ifndef ball_and_socket_joint_userdata_h
-#define ball_and_socket_joint_userdata_h
+#ifndef hinge_joint_userdata_h
+#define hinge_joint_userdata_h
 
 #include <dmsdk/sdk.h>
 #include "undefine_none.h"
@@ -7,9 +7,8 @@
 #include "reactphysics3d/reactphysics3d.h"
 
 
-
 namespace rp3dDefold {
 
-    void BallAndSocketJointUserdataInitMetaTable(lua_State *L);
+    void HingeJointUserdataInitMetaTable(lua_State *L);
 }
 #endif

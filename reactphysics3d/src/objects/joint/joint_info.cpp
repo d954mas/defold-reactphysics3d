@@ -94,12 +94,44 @@ void JointInfoPush(lua_State *L,  JointInfo *info){
             break;
         }
         case JointType::SLIDERJOINT:{
+            assert(false);
             break;
         }
         case JointType::HINGEJOINT:{
+            const HingeJointInfo  *hingeInfo =(HingeJointInfo*) info;
+            lua_pushboolean(L,hingeInfo->isUsingLocalSpaceAnchors);
+            lua_setfield(L, -2, "isUsingLocalSpaceAnchors");
+            pushRp3dVector3(L,hingeInfo->anchorPointWorldSpace);
+            lua_setfield(L, -2, "anchorPointWorldSpace");
+            pushRp3dVector3(L,hingeInfo->anchorPointBody1LocalSpace);
+            lua_setfield(L, -2, "anchorPointBody1LocalSpace");
+            pushRp3dVector3(L,hingeInfo->anchorPointBody2LocalSpace);
+            lua_setfield(L, -2, "anchorPointBody2LocalSpace");
+
+            pushRp3dVector3(L,hingeInfo->rotationAxisWorld);
+            lua_setfield(L, -2, "rotationAxisWorld");
+            pushRp3dVector3(L,hingeInfo->rotationAxisBody1Local);
+            lua_setfield(L, -2, "rotationAxisBody1Local");
+            pushRp3dVector3(L,hingeInfo->rotationAxisBody2Local);
+            lua_setfield(L, -2, "rotationAxisBody2Local");
+
+            lua_pushboolean(L,hingeInfo->isLimitEnabled);
+            lua_setfield(L, -2, "isLimitEnabled");
+            lua_pushboolean(L,hingeInfo->isMotorEnabled);
+            lua_setfield(L, -2, "isMotorEnabled");
+
+            lua_pushnumber(L,hingeInfo->minAngleLimit);
+            lua_setfield(L, -2, "minAngleLimit");
+            lua_pushnumber(L,hingeInfo->maxAngleLimit);
+            lua_setfield(L, -2, "maxAngleLimit");
+            lua_pushnumber(L,hingeInfo->motorSpeed);
+            lua_setfield(L, -2, "motorSpeed");
+            lua_pushnumber(L,hingeInfo->maxMotorTorque);
+            lua_setfield(L, -2, "maxMotorTorque");
             break;
         }
         case JointType::FIXEDJOINT:
+             assert(false);
             break;
         default:
             assert(false);
