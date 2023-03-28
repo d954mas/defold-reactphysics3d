@@ -23,6 +23,9 @@
 *                                                                               *
 ********************************************************************************/
 
+#include "objects/collision_body_userdata.h"
+#include "objects/joint/joint_userdata.h"
+
 // Libraries
 #include <reactphysics3d/engine/PhysicsCommon.h>
 #include <reactphysics3d/engine/PhysicsWorld.h>
@@ -1155,5 +1158,18 @@ RigidBody* PhysicsWorld::getRigidBody(uint32 index) {
     assert(index < mRigidBodies.size());
 
     return mRigidBodies[index];
+}
+
+void PhysicsWorld::rigidBodyRemoveJointsUserdata(lua_State* L, RigidBody* rigidBody){
+    // Destroy all the joints in which the rigid body to be destroyed is involved
+    const Array<Entity>& joints = mRigidBodyComponents.getJoints(rigidBody->getEntity());
+    for (int i=0;i<joints.size();++i) {
+        Joint* joint = mJointsComponents.getJoint(joints[i]);
+        if(joint->getUserData()!=NULL){
+            rp3dDefold::JointUserdata* data = (rp3dDefold::JointUserdata*)joint->getUserData();
+            data->Destroy(L);
+            delete data;
+        }
+    }
 }
 

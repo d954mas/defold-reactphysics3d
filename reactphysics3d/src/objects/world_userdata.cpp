@@ -437,7 +437,7 @@ static int DestroyRigidBody(lua_State *L){
     body->Destroy(L);
     delete body;
     //TODO DESTROY JOINS USERDATA
-
+    data->world->rigidBodyRemoveJointsUserdata(L,rigidBody);
     data->world->destroyRigidBody(rigidBody);
    	return 0;
 }
@@ -642,6 +642,19 @@ static int CreateJoint(lua_State* L){
     return 1;
 }
 
+static int DestroyJoint(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 0);
+    check_arg_count(L, 2);
+
+    WorldUserdata *world = WorldUserdataCheck(L, 1);
+    JointUserdata *jointUserdata = JointUserdataCheck(L,2);
+    Joint *joint = jointUserdata->joint;
+    jointUserdata->Destroy(L);
+    delete jointUserdata;
+    world->world->destroyJoint(joint);
+    return 1;
+}
+
 void WorldUserdataInitMetaTable(lua_State *L){
     int top = lua_gettop(L);
 
@@ -687,6 +700,7 @@ void WorldUserdataInitMetaTable(lua_State *L){
         {"setEventListener",SetEventListener},
         {"getWorldAABB",GetWorldAABB},
         {"createJoint",CreateJoint},
+        {"destroyJoint",DestroyJoint},
         {"__tostring",ToString},
         { 0, 0 }
     };

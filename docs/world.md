@@ -129,6 +129,7 @@ end
 * World:[testCollisionList](#worldtestcollisionlist)() [ContactPair](#overlappair)[]
 * World:[setEventListener](#worldseteventlistenerlistener)(listener)
 * World:[createJoint](#worldcreatejointjointinfo)(jointInfo) [Joint](joints/join.md)
+* World:[destroyJoint](#worlddestroyjointjoint)(joint)
 
 ---
 ### World:getName()
@@ -437,3 +438,10 @@ Create a joint between two bodies in the world and return a new joint.
 
 **RETURN**
 * ([Joint](joints/joint.md))
+
+---
+### World:destroyJoint(joint)
+Destroy a joint.
+
+**PARAMETERS**
+* `joint` ([Joint](joints/joint.md))

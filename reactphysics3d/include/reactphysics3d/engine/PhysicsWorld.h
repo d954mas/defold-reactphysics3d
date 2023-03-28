@@ -26,6 +26,9 @@
 #ifndef REACTPHYSICS3D_PHYSICS_WORLD_H
 #define REACTPHYSICS3D_PHYSICS_WORLD_H
 
+#include <dmsdk/sdk.h>
+#include "undefine_none.h"
+
 // Libraries
 #include <reactphysics3d/mathematics/mathematics.h>
 #include <reactphysics3d/containers/Array.h>
@@ -452,6 +455,8 @@ class PhysicsWorld {
 
         /// Return a reference to the Debug Renderer of the world
         DebugRenderer& getDebugRenderer();
+
+        void rigidBodyRemoveJointsUserdata(lua_State* L, RigidBody* body);
 
 #ifdef IS_RP3D_PROFILING_ENABLED
 

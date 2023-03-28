@@ -809,6 +809,10 @@ function PhysicsWorld:getWorldAABB(collider) end
 ---@return Rp3dJoint
 function PhysicsWorld:createJoint(jointInfo) end
 
+--Destroy a joint.
+---@param joint Rp3dJoint
+function PhysicsWorld:destroyJoint(joint) end
+
 ---@class Rp3dCollisionShape
 local CollisionShape = {}
 

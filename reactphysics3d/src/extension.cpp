@@ -62,15 +62,14 @@ static int DestroyPhysicsWorldLua(lua_State* L){
     }
     //destroy rigidBodyUserdata
     for(int i=0;i<data->world->getNbRigidBodies();++i){
-        CollisionBody* body = data->world->getRigidBody(i);
+        RigidBody* body = data->world->getRigidBody(i);
         CollisionBodyUserdata* userdata = (CollisionBodyUserdata*) body->getUserData();
         if(userdata!=NULL){
             userdata->Destroy(L);
             delete userdata;
         }
+        data->world->rigidBodyRemoveJointsUserdata(L,body);
     }
-    //destroy joints
-
 
     DebugRendererUserdata* drUserdata = (DebugRendererUserdata*)data->world->getDebugRenderer().getUserData();
     if(drUserdata!=NULL){
