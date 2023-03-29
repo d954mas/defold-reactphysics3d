@@ -1,0 +1,105 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+local ConcaveMesh = require "main.objects.concave_mesh"
+
+local SPHERE_RADIUS = 0.5
+local NB_ROWS_NET_SPHERES = 20
+
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+	self.spheres_net = {}
+
+	self.joints = {}
+
+	-- Create all the spheres of the scene
+	for i = 0, NB_ROWS_NET_SPHERES - 1 do
+		self.spheres_net[i] = {}
+		for j = 0, NB_ROWS_NET_SPHERES - 1 do
+			local sphere = Sphere(true, SPHERE_RADIUS, self.world)
+			sphere.collider:setMaterialBounciness(0)
+			table.insert(self.objects, sphere)
+			self.spheres_net[i][j] = sphere
+		end
+	end
+
+	local sphere = Sphere(true, 7, self.world)
+	sphere.body:setType(rp3d.BodyType.STATIC)
+	sphere.collider:setMaterialBounciness(0)
+
+	local space = 0.5
+	local startX = -(NB_ROWS_NET_SPHERES / 2.0 * (2.0 * SPHERE_RADIUS + space));
+	local startZ = -(NB_ROWS_NET_SPHERES / 2.0 * (2.0 * SPHERE_RADIUS + space));
+
+	for i = 0, NB_ROWS_NET_SPHERES - 1 do
+		for j = 0, NB_ROWS_NET_SPHERES - 1 do
+			local initPosition = vmath.vector3(startX + i * (2 * SPHERE_RADIUS + space), 12, startZ + j * (2 * SPHERE_RADIUS + space));
+			self.spheres_net[i][j].body:setTransformPosition(initPosition)
+		end
+	end
+
+	for i = 0, NB_ROWS_NET_SPHERES - 1 do
+		for j = 0, NB_ROWS_NET_SPHERES - 1 do
+			if (i > 0) then
+				local body1 = self.spheres_net[i - 1][j].body
+				local body2 = self.spheres_net[i][j].body
+				local anchorPointWorldSpace = body2:getTransformPosition()
+				local jointInfo = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, anchorPointWorldSpace)
+				jointInfo.isCollisionEnabled = false
+				local joint = self.world:createJoint(jointInfo)
+			end
+
+			if (j > 0) then
+				local body1 = self.spheres_net[i][j-1].body
+				local body2 = self.spheres_net[i][j].body
+				local anchorPointWorldSpace = body2:getTransformPosition()
+				local jointInfo = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, anchorPointWorldSpace)
+				jointInfo.isCollisionEnabled = false
+				local joint = self.world:createJoint(jointInfo)
+			end
+		end
+	end
+
+end
+
+function init(self)
+	create_physics(self)
+
+	--msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
+
+	SCENE_HELPER.scene_new({
+		name = "BallSocket Net",
+		world = self.world
+	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
+end
+
+
+
