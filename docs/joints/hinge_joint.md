@@ -128,6 +128,9 @@ Return the intensity of the current torque applied for the joint motor.
 **PARAMETERS**
 * `timeStep` (number)
 
+**RETURN**
+* (number)
+
 ---
 ### HingeJoint:getAngle()
 

@@ -4,6 +4,7 @@
 #include "objects/joint/joint_userdata.h"
 #include "objects/joint/ball_and_socket_joint_userdata.h"
 #include "objects/joint/hinge_joint_userdata.h"
+#include "objects/joint/slider_joint_userdata.h"
 #include "objects/collision_body_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
@@ -25,7 +26,6 @@ JointUserdata::JointUserdata(Joint* joint):BaseUserData(USERDATA_TYPE){
             break;
         case JointType::SLIDERJOINT:
             this->metatable_name = META_SLIDER_JOINT;
-            assert(false);
             break;
         case JointType::HINGEJOINT:
             this->metatable_name = META_HINGE_JOINT;
@@ -121,6 +121,7 @@ int Joint_ToString(lua_State *L){
 void JointUserdataInitMetaTable(lua_State *L){
     BallAndSocketJointUserdataInitMetaTable(L);
     HingeJointUserdataInitMetaTable(L);
+    SliderJointUserdataInitMetaTable(L);
 }
 
 

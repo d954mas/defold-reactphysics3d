@@ -163,7 +163,22 @@ local Rp3dBallAndSocketJointInfo = {}
 ---@field maxAngleLimit number Maximum allowed rotation angle (in radian) if limits are enabled.
 ---@field motorSpeed number Motor speed (in radian/second)
 ---@field maxMotorTorque number Maximum motor torque (in Newtons * meters) that can be applied to reach to desired motor speed.
-local Rp3dHingetJointInfo = {}
+local Rp3dHingeJointInfo = {}
+
+---@class Rp3dSliderJointInfo:Rp3dJointInfo
+---@field isUsingLocalSpaceAnchors bool rue if this object has been constructed using local-space anchors.
+---@field anchorPointWorldSpace vector3 Anchor point (in world-space coordinates)
+---@field anchorPointBody1LocalSpace vector3 Anchor point on body 1 (in local-space coordinates)
+---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
+---@field sliderAxisWorldSpace vector3 Slider axis (in world-space coordinates)
+---@field sliderAxisBody1Local vector3 Hinge slider axis of body 1 (in local-space coordinates)
+---@field isLimitEnabled bool True if the slider limits are enabled.
+---@field isMotorEnabled bool True if the slider motor is enabled.
+---@field minTranslationLimit number Mininum allowed translation if limits are enabled.
+---@field maxTranslationLimit number MMaximum allowed translation if limits are enabled.
+---@field motorSpeed number Motor speed.
+---@field maxMotorForce number Maximum motor force (in Newtons) that can be applied to reach to desired motor speed.
+local Rp3dSliderJointInfo = {}
 
 ---@class Rp3dJoint
 local Rp3dJoint = {}
@@ -258,6 +273,60 @@ function Rp3dHingeJoint:getMotorTorque(timeStep) end
 --Return the current hinge angle (in radians)
 ---@return number
 function Rp3dHingeJoint:getAngle() end
+
+---@class Rp3dSliderJoint:Rp3dJoint
+local Rp3dSliderJoint = {}
+
+---@return bool
+function Rp3dSliderJoint:isLimitEnabled() end
+
+---@return bool
+function Rp3dSliderJoint:isMotorEnabled() end
+
+---@param isLimitEnabled bool
+function Rp3dSliderJoint:enableLimit(isLimitEnabled) end
+
+---@param isMotorEnabled bool
+function Rp3dSliderJoint:enableMotor(isMotorEnabled) end
+
+---@return number
+function Rp3dSliderJoint:getTranslation() end
+
+---@return number
+function Rp3dSliderJoint:getMinTranslationLimit() end
+
+---@param lowerLimit number
+function Rp3dSliderJoint:setMinTranslationLimit(lowerLimit) end
+
+---@return number
+function Rp3dSliderJoint:getMaxTranslationLimit() end
+
+---@param upperLimit number
+function Rp3dSliderJoint:setMaxTranslationLimit(upperLimit) end
+
+---@return number
+function Rp3dSliderJoint:getMotorSpeed() end
+
+---@param motorSpeed number
+function Rp3dSliderJoint:setMotorSpeed(motorSpeed) end
+
+---@return number
+function Rp3dSliderJoint:getMaxMotorForce() end
+
+---@param maxMotorForce number
+function Rp3dSliderJoint:setMaxMotorForce(maxMotorForce) end
+
+---@param timeStep number
+---@return number
+function Rp3dSliderJoint:getMotorForce(timeStep) end
+
+---@param timeStep number
+---@return vector3
+function Rp3dSliderJoint:getReactionForce(timeStep) end
+
+---@param timeStep number
+---@return vector3
+function Rp3dSliderJoint:getReactionTorque(timeStep) end
 
 
 ---@class Rp3dPolyhedronMesh
@@ -1389,6 +1458,23 @@ function rp3d.createHingeJointInfoLocalSpace(body1, body2, anchorPointBody1Local
 ---@param initRotationAxisWorld vector3
 ---@return Rp3dHingeJointInfo
 function rp3d.createHingeJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace, initRotationAxisWorld) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param anchorPointBody1Local vector3
+---@param anchorPointBody2Local vector3
+---@param sliderAxisBody1Local vector3
+---@return Rp3dSliderJointInfo
+function rp3d.createSliderJointInfoLocalSpace(body1, body2, anchorPointBody1Local, anchorPointBody2Local,
+											  sliderAxisBody1Local) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param initAnchorPointWorldSpace vector3
+---@param initSliderAxisWorldSpace vector3
+---@return Rp3dSliderJointInfo
+function rp3d.createSliderJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace, initSliderAxisWorldSpace) end
+
 
 rp3d.ContactsPositionCorrectionTechnique = {
 	BAUMGARTE_CONTACTS = "BAUMGARTE_CONTACTS",

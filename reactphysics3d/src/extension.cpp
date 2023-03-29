@@ -453,6 +453,39 @@ static int CreateHingeJointInfoWorldSpace(lua_State* L){
     return 1;
 }
 
+static int CreateSliderJointInfoLocalSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 5);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 anchorPointBody1Local = checkRp3dVector3(L,3);
+    Vector3 anchorPointBody2Local = checkRp3dVector3(L,4);;
+    Vector3 sliderAxisBody1Local = checkRp3dVector3(L,5);;
+
+    SliderJointInfo jointInfo = SliderJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+        anchorPointBody1Local, anchorPointBody2Local,sliderAxisBody1Local);
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
+
+static int CreateSliderJointInfoWorldSpace(lua_State* L){
+    DM_LUA_STACK_CHECK(L, 1);
+    check_arg_count(L, 4);
+
+    CollisionBodyUserdata* body1 = CollisionBodyRigidUserdataCheck(L,1);
+    CollisionBodyUserdata* body2 = CollisionBodyRigidUserdataCheck(L,2);
+    Vector3 initAnchorPointWorldSpace = checkRp3dVector3(L,3);
+    Vector3 initSliderAxisWorldSpace = checkRp3dVector3(L,4);;
+
+    SliderJointInfo jointInfo = SliderJointInfo((RigidBody*)body1->body,(RigidBody*)body2->body,
+        initAnchorPointWorldSpace, initSliderAxisWorldSpace);
+
+    JointInfoPush(L,&jointInfo);
+    return 1;
+}
+
 
 // Functions exposed to Lua
 static const luaL_reg Module_methods[] ={
@@ -483,6 +516,8 @@ static const luaL_reg Module_methods[] ={
     {"createBallAndSocketJointInfoWorldSpace", CreateBallAndSocketJointInfoWorldSpace},
     {"createHingeJointInfoLocalSpace", CreateHingeJointInfoLocalSpace},
     {"createHingeJointInfoWorldSpace", CreateHingeJointInfoWorldSpace},
+    {"createSliderJointInfoLocalSpace", CreateSliderJointInfoLocalSpace},
+    {"createSliderJointInfoWorldSpace", CreateSliderJointInfoWorldSpace},
     {0, 0}
 };
 

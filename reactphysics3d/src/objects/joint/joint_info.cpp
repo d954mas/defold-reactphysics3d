@@ -94,7 +94,34 @@ void JointInfoPush(lua_State *L,  JointInfo *info){
             break;
         }
         case JointType::SLIDERJOINT:{
-            assert(false);
+            const SliderJointInfo  *sliderInfo =(SliderJointInfo*) info;
+            lua_pushboolean(L,sliderInfo->isUsingLocalSpaceAnchors);
+            lua_setfield(L, -2, "isUsingLocalSpaceAnchors");
+            pushRp3dVector3(L,sliderInfo->anchorPointWorldSpace);
+            lua_setfield(L, -2, "anchorPointWorldSpace");
+            pushRp3dVector3(L,sliderInfo->anchorPointBody1LocalSpace);
+            lua_setfield(L, -2, "anchorPointBody1LocalSpace");
+            pushRp3dVector3(L,sliderInfo->anchorPointBody2LocalSpace);
+            lua_setfield(L, -2, "anchorPointBody2LocalSpace");
+
+            pushRp3dVector3(L,sliderInfo->sliderAxisWorldSpace);
+            lua_setfield(L, -2, "sliderAxisWorldSpace");
+            pushRp3dVector3(L,sliderInfo->sliderAxisBody1Local);
+            lua_setfield(L, -2, "sliderAxisBody1Local");
+
+            lua_pushboolean(L,sliderInfo->isLimitEnabled);
+            lua_setfield(L, -2, "isLimitEnabled");
+            lua_pushboolean(L,sliderInfo->isMotorEnabled);
+            lua_setfield(L, -2, "isMotorEnabled");
+
+            lua_pushnumber(L,sliderInfo->minTranslationLimit);
+            lua_setfield(L, -2, "minTranslationLimit");
+            lua_pushnumber(L,sliderInfo->maxTranslationLimit);
+            lua_setfield(L, -2, "maxTranslationLimit");
+            lua_pushnumber(L,sliderInfo->motorSpeed);
+            lua_setfield(L, -2, "motorSpeed");
+            lua_pushnumber(L,sliderInfo->maxMotorForce);
+            lua_setfield(L, -2, "maxMotorForce");
             break;
         }
         case JointType::HINGEJOINT:{
@@ -283,6 +310,89 @@ static HingeJointInfo* HingeJointInfoCheck(lua_State *L, int index){
 
 }
 
+static SliderJointInfo* SliderJointInfoCheck(lua_State *L, int index){
+    //check Joint class
+    lua_getfield(L, index, "type");
+    JointType type = JointTypeStringToEnum(L,luaL_checkstring(L,-1));
+    lua_pop(L,1);
+    if(type != JointType::SLIDERJOINT){
+        luaL_error(L, "need SliderJointInfo get:%s", JointTypeEnumToString(type));
+    }
+
+    lua_getfield(L, index, "body1");
+    RigidBody* body1 = (RigidBody*)CollisionBodyRigidUserdataCheck(L,-1)->body;
+    lua_pop(L,1);
+
+    lua_getfield(L, index, "body2");
+    RigidBody* body2 = (RigidBody*)CollisionBodyRigidUserdataCheck(L,-1)->body;
+    lua_pop(L,1);
+
+    SliderJointInfo* info = new SliderJointInfo(body1,body2,Vector3(0,0,0),Vector3(0,1,0));
+
+    /* table is in the stack at index 't' */
+    lua_pushnil(L);  /* first key */
+    while (lua_next(L, -2) != 0) {
+        /* uses 'key' (at index -2) and 'value' (at index -1) */
+        // printf("%s - %s\n",lua_tostring(L, -2),lua_tostring(L, -1));
+        const char* key = lua_tostring(L, -2);
+        switch (hash_string(key)) {
+            case HASH_body1:break;
+            case HASH_body2:break;
+            case HASH_type:break;
+            case HASH_positionCorrectionTechnique:
+                info->positionCorrectionTechnique = JointsPositionCorrectionTechniqueStringToEnum(L,luaL_checkstring(L,-1));
+                break;
+            case HASH_isCollisionEnabled:
+                info->isCollisionEnabled = lua_toboolean(L,-1);
+                break;
+            case HASH_isUsingLocalSpaceAnchors:
+                info->isUsingLocalSpaceAnchors = lua_toboolean(L,-1);
+                break;
+            case HASH_anchorPointBody1LocalSpace:
+                info->anchorPointBody1LocalSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_anchorPointBody2LocalSpace:
+                info->anchorPointBody2LocalSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_anchorPointWorldSpace:
+                info->anchorPointWorldSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_sliderAxisWorldSpace:
+                info->sliderAxisWorldSpace = checkRp3dVector3(L,-1);
+                break;
+            case HASH_sliderAxisBody1Local:
+                info->sliderAxisBody1Local = checkRp3dVector3(L,-1);
+                break;
+            case HASH_isLimitEnabled:
+                info->isLimitEnabled = lua_toboolean(L,-1);
+                break;
+            case HASH_isMotorEnabled:
+                info->isMotorEnabled = lua_toboolean(L,-1);
+                break;
+            case HASH_minTranslationLimit:
+                info->minTranslationLimit = luaL_checknumber(L,-1);
+                break;
+            case HASH_maxTranslationLimit:
+                info->maxTranslationLimit = luaL_checknumber(L,-1);
+                break;
+            case HASH_motorSpeed:
+                info->motorSpeed = luaL_checknumber(L,-1);
+                break;
+            case HASH_maxMotorForce:
+                info->maxMotorForce = luaL_checknumber(L,-1);
+                break;
+           default:
+               luaL_error(L, "unknown key:%s", key);
+               break;
+       }
+      /* removes 'value'; keeps 'key' for next iteration */
+      lua_pop(L, 1);
+    }
+
+    return info;
+
+}
+
 //YOU NEED DELETE JointInfo after use.
 JointInfo* JointInfoCheck(lua_State *L, int index){
     if (!lua_istable(L, index))  luaL_error(L,"JointInfo should be table");
@@ -297,7 +407,7 @@ JointInfo* JointInfoCheck(lua_State *L, int index){
             info = BallAndSocketJointInfoCheck(L, index);
             break;
         case JointType::SLIDERJOINT:{
-            assert(false);
+             info = SliderJointInfoCheck(L, index);
             break;
         }
         case JointType::HINGEJOINT:{

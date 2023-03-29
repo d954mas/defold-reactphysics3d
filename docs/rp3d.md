@@ -29,8 +29,10 @@ This object is used by the user as a factory to create the physics world and oth
 * rp3d.[createAABB](#rp3dcreateaabbmincoordinates-maxcoordinates)(minCoordinates, maxCoordinates) [AABB](aabb.md)
 * rp3d.[createBallAndSocketJointInfoLocalSpace](#rp3dcreateballandsocketjointinfolocalspacebody1-body2-anchorpointbody1localspace-anchorpointbody2localspace)(body1, body2, anchorPointBody1LocalSpace, anchorPointBody2LocalSpace) [BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md)
 * rp3d.[createBallAndSocketJointInfoWorldSpace](#rp3dcreateballandsocketjointinfoworldspacebody1-body2-initanchorpointworldspace)(body1, body2, initAnchorPointWorldSpace) [BallAndSocketJointInfo](joints/ball_and_socket_joint_info.md)
-* rp3d.[createHingeJointInfoLocalSpace](#rp3dcreatehingejointinfolocalspaceb)(body1, body2, anchorPointBody1Local, anchorPointBody2Local, rotationBody1AxisLocal, rotationBody2AxisLocal) [HingeJointInfo](joints/hinge_joint_info.md)
-* rp3d.[createHingeJointInfoWorldSpace](#rp3dcreateheigejointinfoworldspacebody1)(body1, body2, initAnchorPointWorldSpace, initRotationAxisWorld) [HingeJointInfo](joints/hinge_joint_info.md)
+* rp3d.[createHingeJointInfoLocalSpace](#rp3dcreatehingejointinfolocalspacebody1-body2-anchorpointbody1local-anchorpointbody2local-rotationbody1axislocal-rotationbody2axislocal)(body1, body2, anchorPointBody1Local, anchorPointBody2Local, rotationBody1AxisLocal, rotationBody2AxisLocal) [HingeJointInfo](joints/hinge_joint_info.md)
+* rp3d.[createHingeJointInfoWorldSpace](#rp3dcreatehingejointinfoworldspacebody1-body2-initanchorpointworldspace-initrotationaxisworld)(body1, body2, initAnchorPointWorldSpace, initRotationAxisWorld) [HingeJointInfo](joints/hinge_joint_info.md)
+* rp3d.[createSliderJointInfoLocalSpace](#rp3dcreatesliderjointinfolocalspacebody1-body2-anchorpointbody1local-anchorpointbody2local-slideraxisbody1local)(body1, body2, anchorPointBody1Local, anchorPointBody2Local, sliderAxisBody1Local) [SliderJointInfo](joints/slider_joint_info.md)
+* rp3d.[createSliderJointInfoWorldSpace](#rp3dcreatesliderjointinfoworldspacebody1-body2-initanchorpointworldspace-initslideraxisworldspace)(body1, body2, initAnchorPointWorldSpace, initSliderAxisWorldSpace) [SliderJointInfo](joints/slider_joint_info.md)
 ---
 ### rp3d.createPhysicsWorld(settings)
 Create and return an instance of PhysicsWorld.
@@ -296,6 +298,34 @@ Create HingeJointInfo
 
 **RETURN**
 * ([HingeJointInfo](joints/hinge_joint_info.md))
+
+
+---
+### rp3d.createSliderJointInfoLocalSpace(body1, body2, anchorPointBody1Local, anchorPointBody2Local, sliderAxisBody1Local)
+Create SliderJointInfo
+
+**PARAMETERS**
+* `body1` ([RigidBody](rigid_body.md))
+* `body2` ([RigidBody](rigid_body.md))
+* `anchorPointBody1Local` (vector3)
+* `anchorPointBody2Local` (vector3)
+* `sliderAxisBody1Local` (vector3)
+
+**RETURN**
+* ([SliderJointInfo](joints/slider_joint_info.md))
+
+---
+### rp3d.createSliderJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace, initSliderAxisWorldSpace)
+Create SliderJointInfo
+
+**PARAMETERS**
+* `body1` ([RigidBody](rigid_body.md))
+* `body2` ([RigidBody](rigid_body.md))
+* `initAnchorPointWorldSpace` (vector3)
+* `initSliderAxisWorldSpace` (vector3)
+
+**RETURN**
+* ([SliderJointInfo](joints/slider_joint_info.md))
 
 ## Enums
 
