@@ -62,7 +62,13 @@ static int SetMinAngleLimit(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
     HingeJoint *joint = HingeJointCheck(L,1);
-    joint->setMinAngleLimit(luaL_checknumber(L,2));
+    double limit = luaL_checknumber(L,2);
+    if(limit <= 0 && limit >= -2 * PI_RP3D){
+        joint->setMinAngleLimit(limit);
+    }else{
+        luaL_error(L,"limit must be in range[0,-2pi]");
+    }
+
     return 0;
 }
 
@@ -78,7 +84,12 @@ static int SetMaxAngleLimit(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
     HingeJoint *joint = HingeJointCheck(L,1);
-    joint->setMaxAngleLimit(luaL_checknumber(L,2));
+    double limit = luaL_checknumber(L,2);
+    if(limit >= 0 && limit <= 2 * PI_RP3D){
+       joint->setMaxAngleLimit(limit);
+    }else{
+       luaL_error(L,"limit must be in range[0,-2pi]");
+    }
     return 0;
 }
 
@@ -110,7 +121,11 @@ static int SetMaxMotorTorque(lua_State* L){
     DM_LUA_STACK_CHECK(L, 0);
     check_arg_count(L, 2);
     HingeJoint *joint = HingeJointCheck(L,1);
-    joint->setMaxMotorTorque(luaL_checknumber(L,2));
+    double torque = luaL_checknumber(L,2);
+    if(torque<0){
+        luaL_error(L,"torque must be >=0");
+    }
+    joint->setMaxMotorTorque(torque);
     return 0;
 }
 
@@ -151,7 +166,7 @@ void HingeJointUserdataInitMetaTable(lua_State *L){
             {"getAngle", GetAngle},
             {0, 0}
         };
-    luaL_newmetatable(L, META_BALL_AND_SOCKET_JOINT);
+    luaL_newmetatable(L, META_HINGE_JOINT);
     luaL_register (L, NULL,functions);
     lua_pushvalue(L, -1);
     lua_setfield(L, -1, "__index");

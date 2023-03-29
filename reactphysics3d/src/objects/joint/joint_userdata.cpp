@@ -29,7 +29,6 @@ JointUserdata::JointUserdata(Joint* joint):BaseUserData(USERDATA_TYPE){
             break;
         case JointType::HINGEJOINT:
             this->metatable_name = META_HINGE_JOINT;
-            assert(false);
             break;
         case JointType::FIXEDJOINT:
             this->metatable_name = META_FIXED_JOINT;

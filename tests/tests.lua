@@ -26,6 +26,7 @@ local TEST_CONCAVE_SHAPE = require "tests.shape.test_concave_shape"
 local TEST_BALL_AND_SOCKET_JOINT_INFO = require "tests.joint.tests_ball_and_socket_joint_info"
 local TEST_BALL_AND_SOCKET_JOINT = require "tests.joint.tests_ball_and_socket_joint"
 local TEST_HINGE_JOINT_INFO = require "tests.joint.tests_hinge_joint_info"
+local TEST_HINGE_JOINT= require "tests.joint.tests_hinge_joint"
 local M = {}
 
 function M.run()
@@ -96,6 +97,7 @@ function M.run()
 	DEFTEST.add(TEST_BALL_AND_SOCKET_JOINT_INFO)
 	DEFTEST.add(TEST_BALL_AND_SOCKET_JOINT)
 	DEFTEST.add(TEST_HINGE_JOINT_INFO)
+	DEFTEST.add(TEST_HINGE_JOINT)
 	DEFTEST.run()
 end
 
