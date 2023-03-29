@@ -1,7 +1,7 @@
 local CLASS = require "libs.middleclass"
 
 ---@class GamePhysObject
----@field body Rp3dCollisionBody
+---@field body Rp3dRigidBody
 local Body = CLASS.class("PhysObject")
 
 ---@param world Rp3dPhysicsWorld

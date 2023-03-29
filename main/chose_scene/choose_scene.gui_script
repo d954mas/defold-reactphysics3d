@@ -62,7 +62,9 @@ function init(self)
 		{id = "heightfield",scene = "heightfield"},
 		{id = "BallSocket Joint",scene = "ball_and_socket_joint"},
 		{id = "BallSocket Chain",scene = "ball_and_socket_joints_chain"},
-		{id = "BallSocket Net",scene = "ball_and_socket_joints_net"}
+		{id = "BallSocket Net",scene = "ball_and_socket_joints_net"},
+		{id = "Hinge Joint",scene = "hinge_joint"},
+		{id = "Hinge Chain",scene = "hinge_joint_chain"}
 	}
 	update_list(self)
 
