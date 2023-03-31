@@ -5,6 +5,7 @@
 #include "objects/joint/ball_and_socket_joint_userdata.h"
 #include "objects/joint/hinge_joint_userdata.h"
 #include "objects/joint/slider_joint_userdata.h"
+#include "objects/joint/fixed_joint_userdata.h"
 #include "objects/collision_body_userdata.h"
 #include "reactphysics3d/reactphysics3d.h"
 #include "utils.h"
@@ -32,7 +33,6 @@ JointUserdata::JointUserdata(Joint* joint):BaseUserData(USERDATA_TYPE){
             break;
         case JointType::FIXEDJOINT:
             this->metatable_name = META_FIXED_JOINT;
-            assert(false);
             break;
         default:{
             assert(false);
@@ -122,6 +122,7 @@ void JointUserdataInitMetaTable(lua_State *L){
     BallAndSocketJointUserdataInitMetaTable(L);
     HingeJointUserdataInitMetaTable(L);
     SliderJointUserdataInitMetaTable(L);
+    FixedJointUserdataInitMetaTable(L);
 }
 
 

@@ -180,6 +180,14 @@ local Rp3dHingeJointInfo = {}
 ---@field maxMotorForce number Maximum motor force (in Newtons) that can be applied to reach to desired motor speed.
 local Rp3dSliderJointInfo = {}
 
+---@class Rp3dFixedJointInfo:Rp3dJointInfo
+---@field isUsingLocalSpaceAnchors bool rue if this object has been constructed using local-space anchors.
+---@field anchorPointWorldSpace vector3 Anchor point (in world-space coordinates)
+---@field anchorPointBody1LocalSpace vector3 Anchor point on body 1 (in local-space coordinates)
+---@field anchorPointBody2LocalSpace vector3 Anchor point on body 2 (in local-space coordinates)
+local Rp3dFixedJointInfo = {}
+
+
 ---@class Rp3dJoint
 local Rp3dJoint = {}
 
@@ -327,6 +335,10 @@ function Rp3dSliderJoint:getReactionForce(timeStep) end
 ---@param timeStep number
 ---@return vector3
 function Rp3dSliderJoint:getReactionTorque(timeStep) end
+
+---@class Rp3dFixedJoint:Rp3dJoint
+local Rp3dFixedJoint = {}
+
 
 
 ---@class Rp3dPolyhedronMesh
@@ -1474,6 +1486,19 @@ function rp3d.createSliderJointInfoLocalSpace(body1, body2, anchorPointBody1Loca
 ---@param initSliderAxisWorldSpace vector3
 ---@return Rp3dSliderJointInfo
 function rp3d.createSliderJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace, initSliderAxisWorldSpace) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param anchorPointBody1Local vector3
+---@param anchorPointBody2Local vector3
+---@return Rp3dFixedJointInfo
+function rp3d.createFixedJointInfoLocalSpace(body1, body2, anchorPointBody1Local, anchorPointBody2Local) end
+
+---@param body1 Rp3dRigidBody
+---@param body2 Rp3dRigidBody
+---@param initAnchorPointWorldSpace vector3
+---@return Rp3dFixedJointInfo
+function rp3d.createFixedJointInfoWorldSpace(body1, body2, initAnchorPointWorldSpace) end
 
 
 rp3d.ContactsPositionCorrectionTechnique = {

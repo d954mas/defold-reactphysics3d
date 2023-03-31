@@ -1,5 +1,6 @@
 # HingeJoint
 
+This class represents a hinge joint that allows arbitrary rotation between two bodies around a single axis.
 
 ---
 

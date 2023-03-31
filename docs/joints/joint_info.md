@@ -6,7 +6,8 @@ This structure is used to gather the information needed to create a joint.
 Subclasses:
 1. [BallAndSocketJointInfo](ball_and_socket_joint_info.md)
 2. [HingeJointInfo](hinge_joint_info.md)
-3. [SliderJointInfo](sliderjoint_info.md)
+3. [SliderJointInfo](slider_joint_info.md)
+4. [FixedJointInfo](fixed_joint_info.md)
 ---
 
 * `body1` ([RigidBody](../rigid_body.md)) First rigid body of the joint.

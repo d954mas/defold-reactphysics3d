@@ -1,5 +1,9 @@
 # SliderJoint
 
+This class represents a slider joint.
+
+This joint has a one degree of freedom. It only allows relative translation of the bodies along a single direction and no rotation.
+
 
 ---
 

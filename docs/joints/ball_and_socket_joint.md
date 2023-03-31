@@ -1,5 +1,6 @@
 # BallAndSocketJoint
 
+This class represents a ball-and-socket joint that allows arbitrary rotation between two bodies.
 
 ---
 

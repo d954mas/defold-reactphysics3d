@@ -29,6 +29,8 @@ local TEST_HINGE_JOINT_INFO = require "tests.joint.tests_hinge_joint_info"
 local TEST_HINGE_JOINT = require "tests.joint.tests_hinge_joint"
 local TEST_SLIDER_JOINT_INFO = require "tests.joint.tests_slider_joint_info"
 local TEST_SLIDER_JOINT = require "tests.joint.tests_slider_joint"
+local TEST_FIXED_JOINT_INFO = require "tests.joint.tests_fixed_joint_info"
+local TEST_FIXED_JOINT = require "tests.joint.tests_fixed_joint"
 local M = {}
 
 function M.run()
@@ -102,6 +104,8 @@ function M.run()
 	DEFTEST.add(TEST_HINGE_JOINT)
 	DEFTEST.add(TEST_SLIDER_JOINT_INFO)
 	DEFTEST.add(TEST_SLIDER_JOINT)
+	DEFTEST.add(TEST_FIXED_JOINT_INFO)
+	DEFTEST.add(TEST_FIXED_JOINT)
 	DEFTEST.run()
 end
 

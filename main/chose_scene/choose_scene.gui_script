@@ -65,7 +65,8 @@ function init(self)
 		{id = "BallSocket Net",scene = "ball_and_socket_joints_net"},
 		{id = "Hinge Joint",scene = "hinge_joint"},
 		{id = "Hinge Chain",scene = "hinge_joint_chain"},
-		{id = "Slider Joint",scene = "slider_joint"}
+		{id = "Slider Joint",scene = "slider_joint"},
+		{id = "Fixed Joint",scene = "fixed_joint"}
 	}
 	update_list(self)
 
