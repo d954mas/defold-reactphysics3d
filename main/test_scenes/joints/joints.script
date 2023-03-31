@@ -1,0 +1,207 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+local ConcaveMesh = require "main.objects.concave_mesh"
+
+local SCENE_RADIUS = 70.0
+local BOX_SIZE = vmath.vector3(2, 2, 2);
+local FLOOR_SIZE = vmath.vector3(15, 0.5, 15);
+local NB_BALLSOCKETJOINT_BOXES = 7;
+local NB_HINGE_BOXES = 7;
+--// Create the boxes and joints for the Ball-and-Socket joint example
+local function createBallAndSocketJoints(self)
+	--------------- Create the boxes ---------------
+	local positionBox = vmath.vector3(0, 15, 5);
+	local boxDimension = vmath.vector3(1, 1, 1);
+	---@type GameBox[]
+	self.mBallAndSocketJointChainBoxes = {}
+
+	for i = 0, NB_BALLSOCKETJOINT_BOXES - 1 do
+		local box = Box(true, boxDimension, self.world);
+		self.mBallAndSocketJointChainBoxes[i + 1] = box
+		box.body:setTransformPosition(positionBox);
+
+		-- The fist box cannot move (static body)
+		if (i == 0) then
+			box.body:setType(rp3d.BodyType.STATIC)
+		end
+		box.body:setAngularDamping(0.2)
+		box.collider:setMaterialBounciness(0.4)
+		table.insert(self.objects, box)
+		positionBox.y = positionBox.y - (boxDimension.y + 0.5);
+	end
+
+	self.mBallAndSocketJoints = {}
+	for i = 0, NB_BALLSOCKETJOINT_BOXES - 2 do
+		local body1 = self.mBallAndSocketJointChainBoxes[i + 1].body
+		local body2 = self.mBallAndSocketJointChainBoxes[i + 2].body
+		local body1Position = body1:getTransformPosition()
+		local body2Position = body2:getTransformPosition()
+		local anchorPointWorldSpace = 0.5 * (body1Position + body2Position);
+		local jointInfo = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, anchorPointWorldSpace);
+		self.mBallAndSocketJoints[i + 1] = self.world:createJoint(jointInfo)
+	end
+end
+
+-- Create the boxes and joint for the Slider joint example
+local function createSliderJoint(self)
+	--------------- Create the first box ---------------
+	local positionBox1 = vmath.vector3(0, 2.1, 0);
+	local box1Dimension = vmath.vector3(2, 4, 2);
+	self.mSliderJointBottomBox = Box(true, box1Dimension, self.world);
+	self.mSliderJointBottomBox.body:setTransformPosition(positionBox1)
+	-- The fist box cannot move
+	self.mSliderJointBottomBox.body:setType(rp3d.BodyType.STATIC);
+	self.mSliderJointBottomBox.collider:setMaterialBounciness(0.4)
+	table.insert(self.objects, self.mSliderJointBottomBox)
+
+	--------------- Create the second box ---------------
+	local positionBox2 = vmath.vector3(0, 4.2, 0)
+	local box2Dimension = vmath.vector3(1.5, 4, 1.5)
+	self.mSliderJointTopBox = Box(true, box2Dimension, self.world);
+	self.mSliderJointTopBox.body:setTransformPosition(positionBox2)
+	self.mSliderJointTopBox.collider:setMaterialBounciness(0.4)
+	table.insert(self.objects, self.mSliderJointTopBox)
+
+	local body1 = self.mSliderJointBottomBox.body
+	local body2 = self.mSliderJointTopBox.body
+	local body1Position = body1:getTransformPosition()
+	local body2Position = body2:getTransformPosition()
+	local anchorPointWorldSpace = 0.5 * (body2Position + body1Position);
+	local sliderAxisWorldSpace = (body2Position - body1Position);
+	local jointInfo = rp3d.createSliderJointInfoWorldSpace(body1, body2, anchorPointWorldSpace,
+			sliderAxisWorldSpace);
+	jointInfo.maxTranslationLimit = 1.7
+	jointInfo.minTranslationLimit = -1.7
+	jointInfo.isMotorEnabled = true;
+	jointInfo.motorSpeed = 0.0;
+	jointInfo.maxMotorForce = 10000.0;
+	jointInfo.isCollisionEnabled = false;
+	self.mSliderJoint = self.world:createJoint(jointInfo)
+end
+
+-- Create the boxes and joint for the Hinge joint example
+local function createPropellerHingeJoint(self)
+	--------------- Create the propeller box ---------------
+	local positionBox1 = vmath.vector3(0, 7, 0);
+	local boxDimension = vmath.vector3(10, 1, 1)
+	self.mPropellerBox = Box(true, boxDimension, self.world)
+	self.mPropellerBox.body:setTransformPosition(positionBox1)
+	self.mPropellerBox.collider:setMaterialBounciness(0.4)
+	table.insert(self.objects, self.mPropellerBox)
+	--------------- Create the Hinge joint ---------------
+	local body1 = self.mPropellerBox.body
+	local body2 = self.mSliderJointTopBox.body
+	local body1Position = body1:getTransformPosition()
+	local body2Position = body2:getTransformPosition()
+	local anchorPointWorldSpace = 0.5 * (body2Position + body1Position);
+	local hingeAxisWorldSpace = vmath.vector3(0, 1, 0)
+	local jointInfo = rp3d.createHingeJointInfoWorldSpace(body1, body2, anchorPointWorldSpace, hingeAxisWorldSpace);
+	jointInfo.isMotorEnabled = true;
+	jointInfo.motorSpeed = -0.5 * math.pi
+	jointInfo.maxMotorTorque = 60
+	jointInfo.isCollisionEnabled = false;
+	self.mPropellerHingeJoint = self.world:createJoint(jointInfo)
+end
+
+--Create the boxes and joints for the fixed joints
+local function createFixedJoints(self)
+	--------------- Create the first box ---------------
+	local positionBox1 = vmath.vector3(5, 7, 0);
+	local boxDimension = vmath.vector3(1.5, 1.5, 1.5)
+	self.mFixedJointBox1 = Box(true, boxDimension, self.world)
+	self.mFixedJointBox1.body:setTransformPosition(positionBox1)
+	self.mFixedJointBox1.collider:setMaterialBounciness(0.4)
+	table.insert(self.objects, self.mFixedJointBox1)
+	--------------- Create the second box ---------------
+	local positionBox2 = vmath.vector3(-5, 7, 0);
+	self.mFixedJointBox2 = Box(true, boxDimension, self.world);
+	self.mFixedJointBox2.body:setTransformPosition(positionBox2)
+	self.mFixedJointBox2.collider:setMaterialBounciness(0.4)
+	table.insert(self.objects, self.mFixedJointBox2)
+	--------------- Create the first fixed joint ---------------
+	local body1 = self.mFixedJointBox1.body
+	local propellerBody = self.mPropellerBox.body
+	local anchorPointWorldSpace = vmath.vector3(5, 7, 0)
+	local jointInfo1 = rp3d.createFixedJointInfoWorldSpace(body1, propellerBody, anchorPointWorldSpace)
+	jointInfo1.isCollisionEnabled = false
+	self.mFixedJoint1 = self.world:createJoint(jointInfo1)
+
+	--------------- Create the second fixed joint --------------- //
+	local body2 = self.mFixedJointBox2.body
+	local anchorPointWorldSpace2 = vmath.vector3(-5, 7, 0)
+	local jointInfo2 = rp3d.createFixedJointInfoWorldSpace(body2, propellerBody, anchorPointWorldSpace2)
+	jointInfo2.isCollisionEnabled = false
+	self.mFixedJoint2 = self.world:createJoint(jointInfo2)
+end
+
+-- Create the floor
+local function createFloor(self)
+	local floorPosition = vmath.vector3(0, 0, 0);
+	self.mFloor = Box(true, FLOOR_SIZE, self.world)
+	self.mFloor:setColor(self.mFloor.colors.floorColorDemo)
+	self.mFloor:setColorSleeping(self.mFloor.colors.floorColorDemo)
+	self.mFloor.body:setType(rp3d.BodyType.STATIC)
+	self.mFloor.collider:setMaterialBounciness(0.3)
+	table.insert(self.objects, self.mFloor)
+end
+
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-5, 10, 30) })
+
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+
+	createBallAndSocketJoints(self)
+	createSliderJoint(self)
+	createPropellerHingeJoint(self)
+	createFixedJoints(self)
+	createFloor(self)
+end
+
+function init(self)
+	create_physics(self)
+
+	--msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
+
+	SCENE_HELPER.scene_new({
+		name = "Joints",
+		world = self.world
+	})
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+
+	--Update the motor speed of the Slider Joint (to move up and down)
+	local motorSpeed = 2.0 * math.cos(SCENE_HELPER.simulation.time * 1.5);
+	self.mSliderJoint:setMotorSpeed(motorSpeed);
+
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	SCENE_HELPER.scene_final()
+end
+
+
+

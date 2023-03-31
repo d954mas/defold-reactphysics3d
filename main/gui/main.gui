@@ -94,8 +94,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -434,8 +434,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -592,8 +592,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -751,8 +751,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -910,8 +910,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -1136,8 +1136,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -1622,9 +1622,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Physics total:"
+  text: "Debug draw:"
   font: "roboto_mono_bold"
-  id: "menu/profiling/physics_total"
+  id: "menu/profiling/physics_draw"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_W
@@ -1888,7 +1888,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
   font: "roboto_mono_bold"
-  id: "menu/profiling/physics_total/lbl"
+  id: "menu/profiling/physics_draw/lbl"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_W
@@ -2005,8 +2005,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -2581,8 +2581,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -2681,8 +2681,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -2848,8 +2848,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -2973,8 +2973,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -3773,8 +3773,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4063,8 +4063,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4221,8 +4221,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4280,8 +4280,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4570,8 +4570,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4728,8 +4728,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4787,8 +4787,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -4887,8 +4887,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5054,8 +5054,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5221,8 +5221,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5388,8 +5388,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5555,8 +5555,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5722,8 +5722,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -5904,8 +5904,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1.0
-    y: 1.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -6246,8 +6246,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -6348,8 +6348,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -6515,8 +6515,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -6682,8 +6682,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 64.0
-    y: 68.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }

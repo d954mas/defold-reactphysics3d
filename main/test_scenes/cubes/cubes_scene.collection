@@ -1,4 +1,4 @@
-name: "cubes"
+name: "cubes_scene"
 scale_along_z: 0
 embedded_instances {
   id: "controller"

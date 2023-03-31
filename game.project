@@ -54,5 +54,5 @@ game_binding = /builtins/input/all.input_bindingc
 max_resources = 4096
 
 [collection_proxy]
-max_count = 16
+max_count = 32
 

@@ -17,13 +17,13 @@ local function reset_gui(self)
 	gui.set_text(self.vh.lbl_title, tostring(SCENE_HELPER.scene_config.name))
 end
 
-local function settings_set(self,name)
-	gui.set_enabled(self.vh.settings.physics.root,false)
-	gui.set_enabled(self.vh.settings.rendering.root,false)
-	if(name == "physics")then
-		gui.set_enabled(self.vh.settings.physics.root,true)
-	elseif(name == "rendering")then
-		gui.set_enabled(self.vh.settings.rendering.root,true)
+local function settings_set(self, name)
+	gui.set_enabled(self.vh.settings.physics.root, false)
+	gui.set_enabled(self.vh.settings.rendering.root, false)
+	if (name == "physics") then
+		gui.set_enabled(self.vh.settings.physics.root, true)
+	elseif (name == "rendering") then
+		gui.set_enabled(self.vh.settings.rendering.root, true)
 	end
 end
 
@@ -37,7 +37,7 @@ function init(self)
 		profiling = {
 			lbl_fps = gui.get_node("menu/profiling/fps/lbl"),
 			lbl_dt = gui.get_node("menu/profiling/fps/dt/lbl"),
-			lbl_physics_total = gui.get_node("menu/profiling/physics_total/lbl"),
+			lbl_physics_draw = gui.get_node("menu/profiling/physics_draw/lbl"),
 			lbl_physics_step = gui.get_node("menu/profiling/physics_step/lbl"),
 		},
 		settings = {
@@ -51,11 +51,11 @@ function init(self)
 	}
 	self.gui_functions = {
 		btn_play = function() SCENE_HELPER.simulation.play = true end,
-		btn_step = function()   SCENE_HELPER.simulation.make_step = true end,
-		btn_pause = function()  SCENE_HELPER.simulation.play = false end,
+		btn_step = function() SCENE_HELPER.simulation.make_step = true end,
+		btn_pause = function() SCENE_HELPER.simulation.play = false end,
 		btn_restart = function() MONARCH.show(MONARCH.top(), { reload = true }) end,
-		btn_settings_physics = function() settings_set(self,"physics") end,
-		btn_settings_rendering = function() settings_set(self,"rendering") end,
+		btn_settings_physics = function() settings_set(self, "physics") end,
+		btn_settings_rendering = function() settings_set(self, "rendering") end,
 		btn_camera_reset = function()
 			SCENE_HELPER.camera.euler_y = 0
 			SCENE_HELPER.camera.euler_x = 0
@@ -65,39 +65,39 @@ function init(self)
 		end,
 		btn_timestep_1 = function()
 			SCENE_HELPER.simulation.step = 0.001
-			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"),string.format("Step:%.2fms",SCENE_HELPER.simulation.step*1000))
+			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"), string.format("Step:%.2fms", SCENE_HELPER.simulation.step * 1000))
 		end,
 		btn_timestep_2 = function()
-			SCENE_HELPER.simulation.step =1/120
-			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"),string.format("Step:%.2fms",SCENE_HELPER.simulation.step*1000))
+			SCENE_HELPER.simulation.step = 1 / 120
+			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"), string.format("Step:%.2fms", SCENE_HELPER.simulation.step * 1000))
 		end,
 		btn_timestep_3 = function()
-			SCENE_HELPER.simulation.step =1/60
-			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"),string.format("Step:%.2fms",SCENE_HELPER.simulation.step*1000))
+			SCENE_HELPER.simulation.step = 1 / 60
+			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"), string.format("Step:%.2fms", SCENE_HELPER.simulation.step * 1000))
 		end,
 		btn_timestep_4 = function()
-			SCENE_HELPER.simulation.step =1/30
-			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"),string.format("Step:%.2fms",SCENE_HELPER.simulation.step*1000))
+			SCENE_HELPER.simulation.step = 1 / 30
+			gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"), string.format("Step:%.2fms", SCENE_HELPER.simulation.step * 1000))
 		end,
 		btn_profiler = function(checkbox)
 			self.profiler_enabled = not self.profiler_enabled
 			profiler.enable_ui(self.profiler_enabled)
 		end,
 		btn_add_velocity = function()
-			SCENE_HELPER.simulation.velocity_iterations = LUME.clamp(SCENE_HELPER.simulation.velocity_iterations+1,1,100)
-			gui.set_text(gui.get_node("menu/settings/physics/velocity/lbl"),SCENE_HELPER.simulation.velocity_iterations)
+			SCENE_HELPER.simulation.velocity_iterations = LUME.clamp(SCENE_HELPER.simulation.velocity_iterations + 1, 1, 100)
+			gui.set_text(gui.get_node("menu/settings/physics/velocity/lbl"), SCENE_HELPER.simulation.velocity_iterations)
 		end,
 		btn_remove_velocity = function()
-			SCENE_HELPER.simulation.velocity_iterations = LUME.clamp(SCENE_HELPER.simulation.velocity_iterations-1,1,100)
-			gui.set_text(gui.get_node("menu/settings/physics/velocity/lbl"),SCENE_HELPER.simulation.velocity_iterations)
+			SCENE_HELPER.simulation.velocity_iterations = LUME.clamp(SCENE_HELPER.simulation.velocity_iterations - 1, 1, 100)
+			gui.set_text(gui.get_node("menu/settings/physics/velocity/lbl"), SCENE_HELPER.simulation.velocity_iterations)
 		end,
 		btn_add_position = function()
-			SCENE_HELPER.simulation.position_iterations = LUME.clamp(SCENE_HELPER.simulation.position_iterations+1,1,100)
-			gui.set_text(gui.get_node("menu/settings/physics/position/lbl"),SCENE_HELPER.simulation.position_iterations)
+			SCENE_HELPER.simulation.position_iterations = LUME.clamp(SCENE_HELPER.simulation.position_iterations + 1, 1, 100)
+			gui.set_text(gui.get_node("menu/settings/physics/position/lbl"), SCENE_HELPER.simulation.position_iterations)
 		end,
 		btn_remove_position = function()
-			SCENE_HELPER.simulation.position_iterations = LUME.clamp(SCENE_HELPER.simulation.position_iterations-1,1,100)
-			gui.set_text(gui.get_node("menu/settings/physics/position/lbl"),SCENE_HELPER.simulation.position_iterations)
+			SCENE_HELPER.simulation.position_iterations = LUME.clamp(SCENE_HELPER.simulation.position_iterations - 1, 1, 100)
+			gui.set_text(gui.get_node("menu/settings/physics/position/lbl"), SCENE_HELPER.simulation.position_iterations)
 		end,
 
 		chb_sleep = function(checkbox)
@@ -160,7 +160,7 @@ function init(self)
 	DIRTY_LARRY.checkbox("menu_right/camera/orbit_x").set_checked(SCENE_HELPER.camera.orbit_x)
 	DIRTY_LARRY.checkbox("menu_right/camera/input").set_checked(SCENE_HELPER.camera.input)
 	reset_gui(self)
-	settings_set(self,"physics")
+	settings_set(self, "physics")
 end
 
 function final(self)
@@ -170,8 +170,8 @@ end
 local function update_profiling(self)
 	gui.set_text(self.vh.profiling.lbl_fps, string.format("%d", SCENE_HELPER.profiling.fps))
 	gui.set_text(self.vh.profiling.lbl_dt, string.format("%.2fms(max)", SCENE_HELPER.profiling.dt * 1000))
-	gui.set_text(self.vh.profiling.lbl_physics_total, SCENE_HELPER.profiling.phys_total)
-	gui.set_text(self.vh.profiling.lbl_physics_step, string.format("%.2fms",SCENE_HELPER.profiling.phys_step*1000))
+	gui.set_text(self.vh.profiling.lbl_physics_draw, string.format("%.2fms", SCENE_HELPER.profiling.draw_time * 1000))
+	gui.set_text(self.vh.profiling.lbl_physics_step, string.format("%.2fms", SCENE_HELPER.profiling.phys_step * 1000))
 end
 
 function update(self, dt)
@@ -187,7 +187,7 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	if(MONARCH.top() == hash("choose_scene"))then return false end
+	if (MONARCH.top() == hash("choose_scene")) then return false end
 	DIRTY_LARRY.button("btn_play", action_id, action, self.gui_functions.btn_play, gui_refresh_scale)
 	DIRTY_LARRY.button("btn_restart", action_id, action, self.gui_functions.btn_restart, gui_refresh_scale)
 	DIRTY_LARRY.button("btn_pause", action_id, action, self.gui_functions.btn_pause, gui_refresh_scale)
@@ -223,6 +223,6 @@ function on_input(self, action_id, action)
 	DIRTY_LARRY.checkbox("menu_right/camera/orbit_x", action_id, action, self.gui_functions.chb_camera_orbit_x)
 	DIRTY_LARRY.checkbox("menu_right/camera/input", action_id, action, self.gui_functions.chb_camera_input)
 
-	SCENE_HELPER.on_input(action_id,action)
+	SCENE_HELPER.on_input(action_id, action)
 end
 

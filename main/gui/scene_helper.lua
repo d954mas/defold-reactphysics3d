@@ -26,9 +26,11 @@ M.simulation = {
 	velocity_iterations = 6,
 	position_iterations = 3,
 	step = 1 / 60,
+	---@type Rp3dRigidBody
 	body_selected = nil,
 	raycast_from = nil,
-	raycast_to = nil
+	raycast_to = nil,
+	time = 0
 }
 M.profiling = {
 	fps_delay = 1,
@@ -37,6 +39,7 @@ M.profiling = {
 	frames = 0,
 	dt = 0,
 	phys_step = 0,
+	draw_time = 0,
 	phys_total = 0,
 }
 
@@ -69,6 +72,7 @@ function M.scene_new(cfg)
 	M.profiling.fps = 0
 	M.profiling.dt = 0
 	M.profiling.phys_step = 0
+	M.profiling.draw_time = 0
 	M.profiling.phys_total = 0
 	M.profiling.dt_max = 0
 	M.profiling.dt_total = 0
@@ -80,6 +84,7 @@ function M.scene_final()
 	M.simulation.raycast_from = nil
 	M.simulation.raycast_to = nil
 	M.simulation.body_selected = nil
+	M.simulation.time = 0
 	msg.post("main:/camera3d", "reset")
 end
 
@@ -92,11 +97,17 @@ function M.update(dt)
 			M.simulation.make_step = false
 			local time = socket.gettime()
 			cfg.world:update(M.simulation.step)
-			cfg.world:getDebugRenderer():draw()
-			cfg.world:getDebugRenderer():reset()
-			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
 			M.profiling.phys_step = socket.gettime() - time
+			-- cfg.world:Step(cfg.dt * cfg.time_scale, cfg.velocityIterations, cfg.positionIterations)
+
+			M.simulation.time = M.simulation.time + M.simulation.step
 			--cfg.world:DebugDraw()
+		end
+
+		if (M.rendering.debug_draw) then
+			local time = socket.gettime()
+			cfg.world:getDebugRenderer():draw()
+			M.profiling.draw_time = socket.gettime() - time
 		end
 
 	end
@@ -121,8 +132,8 @@ function M.update(dt)
 	end
 
 	if (M.simulation.raycast_from) then
-	--	msg.post("@render:", "draw_line",
-			--	{ start_point = M.simulation.raycast_from, end_point = M.simulation.raycast_to, color = vmath.vector4(1, 0, 0, 0.5) })
+		--	msg.post("@render:", "draw_line",
+		--	{ start_point = M.simulation.raycast_from, end_point = M.simulation.raycast_to, color = vmath.vector4(1, 0, 0, 0.5) })
 	end
 end
 
@@ -246,7 +257,7 @@ function M.on_input(action_id, action)
 						local phys_body = result:getUserData()
 						phys_body:setSelected(true)
 						M.simulation.body_selected = result
-						M.simulation.body_selected_pos =result:getLocalPoint(result_world_pos)
+						M.simulation.body_selected_pos = result:getLocalPoint(result_world_pos)
 					end
 				end
 			end
@@ -259,14 +270,16 @@ function M.on_input(action_id, action)
 				end
 			end
 
-			if(not action.pressed and M.simulation.body_selected)then
-				local v3 = vmath.vector3(action.dx/960,action.dy/540,0)
-				local MOUSE_MOVE_BODY_FORCE = 200000.0
-				local quat = vmath.quat_from_to(vmath.vector3(0,0,-1),RENDER_3D.view_front)
-				v3 = vmath.rotate(quat,v3)
-
+			if (not action.pressed and M.simulation.body_selected) then
+				local v3 = vmath.vector3(action.dx / 960, action.dy / 540, 0)
+				local MOUSE_MOVE_BODY_FORCE = 100000.0
+				local quat = vmath.quat_from_to(vmath.vector3(0, 0, -1), RENDER_3D.view_front)
+				v3 = vmath.rotate(quat, v3)
 
 				local force = v3 * MOUSE_MOVE_BODY_FORCE
+				if (vmath.length(force) > MOUSE_MOVE_BODY_FORCE / 2) then
+					force = force / 2
+				end
 
 				M.simulation.body_selected:applyWorldForceAtLocalPosition(force, M.simulation.body_selected_pos);
 			end
@@ -276,6 +289,5 @@ function M.on_input(action_id, action)
 	end
 
 end
-
 
 return M

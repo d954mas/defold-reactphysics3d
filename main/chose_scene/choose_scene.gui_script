@@ -52,8 +52,9 @@ function init(self)
 	gui.set_render_order(2)
 	msg.post(".", "acquire_input_focus")
 	self.list_data = {
-		{id = "cubes",scene = "cubes"},
-		{id = "cube stack",scene = "cube_stack"},
+		{id = "Cubes",scene = "cubes"},
+		{id = "Cube Stack",scene = "cube_stack"},
+		{id = "Joints",scene = "joints"},
 		{id = "box tower",scene = "box_tower"},
 		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"},
 		{id = "collision shapes",scene = "collision_shapes"},
