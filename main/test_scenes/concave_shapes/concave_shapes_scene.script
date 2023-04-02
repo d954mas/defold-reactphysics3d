@@ -190,12 +190,12 @@ end
 function init(self)
 	create_physics(self)
 
-	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
-
 	SCENE_HELPER.scene_new({
-		name = "collision shapes",
+		name = "Concave Mesh",
 		world = self.world
 	})
+
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
 	--timer.delay(0.05,false,function()
 	--	MONARCH.show(MONARCH.top(), { reload = true })
 	--end)

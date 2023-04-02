@@ -117,7 +117,7 @@ function init(self)
 	create_physics(self)
 
 	SCENE_HELPER.scene_new({
-		name = "convex mesh(cubes)",
+		name = "Convex Mesh(cubes)",
 		world = self.world
 	})
 	--timer.delay(0.05,false,function()

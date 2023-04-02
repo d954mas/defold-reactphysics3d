@@ -59,50 +59,15 @@ local function create_physics(self)
 		end
 	end
 	self.floor.body:setTransform({ position = vmath.vector3(0), quat = vmath.quat_rotation_z(0) })
-	--[[// Gravity vector in the physics world
-
-	// Create all the cubes of the scene
-	for (int i=0; i<NB_CUBES; i++) {
-
-
-
-	// Set the box color
-	cube->setColor(mObjectColorDemo);
-	cube->setSleepingColor(mSleepingColorDemo);
-
-	// Change the material properties of the rigid body
-	rp3d::Material& material = cube->getCollider()->getMaterial();
-	material.setBounciness(rp3d::decimal(0.4));
-
-	// Add the box the list of box in the scene
-	mBoxes.push_back(cube);
-	mPhysicsObjects.push_back(cube);
-	}
-
-	// ------------------------- FLOOR ----------------------- //
-
-	// Create the floor
-	mFloor = new Box(true, FLOOR_SIZE, mPhysicsCommon, mPhysicsWorld, mMeshFolderPath);
-	mFloor->setColor(mFloorColorDemo);
-	mFloor->setSleepingColor(mFloorColorDemo);
-
-	// The floor must be a static rigid body
-	mFloor->getRigidBody()->setType(rp3d::BodyType::STATIC);
-	mPhysicsObjects.push_back(mFloor);
-	createPhysicsWorld();
-	initBodiesPositions();--]]
 end
 
 function init(self)
 	create_physics(self)
 
 	SCENE_HELPER.scene_new({
-		name = "box tower",
+		name = "Box Tower",
 		world = self.world
 	})
-	--timer.delay(0.05,false,function()
-	--	MONARCH.show(MONARCH.top(), { reload = true })
-	--end)
 end
 
 function update(self, dt)

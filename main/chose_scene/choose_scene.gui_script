@@ -43,7 +43,7 @@ end
 local function list_on_item_selected(list)
 	local data = list.data[list.selected_item]
 	MONARCH.back(nil, function()
-		timer.delay(0.01,false, function()
+		timer.delay(0.01, false, function()
 			MONARCH.replace(data.scene)
 		end)
 	end)
@@ -59,14 +59,15 @@ function init(self)
 		{ id = "Collision Shapes", scene = "collision_shapes" },
 		{ id = "Heightfield", scene = "heightfield" },
 		{ id = "Raycast", scene = "raycast" },
-		{ id = "box tower", scene = "box_tower" },
-		{ id = "convex mesh(cubes)", scene = "convex_mesh_cubes" },
-		{ id = "concave shape", scene = "concave_shape" },
-		{ id = "pile", scene = "pile" },
+		{ id = "Concave Mesh", scene = "concave_shape" },
+		{ id = "Pile", scene = "pile" },
+		{ id = "Box Tower", scene = "box_tower" },
+		{ id = "Convex Mesh(cubes)", scene = "convex_mesh_cubes" },
 
 		{ id = "BallSocket Joint", scene = "ball_and_socket_joint" },
-		{ id = "BallSocket Chain", scene = "ball_and_socket_joints_chain" },
 		{ id = "BallSocket Net", scene = "ball_and_socket_joints_net" },
+		{ id = "BallSocket Chain", scene = "ball_and_socket_joints_chain" },
+
 		{ id = "Hinge Joint", scene = "hinge_joint" },
 		{ id = "Hinge Chain", scene = "hinge_joint_chain" },
 		{ id = "Slider Joint", scene = "slider_joint" },
