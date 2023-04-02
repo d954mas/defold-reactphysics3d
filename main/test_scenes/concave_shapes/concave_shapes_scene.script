@@ -216,7 +216,7 @@ function final(self)
 		self.convex_meshes = nil
 	end
 
-	if (self.triangle_meshe) then
+	if (self.triangle_mesh) then
 		rp3d.destroyTriangleMesh(self.triangle_mesh)
 		self.triangle_mesh = nil
 	end
@@ -230,7 +230,7 @@ function final(self)
 
 	rp3d.destroyPhysicsWorld(self.world)
 	-- self.world:Destroy()
-	SCENE_HELPER.scene_final()
+	--SCENE_HELPER.scene_final()
 end
 
 

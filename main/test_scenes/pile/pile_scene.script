@@ -186,12 +186,12 @@ end
 function init(self)
 	create_physics(self)
 
-	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
-
 	SCENE_HELPER.scene_new({
 		name = "collision shapes",
 		world = self.world
 	})
+
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
 	--timer.delay(0.05,false,function()
 	--	MONARCH.show(MONARCH.top(), { reload = true })
 	--end)
@@ -212,7 +212,7 @@ function final(self)
 		self.convex_meshes = nil
 	end
 
-	if (self.triangle_meshe) then
+	if (self.triangle_mesh) then
 		rp3d.destroyTriangleMesh(self.triangle_mesh)
 		self.triangle_mesh = nil
 	end
@@ -226,7 +226,7 @@ function final(self)
 
 	rp3d.destroyPhysicsWorld(self.world)
 	-- self.world:Destroy()
-	SCENE_HELPER.scene_final()
+	--SCENE_HELPER.scene_final()
 end
 
 

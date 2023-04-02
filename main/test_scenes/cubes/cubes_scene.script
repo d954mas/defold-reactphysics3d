@@ -105,7 +105,7 @@ function final(self)
 
 	rp3d.destroyPhysicsWorld(self.world)
 	-- self.world:Destroy()
-	SCENE_HELPER.scene_final()
+	--SCENE_HELPER.scene_final()
 end
 
 

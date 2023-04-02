@@ -155,7 +155,7 @@ local function create_physics(self)
 		gravity = vmath.vector3(0, -9.81, 0)
 	}
 
-	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-5, 10, 30) })
+
 
 	self.world = rp3d.createPhysicsWorld(settings)
 	---@type GameBox[]
@@ -171,12 +171,15 @@ end
 function init(self)
 	create_physics(self)
 
-	--msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
+	--
 
 	SCENE_HELPER.scene_new({
 		name = "Joints",
 		world = self.world
 	})
+
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-5, 10, 30) })
+
 	--timer.delay(0.05,false,function()
 	--	MONARCH.show(MONARCH.top(), { reload = true })
 	--end)
@@ -200,7 +203,7 @@ function final(self)
 
 	rp3d.destroyPhysicsWorld(self.world)
 	-- self.world:Destroy()
-	SCENE_HELPER.scene_final()
+	--SCENE_HELPER.scene_final()
 end
 
 

@@ -2,7 +2,6 @@ local DIRTY_LARRY = require "gooey-dirtylarry.dirtylarry"
 local MONARCH = require "monarch.monarch"
 local GOOEY = require "gooey.gooey"
 
-
 local LISTITEM_SELECTED = hash("button_pressed")
 local LISTITEM_PRESSED = hash("button_pressed")
 local LISTITEM_OVER = hash("button_normal")
@@ -30,21 +29,23 @@ local function update_listitem(list, item)
 end
 
 local function update_dynamic_list(list)
-	for _,item in ipairs(list.items) do
+	for _, item in ipairs(list.items) do
 		update_listitem(list, item)
 		gui.set_text(item.nodes[hash(list.id .. "/listitem_text")], tostring(item.data and item.data.id or "-"))
 	end
 end
 
-local function update_list(self,action_id,action,fn)
+local function update_list(self, action_id, action, fn)
 	local list_id = "list"
 	GOOEY.dynamic_list(list_id, list_id .. "/stencil", list_id .. "/listitem_bg", self.list_data, action_id, action, nil, fn, update_dynamic_list)
 end
 
 local function list_on_item_selected(list)
 	local data = list.data[list.selected_item]
-	MONARCH.back(nil,function()
-		MONARCH.replace(data.scene)
+	MONARCH.back(nil, function()
+		timer.delay(0.01,false, function()
+			MONARCH.replace(data.scene)
+		end)
 	end)
 end
 
@@ -52,27 +53,28 @@ function init(self)
 	gui.set_render_order(2)
 	msg.post(".", "acquire_input_focus")
 	self.list_data = {
-		{id = "Cubes",scene = "cubes"},
-		{id = "Cube Stack",scene = "cube_stack"},
-		{id = "Joints",scene = "joints"},
-		{id = "box tower",scene = "box_tower"},
-		{id = "convex mesh(cubes)",scene = "convex_mesh_cubes"},
-		{id = "collision shapes",scene = "collision_shapes"},
-		{id = "concave shape",scene = "concave_shape"},
-		{id = "pile",scene = "pile"},
-		{id = "heightfield",scene = "heightfield"},
-		{id = "BallSocket Joint",scene = "ball_and_socket_joint"},
-		{id = "BallSocket Chain",scene = "ball_and_socket_joints_chain"},
-		{id = "BallSocket Net",scene = "ball_and_socket_joints_net"},
-		{id = "Hinge Joint",scene = "hinge_joint"},
-		{id = "Hinge Chain",scene = "hinge_joint_chain"},
-		{id = "Slider Joint",scene = "slider_joint"},
-		{id = "Fixed Joint",scene = "fixed_joint"}
+		{ id = "Cubes", scene = "cubes" },
+		{ id = "Cube Stack", scene = "cube_stack" },
+		{ id = "Joints", scene = "joints" },
+		{ id = "Collision Shapes", scene = "collision_shapes" },
+		{ id = "Heightfield", scene = "heightfield" },
+		{ id = "Raycast", scene = "raycast" },
+		{ id = "box tower", scene = "box_tower" },
+		{ id = "convex mesh(cubes)", scene = "convex_mesh_cubes" },
+		{ id = "concave shape", scene = "concave_shape" },
+		{ id = "pile", scene = "pile" },
+
+		{ id = "BallSocket Joint", scene = "ball_and_socket_joint" },
+		{ id = "BallSocket Chain", scene = "ball_and_socket_joints_chain" },
+		{ id = "BallSocket Net", scene = "ball_and_socket_joints_net" },
+		{ id = "Hinge Joint", scene = "hinge_joint" },
+		{ id = "Hinge Chain", scene = "hinge_joint_chain" },
+		{ id = "Slider Joint", scene = "slider_joint" },
+		{ id = "Fixed Joint", scene = "fixed_joint" }
 	}
 	update_list(self)
 
 end
-
 
 function final(self)
 	msg.post(".", "release_input_focus")
@@ -94,8 +96,7 @@ function on_input(self, action_id, action)
 	DIRTY_LARRY.button("btn_close", action_id, action, function()
 		MONARCH.back()
 	end)
-	update_list(self,action_id,action,list_on_item_selected)
-
+	update_list(self, action_id, action, list_on_item_selected)
 
 	return true
 end

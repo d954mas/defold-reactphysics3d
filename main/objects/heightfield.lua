@@ -22,8 +22,8 @@ function HeightField:initialize(rigid_body, world, mesh_url)
 	self.go = {
 		mesh = self.mesh_url
 	}
-	local buffer = game_utils.heightfield_update_mesh(self.mIndices,self.mVertices,self.mNormals)
-	resource.set_buffer(self.mesh_vertices,buffer)
+	local buffer = game_utils.heightfield_update_mesh(self.mIndices, self.mVertices, self.mNormals)
+	resource.set_buffer(self.mesh_vertices, buffer)
 
 	local transform_identity = {
 		position = vmath.vector3(),
@@ -55,7 +55,7 @@ function HeightField:generateHeightField()
 
 	for i = 0, NB_POINTS_WIDTH - 1 do
 		for j = 0, NB_POINTS_LENGTH - 1 do
-			local arrayIndex = i * NB_POINTS_LENGTH+j;
+			local arrayIndex = i * NB_POINTS_LENGTH + j;
 			local h = perlinNoise:GetHeight(-width * 0.5 + i, -length * 0.5 + j)
 
 			if (i == 0 and j == 0) then
@@ -92,18 +92,18 @@ function HeightField:generateGraphicsMesh()
 				local v4 = vertexId + NB_POINTS_LENGTH + 1;
 
 				-- First triangle
-				self.mIndices[mIndicesId]= v1
+				self.mIndices[mIndicesId] = v1
 				mIndicesId = mIndicesId + 1
-				self.mIndices[mIndicesId]= v2
+				self.mIndices[mIndicesId] = v2
 				mIndicesId = mIndicesId + 1
-				self.mIndices[mIndicesId]= v3
+				self.mIndices[mIndicesId] = v3
 				mIndicesId = mIndicesId + 1
 				-- Second triangle
-				self.mIndices[mIndicesId]= v2
+				self.mIndices[mIndicesId] = v2
 				mIndicesId = mIndicesId + 1
-				self.mIndices[mIndicesId]= v4
+				self.mIndices[mIndicesId] = v4
 				mIndicesId = mIndicesId + 1
-				self.mIndices[mIndicesId]= v3
+				self.mIndices[mIndicesId] = v3
 				mIndicesId = mIndicesId + 1
 			end
 			vertexId = vertexId + 1
@@ -113,39 +113,41 @@ function HeightField:generateGraphicsMesh()
 	self:calculateNormals()
 end
 
+function HeightField:setEnabled(enable)
+	msg.post(self.mesh_url, enable and "enable" or "disable")
+end
+
 function HeightField:calculateNormals()
 	self.mNormals = {}
-	for i=0,#self.mVertices do
+	for i = 0, #self.mVertices do
 		self.mNormals[i] = vmath.vector3(0)
 	end
 
-
 	local getVertexIndexInFace = function(faceIndex, i)
-		return self.mIndices[faceIndex*3 + i]
+		return self.mIndices[faceIndex * 3 + i]
 	end
-	for i=0,(#self.mIndices+1)/3-1 do
+	for i = 0, (#self.mIndices + 1) / 3 - 1 do
 		-- Get the three vertices index of the current face
 		local v1 = getVertexIndexInFace(i, 0);
 		local v2 = getVertexIndexInFace(i, 1);
 		local v3 = getVertexIndexInFace(i, 2);
-		assert(v1 < #self.mVertices+1);
-		assert(v2 < #self.mVertices+1);
-		assert(v3 < #self.mVertices+1);
+		assert(v1 < #self.mVertices + 1);
+		assert(v2 < #self.mVertices + 1);
+		assert(v3 < #self.mVertices + 1);
 		-- Compute the normal of the face
 		local p = assert(self.mVertices[v1])
 		local q = assert(self.mVertices[v2])
 		local r = assert(self.mVertices[v3])
-		local normal = vmath.normalize(vmath.cross(q-p,r-p))
+		local normal = vmath.normalize(vmath.cross(q - p, r - p))
 
-		self.mNormals[v1] = self.mNormals[v1]+normal;
-		self.mNormals[v2] = self.mNormals[v1]+normal;
-		self.mNormals[v3] = self.mNormals[v1]+normal;
+		self.mNormals[v1] = self.mNormals[v1] + normal;
+		self.mNormals[v2] = self.mNormals[v1] + normal;
+		self.mNormals[v3] = self.mNormals[v1] + normal;
 	end
 
-	for i=0,#self.mNormals do
+	for i = 0, #self.mNormals do
 		self.mNormals[i] = vmath.normalize(self.mNormals[i])
 	end
-
 
 
 end

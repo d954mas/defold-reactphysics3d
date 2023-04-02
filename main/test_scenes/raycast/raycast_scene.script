@@ -1,0 +1,265 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+local ConcaveMesh = require "main.objects.concave_mesh"
+local Heightfield = require "main.objects.heightfield"
+
+---@type Rp3dRay
+local RAY = {
+	point1 = vmath.vector3(),
+	point2 = vmath.vector3(),
+	maxFraction = 1 --[0-1] if nil use 1.
+}
+local HIT_POINTS = {}
+
+local MSG_DRAW_LINE = {
+	start_point = vmath.vector3(),
+	end_point = vmath.vector3(),
+	color = vmath.vector4(0, 0, 0, 1)
+}
+
+local BOX_SIZE = vmath.vector3(4, 2, 1);
+local SPHERE_RADIUS = 6.0
+local CONE_RADIUS = 3.0
+local CONE_HEIGHT = 5.0
+local CYLINDER_RADIUS = 3.0
+local CYLINDER_HEIGHT = 5.0
+local CAPSULE_RADIUS = 9.0
+local CAPSULE_HEIGHT = 9.0
+local DUMBBELL_HEIGHT = 5.0
+local NB_RAYS = 100
+local RAY_LENGTH = 30.0
+local NB_BODIES = 7
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+
+	self.mDumbbell = Dumbbell(false, self.world);
+	table.insert(self.objects, self.mDumbbell)
+
+	self.mBox = Box(false, SPHERE_RADIUS, self.world)
+	self.mBox.body:setIsActive(false)
+	table.insert(self.objects, self.mBox)
+
+	self.mSphere = Sphere(false, SPHERE_RADIUS, self.world)
+	table.insert(self.objects, self.mSphere)
+
+	self.mCapsule = Capsule(false, CAPSULE_RADIUS, CAPSULE_HEIGHT, self.world)
+	table.insert(self.objects, self.mCapsule)
+
+	local res = go.get("/meshes#convex", "vertices")
+	local buf = resource.get_buffer(res)
+	self.polyhedron_mesh = rp3d.createPolyhedronMeshFromMeshVerticesCopy(buf)
+
+	self.mConvexMesh = ConvexMesh(false, self.polyhedron_mesh, "/factory#convexmesh", self.world)
+	self.mConvexMesh:setScale(vmath.vector3(1),vmath.vector3(1))
+	table.insert(self.objects, self.mConvexMesh)
+
+	local str = sys.load_resource("/assets/custom_resources/castle_scene/level_objects.json")
+	local level_objects = json.decode(str)
+	local castle_collection = collectionfactory.create("/factory#castle")
+	self.triangle_arrays = {}
+	self.triangle_mesh = rp3d.createTriangleMesh()
+	local castle_collection_meshes = {}
+	for id, object in pairs(level_objects) do
+		local obj_url = assert(castle_collection[hash("/" .. id)])
+		local mesh_url = msg.url(obj_url)
+		mesh_url = msg.url(mesh_url.socket, mesh_url.path, id .. "_mesh")
+		table.insert(castle_collection_meshes, mesh_url)
+		--mesh_url.socket = hash(id)
+		local obj_res = go.get(mesh_url, "vertices")
+		local obj_buf = resource.get_buffer(obj_res)
+		local array = rp3d.createTriangleVertexArrayFromMeshVerticesCopy(obj_buf)
+		self.triangle_mesh:addSubpart(array)
+		table.insert(self.triangle_arrays, array)
+	end
+
+	self.mConcaveMesh = ConcaveMesh(false, self.triangle_mesh, castle_collection, self.world)
+	self.mConcaveMesh.meshes = castle_collection_meshes
+	table.insert(self.objects, self.mConcaveMesh)
+
+	self.mHeightField = Heightfield(false, self.world, msg.url("/meshes#heightfield"))
+	table.insert(self.objects, self.mHeightField)
+
+end
+
+local function createLines(self)
+	self.mLines = {}
+	self.mLinesPoints = {}
+	local nbRaysOneDimension = math.sqrt(NB_RAYS);
+
+	for i = 0, nbRaysOneDimension - 1 do
+		for j = 0, nbRaysOneDimension - 1 do
+			local theta = i * 2.0 * math.pi / nbRaysOneDimension
+			local phi = j * math.pi / nbRaysOneDimension
+			local x = RAY_LENGTH * math.sin(phi) * math.cos(theta);
+			local y = RAY_LENGTH * math.sin(phi) * math.sin(theta);
+			local z = RAY_LENGTH * math.cos(phi);
+
+			local point1 = vmath.vector3(x, y, z);
+			local point2 = vmath.vector3(0, 0, 0);
+			table.insert(self.mLines, { p1 = point1, p2 = point2 })
+			table.insert(self.mLinesPoints, point1)
+			table.insert(self.mLinesPoints, point2)
+		end
+	end
+end
+
+local function changeBody(self)
+	self.mCurrentBodyIndex = self.mCurrentBodyIndex + 1
+	if (self.mCurrentBodyIndex >= NB_BODIES) then
+		self.mCurrentBodyIndex = 0
+	end
+
+	self.mSphere.body:setIsActive(false)
+	self.mSphere:setEnabled(false)
+	self.mBox.body:setIsActive(false)
+	self.mBox:setEnabled(false)
+	self.mCapsule.body:setIsActive(false)
+	self.mCapsule:setEnabled(false)
+	self.mConvexMesh.body:setIsActive(false)
+	self.mConvexMesh:setEnabled(false)
+	self.mDumbbell.body:setIsActive(false)
+	self.mDumbbell:setEnabled(false)
+	self.mConcaveMesh.body:setIsActive(false)
+	self.mConcaveMesh:setEnabled(false)
+	self.mHeightField.body:setIsActive(false)
+	self.mHeightField:setEnabled(false)
+
+	if (self.mCurrentBodyIndex == 0) then
+		self.mSphere.body:setIsActive(true)
+		self.mSphere:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 1) then
+		self.mBox.body:setIsActive(true)
+		self.mBox:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 2) then
+		self.mCapsule.body:setIsActive(true)
+		self.mCapsule:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 3) then
+		self.mConvexMesh.body:setIsActive(true)
+		self.mConvexMesh:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 4) then
+		self.mDumbbell.body:setIsActive(true)
+		self.mDumbbell:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 5) then
+		self.mConcaveMesh.body:setIsActive(true)
+		self.mConcaveMesh:setEnabled(true)
+	elseif (self.mCurrentBodyIndex == 6) then
+		self.mHeightField.body:setIsActive(true)
+		self.mHeightField:setEnabled(true)
+	end
+end
+
+function init(self)
+	create_physics(self)
+	createLines(self)
+	self.mCurrentBodyIndex = -1
+	changeBody(self)
+
+	msg.post(".", "acquire_input_focus")
+
+	SCENE_HELPER.scene_new({
+		name = "Raycast",
+		world = self.world
+	})
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 12, 75) })
+	self.hits_go = {}
+	--timer.delay(0.05,false,function()
+	--	MONARCH.show(MONARCH.top(), { reload = true })
+	--end)
+end
+
+---@param info Rp3dRaycastInfo
+local function RAYCAST_F(info)
+	table.insert(HIT_POINTS, info.worldPoint)
+	return 0
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+	HIT_POINTS = {}
+	for _, line in ipairs(self.mLines) do
+		local p1 = RAY.point1
+		local p2 = RAY.point2
+		p1.x, p1.y, p1.z = line.p1.x, line.p1.y, line.p1.z
+		p2.x, p2.y, p2.z = line.p2.x, line.p2.y, line.p2.z
+
+		---@type Rp3dPhysicsWorld
+		local world = self.world
+		world:raycast(RAY, RAYCAST_F)
+
+		MSG_DRAW_LINE.start_point = p1
+		MSG_DRAW_LINE.end_point = p2
+		msg.post("@render:", "draw_line", MSG_DRAW_LINE)
+	end
+	--remove old
+	for i = #self.hits_go, #HIT_POINTS + 1, -1 do
+		local go_url = table.remove(self.hits_go)
+		go.delete(go_url, true)
+	end
+	for i = 1, #HIT_POINTS do
+		local hit_go = self.hits_go[i]
+		local hit_point = HIT_POINTS[i]
+		if (not hit_go) then
+			local collection = collectionfactory.create("/factory#sphere", nil, nil, nil, 0.1)
+			hit_go = msg.url(collection["/root"])
+			local mesh = msg.url(hit_go.socket, hit_go.path, "mesh")
+			go.set(mesh, "tint", vmath.vector4(1, 0, 0, 1))
+			self.hits_go[i] = hit_go
+
+		end
+		go.set_position(hit_point, hit_go)
+	end
+
+
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+	if (self.polyhedron_mesh) then
+		rp3d.destroyPolyhedronMesh(self.polyhedron_mesh)
+		self.convex_meshes = nil
+	end
+
+	if (self.triangle_mesh) then
+		rp3d.destroyTriangleMesh(self.triangle_mesh)
+		self.triangle_mesh = nil
+	end
+
+	if (self.triangle_arrays) then
+		for _, array in ipairs(self.triangle_arrays) do
+			rp3d.destroyTriangleVertexArray(array)
+		end
+		self.triangle_arrays = nil
+	end
+
+	rp3d.destroyPhysicsWorld(self.world)
+
+	for i = 1, #self.hits_go, -1 do
+		local go_url = table.remove(self.hits_go)
+		go.delete(go_url, true)
+	end
+	-- self.world:Destroy()
+	--SCENE_HELPER.scene_final()
+end
+
+function on_input(self, action_id, action)
+	if (action_id == hash("key_space") and action.pressed) then
+		changeBody(self)
+	end
+end
+
+
+

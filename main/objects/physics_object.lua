@@ -24,6 +24,10 @@ function Body:setSelected(selected)
 	self.selected = selected
 end
 
+function Body:setEnabled(enable)
+	msg.post(self.go.root, enable and "enable" or "disable")
+end
+
 
 
 
@@ -71,8 +75,9 @@ function Body:dispose()
 	else
 		self.world:destroyCollisionBody(self.body)
 	end
-	if (self.go) then
+	if (self.go and self.go.root) then
 		go.delete(self.go.root, true)
+		self.go = nil
 	end
 
 end

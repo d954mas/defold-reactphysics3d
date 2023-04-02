@@ -66,6 +66,9 @@ function M.set_enable_gravity(enable)
 end
 
 function M.scene_new(cfg)
+	if(M.scene_config.world)then
+		M.scene_final()
+	end
 	M.dirty = true
 	M.scene_config.name = assert(cfg.name)
 	M.scene_config.world = assert(cfg.world)
@@ -244,9 +247,12 @@ function M.on_input(action_id, action)
 					local result_world_pos = nil
 					local ray_1 = { point1 = ray_start, point2 = ray_end, maxFraction = 1 }
 					M.scene_config.world:raycast(ray_1, function(info)
-						result = info.body
-						result_world_pos = info.worldPoint
-						return info.hitFraction
+						if(info.body:isRigidBody())then
+							result = info.body
+							result_world_pos = info.worldPoint
+							return info.hitFraction
+						end
+						return 1
 					end)
 					if (M.simulation.body_selected) then
 						local phys_body = M.simulation.body_selected:getUserData()

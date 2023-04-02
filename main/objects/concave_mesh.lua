@@ -53,6 +53,12 @@ function Box:updateTransform()
 
 end
 
+function Box:setEnabled(enable)
+	for _,mesh in ipairs(self.meshes)do
+		msg.post(mesh, enable and "enable" or "disable")
+	end
+end
+
 function Box:dispose()
 	PhysObject.dispose(self)
 	rp3d.destroyConcaveMeshShape(self.shape)
