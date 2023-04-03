@@ -11,7 +11,8 @@ function Box:initialize(rigid_body, radius,height, world)
 	self.radius = radius
 	self.height = height
 	self.shape = rp3d.createCapsuleShape(self.radius,self.height)
-	self.collection = collectionfactory.create("/factory#capsule", nil, nil, nil, vmath.vector3(self.radius,self.height,self.radius))
+	local scale =  vmath.vector3(self.radius,(self.height+2*self.radius)/ 3.0,self.radius)
+	self.collection = collectionfactory.create("/factory#capsule", nil, nil, nil, scale)
 	self.go = {
 		root = msg.url(self.collection["/root"]),
 		mesh = nil
