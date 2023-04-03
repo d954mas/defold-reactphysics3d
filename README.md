@@ -43,6 +43,8 @@ self.world:destroyCollisionBody(self.body)
 self.world:destroyCollisionBody(self.body)
 rp3d.destroyBoxShape(self.shape)
 ```
+
+5. In most places used 0 index.
 ---
 ## TODO
 1.Add Joints

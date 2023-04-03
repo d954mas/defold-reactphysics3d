@@ -71,7 +71,8 @@ function init(self)
 		{ id = "Hinge Joint", scene = "hinge_joint" },
 		{ id = "Hinge Chain", scene = "hinge_joint_chain" },
 		{ id = "Slider Joint", scene = "slider_joint" },
-		{ id = "Fixed Joint", scene = "fixed_joint" }
+		{ id = "Fixed Joint", scene = "fixed_joint" },
+		{ id = "Bridge", scene = "bridge" }
 	}
 	update_list(self)
 
