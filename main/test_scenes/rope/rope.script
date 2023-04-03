@@ -7,7 +7,82 @@ local Capsule = require "main.objects.capsules"
 local ConvexMesh = require "main.objects.convex_mesh"
 local ConcaveMesh = require "main.objects.concave_mesh"
 
+local SCENE_RADIUS = 60.0
+local CAPSULE_RADIUS = 0.2
+local CAPSULE_HEIGHT = 1.5
+local BOX_SIZE = 5.0
+local NB_ROPES = 5
+local NB_CAPSULES_PER_ROPE = 20
+local NB_TORQUE_ITERATIONS = 200
 
+local function createJoints(self)
+	for r = 0, NB_ROPES - 1 do
+		for i = 0, NB_CAPSULES_PER_ROPE - 2 do
+			local capsuleIndex = r * NB_CAPSULES_PER_ROPE + i;
+			local body1 = self.mCapsules[capsuleIndex].body
+			local body2 = self.mCapsules[capsuleIndex + 1].body
+			local body1Position = body1:getTransformPosition()
+			local body2Position = body2:getTransformPosition()
+			local anchorPointWorldSpace = 0.5 * (body1Position + body2Position)
+			local jointInfo = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, anchorPointWorldSpace);
+			jointInfo.isCollisionEnabled = false;
+			local joint = self.world:createJoint(jointInfo)
+		end
+
+		local body1 = self.mCapsules[r * NB_CAPSULES_PER_ROPE + NB_CAPSULES_PER_ROPE - 1].body
+		local body2 = r > 0 and self.mBox2.body or self.mBox1.body
+		local body1Position = body1:getTransformPosition()
+		local anchorPointWorldSpace = body1Position + vmath.vector3(0, -CAPSULE_HEIGHT * 0.5, 0);
+		local jointInfo = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2, anchorPointWorldSpace);
+		jointInfo.isCollisionEnabled = false
+		local joint = self.world:createJoint(jointInfo)
+	end
+end
+
+local function initBodiesPositions(self)
+	local initOrientation = vmath.quat_rotation_z(0)
+	for r = 0, NB_ROPES - 1 do
+		local initPosition = vmath.vector3(r == 0 and -5 or 25, 15, 0);
+		if (r == 1) then
+			initPosition = initPosition + vmath.vector3(BOX_SIZE, 0, -BOX_SIZE) * 0.5
+		elseif (r == 2) then
+			initPosition = initPosition + vmath.vector3(BOX_SIZE, 0, BOX_SIZE) * 0.5
+		elseif (r == 3) then
+			initPosition = initPosition + vmath.vector3(-BOX_SIZE, 0, BOX_SIZE) * 0.5
+		elseif (r == 4) then
+			initPosition = initPosition + vmath.vector3(-BOX_SIZE, 0, -BOX_SIZE) * 0.5
+		end
+		for i = 0, NB_CAPSULES_PER_ROPE - 1 do
+			local capsuleIndex = r * NB_CAPSULES_PER_ROPE + i;
+			initPosition = initPosition + vmath.vector3(0, -CAPSULE_HEIGHT, 0);
+			local transform = { position = initPosition, quat = initOrientation }
+			self.mCapsules[capsuleIndex]:setTransform(transform);
+		end
+	end
+
+	local box1Position = vmath.vector3(-5, 15 - NB_CAPSULES_PER_ROPE * CAPSULE_HEIGHT - BOX_SIZE * 0.5, 0);
+	self.mBox1.body:setTransformPosition(box1Position);
+
+	local box2Position = vmath.vector3(25, 15 - NB_CAPSULES_PER_ROPE * CAPSULE_HEIGHT - BOX_SIZE * 0.5, 0);
+	self.mBox2.body:setTransformPosition(box2Position);
+
+	local plankPosition = vmath.vector3(-9, 5, 0);
+	self.mPlank.body:setTransformPosition(plankPosition);
+end
+
+local function moveFirstRopeToHorizontalPosition(self)
+	---------- Move the first rope in a horizontal position ----------
+	local initOrientation = vmath.quat_rotation_z(-90 * math.pi / 180)
+	for i = 1, NB_CAPSULES_PER_ROPE - 2 do
+		local initPosition = vmath.vector3(5 - (i + 0.5) * CAPSULE_HEIGHT, 15 - CAPSULE_HEIGHT, 0)
+		local transform = { position = initPosition, quat = initOrientation }
+		self.mCapsules[i].body:setTransform(transform)
+	end
+
+	local box1Position = vmath.vector3(-5 - (NB_CAPSULES_PER_ROPE + 0.5) * CAPSULE_HEIGHT - BOX_SIZE * 0.5, 15 - CAPSULE_HEIGHT, 0);
+	local box1Transform = { position = box1Position, quat = initOrientation }
+	self.mBox1.body:setTransform(box1Transform)
+end
 
 local function create_physics(self)
 	local settings = {
@@ -16,29 +91,85 @@ local function create_physics(self)
 	self.world = rp3d.createPhysicsWorld(settings)
 	---@type GameBox[]
 	self.objects = {}
+
+	self.mCapsules = {}
+	---------- Create the ropes  ---------
+	local linearDamping = 0.03
+	local angularDamping = 0.03
+	for r = 0, NB_ROPES - 1 do
+		for i = 0, NB_CAPSULES_PER_ROPE - 1 do
+			local capsuleIndex = r * NB_CAPSULES_PER_ROPE + i;
+			local capsule = Capsule(true, CAPSULE_RADIUS, CAPSULE_HEIGHT, self.world)
+
+			capsule.collider:setMaterialBounciness(0)
+			capsule.collider:setMaterialMassDensity(0.1)
+			capsule.body:setAngularDamping(angularDamping)
+			capsule.body:setLinearDamping(linearDamping)
+
+			if (i == 0) then
+				capsule.body:setType(rp3d.BodyType.STATIC)
+			end
+
+			self.mCapsules[capsuleIndex] = capsule
+			table.insert(self.objects, capsule)
+		end
+	end
+	---------- Create the first box ---------
+	self.mBox1 = Box(true, vmath.vector3(BOX_SIZE, BOX_SIZE, BOX_SIZE), self.world);
+	self.mBox1.body:setAngularDamping(angularDamping)
+	self.mBox1.body:setLinearDamping(linearDamping)
+
+	self.mBox1.collider:setMaterialBounciness(0)
+	self.mBox1.collider:setMaterialMassDensity(0.02)
+	self.mBox1.body:updateMassPropertiesFromColliders()
+	table.insert(self.objects, self.mBox1)
+
+	---------- Create the second box ---------
+	self.mBox2 = Box(true, vmath.vector3(BOX_SIZE, BOX_SIZE, BOX_SIZE), self.world);
+	self.mBox2.body:setAngularDamping(angularDamping)
+	self.mBox2.body:setLinearDamping(linearDamping)
+
+	self.mBox2.collider:setMaterialBounciness(0)
+	self.mBox2.collider:setMaterialMassDensity(0.7)
+	self.mBox2.body:updateMassPropertiesFromColliders()
+	table.insert(self.objects, self.mBox2)
+
+	---------- Create plank box ---------
+	self.mPlank = Box(true, vmath.vector3(10, 2, 15), self.world);
+	self.mPlank.body:setType(rp3d.BodyType.STATIC)
+	self.mPlank:setColorSleeping(self.mPlank.colors.floorColorDemo)
+	self.mPlank:setColor(self.mPlank.colors.floorColorDemo)
+
+	self.mPlank.collider:setMaterialBounciness(0.5)
+
+	table.insert(self.objects, self.mPlank)
+
+	initBodiesPositions(self);
+	createJoints(self);
+	moveFirstRopeToHorizontalPosition(self)
 end
 
 function init(self)
 
 	create_physics(self)
 
-
-
 	SCENE_HELPER.scene_new({
 		name = "Rope",
 		world = self.world
 	})
 
-	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 12, 70) })
-	--timer.delay(0.05,false,function()
-	--	MONARCH.show(MONARCH.top(), { reload = true })
-	--end)
+	self.nbIterations = 0
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-9, 8, 75) })
 end
 
 function update(self, dt)
 	SCENE_HELPER.update(dt)
 	SCENE_HELPER.updatePhysics(dt, self.objects)
-	
+	if (self.nbIterations < NB_TORQUE_ITERATIONS) then
+		self.mBox2.body:applyLocalTorque(vmath.vector3(0, 1000, 0))
+	end
+	self.nbIterations = self.nbIterations + 1
+
 end
 
 function final(self)
