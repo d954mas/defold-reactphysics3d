@@ -7,11 +7,23 @@ local LISTITEM_PRESSED = hash("button_pressed")
 local LISTITEM_OVER = hash("button_normal")
 local LISTITEM_NORMAL = hash("button_normal")
 
+local COLOR_BASE = vmath.vector4(1)
+local COLOR_CURRENT = vmath.vector4(0,1,0,1)
+
+local CURRENT_IDX = 1
+
 local function update_listitem(list, item)
 	local pos = gui.get_position(item.root)
+	local lbl_node = item.nodes[hash("list/listitem_text")]
+	gui.set_color(lbl_node,COLOR_BASE)
+	if(item.index == CURRENT_IDX)then
+		gui.set_color(lbl_node,COLOR_CURRENT)
+	end
+
 	if item == list.selected_item then
 		pos.x = 4
 		gui.play_flipbook(item.root, LISTITEM_PRESSED)
+		gui.set_color(lbl_node,COLOR_SELECTED)
 	elseif item == list.pressed_item then
 		pos.x = 1
 		gui.play_flipbook(item.root, LISTITEM_SELECTED)
@@ -37,7 +49,7 @@ end
 
 local function update_list(self, action_id, action, fn)
 	local list_id = "list"
-	GOOEY.dynamic_list(list_id, list_id .. "/stencil", list_id .. "/listitem_bg", self.list_data, action_id, action, nil, fn, update_dynamic_list)
+	return GOOEY.dynamic_list(list_id, list_id .. "/stencil", list_id .. "/listitem_bg", self.list_data, action_id, action, nil, fn, update_dynamic_list)
 end
 
 local function list_on_item_selected(list)
@@ -72,9 +84,24 @@ function init(self)
 		{ id = "Hinge Chain", scene = "hinge_joint_chain" },
 		{ id = "Slider Joint", scene = "slider_joint" },
 		{ id = "Fixed Joint", scene = "fixed_joint" },
-		{ id = "Bridge", scene = "bridge" }
+		{ id = "Bridge", scene = "bridge" },
+		{ id = "Rope", scene = "rope" }
 	}
+	local list = update_list(self)
+
+	local current_scene = MONARCH.top(-1)
+	local idx = 1
+	for i, data in ipairs(self.list_data) do
+		if (hash(data.scene) == current_scene) then
+			idx = i
+		end
+	end
+	CURRENT_IDX = idx
+	local x = (idx - 1) * 64
+	local max_x = #self.list_data * 64 - 400
+	list.scroll_to(0, math.min(1, x / max_x))
 	update_list(self)
+
 
 end
 
