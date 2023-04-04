@@ -107,7 +107,7 @@ max_instances = 1024
 max_input_stack_entries = 16
 
 [collection_proxy]
-max_count = 16
+max_count = 32
 
 [collectionfactory]
 max_count = 128
