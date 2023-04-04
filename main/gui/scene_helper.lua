@@ -30,7 +30,8 @@ M.simulation = {
 	body_selected = nil,
 	raycast_from = nil,
 	raycast_to = nil,
-	time = 0
+	time = 0,
+	force_scale = 1
 }
 M.profiling = {
 	fps_delay = 1,
@@ -80,6 +81,7 @@ function M.scene_new(cfg)
 	M.profiling.dt_max = 0
 	M.profiling.dt_total = 0
 	M.profiling.fps_delay = 0
+	M.simulation.force_scale = 1
 end
 
 function M.scene_final()
@@ -88,6 +90,7 @@ function M.scene_final()
 	M.simulation.raycast_to = nil
 	M.simulation.body_selected = nil
 	M.simulation.time = 0
+	M.simulation.force_scale = 1
 	msg.post("main:/camera3d", "reset")
 end
 
@@ -287,7 +290,8 @@ function M.on_input(action_id, action)
 					force = force / 2
 				end
 
-				M.simulation.body_selected:applyWorldForceAtLocalPosition(force, M.simulation.body_selected_pos);
+
+				M.simulation.body_selected:applyWorldForceAtLocalPosition(force* M.simulation.force_scale, M.simulation.body_selected_pos);
 			end
 
 

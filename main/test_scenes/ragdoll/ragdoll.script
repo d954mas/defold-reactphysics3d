@@ -1,0 +1,437 @@
+local SCENE_HELPER = require "main.gui.scene_helper"
+local MONARCH = require "monarch.monarch"
+local Box = require "main.objects.box"
+local Dumbbell = require "main.objects.dumbbell"
+local Sphere = require "main.objects.sphere"
+local Capsule = require "main.objects.capsules"
+local ConvexMesh = require "main.objects.convex_mesh"
+local ConcaveMesh = require "main.objects.concave_mesh"
+
+local SCENE_RADIUS = 45.0
+local NB_RAGDOLLS_ROWS = 3;
+local NB_RAGDOLLS_COLS = 2;
+local NB_RAGDOLLS = NB_RAGDOLLS_ROWS * NB_RAGDOLLS_COLS;
+local BOX_SIZE = vmath.vector3(2, 2, 2);
+local FLOOR_1_SIZE = vmath.vector3(52, 0.5, 52);
+local FLOOR_2_SIZE = vmath.vector3(60, 0.5, 82);
+local NB_BALLSOCKETJOINT_BOXES = 7
+local NB_HINGE_BOXES = 7
+
+local function createRagdolls(self)
+	local linearDamping = 0.02
+	local angularDamping = 0.02
+	local frictionCoeff = 0.4
+	for i = 0, NB_RAGDOLLS_ROWS - 1 do
+		for j = 0, NB_RAGDOLLS_COLS - 1 do
+			local ragdollIndex = i * NB_RAGDOLLS_COLS + j;
+			local ragdollDistX = 17;
+			local ragdollDistZ = 16;
+			local ragdollHeight = 31;
+			local ragdollPosition = vmath.vector3((-(NB_RAGDOLLS_ROWS - 1) / 2.0 + i) * ragdollDistX,
+					ragdollHeight, -6 + (-(NB_RAGDOLLS_COLS - 1) / 2.0 + j) * ragdollDistZ);
+
+			--------------- Create the head box ---------------
+			self.mHeadPos[ragdollIndex] = vmath.vector3(ragdollPosition);
+			local headShape = Sphere(true, 0.75, self.world)
+			self.mHeadBox[ragdollIndex] = headShape
+			headShape.body:setTransformPosition(self.mHeadPos[ragdollIndex])
+			headShape.collider:setMaterialMassDensity(7)
+			headShape.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			headShape.body:updateMassPropertiesFromColliders()
+			headShape.body:setLinearDamping(linearDamping)
+			headShape.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, headShape)
+
+			--------------- Create the chest capsule ---------------
+			self.mChestPos[ragdollIndex] = self.mHeadPos[ragdollIndex] + vmath.vector3(0, -1.75, 0);
+			local chestShape = Capsule(true, 1, 1.5, self.world)
+			self.mChestCapsule[ragdollIndex] = chestShape
+			chestShape.body:setTransformPosition(self.mChestPos[ragdollIndex])
+			chestShape.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			chestShape.collider:setMaterialMassDensity(9)
+			chestShape.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			chestShape.body:updateMassPropertiesFromColliders()
+			chestShape.body:setLinearDamping(linearDamping)
+			chestShape.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, chestShape)
+
+			--------------- Create the waist capsule ---------------
+			self.mWaistPos[ragdollIndex] = self.mChestPos[ragdollIndex] + vmath.vector3(0, -2, 0);
+			local waistShape = Capsule(true, 1, 1.5, self.world)
+			self.mWaistCapsule[ragdollIndex] = waistShape
+			waistShape.body:setTransformPosition(self.mWaistPos[ragdollIndex])
+			waistShape.collider:setMaterialMassDensity(9)
+			waistShape.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			waistShape.body:updateMassPropertiesFromColliders()
+			waistShape.body:setLinearDamping(linearDamping)
+			waistShape.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, waistShape)
+
+			--------------- Create the hips capsule ---------------
+			self.mHipPos[ragdollIndex] = self.mWaistPos[ragdollIndex] + vmath.vector3(0, -2, 0);
+			local hipShape = Capsule(true, 1, 1, self.world)
+			self.mHipCapsule[ragdollIndex] = hipShape
+			hipShape.body:setTransformPosition(self.mHipPos[ragdollIndex])
+			hipShape.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			hipShape.collider:setMaterialMassDensity(9)
+			hipShape.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			hipShape.body:updateMassPropertiesFromColliders()
+			hipShape.body:setLinearDamping(linearDamping)
+			hipShape.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, hipShape)
+
+			--------------- Create the left upper arm capsule ---------------
+			self.mLeftUpperArmPos[ragdollIndex] = self.mChestPos[ragdollIndex] + vmath.vector3(2.25, 0, 0);
+			local leftUpperArmCapsule = Capsule(true, 0.5, 2, self.world)
+			self.mLeftUpperArmCapsule[ragdollIndex] = leftUpperArmCapsule
+			leftUpperArmCapsule.body:setTransformPosition(self.mLeftUpperArmPos[ragdollIndex])
+			leftUpperArmCapsule.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			leftUpperArmCapsule.collider:setMaterialMassDensity(8)
+			leftUpperArmCapsule.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			leftUpperArmCapsule.body:updateMassPropertiesFromColliders()
+			leftUpperArmCapsule.body:setLinearDamping(linearDamping)
+			leftUpperArmCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, leftUpperArmCapsule)
+
+			--------------- Create the left lower arm capsule ---------------
+			self.mLeftLowerArmPos[ragdollIndex] = self.mLeftUpperArmPos[ragdollIndex] + vmath.vector3(2.5, 0, 0);
+			local leftLowerArmCapsule = Capsule(true, 0.5, 2, self.world)
+			self.mLeftLowerArmCapsule[ragdollIndex] = leftLowerArmCapsule
+			leftLowerArmCapsule.body:setTransformPosition(self.mLeftLowerArmPos[ragdollIndex])
+			leftLowerArmCapsule.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			leftLowerArmCapsule.collider:setMaterialMassDensity(8)
+			leftLowerArmCapsule.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			leftLowerArmCapsule.body:updateMassPropertiesFromColliders()
+			leftLowerArmCapsule.body:setLinearDamping(linearDamping)
+			leftLowerArmCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, leftLowerArmCapsule)
+
+			--------------- Create the left upper leg capsule ---------------
+			self.mLeftUpperLegPos[ragdollIndex] = self.mHipPos[ragdollIndex] + vmath.vector3(0.8, -1.5, 0);
+			local leftUpperLeg = Capsule(true, 0.75, 2, self.world)
+			self.mLeftUpperLegCapsule[ragdollIndex] = leftUpperLeg
+			leftUpperLeg.body:setTransformPosition(self.mLeftUpperLegPos[ragdollIndex])
+			leftUpperLeg.collider:setMaterialMassDensity(8)
+			leftUpperLeg.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			leftUpperLeg.body:updateMassPropertiesFromColliders()
+			leftUpperLeg.body:setLinearDamping(linearDamping)
+			leftUpperLeg.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, leftUpperLeg)
+
+			--------------- Create the left lower leg capsule --------------
+			self.mLeftLowerLegPos[ragdollIndex] = self.mLeftUpperLegPos[ragdollIndex] + vmath.vector3(0, -3, 0);
+			local leftLowerLegCapsule = Capsule(true, 0.5, 3, self.world)
+			self.mLeftLowerLegCapsule[ragdollIndex] = leftLowerLegCapsule
+			leftLowerLegCapsule.body:setTransformPosition(self.mLeftLowerLegPos[ragdollIndex])
+			leftLowerLegCapsule.collider:setMaterialMassDensity(8)
+			leftLowerLegCapsule.collider:setMaterialFrictionCoefficient(0.3)
+			leftLowerLegCapsule.body:updateMassPropertiesFromColliders()
+			leftLowerLegCapsule.body:setLinearDamping(linearDamping)
+			leftLowerLegCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, leftLowerLegCapsule)
+
+			--------------- Create the right upper arm capsule ---------------
+			self.mRightUpperArmPos[ragdollIndex] = self.mChestPos[ragdollIndex] + vmath.vector3(-2.25, 0, 0);
+			local rightUpperArmCapsule = Capsule(true, 0.5, 2, self.world)
+			self.mRightUpperArmCapsule[ragdollIndex] = rightUpperArmCapsule
+			rightUpperArmCapsule.body:setTransformPosition(self.mRightUpperArmPos[ragdollIndex])
+			rightUpperArmCapsule.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			rightUpperArmCapsule.collider:setMaterialMassDensity(8)
+			rightUpperArmCapsule.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			rightUpperArmCapsule.body:updateMassPropertiesFromColliders()
+			rightUpperArmCapsule.body:setLinearDamping(linearDamping)
+			rightUpperArmCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, rightUpperArmCapsule)
+
+			--------------- Create the right lower arm capsule ---------------
+			self.mRightLowerArmPos[ragdollIndex] = self.mRightUpperArmPos[ragdollIndex] + vmath.vector3(-2.5, 0, 0);
+			local rightLowerArmCapsule = Capsule(true, 0.5, 2, self.world)
+			self.mRightLowerArmCapsule[ragdollIndex] = rightLowerArmCapsule
+			rightLowerArmCapsule.body:setTransformPosition(self.mRightLowerArmPos[ragdollIndex])
+			rightLowerArmCapsule.body:setTransformQuat(vmath.quat_rotation_z(math.pi / 2))
+			rightLowerArmCapsule.collider:setMaterialMassDensity(8)
+			rightLowerArmCapsule.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			rightLowerArmCapsule.body:updateMassPropertiesFromColliders()
+			rightLowerArmCapsule.body:setLinearDamping(linearDamping)
+			rightLowerArmCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, rightLowerArmCapsule)
+
+			--------------- Create the right upper leg capsule ---------------
+			self.mRightUpperLegPos[ragdollIndex] = self.mHipPos[ragdollIndex] + vmath.vector3(-0.8, -1.5, 0);
+			local rightUpperLegCapsule = Capsule(true, 0.75, 2, self.world)
+			self.mRightUpperLegCapsule[ragdollIndex] = rightUpperLegCapsule
+			rightUpperLegCapsule.body:setTransformPosition(self.mRightUpperLegPos[ragdollIndex])
+			rightUpperLegCapsule.collider:setMaterialMassDensity(8)
+			rightUpperLegCapsule.collider:setMaterialFrictionCoefficient(frictionCoeff)
+			rightUpperLegCapsule.body:updateMassPropertiesFromColliders()
+			rightUpperLegCapsule.body:setLinearDamping(linearDamping)
+			rightUpperLegCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, rightUpperLegCapsule)
+
+			--------------- Create the right lower leg capsule ---------------
+			self.mRightLowerLegPos[ragdollIndex] = self.mRightUpperLegPos[ragdollIndex] + vmath.vector3(0, -3, 0);
+			local rightLowerLegCapsule = Capsule(true, 0.5, 3, self.world)
+			self.mRightLowerLegCapsule[ragdollIndex] = rightLowerLegCapsule
+			rightLowerLegCapsule.body:setTransformPosition(self.mRightLowerLegPos[ragdollIndex])
+			rightLowerLegCapsule.collider:setMaterialMassDensity(8)
+			rightLowerLegCapsule.collider:setMaterialFrictionCoefficient(0.3)
+			rightLowerLegCapsule.body:updateMassPropertiesFromColliders()
+			rightLowerLegCapsule.body:setLinearDamping(linearDamping)
+			rightLowerLegCapsule.body:setAngularDamping(angularDamping)
+			table.insert(self.objects, rightLowerLegCapsule)
+
+			-------------- Create the joint between head and chest ---------------
+			local body1 = self.mHeadBox[ragdollIndex].body
+			local body2 = self.mChestCapsule[ragdollIndex].body
+			local jointInfo1 = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2,
+					self.mHeadPos[ragdollIndex] + vmath.vector3(0, -0.75, 0))
+			jointInfo1.isCollisionEnabled = false;
+			self.mHeadChestJoint[ragdollIndex] = self.world:createJoint(jointInfo1)
+			self.mHeadChestJoint[ragdollIndex]:setConeLimitHalfAngle(40.0 * math.pi / 180.0);
+			self.mHeadChestJoint[ragdollIndex]:enableConeLimit(true)
+
+			-------------- Create the joint between chest and left upper arm ---------------
+			body1 = self.mChestCapsule[ragdollIndex].body
+			body2 = self.mLeftUpperArmCapsule[ragdollIndex].body
+			local jointInfo2 = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2,
+					self.mLeftUpperArmPos[ragdollIndex] + vmath.vector3(-1, 0, 0))
+			jointInfo2.isCollisionEnabled = false;
+			self.mChestLeftUpperArmJoint[ragdollIndex] = self.world:createJoint(jointInfo2)
+			self.mChestLeftUpperArmJoint[ragdollIndex]:setConeLimitHalfAngle(180 * math.pi / 180.0);
+			self.mChestLeftUpperArmJoint[ragdollIndex]:enableConeLimit(true)
+
+			--------------- Create the joint between left upper arm and left lower arm  ---------------
+			body1 = self.mLeftUpperArmCapsule[ragdollIndex].body
+			body2 = self.mLeftLowerArmCapsule[ragdollIndex].body
+			local joint2WorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local joint2WorldAxis = vmath.vector3(0, 0, 1);
+			local jointInfo3 = rp3d.createHingeJointInfoWorldSpace(body1, body2, joint2WorldAnchor, joint2WorldAxis)
+			jointInfo3.isCollisionEnabled = false;
+			self.mLeftUpperLeftLowerArmJoint[ragdollIndex] = self.world:createJoint(jointInfo3)
+			self.mLeftUpperLeftLowerArmJoint[ragdollIndex]:enableLimit(true);
+			self.mLeftUpperLeftLowerArmJoint[ragdollIndex]:setMinAngleLimit(0.0 * math.pi / 180.0);
+			self.mLeftUpperLeftLowerArmJoint[ragdollIndex]:setMaxAngleLimit(340.0 * math.pi / 180.0);
+
+			--------------- Create the joint between chest and waist  ---------------
+			body1 = self.mChestCapsule[ragdollIndex].body
+			body2 = self.mWaistCapsule[ragdollIndex].body
+			local jointChestWaistWorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local jointChestWaistInfo = rp3d.createFixedJointInfoWorldSpace(body1, body2, jointChestWaistWorldAnchor)
+			jointChestWaistInfo.isCollisionEnabled = false;
+			self.mChestWaistJoint[ragdollIndex] = self.world:createJoint(jointChestWaistInfo)
+
+			--------------- Create the joint between waist and hips  ---------------
+			body1 = self.mWaistCapsule[ragdollIndex].body
+			body2 = self.mHipCapsule[ragdollIndex].body
+			local jointWaistHipsWorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local jointWaistHipsInfo = rp3d.createFixedJointInfoWorldSpace(body1, body2, jointWaistHipsWorldAnchor)
+			jointWaistHipsInfo.isCollisionEnabled = false;
+			self.mWaistHipsJoint[ragdollIndex] = self.world:createJoint(jointWaistHipsInfo)
+
+			--------------- Create the joint between hip and left upper leg  ---------------
+			body1 = self.mHipCapsule[ragdollIndex].body
+			body2 = self.mLeftUpperLegCapsule[ragdollIndex].body
+			local jointInfo4 = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2,
+					self.mHipPos[ragdollIndex] + vmath.vector3(0.8, 0, 0))
+			jointInfo4.isCollisionEnabled = false;
+			self.mHipLeftUpperLegJoint[ragdollIndex] = self.world:createJoint(jointInfo4)
+			self.mHipLeftUpperLegJoint[ragdollIndex]:setConeLimitHalfAngle(80.0 * math.pi / 180.0);
+			self.mHipLeftUpperLegJoint[ragdollIndex]:enableConeLimit(true);
+
+			--------------- Create the joint between left upper leg and left lower leg  ---------------
+			body1 = self.mLeftUpperLegCapsule[ragdollIndex].body
+			body2 = self.mLeftLowerLegCapsule[ragdollIndex].body
+			local joint5WorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local joint5WorldAxis = vmath.vector3(1, 0, 0)
+			local joint5MinAngle = 0.0 * math.pi / 180.0;
+			local joint5MaxAngle = 140.0 * math.pi / 180.0;
+			local jointInfo5 = rp3d.createHingeJointInfoWorldSpace(body1, body2,
+					joint5WorldAnchor, joint5WorldAxis)
+			jointInfo5.minAngleLimit = joint5MinAngle
+			jointInfo5.maxAngleLimit = joint5MaxAngle
+			jointInfo5.isCollisionEnabled = false;
+			self.mLeftUpperLeftLowerLegJoint[ragdollIndex] = self.world:createJoint(jointInfo5)
+
+			--------------- Create the joint between chest and right upper arm  ---------------
+			body1 = self.mChestCapsule[ragdollIndex].body
+			body2 = self.mRightUpperArmCapsule[ragdollIndex].body
+			local jointInfo6 = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2,
+					self.mRightUpperArmPos[ragdollIndex] + vmath.vector3(1, 0, 0))
+			jointInfo6.isCollisionEnabled = false;
+			self.mChestRightUpperArmJoint[ragdollIndex] = self.world:createJoint(jointInfo6)
+			self.mChestRightUpperArmJoint[ragdollIndex]:setConeLimitHalfAngle(180.0 * math.pi / 180.0);
+			self.mChestRightUpperArmJoint[ragdollIndex]:enableConeLimit(true);
+
+			--------------- Create the joint between right upper arm and right lower arm   ---------------
+			body1 = self.mRightUpperArmCapsule[ragdollIndex].body
+			body2 = self.mRightLowerArmCapsule[ragdollIndex].body
+			local joint7WorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local joint7WorldAxis = vmath.vector3(1, 0, 0)
+			local jointInfo7 = rp3d.createHingeJointInfoWorldSpace(body1, body2,
+					joint7WorldAnchor, joint7WorldAxis)
+			jointInfo7.isCollisionEnabled = false;
+			self.mRightUpperRightLowerArmJoint[ragdollIndex] = self.world:createJoint(jointInfo7)
+			self.mRightUpperRightLowerArmJoint[ragdollIndex]:enableLimit(true)
+			self.mRightUpperRightLowerArmJoint[ragdollIndex]:setMinAngleLimit(0.0 * math.pi / 180.0)
+			self.mRightUpperRightLowerArmJoint[ragdollIndex]:setMaxAngleLimit(340.0 * math.pi / 180.0)
+
+			--------------- Create the joint between hips and right upper leg  ---------------
+			body1 = self.mHipCapsule[ragdollIndex].body
+			body2 = self.mRightUpperLegCapsule[ragdollIndex].body
+			local jointInfo8 = rp3d.createBallAndSocketJointInfoWorldSpace(body1, body2,
+					self.mHipPos[ragdollIndex] + vmath.vector3(-0.8, 0, 0))
+			jointInfo8.isCollisionEnabled = false;
+			self.mHipRightUpperLegJoint[ragdollIndex] = self.world:createJoint(jointInfo8)
+			self.mHipRightUpperLegJoint[ragdollIndex]:setConeLimitHalfAngle(80.0 * math.pi / 180.0);
+			self.mHipRightUpperLegJoint[ragdollIndex]:enableConeLimit(true);
+
+			--------------- Create the joint between left upper leg and left lower leg  ---------------
+			body1 = self.mRightUpperLegCapsule[ragdollIndex].body
+			body2 = self.mRightLowerLegCapsule[ragdollIndex].body
+			local joint9WorldAnchor = (body1:getTransformPosition() + body2:getTransformPosition()) * 0.5
+			local joint9WorldAxis = vmath.vector3(1, 0, 0)
+			local joint9MinAngle = 0.0 * math.pi / 180.0;
+			local joint9MaxAngle = 140.0 * math.pi / 180.0;
+			local jointInfo9 = rp3d.createHingeJointInfoWorldSpace(body1, body2,
+					joint9WorldAnchor, joint9WorldAxis)
+			jointInfo9.minAngleLimit = joint9MinAngle
+			jointInfo9.maxAngleLimit = joint9MaxAngle
+			jointInfo9.isCollisionEnabled = false;
+			self.mRightUpperRightLowerLegJoint[ragdollIndex] = self.world:createJoint(jointInfo9)
+		end
+	end
+end
+
+local function initBodiesPositions(self)
+	for i = 0, NB_RAGDOLLS - 1 do
+		self.mHeadBox[i]:setTransform({ position = self.mHeadPos[i], quat = vmath.quat_rotation_z(0) })
+		self.mChestCapsule[i]:setTransform({ position = self.mChestPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mWaistCapsule[i]:setTransform({ position = self.mWaistPos[i], quat = vmath.quat_rotation_z(0) })
+		self.mHipCapsule[i]:setTransform({ position = self.mHipPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mLeftUpperArmCapsule[i]:setTransform({ position = self.mLeftUpperArmPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mLeftLowerArmCapsule[i]:setTransform({ position = self.mLeftLowerArmPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mLeftUpperLegCapsule[i]:setTransform({ position = self.mLeftUpperLegPos[i], quat = vmath.quat_rotation_z(0) })
+		self.mLeftLowerLegCapsule[i]:setTransform({ position = self.mLeftLowerLegPos[i], quat = vmath.quat_rotation_z(0) })
+		self.mRightUpperArmCapsule[i]:setTransform({ position = self.mRightUpperArmPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mRightLowerArmCapsule[i]:setTransform({ position = self.mRightLowerArmPos[i], quat = vmath.quat_rotation_z(math.pi / 2.0) })
+		self.mRightUpperLegCapsule[i]:setTransform({ position = self.mRightUpperLegPos[i], quat = vmath.quat_rotation_z(0) })
+		self.mRightLowerLegCapsule[i]:setTransform({ position = self.mRightLowerLegPos[i], quat = vmath.quat_rotation_z(0) })
+	end
+end
+
+local function create_physics(self)
+	local settings = {
+		gravity = vmath.vector3(0, -9.81, 0)
+	}
+	self.world = rp3d.createPhysicsWorld(settings)
+	---@type GameBox[]
+	self.objects = {}
+
+	self.mHeadBox = {}
+	self.mChestCapsule = {}
+	self.mWaistCapsule = {}
+	self.mHipCapsule = {}
+	self.mLeftUpperArmCapsule = {}
+	self.mLeftLowerArmCapsule = {}
+	self.mLeftUpperLegCapsule = {}
+	self.mLeftLowerLegCapsule = {}
+	self.mRightUpperArmCapsule = {}
+	self.mRightLowerArmCapsule = {}
+	self.mRightUpperLegCapsule = {}
+	self.mRightLowerLegCapsule = {}
+
+	self.mChestPos = {}
+	self.mWaistPos = {}
+	self.mHipPos = {}
+	self.mHeadPos = {}
+	self.mLeftUpperArmPos = {}
+	self.mLeftLowerArmPos = {}
+	self.mLeftUpperLegPos = {}
+	self.mLeftLowerLegPos = {}
+	self.mRightUpperArmPos = {}
+	self.mRightLowerArmPos = {}
+	self.mRightUpperLegPos = {}
+	self.mRightLowerLegPos = {}
+
+
+	self.mHeadChestJoint= {}
+	self.mChestLeftUpperArmJoint= {}
+	self.mLeftUpperLeftLowerArmJoint= {}
+	self.mChestWaistJoint= {}
+	self.mWaistHipsJoint= {}
+	self.mHipLeftUpperLegJoint= {}
+	self.mLeftUpperLeftLowerLegJoint= {}
+	self.mChestRightUpperArmJoint= {}
+	self.mRightUpperRightLowerArmJoint= {}
+	self.mHipRightUpperLegJoint= {}
+	self.mRightUpperRightLowerLegJoint= {}
+
+	createRagdolls(self)
+
+	self.mFloor1 = Box(true, FLOOR_1_SIZE, self.world);
+	self.mFloor1.body:setTransformPosition(vmath.vector3(0, 5, -4))
+	self.mFloor1:setColor(self.mFloor1.colors.floorColorDemo)
+	self.mFloor1:setColorSleeping(self.mFloor1.colors.floorColorDemo)
+	self.mFloor1.body:setType(rp3d.BodyType.STATIC)
+	table.insert(self.objects, self.mFloor1)
+
+	self.mFloor2 = Box(true, FLOOR_2_SIZE, self.world);
+	self.mFloor2.body:setTransformPosition(vmath.vector3(0, -10, 0))
+	self.mFloor2:setColor(self.mFloor1.colors.floorColorDemo)
+	self.mFloor2:setColorSleeping(self.mFloor1.colors.floorColorDemo)
+	self.mFloor2.body:setType(rp3d.BodyType.STATIC)
+	table.insert(self.objects, self.mFloor2)
+
+	self.mLargeBox = Box(true, vmath.vector3(36, 15, 18), self.world);
+	self.mLargeBox.body:setTransformPosition(vmath.vector3(0, 10, -14))
+	self.mLargeBox:setColor(self.mFloor1.colors.floorColorDemo)
+	self.mLargeBox:setColorSleeping(self.mFloor1.colors.floorColorDemo)
+	self.mLargeBox.body:setType(rp3d.BodyType.STATIC)
+	table.insert(self.objects, self.mLargeBox)
+
+	self.mInclinedPlaneBox = Box(true, vmath.vector3(36, 1, 25), self.world);
+	self.mInclinedPlaneBox.body:setTransformPosition(vmath.vector3(0, 10.82, 5.56))
+	self.mInclinedPlaneBox.body:setTransformQuat(vmath.quat_rotation_x(30 * math.pi / 180))
+	self.mInclinedPlaneBox:setColor(self.mFloor1.colors.floorColorDemo)
+	self.mInclinedPlaneBox:setColorSleeping(self.mFloor1.colors.floorColorDemo)
+	self.mInclinedPlaneBox.body:setType(rp3d.BodyType.STATIC)
+	table.insert(self.objects, self.mInclinedPlaneBox)
+
+
+	initBodiesPositions(self)
+
+end
+
+function init(self)
+
+	create_physics(self)
+
+	SCENE_HELPER.scene_new({
+		name = "Ragdoll",
+		world = self.world
+	})
+	SCENE_HELPER.simulation.force_scale = 5
+
+	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-8, 15, 100) })
+
+
+end
+
+function update(self, dt)
+	SCENE_HELPER.update(dt)
+	SCENE_HELPER.updatePhysics(dt, self.objects)
+end
+
+function final(self)
+	for _, obj in ipairs(self.objects) do
+		obj:dispose()
+	end
+	self.objects = nil
+
+	rp3d.destroyPhysicsWorld(self.world)
+	-- self.world:Destroy()
+	--SCENE_HELPER.scene_final()
+end
+
+
+

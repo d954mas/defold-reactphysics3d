@@ -75,17 +75,16 @@ function init(self)
 		{ id = "Pile", scene = "pile" },
 		{ id = "Box Tower", scene = "box_tower" },
 		{ id = "Convex Mesh(cubes)", scene = "convex_mesh_cubes" },
-
 		{ id = "BallSocket Joint", scene = "ball_and_socket_joint" },
 		{ id = "BallSocket Net", scene = "ball_and_socket_joints_net" },
 		{ id = "BallSocket Chain", scene = "ball_and_socket_joints_chain" },
-
 		{ id = "Hinge Joint", scene = "hinge_joint" },
 		{ id = "Hinge Chain", scene = "hinge_joint_chain" },
 		{ id = "Slider Joint", scene = "slider_joint" },
 		{ id = "Fixed Joint", scene = "fixed_joint" },
 		{ id = "Bridge", scene = "bridge" },
-		{ id = "Rope", scene = "rope" }
+		{ id = "Rope", scene = "rope" },
+		{ id = "Ragdoll", scene = "ragdoll" }
 	}
 	local list = update_list(self)
 

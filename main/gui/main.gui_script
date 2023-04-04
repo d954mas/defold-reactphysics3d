@@ -180,6 +180,7 @@ function update(self, dt)
 		SCENE_HELPER.dirty = false
 		reset_gui(self)
 	end
+	gui.set_text(gui.get_node("menu/settings/physics/timestep/lbl"), string.format("Step:%.2fms", SCENE_HELPER.simulation.step * 1000))
 end
 
 function on_message(self, message_id, message, sender)

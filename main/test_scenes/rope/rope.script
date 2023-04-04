@@ -160,6 +160,8 @@ function init(self)
 
 	self.nbIterations = 0
 	msg.post("main:/camera3d", "set_position", { position = vmath.vector3(-9, 8, 75) })
+
+	SCENE_HELPER.simulation.step = 1 / 120
 end
 
 function update(self, dt)
@@ -179,6 +181,7 @@ function final(self)
 	self.objects = nil
 
 	rp3d.destroyPhysicsWorld(self.world)
+	SCENE_HELPER.simulation.step = 1 / 60
 	-- self.world:Destroy()
 	--SCENE_HELPER.scene_final()
 end
