@@ -45,6 +45,12 @@ rp3d.destroyBoxShape(self.shape)
 ```
 
 5. In most places used 0 index.
+
+6. You can crash physics engine in Hinge Chain test scene.
+```
+Assertion failed: length() > MACHINE_EPSILON, at: upload/reactphysics3d/src/reactphysics3d/mathematics/Vector3.cpp,48,getOneUnitOrthogonalVector)
+```
+
 ---
 
 ## Limits
