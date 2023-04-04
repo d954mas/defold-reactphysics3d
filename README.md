@@ -95,6 +95,8 @@ Every function have a test. You can use test as example.
 [rp3d](docs/rp3d.md)
 
 [AABB](docs/aabb.md)\
+[BallAndSocketJoint](docs/joints/ball_and_socket_joint.md)\
+[BallAndSocketJointInfo](docs/joints/ball_and_socket_joint_info.md)\
 [BoxShape](docs/shapes/box_shape.md)\
 [CapsuleShape](docs/shapes/capsule_shape.md)\
 [Collider](docs/collider.md)\
@@ -107,8 +109,14 @@ Every function have a test. You can use test as example.
 [ConvexShape](docs/shapes/convex_shape.md)\
 [DebugRenderer](docs/debug_renderer.md)\
 [EventListener](docs/world.md#eventlistener)\
+[FixedJoint](docs/joints/fixed_joint.md)\
+[FixedJointInfo](docs/joints/fixed_joint_info.md)\
 [HalfEdgeStructure](docs/half_edge_structure.md)\
 [HeightFieldShape](docs/shapes/heightfield_shape.md)\
+[HingeJoint](docs/joints/hinge_joint.md)\
+[HingeJointInfo](docs/joints/hinge_joint_info.md)\
+[Joint](docs/joints/joint.md)\
+[JointInfo](docs/joints/joint_info.md)\
 [Material](docs/material.md)\
 [PhysicsCommon](docs/rp3d.md) rp3d in lua\
 [PhysicsWorld](docs/world.md)\
@@ -117,6 +125,8 @@ Every function have a test. You can use test as example.
 [RaycastCallback](docs/world.md#raycastcallback)\
 [RaycastInfo](docs/raycast_info.md)\
 [RigidBody](docs/rigid_body.md)\
+[SliderJoint](docs/joints/slider_joint.md)\
+[SliderJointInfo](docs/joints/slider_joint_info.md)\
 [SphereShape](docs/shapes/sphere_shape.md)\
 [Transform](docs/transform.md)\
 [TriangleMesh](docs/triangle_mesh.md)\
